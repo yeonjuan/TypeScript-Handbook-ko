@@ -251,4 +251,176 @@ let a;
 
 temporal dead zone에 더 자세한 설명은 [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let)를 살펴보세요.
 
+## Re-declarations and Shadowing
+
+`var`로 선언하면 얼마나 변수를 많이 선언하는지는 중요하지 않다고 했었습니다. 단 하나만 생성됩니다.
+
+```ts
+function f(x) {
+    var x;
+    var x;
+
+    if (true) {
+        var x;
+    }
+}
+```
+
+위 예제를 보면 모든 `x`의 선언은 사실 같은 `x`를 가르치며, 이는 유효합니다.
+이건 종종 버그의 원인이 됩니다.
+고맙게도, `let`선언은 이것을 허용하지 않습니다.
+
+```ts
+let x = 10;
+let x = 20; // error: 'x'를 같은 스코프에 선언할 수 없습니다.
+```
+
+TypeScript가 문제가 있음을 말해주기 때문에, 같은 변수는 같은 블록 스코프에 있을 필요가 없습니다.
+
+```ts
+function f(x) {
+    let x = 100; // error: interferes with parameter declaration
+}
+
+function g() {
+    let x = 100;
+    var x = 100; // error: can't have both declarations of 'x'
+}
+```
+
+이는 블록-스코프 변수가 함수-스코프 변수로 선언될 수 없다는 것은 아닙니다.
+블록 스코프 변수는 단지 별개의 다른 블록에 선언되어야 합니다.
+
+```ts
+function f(condition, x) {
+    if (condition) {
+        let x = 100;
+        return x;
+    }
+
+    return x;
+}
+
+f(false, 0); // '0' 반환
+f(true, 0);  // '100' 반환
+```
+
+더 중첩된 스코프에서 바깥 스코프의 변수 이름을 사용하는 것을 *shadowing*이라고 합니다.
+*shadowing*은 양날의 검이라고 할 수 있는데, 이는 실수로 방생되어 특정 버그를 일으키거나, 혹은 특정 버그를 막기 위해 쓰이기 때문입니다.
+
+예를 들어, 위에서 사용했던 `sumMatrix` 함수를 `let` 을 이용해서 작성했다고 생각해 봅시다.
+
+```ts
+function sumMatrix(matrix: number[][]) {
+    let sum = 0;
+    for (let i = 0; i < matrix.length; i++) {
+        var currentRow = matrix[i];
+        for (let i = 0; i < currentRow.length; i++) {
+            sum += currentRow[i];
+        }
+    }
+
+    return sum;
+}
+```
+
+이 루프는 합을 올바르게 계산할 것입니다. 왜냐하면 안쪽 루프의 `i` 가 바깥 루프의 `i`를 가리기 때문입니다.
+
+*보통* 더 명확한 코드 작성을 위해 Shadowing의 사용을 피합니다.
+하지만 Shadowing의 이점을 활용할 수 있는 적합한 상황이 있으므로, 최선의 판단을 내려야 합니다.
+
+## Block-scoped variable capturing
+
+`var` 선언에 변수 캡쳐링을 하는 것을 처음 보았을 때, 변수가 한번 캡쳐되면 어떻게 동작하는지 간단히 살펴보았습니다.
+
+이를 더 잘 이해해 보면, 스코프가 각각 실행될 때마다 이는 변수의 "환경"을 만듭니다.
+
+그 환경과 캡쳐된 변수들은 심지어 그 스코프가 포함한 모든 것이 실행을 종료한 후에도 존재합니다.
+
+```ts
+function theCityThatAlwaysSleeps() {
+    let getCity;
+
+    if (true) {
+        let city = "Seattle";
+        getCity = function() {
+            return city;
+        }
+    }
+
+    return getCity();
+}
+```
+
+`city`를 그 환경 안에 캡쳐했기 때문에, `if` 블록의 실행이 완료되었음에도 여전히 `city`에 접근할 수 있습니다.
+
+앞의 `setTimeout` 예제에서, `for` 루프가 매번 반복될 때마다 변수를 캡쳐하기 위해서 IIFE를 사용했던 것을 떠올려 봅시다.
+
+실제론, 캡처된 변수를 위해 새로운 변수 환경을 만드는 것이었습니다.
+
+이는 약간의 고통스러운 일이지만, 다행히, 타입스크립트 에서는 그렇게 할필요가 없습니다.
+`let` 선언은 루프의 일부로 선언될 때 동작이 크게 다릅니다.
+이 선언은 루프 자체에 새로운 환경을 만드는 대신, `반복마다` 새로운 환경을 만들어 냅니다.
+어쨋든 이건 IIFE를 통해 하고 있었던 동작이므로, 이전 `setTimeout`예제를 `let`선언만 사용해서 바꿀수 있습니다.
+
+```ts
+for (let i = 0; i < 10 ; i++) {
+    setTimeout(function() { console.log(i); }, 100 * i);
+}
+```
+
+그리고 예상 했던 대로, 다음과 같은 결과가 출력됩니다.
+
+```text
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
+# `const` declarations
+
+`const` 선언은 변수를 선언하는 또 다른 방법입니다.
+
+```ts
+const numLivesForCat = 9;
+```
+
+이 방법은 `let` 선언과 비슷합니다 하지만 그 이름에서 말해주듯이, 일단 바인딩 되면 값을 변경할 수 없습니다.
+
+다른 말로 `const`는 `let`과 같은 스코프 규칙을 가지고 있지만, 재할당 할 수 없습니다.
+
+이를 `const`가 참조하는 값이 *불변*이라고 혼동하면 안 됩니다.
+
+```ts
+const numLivesForCat = 9;
+const kitty = {
+    name: "Aurora",
+    numLives: numLivesForCat,
+}
+
+// Error
+kitty = {
+    name: "Danielle",
+    numLives: numLivesForCat
+};
+
+// all "okay"
+kitty.name = "Rory";
+kitty.name = "Kitty";
+kitty.name = "Cat";
+kitty.numLives--;
+```
+
+위와 같은 상황을 피하기 위해 특별한 조치를 취하지 않는 한, `const` 변수의 내부 상태는 여전히 수정 가능합니다.
+
+다행히, TypeScript를 사용하면 객체의 멤버가 `읽기 전용(readonly)`이라고 지정할 수 있습니다.
+[Interfaces 챕터](./Interfaces.md)에 자세히 설명되어 있습니다.
+
 `...작업중`
