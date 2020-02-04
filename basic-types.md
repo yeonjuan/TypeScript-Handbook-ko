@@ -16,7 +16,7 @@
 
 # Introduction
 
-프로그램이 유용하려면 숫자, 문자열, 구조체, 부울 값과 같은 몇 가지 가장 단순한 단위의 데이터가 필요합니다.
+프로그램이 유용하려면 숫자, 문자열, 구조체, 부울 값과 같은 몇 가지 가장 간단한 데이터의 단위가 필요합니다.
 TypeScript에서는 JavaScript에서 지원하는 거의 동일한 데이터 타입을 지원하며, 열거 타입을 사용하여 이를 더 편리하게 사용할 수 있습니다.
 
 # Boolean
@@ -62,7 +62,7 @@ let sentence: string = `Hello, my name is ${ fullName }.
 I'll be ${ age + 1 } years old next month.`;
 ```
 
-위는 아래 `sendence`선언과 동일합니다:
+위는 아래 `sentence`선언과 동일합니다:
 
 ```ts
 let sentence: string = "Hello, my name is " + fullName + ".\n\n" +
@@ -151,7 +151,7 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 
 # Any
 
-애플리케이션을 만들 때, 알지 못하는 타입을 표현해야 할수도 있습니다.
+애플리케이션을 만들 때, 알지 못하는 타입을 표현해야할 수도 있습니다.
 이 값들은 동적인 콘텐츠에서 올 수도 있습니다. 예) 사용자로부터 받은 데이터. 혹은 3rd party library.
 이 경우 타입 검사를 하지 않고, 그 값들이 컴파일 시간에 검사를 통과하길 원합니다.
 이를 위해, `any` 타입을 사용할 수 있습니다:
@@ -163,12 +163,12 @@ notSure = false; // okay, definitely a boolean
 ```
 
 `any` 타입은 기존에 존재하는 JavaScript로 작업할 수 있는 강력한 방법으로, 컴파일 중에 점진적으로 타입 검사를 하거나 하지 않을 수 있습니다.
-혹 다른 언어에서 그렇듯, `Object`가 비슷한 역할을 할수 있을 것 같다고 생각할 수도 있습니다.
-그런데, `Ojbect`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다: 
+혹 다른 언어에서 그렇듯, `Object`가 비슷한 역할을 할 수 있을 것 같다고 생각할 수도 있습니다.
+그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다: 
 
 ```ts
 let notSure: any = 4;
-notSure.ifItExists(); // okay, ifItExists 는 런타임엔 존제 할 것입니다.
+notSure.ifItExists(); // okay, ifItExists 는 런타임엔 존재할 것입니다.
 notSure.toFixed(); // okay, toFixed는 존재합니다. (하지만 컴파일러는 검사하지 않음)
 
 let prettySure: Object = 4;
@@ -210,13 +210,13 @@ TypeScript는 `undefined` 과 `null` 둘 다 각각 자신의 타입 이름으�
 `void`처럼 그 자체로 유용한 경우는 거의 없습니다: 
 
 ```ts
-// 이 밖에 이 변수들에 할당할수 있는 값이 없습니다.
+// 이 밖에 이 변수들에 할당할 수 있는 값이 없습니다.
 let u: undefined = undefined;
 let n: null = null;
 ```
 
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
-이건, null과 nudefined를 `number` 같은 타입 에 할당할수 있다는 것을 의미합니다.
+이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
 
 하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외 적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
@@ -279,7 +279,7 @@ create(undefined); // Error
 대게, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
 
 *Type assertions* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
-`type assertuin` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
+`type assertion` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
 이는 런타임에 영향을 미치지 않으며, 온전히 컴파일러만 이를 사용합니다.
 타입 스크립트는 개발자가 필요한 어떤 특정 검사를 수행했다고 인지합니다.
 
