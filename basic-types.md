@@ -1,5 +1,4 @@
 # Table of Contents
-
 1. [Introduction](#introduction)
 2. [Boolean](#boolean)
 3. [Number](#number)
@@ -48,31 +47,26 @@ let octal: number = 0o744;
 JavaScript처럼 TypeScript도 큰따옴표 (`"`)나 작은따옴표 (`'`)를 문자열 데이터를 감싸는데 사용합니다.
 
 ```ts
-let color: string = 'blue';
+let color: string = "blue";
 color = 'red';
 ```
 
-또한 _템플릿 문자열_ 을 통해 여러 줄에 걸쳐 문자열을 작성할 수 있으며, 표현식을 포함시킬 수도 있습니다.
+또한 *템플릿 문자열* 을 통해 여러 줄에 걸쳐 문자열을 작성할 수 있으며, 표현식을 포함시킬 수도 있습니다.
 이 문자열은 백틱/백쿼트 (`` ` `` ) 문자로 감싸지며, `${ expr }`과 같은 형태로 표현식을 포함시킬 수 있습니다.
 
 ```ts
 let fullName: string = `Bob Bobbington`;
 let age: number = 37;
-let sentence: string = `Hello, my name is ${fullName}.
+let sentence: string = `Hello, my name is ${ fullName }.
 
-I'll be ${age + 1} years old next month.`;
+I'll be ${ age + 1 } years old next month.`;
 ```
 
 위는 아래 `sentence`선언과 동일합니다:
 
 ```ts
-let sentence: string =
-  'Hello, my name is ' +
-  fullName +
-  '.\n\n' +
-  "I'll be " +
-  (age + 1) +
-  ' years old next month.';
+let sentence: string = "Hello, my name is " + fullName + ".\n\n" +
+    "I'll be " + (age + 1) + " years old next month.";
 ```
 
 # Array
@@ -99,9 +93,9 @@ let list: Array<number> = [1, 2, 3];
 // 튜플 타입으로 선언
 let x: [string, number];
 // 초기화
-x = ['hello', 10]; // OK
+x = ["hello", 10]; // OK
 // 잘못된 초기화
-x = [10, 'hello']; // Error
+x = [10, "hello"]; // Error
 ```
 
 정해진 인덱스에 위치한 요소에 접근하면 그에 맞는 타입이 나타납니다.
@@ -114,7 +108,7 @@ console.log(x[1].substring(1)); // Error, 'number'에는 'substring' 이 없습�
 정해진 인덱스 외에 다른 인덱스에 있는 요소에 접근하면, 에러가 발생하며 실패합니다.
 
 ```ts
-x[3] = 'world'; // Error, '[string, number]' 타입에는 프로퍼티 '3'이 없습니다.
+x[3] = "world"; // Error, '[string, number]' 타입에는 프로퍼티 '3'이 없습니다.
 
 console.log(x[5].toString()); // '[string, number]' 타입에는 프로퍼티 '5'가 없습니다.
 ```
@@ -125,11 +119,7 @@ JavaScript의 표준 자료형 집합과 사용하면 도움이 될만한 데이
 C# 같은 언어처럼, `enum`은 값의 집합에 더 나은 이름을 붙여줄 수 있습니다.
 
 ```ts
-enum Color {
-  Red,
-  Green,
-  Blue
-}
+enum Color {Red, Green, Blue}
 let c: Color = Color.Green;
 ```
 
@@ -138,22 +128,14 @@ let c: Color = Color.Green;
 예를 들어, 위 예제를 `0`대신 `1`부터 시작해 번호를 매기도록 바꿀 수 있습니다.
 
 ```ts
-enum Color {
-  Red = 1,
-  Green,
-  Blue
-}
+enum Color {Red = 1, Green, Blue}
 let c: Color = Color.Green;
 ```
 
 또는, 모든 값을 수동으로 설정할 수 있습니다:
 
 ```ts
-enum Color {
-  Red = 1,
-  Green = 2,
-  Blue = 4
-}
+enum Color {Red = 1, Green = 2, Blue = 4}
 let c: Color = Color.Green;
 ```
 
@@ -161,14 +143,10 @@ let c: Color = Color.Green;
 예를 들어, 위의 예제에서 `2`라는 값이 위의 어떤 `Color` enum 멤버와 매칭되는지 알 수 없을 때, 이에 일치하는 이름을 알아낼 수 있습니다:
 
 ```ts
-enum Color {
-  Red = 1,
-  Green,
-  Blue
-}
+enum Color {Red = 1, Green, Blue}
 let colorName: string = Color[2];
 
-console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
+console.log(colorName); // 값이 2인 'Green'이 출력됩니다. 
 ```
 
 # Any
@@ -180,13 +158,13 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 
 ```ts
 let notSure: any = 4;
-notSure = 'maybe a string instead';
+notSure = "maybe a string instead";
 notSure = false; // okay, definitely a boolean
 ```
 
 `any` 타입은 기존에 존재하는 JavaScript로 작업할 수 있는 강력한 방법으로, 컴파일 중에 점진적으로 타입 검사를 하거나 하지 않을 수 있습니다.
 혹 다른 언어에서 그렇듯, `Object`가 비슷한 역할을 할 수 있을 것 같다고 생각할 수도 있습니다.
-그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다:
+그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다: 
 
 ```ts
 let notSure: any = 4;
@@ -203,7 +181,7 @@ prettySure.toFixed(); // Error: 프로퍼티 'toFixed'는 'Object'에 존재하�
 예를 들어, 여러 다른 타입이 섞인 배열을 다룰 수 있습니다.
 
 ```ts
-let list: any[] = [1, true, 'free'];
+let list: any[] = [1, true, "free"];
 
 list[1] = 100;
 ```
@@ -215,7 +193,7 @@ list[1] = 100;
 
 ```ts
 function warnUser(): void {
-  console.log('This is my warning message');
+    console.log("This is my warning message");
 }
 ```
 
@@ -229,7 +207,7 @@ unusable = null; // OK  `--strictNullChecks` 을 사용하지 않을때만
 # Null and Undefined
 
 TypeScript는 `undefined` 과 `null` 둘 다 각각 자신의 타입 이름으로 `undefined` , `null`로 사용합니다.
-`void`처럼 그 자체로 유용한 경우는 거의 없습니다:
+`void`처럼 그 자체로 유용한 경우는 거의 없습니다: 
 
 ```ts
 // 이 밖에 이 변수들에 할당할 수 있는 값이 없습니다.
@@ -240,7 +218,7 @@ let n: null = null;
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
 이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
 
-하지만, `--strictNullChecks`를 사용하면, `null`과 `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외 적으로 `undefined`는 `void`에 할당 가능합니다)
+하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외 적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
 이 경우, `string` 또는 `null` 또는 `undefined` 를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
@@ -262,17 +240,18 @@ Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 ```ts
 // never를 반환하는 함수는 함수의 마지막에 도달 할 수 없다.
 function error(message: string): never {
-  throw new Error(message);
+    throw new Error(message);
 }
 
 // 반환 타입이 never로 추론된다.
 function fail() {
-  return error('Something failed');
+    return error("Something failed");
 }
 
 // never를 반환하는 함수는 함수의 마지막에 도달 할 수 없다.
 function infiniteLoop(): never {
-  while (true) {}
+    while (true) {
+    }
 }
 ```
 
@@ -289,7 +268,7 @@ create({ prop: 0 }); // OK
 create(null); // OK
 
 create(42); // Error
-create('string'); // Error
+create("string"); // Error
 create(false); // Error
 create(undefined); // Error
 ```
@@ -299,24 +278,23 @@ create(undefined); // Error
 가끔, TypeScript보다 개발자가 값에 대해 더 잘 알고 일을 때가 있습니다.
 대게, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
 
-_Type assertions_ 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
+*Type assertions* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
 `type assertion` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
 이는 런타임에 영향을 미치지 않으며, 온전히 컴파일러만 이를 사용합니다.
 타입 스크립트는 개발자가 필요한 어떤 특정 검사를 수행했다고 인지합니다.
 
 Type assertion 은 두 가지 형태가 있습니다.
-하나는, "angle-bracket" 문법입니다:
+하나는, "angle-bracket" 문법입니다: 
 
 ```ts
-let someValue: any = 'this is a string';
+let someValue: any = "this is a string";
 
 let strLength: number = (<string>someValue).length;
 ```
-
 다른 하나는 `as`-문법 입니다.
 
 ```ts
-let someValue: any = 'this is a string';
+let someValue: any = "this is a string";
 
 let strLength: number = (someValue as string).length;
 ```
