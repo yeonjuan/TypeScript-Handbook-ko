@@ -1,6 +1,6 @@
 # Typescript-Handbook-ko
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
  타입스크립트 핸드북 번역
@@ -18,6 +18,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://yeon-js.tistory.com/"><img src="https://avatars3.githubusercontent.com/u/41323220?v=4" width="100px;" alt=""/><br /><sub><b>YeonJuan</b></sub></a><br /><a href="#translation-yeonjuan" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://guyeol.github.io"><img src="https://avatars3.githubusercontent.com/u/7357413?v=4" width="100px;" alt=""/><br /><sub><b>GuyeolJeong</b></sub></a><br /><a href="#translation-guyeol" title="Translation">🌍</a></td>
   </tr>
 </table>
 
