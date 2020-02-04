@@ -58,7 +58,6 @@ color = 'red';
 let fullName: string = `Bob Bobbington`;
 let age: number = 37;
 let sentence: string = `Hello, my name is ${ fullName }.
-
 I'll be ${ age + 1 } years old next month.`;
 ```
 
@@ -79,7 +78,7 @@ TypeScript는 JavaScript처럼 값들을 배열로 다룰 수 있게 해줍니�
 let list: number[] = [1, 2, 3];
 ```
 
-두 번째 방법은 제네릭 베열 타입을 쓰는 것입니다, `Array<elemType>`:
+두 번째 방법은 제네릭 베열 타입을 쓰는 것입니다. `Array<elemType>`:
 
 ```ts
 let list: Array<number> = [1, 2, 3];
@@ -218,7 +217,7 @@ let n: null = null;
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
 이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
 
-하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외 적으로 `undefined`는 `void`에 할당 가능합니다)
+하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
 이 경우, `string` 또는 `null` 또는 `undefined` 를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
@@ -276,7 +275,7 @@ create(undefined); // Error
 # Type assertions
 
 가끔, TypeScript보다 개발자가 값에 대해 더 잘 알고 일을 때가 있습니다.
-대게, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
+대개, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
 
 *Type assertions* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
 `type assertion` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
