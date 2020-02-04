@@ -3,3 +3,43 @@
 타입스크립트의 핵심 원칙 중 하나는 타입 검사가 값(value)들이 가지고 있는 *형태(shape)*에 초점을 맞추고 있는 것입니다.
 이는 "덕 타이핑(duck typing)" 혹은 "구조적 서브타이핑 (structural subtyping)"이라고도 합니다.
 타입스크립트에서, 인터페이스는 이런 타입들의 이름을 짓는 역할을 하고 코드 안의 계약을 정의하는 것뿐만 아니라 프로젝트 외부에서 사용하는 계약을 정의합니다.
+
+# 첫 번째 인터페이스 (Our First Interface)
+
+인터페이스가 어떻게 동작하는지 확인하기 위한 가장 간단한 예제:
+
+```ts
+function printLabel(labeledObj: { label: string }) {
+    console.log(labeledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+```
+
+타입 체커는 `printLabel`에 대한 호출을 확인합니다.
+`printLabel` 함수는 `문자열` 타입의 `label`을 갖는 객체를 하나의 매개변수로 가집니다.
+이 객체가 실제로는 이보다 더 많은 프로퍼티를 갖고 있지만, 컴파일러는 *최소* 필요한 프로퍼티가 있고, 이것의 타입이 잘 맞는지만 검사합니다.
+타입스크립트가 관대하지 않은 몇 가지 케이스들이 있는데, 이는 나중에 다룰 것입니다.
+
+이번엔 문자열 타입의 프로퍼티 `label`을 갖고 있음을 기술하는 인터페이스를 사용하여 같은 예제를 다시 사용해보겠습니다.
+
+```ts
+interface LabeledValue {
+    label: string;
+}
+
+function printLabel(labeledObj: LabeledValue) {
+    console.log(labeledObj.label);
+}
+
+let myObj = {size: 10, label: "Size 10 Object"};
+printLabel(myObj);
+```
+
+`LabeledValue` 인터페이스는 이전 예제의 요구사항을 똑같이 기술하는 이름으로 사용할 수 있습니다.
+이 인터페이스는 똑같이 `문자열` 타입의 `label` 프로퍼티 하나를 가진다는 것을 의미하고 있습니다.
+다른 언어에서처럼 `printLabel`에 전달한 객체가 이 인터페이스를 구현해야 한다고 명시적으로 얘기할 필요는 없습니다.
+여기서 중요한 것은 형태뿐입니다. 함수에 전달된 객체가 나열된 요구 조건을 충족한다면 허용됩니다.
+
+타입 체커는 프로퍼티들이 어떤 순서로 올 것인지에 대해서는 요구하지 않습니다. 단지 인터페이스가 요구하는 프로퍼티들이 존재하는지와 그것들이 요구하는 타입을 가졌는지만을 요구합니다.
