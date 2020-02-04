@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "yeonjuan",
+      "name": "YeonJuan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/41323220?v=4",
+      "profile": "https://yeon-js.tistory.com/",
+      "contributions": [
+        "translation"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Typescript-Handbook-ko",
+  "projectOwner": "yeonjuan",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
