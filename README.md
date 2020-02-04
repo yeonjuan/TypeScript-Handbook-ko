@@ -4,3 +4,4 @@
 
 * [Basic Types](./basic-types.md)
 * [Variable Declarations 작성중...](./variable-declarations.md)
+* [Interfaces 작성중...](./interfaces.md)
