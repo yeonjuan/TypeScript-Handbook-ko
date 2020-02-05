@@ -423,4 +423,78 @@ kitty.numLives--;
 다행히, TypeScript를 사용하면 객체의 멤버가 `읽기 전용(readonly)`이라고 지정할 수 있습니다.
 [Interfaces 챕터](./Interfaces.md)에 자세히 설명되어 있습니다.
 
+# `let` vs. `const`
+
+유사한 스코프의 의미를 가지는 두 가지 유형의 변수 선언이 있기 때문에, 어느 것을 사용하는지는 스스로 선택해야 합니다.
+광범위한 질문처럼, 답은 '때에 따라 다르다'입니다. 
+
+[최소 권한의 원칙](https://en.wikipedia.org/wiki/Principle_of_least_privilege)을 적용하면, 수정하려는 선언 이외에 모든 선언은 `const`를 사용해야 합니다.
+
+그 근거는 변수가 작성될 필요가 없다면, 동일한 코드 베이스에서 작업하는 다른 작업자들은 자동으로 객체에 쓸 수 없어야 하며, 그들이 정말로 변수에 재할당할 필요가 있는지 고려할 필요가 있을 것이라는 것입나다.
+
+`const`를 사용하는 것은 데이터의 흐름을 추론할 때 코드를 더 예측하기 쉽게 해줍니다.
+
+최선의 판단을 하고, 해당되는 경우, 팀원들과 문제에 대해 상의하세요.
+
+이 핸드북은 대부분 `let` 선언을 사용합니다.
+
+## Array destructuring
+
+구조 분해의 가장 단순한 형태는 배열 구조 분해 할당입니다:
+
+```ts
+let input = [1, 2];
+let [first, second] = input;
+console.log(first); // 1 출력
+console.log(second); // 2 출력
+```
+
+이는 `first`, `second`라는 이름의 새로운 두 변수를 생성합니다. 
+이는 인덱싱을 사용하는 것과 동일하지만 더 편리합니다:
+
+```ts
+first = input[0];
+second = input[1];
+```
+
+구조 분해 할당은 이미 선언된 변수에도 동작합니다:
+
+```ts
+// 변수를 스왑
+[first, second] = [second, first];
+```
+
+그리고, 함수의 매개변수에도 동작합니다:
+
+```ts
+function f([first, second]: [number, number]) {
+    console.log(first);
+    console.log(second);
+}
+f([1, 2]);
+```
+
+나머지 요소들에 대해 `...` 구문을 사용하여 변수를 생성할 수 있습니다:
+
+```ts
+let [first, ...rest] = [1, 2, 3, 4];
+console.log(first); // 1 출력
+console.log(rest); // [ 2, 3, 4 ] 출력
+```
+
+물론, 이는 JavaScript이기 때문에, 필요하지 않은 뒤따라 오는 요소들을 무시할 수 있습니다:
+
+```ts
+let [first] = [1, 2, 3, 4];
+console.log(first); // 1 출력
+```
+
+또는 그 밖에 요소들을 무시할 수 있습니다:
+
+```ts
+let [, second, , fourth] = [1, 2, 3, 4];
+console.log(second); // 2 출력
+console.log(fourth); // 4 출력
+```
+
 `...작업중`
