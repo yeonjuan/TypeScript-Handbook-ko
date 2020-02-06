@@ -97,3 +97,46 @@ function createSquare(config: SquareConfig): { color: string; area: number } {
 
 let mySquare = createSquare({color: "black"});
 ```
+
+# 읽기전용 프로퍼티 (Readonly properties)
+
+어떤 프로퍼티들은 객체가 생성될 때만 수정 가능해야합니다.
+프로퍼티 이름 앞에 `readonly`를 넣어서 이를 지정할 수 있습니다:
+
+```ts
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+```
+
+객체 리터럴을 할당하여 `Point`를 생성합니다.
+할당 후에는 `x`, `y`를 수정할 수 없습니다.
+
+```ts
+let p1: Point = { x: 10, y: 20 };
+p1.x = 5; // error!
+```
+
+TypeScript에서는 모든 변경 메소드(Mutating Methods)가 제거된 `Array<T>`와 동일한 `ReadonlyArray<T>` 타입을 제공합니다. 그래서 생성 후에 배열을 변경하지 않음을 보장할 수 있습니다.
+
+```ts
+let a: number[] = [1, 2, 3, 4];
+let ro: ReadonlyArray<number> = a;
+ro[0] = 12; // error!
+ro.push(5); // error!
+ro.length = 100; // error!
+a = ro; // error!
+```
+
+예제 마지막 줄에서 일반 배열을 `ReadonlyArray`로 재할당하는 것이 금지됨을 확인할 수 있습니다.
+타입 단언(type assertion)으로 오버라이드하는 것은 가능합니다.
+
+```ts
+a = ro as number[];
+```
+
+## `readonly` vs `const`
+
+`readonly`와 `const` 중에 어떤 것을 사용할 지 기억하기 가장 쉬운 방법은 변수에 쓸 것인지 프로퍼티에 쓸 것인지 질문해 보는 것입니다.
+변수는 `const`를 사용하고 프로퍼티는 `readonly`를 사용합니다
