@@ -56,6 +56,7 @@ dog.bark();
 `Dog`는 `Animal`의 기능을 확장하기 때문에, `bark()`와 `move()`를 모두 가진 `Dog` 인스턴스를 생성할 수 있습니다.
 
 조금 더 복잡한 예제를 살펴보겠습니다.
+
 ```ts
 class Animal {
     name: string;
