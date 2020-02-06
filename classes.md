@@ -32,6 +32,7 @@ C# 이나 Java를 사용해봤다면, 이 예제 코드는 익숙할 것입니�
 TypeScript에서는, 일반적인 객체 지향 패턴을 사용합니다. 이미 존재하는 클래스를 상속하여 확장된 클래스를 생성하는 방식은 클래스 기반의 프로그래밍에서 가장 기본적인 패턴 중 하나입니다.
 
 예제를 살펴보겠습니다.
+
 ```ts
 class Animal {
     move(distanceInMeters: number = 0) {
@@ -100,4 +101,3 @@ Tommy the Palomino moved 34m.
 ```
 
 `...작업중`
-
