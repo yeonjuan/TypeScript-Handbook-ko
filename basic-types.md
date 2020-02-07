@@ -150,7 +150,7 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 
 # Any
 
-애플리케이션을 만들 때, 알지 못하는 타입을 표현해야할 수도 있습니다.
+애플리케이션을 만들 때, 알지 못하는 타입을 표현해야 할 수도 있습니다.
 이 값들은 동적인 콘텐츠에서 올 수도 있습니다. 예) 사용자로부터 받은 데이터. 혹은 3rd party library.
 이 경우 타입 검사를 하지 않고, 그 값들이 컴파일 시간에 검사를 통과하길 원합니다.
 이를 위해, `any` 타입을 사용할 수 있습니다:
@@ -174,7 +174,7 @@ let prettySure: Object = 4;
 prettySure.toFixed(); // Error: 프로퍼티 'toFixed'는 'Object'에 존재하지 않습니다.
 ```
 
-> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object` 를 no-primitive `object` 대신에 사용하지 마세요.
+> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object`를 no-primitive `object` 대신에 사용하지 마세요.
 
 또한, any 타입은 만약 타입의 일부를 알지만 전체를 알지는 못할 때 유용합니다.
 예를 들어, 여러 다른 타입이 섞인 배열을 다룰 수 있습니다.
@@ -215,11 +215,11 @@ let n: null = null;
 ```
 
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
-이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
+이건, null과 undefined를 `number` 같은 타입에 할당할 수 있다는 것을 의미합니다.
 
 하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
-이 경우, `string` 또는 `null` 또는 `undefined` 를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
+이 경우, `string` 또는 `null` 또는 `undefined`를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
 Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 
