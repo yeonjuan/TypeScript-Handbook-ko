@@ -438,6 +438,12 @@ kitty.numLives--;
 
 이 핸드북은 대부분 `let` 선언을 사용합니다.
 
+# Destructuring
+
+TypeScript가 가진 또 다른 ECMAScript 2015의 특징은 구조 분해입니다. 
+자세한 내용은, [the Mozilla Developer Network의 글](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)을 참고 하세요.
+이번 섹션에서는 간단하게 개요를 살펴보겠습니다.
+
 ## Array destructuring
 
 구조 분해의 가장 단순한 형태는 배열 구조 분해 할당입니다:
@@ -496,5 +502,103 @@ let [, second, , fourth] = [1, 2, 3, 4];
 console.log(second); // 2 출력
 console.log(fourth); // 4 출력
 ```
+
+## Tuple destructuring
+
+튜플은 배열처럼 구조 분해됩니다; 구조 분해된 변수는 튜플 요소와 일치하는 타입을 얻게 됩니다:
+
+``` ts
+let tuple: [number, string, boolean] = [7, "hello", true];
+
+let [a, b, c] = tuple; // a: number, b: string, c: boolean
+```
+
+튜플의 범위를 넘어선 구조 분해는 오류입니다:
+
+``` ts
+let [a, b, c, d] = tuple; // Error, no element at index 3
+```
+
+배열과 마찬가지로, 더 짧은 튜플을 얻기 위해 `...`로 튜플의 나머지를 구조 분해할 수 있습니다.
+
+``` ts
+let [a, ...bc] = tuple; // bc: [string, boolean]
+let [a, b, c, ...d] = tuple; // d: [], 비어있는 튜플
+```
+
+또는, 뒤따라 오는 요소나 다른 요소를 무시할 수 있습니다:
+
+``` ts
+let [a] = tuple; // a: number
+let [, b] = tuple; // b: string
+```
+
+## Object destructuring
+
+또한 객체를 구조 분해할 수 있습니다:
+
+```ts
+let o = {
+    a: "foo",
+    b: 12,
+    c: "bar"
+};
+let { a, b } = o;
+```
+
+이는 `o.a`, `o.b`로 부터 새로운 변수 `a`와 `b`를 생성합니다.
+필요 없다면 `c`를 건너 뛸 수 있다는 걸 알아두세요.
+배열 구조 분해처럼, 선언 없이 할당할 수 있습니다.:
+
+```ts
+({ a, b } = { a: "baz", b: 101 });
+```
+
+이 구문을 괄호로 감싸고 있다는 것을 주의해 주세요.    
+JavaScript는 보통 `{`를 블록의 시작으로 파싱 합니다.
+객체 안에 나머지 요소들을 `...` 구문을 사용하여 변수로 생성할 수 있습니다:
+
+```ts
+let { a, ...passthrough } = o;
+let total = passthrough.b + passthrough.c.length;
+
+```
+
+### Property renaming
+
+프로퍼티들에 다른 이름을 붙히는 것도 가능합니다.
+
+```ts
+let { a: newName1, b: newName2 } = o;
+```
+
+여기서 구문이 혼란스러워지기 시작합니다.
+`a: newName1` 을 "`a`를 `newName1` 로" 와 같이 읽을 수 있습니다.
+여태 써왔던 것 처럼 방향은 왼쪽에서 오른쪽입니다:
+
+```ts
+let newName1 = o.a;
+let newName2 = o.b;
+```
+
+혼란스럽게도 여기서 콜론은 타입을 나타내지 않습니다.
+타입을 지정하는 경우, 전체 구조 분해 뒤에 작성해야 합니다:
+
+```ts
+let { a, b }: { a: string, b: number } = o;
+```
+
+### Default values
+
+기본 값은 프로퍼티가 정의되지 않은 경우, 기본값을 사용하도록 하는 것입니다:
+
+```ts
+function keepWholeObject(wholeObject: { a: string, b?: number }) {
+    let { a, b = 1001 } = wholeObject;
+}
+```
+
+예제에서 `b?`는 `b`가 옵셔널(선택적)이라는 것을 의미합니다. 따라서 이는 `undefined` 일 수도 있습니다.
+`keepWholeObject`는 이제 `b`가 undefined 이더라도 `a`, `b` 프로퍼티와 함께 `wholeObject`라는 변수를 가집니다.
 
 `...작업중`
