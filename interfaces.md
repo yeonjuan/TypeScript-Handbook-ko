@@ -118,7 +118,7 @@ let p1: Point = { x: 10, y: 20 };
 p1.x = 5; // error!
 ```
 
-TypeScript에서는 모든 변경 메소드(Mutating Methods)가 제거된 `Array<T>`와 동일한 `ReadonlyArray<T>` 타입을 제공합니다. 그래서 생성 후에 배열을 변경하지 않음을 보장할 수 있습니다.
+TypeScript에서는 모든 변경 메서드(Mutating Methods)가 제거된 `Array<T>`와 동일한 `ReadonlyArray<T>` 타입을 제공합니다. 그래서 생성 후에 배열을 변경하지 않음을 보장할 수 있습니다.
 
 ```ts
 let a: number[] = [1, 2, 3, 4];
