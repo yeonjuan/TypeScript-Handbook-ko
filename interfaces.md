@@ -165,8 +165,8 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 
 `width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 입력되었다고 생각 할 수 있습니다.
 
-하지만, TypeScript는 이 코드에 버그가 있일 수 있다고 생각할  것입니다.
-객체 리터럴은 다른 변수에 할당할 때나 인수로 전달할 때, 특별한 처리를 받고, *초과 프로퍼티 검사 (excess propery checking)*를 받습니다.
+하지만, TypeScript는 이 코드에 버그가 있을 수 있다고 생각할  것입니다.
+객체 리터럴은 다른 변수에 할당할 때나 인수로 전달할 때, 특별한 처리를 받고, *초과 프로퍼티 검사 (excess property checking)*를 받습니다.
 만약 객체 리터럴이 "대상 타입 (target type)"이 갖고 있지 않은 프로퍼티를 갖고 있으면, 에러가 발생합니다.
 
 ```ts
@@ -182,7 +182,7 @@ let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
 ```
 
 하지만, 객체가 특별한 경우에서 사용될 때, 추가 프로퍼티가 있음을 확신한다면, 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
-만약 `SquareConfig` `color`와 `width` 프로퍼티를 위와같은 타입으로 갖고 있고, *또한* 다른 프로퍼티를 갖을 수 있다면, 다음과 같이 정의할 수 있습니다.
+만약 `SquareConfig` `color`와 `width` 프로퍼티를 위와 같은 타입으로 갖고 있고, *또한* 다른 프로퍼티를 가질 수 있다면, 다음과 같이 정의할 수 있습니다.
 
 ```ts
 interface SquareConfig {
@@ -192,7 +192,7 @@ interface SquareConfig {
 }
 ```
 
-나중에 인데스 서명에 대해 좀 더 다룰것입니다. 하지만 여기서는 `SquareConfig`가 여러 프로퍼티가 갖을 수 있고, 그 프로퍼티들이 `color`나 `width`가 아니라면, 그들의 타입은 중요하지 않습니다.
+나중에 인데스 서명에 대해 좀 더 다룰 것입니다. 하지만 여기서는 `SquareConfig`가 여러 프로퍼티가 가질 수 있고, 그 프로퍼티들이 `color`나 `width`가 아니라면, 그들의 타입은 중요하지 않습니다.
 
 이 검사를 피하는 마지막 방법은 놀랍게도 객체를 다른 변수에 할당하는 것입니다.
 `squareOptions`가 추가 프로퍼티 검사를 받지 않기 때문에, 컴파일러는 에러를 주지 않습니다.
@@ -202,7 +202,7 @@ let squareOptions = { colour: "red", width: 100 };
 let mySquare = createSquare(squareOptions);
 ```
 
-`squareOptions`와 `SquareConfig` 사이에 공통 프로퍼티가 있는 경우에만 위와같은 방법을 사용할 수 있습니다.
+`squareOptions`와 `SquareConfig` 사이에 공통 프로퍼티가 있는 경우에만 위와 같은 방법을 사용할 수 있습니다.
 이 예제에서는, `width`가 그 경우입니다. 하지만 만약에 변수가 공통 객체 프로퍼티가 없으면 에러가 납니다. 예를 들어:
 
 ```ts
@@ -210,7 +210,7 @@ let squareOptions = { colour: "red" };
 let mySquare = createSquare(squareOptions);
 ```
 
-위 처럼 간단한 코드의 경우, 이 검사를 "피하는" 방법을 시도하지 않는 것이 좋습니다.
-메서드가 있거나 상태를 갖고있는 등 더 복잡한 객체 리터럴에서 이 방법을 생각해볼 수 있습니다. 하지만 초과 프로퍼티 에러의 대부분은 실제 버그입니다.
-그 말은, 만약 옵션 백같은 곳에서 초과 프로퍼티 검사 문제가 발생하면, 타입 정의를 수정해야할 필요가 있습니다.
-예를 들어, 만약 `createSquare`에 `color`나 `colour` 모두 전달해도 괜찮다면, `squareConfig`가 이를 반영하도록 정의를 수정해야합니다.
+위처럼 간단한 코드의 경우, 이 검사를 "피하는" 방법을 시도하지 않는 것이 좋습니다.
+메서드가 있거고 상태를 가지는 등 더 복잡한 객체 리터럴에서 이 방법을 생각해볼 수 있습니다. 하지만 초과 프로퍼티 에러의 대부분은 실제 버그입니다.
+그 말은, 만약 옵션 백 같은 곳에서 초과 프로퍼티 검사 문제가 발생하면, 타입 정의를 수정해야 할 필요가 있습니다.
+예를 들어, 만약 `createSquare`에 `color`나 `colour` 모두 전달해도 괜찮다면, `squareConfig`가 이를 반영하도록 정의를 수정해야 합니다.
