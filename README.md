@@ -9,10 +9,33 @@
 - [Basic Types](./basic-types.md)
 - [Variable Declarations](./variable-declarations.md)
 - [Interfaces 작성중...](./interfaces.md)
-- [Classes 작성중...](./classes.md)
+- [Classes](./classes.md)
 - [Functions 작성중 ...](./functions.md)
+- Generics
+- Enums
+- Type Inference
+- Type Compatibility
+- Advanced Types
+- Symbols
+- Iterators and Generators
+- Modules
+- Namespaces
+- Namespaces and Modules
+- Module Resolution
+- Declaraion Merging
+- JSX
+- Decorators
+- Mixins
+- Triple-Slash Directives
+- Type Checking JavaScript Files
+- Utility Types
 
-## Contributors ✨
+
+## 참여하기
+
+누구나 참여 가능하며 참여하는 방법은 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참고해 주세요.
+
+## 컨트리뷰터 목록 ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
