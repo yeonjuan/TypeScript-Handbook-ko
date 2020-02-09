@@ -10,6 +10,7 @@
 - [Variable Declarations 작성중...](./variable-declarations.md)
 - [Interfaces 작성중...](./interfaces.md)
 - [Classes 작성중...](./classes.md)
+- [Functions 작성중 ...](./functions.md)
 
 ## Contributors ✨
 
