@@ -264,7 +264,7 @@ class Octopus {
 }
 ```
 
-생성자에 짧아진 `readonly name: string` 파라미터를 사용하여 `theName`을 제거하고 `name` 멤버를 생성하고 초기화했습니다. 즉 선언과 할당을 한 곳으로 통합했습니다.
+생성자에 짧아진 `readonly name: string` 파라미터를 사용하여 `theName`을 제거하고 `name` 멤버를 생성하고 초기화했습니다. 즉 선언과 할당을 한 곳으로 통합했습니다.`
 
 매개변수 프로퍼티는 접근 지정자나 `readonly` 또는 둘 모두를 생성자 매개변수에 접두어로 붙여 선언합니다. 매개변수 프로퍼티에 `private`을 사용하면 비공개 멤버를 선언하고 초기화합니다. 마찬가지로, `public`, `protected`, `readonly`도 동일하게 작용합니다.
 
@@ -324,4 +324,31 @@ if (employee.fullName) {
 
 먼저 접근자는 ECMAScript 5 이상을 출력하도록 컴파일러를 설정해야 합니다. ECMAScript 3으로의 하향 조정은 지원되지 않습니다. 둘째, `get`과 `set`이 없는 접근자는 자동으로 `readonly`로 유추됩니다. 이는 프로퍼티 내의 사용자들이 변경할 수 없음을 알 수 있기 때문에 코드 내에서 `.d.ts` 파일을 생성할 때 유용합니다.
 
- `작업중...`
+
+ # 전역 프로퍼티 (Static Properties)
+
+지금까지는 인스턴스화될 때 객체에 보이는 *인스턴스* 멤버에 대해서만 살펴보았습니다. 또한 우리는 인스턴스가 아닌 클래스 자체에서 보이는 *전역* 멤버를 생성할 수 있습니다. 이 예제에서는 모든 grid의 일반적인 값이기 때문에 origin에 `static`을 사용합니다. 각 인스턴스는 클래스 이름을 앞에 붙여 이 값에 접근할 수 있습니다. 인스턴스 접근 앞에 `this.`를 붙이는 것과 비슷하게 여기선 전역 접근 앞에 `Grid.`를 붙입니다. 
+
+```ts
+class Grid {
+    static origin = {x: 0, y: 0};
+    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+        let xDist = (point.x - Grid.origin.x);
+        let yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    }
+    constructor (public scale: number) { }
+}
+
+let grid1 = new Grid(1.0);  // 1x scale
+let grid2 = new Grid(5.0);  // 5x scale
+
+console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
+console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
+```
+
+`작업중...`
+
+
+
+
