@@ -182,7 +182,7 @@ animal = employee; // 오류: 'Animal'과 'Employee'은 호환될 수 없음.
 
 ## `protected` 이해하기 (Understanding protected)
 
-`protected` 지정자도 `protected`로 선언된 멤버를 파생된 클래스 내에서 접근할 수 있다는 점만 제외하면 `private`지정자와 매우 유사합니다. 예를 들면,
+`protected` 지정자도 `protected`로 선언된 멤버를 파생된 클래스 내에서 접근할 수 있다는 점만 제외하면 `private`지정자와 매우 유사하게 동작합니다. 예를 들면,
 
 ```ts
 class Person {
