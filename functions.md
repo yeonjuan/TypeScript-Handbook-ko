@@ -186,7 +186,7 @@ let result4 = buildName(undefined, "Adams");     // Will Adams
 
 ```
 
-# Rest 매개변수( Rest Parameters )
+# 나머지 매개변수( Rest Parameters )
 
 필수(required), 선택적(optional), 기본(default) 매개변수는 한 번에 하나의 매개변수만을 가지고 이야기합니다.
 때때로 우리는 그룹으로써 다수의 매개변수를 가지고 작업하기를 원합니다. 또는, 함수가 최종적으로 얼마나 많은 매개변수를 취할지 모를 때도 있을 것 입니다.
@@ -205,12 +205,12 @@ function buildName(firstName: string, ...restOfName: string[]) {
 let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 ```
 
-Rest 매개변수는 선택적 매개변수들의 수를 무한으로 취급합니다. Rest 매개변수로 인자들을 넘겨줄 때는 당신이 원하는 만큼 넘겨 줄 수도 있습니다. ( 아무것도 넘겨주지 않을 수도 있습니다. )
+나머지 매개변수(rest parameters)는 선택적 매개변수들의 수를 무한으로 취급합니다. 나머지 매개변수로 인자들을 넘겨줄 때는 당신이 원하는 만큼 넘겨 줄 수도 있습니다. ( 아무것도 넘겨주지 않을 수도 있습니다. )
 
 컴파일러는 `...` 부호 뒤의 이름으로 전달된 인자 배열을 빌드하여 함수에서 사용 할 수 있도록 합니다.
 
 
-`...` 부호는 Rest 매개변수가 있는 함수의 타입에도 사용됩니다.
+`...` 부호는 나머지 매개변수가 있는 함수의 타입에도 사용됩니다.
 
 ```ts
 function buildName(firstName: string, ...restOfName: string[]) {
