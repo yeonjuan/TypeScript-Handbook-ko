@@ -270,7 +270,7 @@ class Octopus {
 
 # 접근자 (Accessors)
 
-TypeScript는 객체의 멤버에 대한 접근을 인터셉트하는 방식으로 getters/setters를 지원합니다. 이를 통해 각 객체의 멤버에 접근하는 방법을 세밀하게 제어할 수 있습니다.
+TypeScript는 객체의 멤버에 대한 접근을 가로채는 방식으로 getters/setters를 지원합니다. 이를 통해 각 객체의 멤버에 접근하는 방법을 세밀하게 제어할 수 있습니다.
 
 간단한 클래스를 `get`과 `set`을 사용하도록 변환해봅시다. 먼저 getters와 setters가 없는 예제로 시작합니다.
 
