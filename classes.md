@@ -397,5 +397,94 @@ department.printMeeting();
 department.generateReports(); // 오류: 선언된 추상 타입에 메서드가 존재하지 않습니다
 ```
 
+# 고급 기법 (Advanced Techniques)
 
-`작업중...`
+## 생성자 함수 (Constructor functions)
+
+TypeScript에서는 클래스를 선언하면 실제로 여러 개의 선언이 동시에 생성됩니다. 첫 번째로 클래스의 인스턴스 타입입니다. 
+
+```ts
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter: Greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet()); // "Hello, world""
+```
+
+여기서 `let greeter: Greeter`라고 할 때, `Greeter` 클래스의 인스턴스 타입으로 `Greeter`를 사용합니다. 이것은 거의 다른 객체 지향 언어를 사용하는 프로그래머들에겐 자연스러운 성질입니다.
+
+또한 *생성자 함수*라고 불리는 또 다른 값을 생성하고 있습니다. 이것은 클래스의 인스턴스를 `new` 할 때 호출되는 함수입니다. 실제로 어떻게 보이는지 확인하기 위해 위의 예제에서 만들어진 JavaScript를 살펴보겠습니다.
+
+```ts
+let Greeter = (function () {
+    function Greeter(message) {
+        this.greeting = message;
+    }
+    Greeter.prototype.greet = function () {
+        return "Hello, " + this.greeting;
+    };
+    return Greeter;
+})();
+
+let greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet()); // "Hello, world"
+```
+
+여기서, `let Greeter`는 생성자 함수를 할당받을 것입니다. `new`를 호출하고 이 함수를 실행할 때, 클래스의 인스턴스를 얻습니다. 또한 생성자 함수는 클래스의 모든 전역 변수들을 포함하고 있습니다. 각 클래스를 생각하는 또 다른 방법은 *인스턴스* 측면과 *정적* 측면이 있다는 것 입니다.
+
+이 차이를 보여주기 위해 예제를 수정해봅시다.
+
+```ts
+class Greeter {
+    static standardGreeting = "Hello, there";
+    greeting: string;
+    greet() {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeter.standardGreeting;
+        }
+    }
+}
+
+let greeter1: Greeter;
+greeter1 = new Greeter();
+console.log(greeter1.greet()); // "Hello, there"
+
+let greeterMaker: typeof Greeter = Greeter;
+greeterMaker.standardGreeting = "Hey there!";
+
+let greeter2: Greeter = new greeterMaker();
+console.log(greeter2.greet()); // "Hey there!"
+```
+
+이 예제에서 `greeter1`은 이전과 비슷하게 작동합니다. `Greeter` 클래스를 인스턴스화하고 이 객체를 사용합니다. 이것은 전에 본 것입니다.
+
+다음으로, 클래스를 직접 사용합니다. 여기서 `greeterMaker`라는 새로운 변수를 생성합니다. 이 변수는 클래스 자체를 유지하거나 생성자 함수를 다르게 설명합니다. 여기서 `typeof Greeter`를 사용하여 인스턴스 타입이 아닌 "`Greeter` 클래스 자체의 타입을 제공합니다". 혹은 더 정확하게 생성자 함수의 타입인 "`Greeter`라는 심볼의 타입을 제공합니다". 이 타입은 `Greeter` 클래스의 인스턴스를 만드는 생성자와 함께 Greeter의 모든 정적 멤버를 포함할 것입니다. `greeterMaker`에 `new`를 사용함으로써 `Greeter`의 새로운 인스턴스를 생성하고 이전과 같이 호출합니다.
+
+## 인터페이스로써 클래스 사용하기 (Using a class as an interface)
+
+앞서 언급한 것처럼, 클래스 선언은 클래스의 인스턴스를 나타내는 타입과 생성자 함수라는 두 가지를 생성합니다. 클래스는 타입을 생성하기 때문에 인터페이스를 사용할 수 있는 동일한 위치에서 사용할 수 있습니다.
+
+```ts
+class Point {
+    x: number;
+    y: number;
+}
+
+interface Point3d extends Point {
+    z: number;
+}
+
+let point3d: Point3d = {x: 1, y: 2, z: 3};
+```
