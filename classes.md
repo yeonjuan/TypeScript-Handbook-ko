@@ -346,5 +346,57 @@ console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
 console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
 ```
 
+# 추상 클래스 (Abstract Classes)
+
+추상 클래스는 다른 클래스들이 파생될 수 있는 기초 클래스입니다. 추상 클래스는 직접 인스턴스화할 수 없습니다. 추상 클래스는 인터페이스와 달리 멤버에 대한 구현 세부 정보를 포함할 수 있습니다. `abstract` 키워드는 추상 클래스뿐만 아니라 추상 클래스 내에서 추상 메서드를 정의하는데 사용됩니다.
+
+```ts
+abstract class Animal {
+    abstract makeSound(): void;
+    move(): void {
+        console.log("roaming the earth...");
+    }
+}
+```
+
+추상 클래스 내에서 추상으로 표시된 메서드는 구현을 포함하지 않으며 반드시 파생된 클래스에서 구현되어야 합니다. 추상 메서드는 인터페이스 메서드와 비슷한 문법을 공유합니다. 둘 다 메서드 본문을 포함하지 않고 메서드를 정의합니다. 그러나 추상 메서드는 반드시 `abstract` 키워드를 포함해야 하며, 선택적으로 접근 지정자를 포함할 수 있습니다.
+
+```ts
+abstract class Department {
+
+    constructor(public name: string) {
+    }
+
+    printName(): void {
+        console.log("Department name: " + this.name);
+    }
+
+    abstract printMeeting(): void; // 반드시 파생된 클래스에서 구현되어야 합니다.
+}
+
+class AccountingDepartment extends Department {
+
+    constructor() {
+        super("Accounting and Auditing"); // 파생된 클래스의 생성자는 반드시 super()를 호출해야 합니다.
+    }
+
+    printMeeting(): void {
+        console.log("The Accounting Department meets each Monday at 10am.");
+    }
+
+    generateReports(): void {
+        console.log("Generating accounting reports...");
+    }
+}
+
+let department: Department; // 추상 타입의 레퍼런스를 생성합니다
+department = new Department(); // 오류: 추상 클래스는 인스턴스화 할 수 없습니다
+department = new AccountingDepartment(); // 추상이 아닌 하위 클래스를 생성하고 할당합니다
+department.printName();
+department.printMeeting();
+department.generateReports(); // 오류: 선언된 추상 타입에 메서드가 존재하지 않습니다
+```
+
+
 `작업중...`
 
