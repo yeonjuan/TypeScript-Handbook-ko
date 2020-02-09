@@ -268,6 +268,60 @@ class Octopus {
 
 매개변수 프로퍼티는 접근 지정자나 `readonly` 또는 둘 모두를 생성자 매개변수에 접두어로 붙여 선언합니다. 매개변수 프로퍼티에 `private`을 사용하면 비공개 멤버를 선언하고 초기화합니다. 마찬가지로, `public`, `protected`, `readonly`도 동일하게 작용합니다.
 
-`작업중 ...`
+# 접근자 (Accessors)
 
+TypeScript는 객체의 멤버에 대한 접근을 가로채는 방식으로 getters/setters를 지원합니다. 이를 통해 각 객체의 멤버에 접근하는 방법을 세밀하게 제어할 수 있습니다.
 
+간단한 클래스를 `get`과 `set`을 사용하도록 변환해봅시다. 먼저 getters와 setters가 없는 예제로 시작합니다.
+
+```ts
+class Employee {
+    fullName: string;
+}
+
+let employee = new Employee();
+employee.fullName = "Bob Smith";
+if (employee.fullName) {
+    console.log(employee.fullName);
+}
+```
+
+사람들이 임의로 `fullName`을 직접 설정할 수 있도록 허용하는 것은 매우 편리하지만, 우리는 `fullName`이 설정될 때 몇 가지 제약 조건이 적용되는 것을 원할 수 있습니다.
+
+이 버전에서는 백업 데이터베이스 필드의 최대 길이와 호환되는지 확인하기 위해 `newName`의 길이를 확인하는 setter를 추가합니다. 만약 최대 길이를 초과한다면, 클라이언트 코드에 문제가 있다는 것을 알리기 위해 오류를 발생시킵니다.
+
+기존의 기능을 유지하기 위해, `fullName`을 수정하지 않는 간단한 getter도 추가합니다.
+
+```ts
+const fullNameMaxLength = 10;
+
+class Employee {
+    private _fullName: string;
+
+    get fullName(): string {
+        return this._fullName;
+    }
+
+    set fullName(newName: string) {
+        if (newName && newName.length > fullNameMaxLength) {
+            throw new Error("fullName has a max length of " + fullNameMaxLength);
+        }
+        
+        this._fullName = newName;
+    }
+}
+
+let employee = new Employee();
+employee.fullName = "Bob Smith";
+if (employee.fullName) {
+    console.log(employee.fullName);
+}
+```
+
+접근자가 값의 길이를 확인하고 있는지 검증하기 위해서, 10자가 넘는 이름을 할당하고 오류가 발생함을 확인할 수 있습니다.
+
+접근자에 대해 주의해야 할 사항:
+
+먼저 접근자는 ECMAScript 5 이상을 출력하도록 컴파일러를 설정해야 합니다. ECMAScript 3으로의 하향 조정은 지원되지 않습니다. 둘째, `get`과 `set`이 없는 접근자는 자동으로 `readonly`로 유추됩니다. 이는 프로퍼티 내의 사용자들이 변경할 수 없음을 알 수 있기 때문에 코드 내에서 `.d.ts` 파일을 생성할 때 유용합니다.
+
+ `작업중...`
