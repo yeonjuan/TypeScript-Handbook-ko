@@ -236,4 +236,38 @@ let howard = new Employee("Howard", "Sales");
 let john = new Person("John"); // 오류: 'Person'의 생성자는 protected 입니다.
 ```
 
-`작업중...`
+# 읽기전용 지정자 (Readonly modifier)
+
+`readonly`키워드를 사용하여 프로퍼티를 읽기전용으로 만들 수 있습니다. 읽기전용 프로퍼티들은 선언 또는 생성자에서 초기화해야 합니다.
+
+```ts
+class Octopus {
+    readonly name: string;
+    readonly numberOfLegs: number = 8;
+    constructor (theName: string) {
+        this.name = theName;
+    }
+}
+let dad = new Octopus("Man with the 8 strong legs");
+dad.name = "Man with the 3-piece suit"; // 오류! name은 읽기전용 입니다.
+```
+
+## 매개변수 프로퍼티 (Parameter properties)
+
+마지막 예제의 `Octopus` 클래스 내에서 `name`이라는 읽기전용 멤버와 `theName`이라는 생성자 매개변수를 선언했습니다. 이는 `Octopus`의 생성자가 수행된 후에 `theName`의 값에 접근하기 위해서 필요합니다. *매개변수 프로퍼티*를 사용하면 한 곳에서 멤버를 만들고 초기화할 수 있습니다. 다음은 매개변수 프로퍼티를 사용한 더 개정된 `Octopus`클래스입니다.
+
+```ts
+class Octopus {
+    readonly numberOfLegs: number = 8;
+    constructor(readonly name: string) {
+    }
+}
+```
+
+생성자에 짧아진 `readonly name: string` 파라미터를 사용하여 `theName`을 제거하고 `name` 멤버를 생성하고 초기화했습니다. 즉 선언과 할당을 한 곳으로 통합했습니다.
+
+매개변수 프로퍼티는 접근 지정자나 `readonly` 또는 둘 모두를 생성자 매개변수에 접두어로 붙여 선언합니다. 매개변수 프로퍼티에 `private`을 사용하면 비공개 멤버를 선언하고 초기화합니다. 마찬가지로, `public`, `protected`, `readonly`도 동일하게 작용합니다.
+
+`작업중 ...`
+
+
