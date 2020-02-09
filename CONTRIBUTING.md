@@ -11,7 +11,7 @@
 
 ## 번역 규칙
 
-* 번역에 관련된 규칙은 [번역 규칙]을 참고해주세요.
+* 번역에 관련된 규칙은 [번역 규칙](https://github.com/yeonjuan/Typescript-Handbook-ko/wiki/%EB%B2%88%EC%97%AD-%EA%B7%9C%EC%B9%99)을 참고해주세요.
 * 부담가지고 깐깐하게 지키지 않아도 괜찮습니다 :) 누군가 이후에 다시 수정해 줄 겁니다.
 
 ## Pull Request
