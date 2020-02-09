@@ -163,7 +163,7 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 
 `color`대신에 *`colour`* 로 인수를 잘못 전달했을 경우, 일반 JavaScript에선 이런 경우 조용히 에러가 발생합니다.
 
-`width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 입력되었다고 생각 할 수 있습니다.
+`width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 작성되었다고 생각할 수 있습니다.
 
 하지만, TypeScript는 이 코드에 버그가 있을 수 있다고 생각할 것입니다.
 객체 리터럴은 다른 변수에 할당할 때나 인수로 전달할 때, 특별한 처리를 받고, *초과 프로퍼티 검사 (excess property checking)*를 받습니다.
