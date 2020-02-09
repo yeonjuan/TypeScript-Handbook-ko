@@ -218,7 +218,7 @@ class Person {
     protected constructor(theName: string) { this.name = theName; }
 }
 
-// Employee는 Person 확장합니다.
+// Employee는 Person을 확장할 수 있습니다.
 class Employee extends Person {
     private department: string;
 
