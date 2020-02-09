@@ -643,4 +643,57 @@ f({}); // error, 'a' is required if you supply an argument
 구조 분해 표현식을 작고 간단하게 유지하세요.
 당신은 언제나 구조 분해가 만드는 과제를 당신 손으로 만들 수 있습니다.
 
-`...작업중`
+## Spread
+
+전재 연산자는 구조 분해와 반대입니다.
+이는 배열을 다른 배열 안에, 혹은 객체를 다른 객체 안에 전개하도록 해줍니다.
+예를 보겠습니다:
+
+```ts
+let first = [1, 2];
+let second = [3, 4];
+let bothPlus = [0, ...first, ...second, 5];
+```
+
+이는 bothPlus에 `[0, 1, 2, 3, 4, 5]`라는 값을 줍니다.
+전개는 `first`와 `second`의 얕은 복사를 만듭니다.
+이들은 전개에 의해 변하지 않습니다.
+
+또한 객체를 전개할 수 있습니다:
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { ...defaults, food: "rich" };
+```
+
+여기서 `search`는 `{ food: "rich", price: "$$", ambiance: "noisy" }`입니다.
+객체 전개는 배열 전개보다 훨씬 복잡합니다.
+배열 전개처럼 왼쪽에서-오른쪽으로 진행되지만 그 결과는 여전히 객체입니다.
+이는 전개 객체 안에서 나중에 오는 프로퍼티가 이전에 오는 프로퍼티를 덮어쓰는 것을 의미합니다.
+그래서 만약에 우리가 이전 예제를 마지막에 전개하도록 수정하면:
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { food: "rich", ...defaults };
+```
+
+`defaults`안에 `food` 프로퍼티는 `food: "rich"`를 덮어쓰는데, 이 경우 우리가 의도한 것은 아닙니다.
+
+객체 전개는 또한 몇몇의 놀라운 제한점이 잇습니다.
+첫째로, 이는 오직 객체의 [본인의, 열거 가능한 프로퍼티](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)만 해당한다는 것입니다.
+기본적으로, 이는 객체의 인스턴스를 전개하면 메서드를 잃게 된다는 것을 뜻합니다:
+
+```ts
+class C {
+  p = 12;
+  m() {
+  }
+}
+let c = new C();
+let clone = { ...c };
+clone.p; // ok
+clone.m(); // error!
+```
+
+두 번째로, TypeScript 컴파일러는 제네릭 함수에서 타입 매개변수를 전개하는 것을 허용하지 않습니다.
+이 기능은 이후 버전에서 예상되는 기능입니다.
