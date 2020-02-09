@@ -29,7 +29,7 @@ let isDone: boolean = false;
 
 # Number
 
-JavaScript처럼, TypesScript의 모든 숫자는 부동 소수 값입니다.
+JavaScript처럼, TypeScript의 모든 숫자는 부동 소수 값입니다.
 이런 부동 소수에는 `number`라는 타입이 붙혀집니다.
 TypeScript는 16진수, 10진수 리터럴에 더불어, ECMAScript 2015에 소개된 2진수, 8진수 리터럴도 지원합니다.
 
@@ -150,7 +150,7 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 
 # Any
 
-애플리케이션을 만들 때, 알지 못하는 타입을 표현해야할 수도 있습니다.
+애플리케이션을 만들 때, 알지 못하는 타입을 표현해야 할 수도 있습니다.
 이 값들은 동적인 콘텐츠에서 올 수도 있습니다. 예) 사용자로부터 받은 데이터. 혹은 3rd party library.
 이 경우 타입 검사를 하지 않고, 그 값들이 컴파일 시간에 검사를 통과하길 원합니다.
 이를 위해, `any` 타입을 사용할 수 있습니다:
@@ -174,7 +174,7 @@ let prettySure: Object = 4;
 prettySure.toFixed(); // Error: 프로퍼티 'toFixed'는 'Object'에 존재하지 않습니다.
 ```
 
-> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object` 를 no-primitive `object` 대신에 사용하지 마세요.
+> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object`를 no-primitive `object` 대신에 사용하지 마세요.
 
 또한, any 타입은 만약 타입의 일부를 알지만 전체를 알지는 못할 때 유용합니다.
 예를 들어, 여러 다른 타입이 섞인 배열을 다룰 수 있습니다.
@@ -215,11 +215,11 @@ let n: null = null;
 ```
 
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
-이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
+이건, null과 undefined를 `number` 같은 타입에 할당할 수 있다는 것을 의미합니다.
 
 하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
-이 경우, `string` 또는 `null` 또는 `undefined` 를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
+이 경우, `string` 또는 `null` 또는 `undefined`를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
 Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 
@@ -277,12 +277,12 @@ create(undefined); // Error
 가끔, TypeScript보다 개발자가 값에 대해 더 잘 알고 일을 때가 있습니다.
 대개, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
 
-*Type assertions* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
-`type assertion` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
+*타입 단언(Type assertions)* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
+`타입 단언`은 다른 언어의 타입 변환(형 변환)과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
 이는 런타임에 영향을 미치지 않으며, 온전히 컴파일러만 이를 사용합니다.
 타입 스크립트는 개발자가 필요한 어떤 특정 검사를 수행했다고 인지합니다.
 
-Type assertion 은 두 가지 형태가 있습니다.
+타입 단언에는 두 가지 형태가 있습니다.
 하나는, "angle-bracket" 문법입니다: 
 
 ```ts
@@ -299,7 +299,7 @@ let strLength: number = (someValue as string).length;
 ```
 
 위 두 예제는 동일합니다.
-어떤 것을 사용할지는 주로 선호에 따른 선택입니다. 하지만 TypeScript를 JSX와 함께 사용할 때는, `as`-스타일의 assertion만 허용됩니다.
+어떤 것을 사용할지는 주로 선호에 따른 선택입니다. 하지만 TypeScript를 JSX와 함께 사용할 때는, `as`-스타일의 단언만 허용됩니다.
 
 # A note about `let`
 

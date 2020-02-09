@@ -107,7 +107,11 @@ Tommy the Palomino moved 34m.
 
 ## 기본적인 공개 (Public by default)
 
+<<<<<<< HEAD
 우리의 예제에서는, 프로그램 내에서 선언된 멤버들에게 자유롭게  접근할 수 있습니다. 다른 언어의 클래스가 익숙하다면, 위의 예제에서 `public`을 사용하지 않아도 된다는 점을 알 수 있습니다. 예를 들어, C#에서는 명시적으로 각 멤버에 `public`을 붙여야 합니다. TypeScript에서는 기본적으로 각 멤버는 `public`입니다.
+=======
+우리의 예제에서는, 프로그램 내에서 선언된 멤버들에게 자유롭게 접근할 수 있습니다. 다른 언어의 클래스가 익숙하다면, 위의 예제에서 `public`을 사용하지 않아도 된다는 점을 알 수 있습니다. 예를 들어, C#에서는 명시적으로 각 멤버에 `public`을 붙여야 합니다. TypeScript에서는 기본적으로 각 멤버는 `public`입니다.
+>>>>>>> c543ba0174a636dc69d1df90b5a28c0cf396ba43
 
 명시적으로 멤버를 `public`으로 표시할 수도 있습니다. 이전 섹션의 `Animal` 클래스를 다음과 같은 방식으로 작성할 수 있습니다.
 
@@ -182,7 +186,11 @@ animal = employee; // 오류: 'Animal'과 'Employee'은 호환될 수 없음.
 
 ## `protected` 이해하기 (Understanding protected)
 
+<<<<<<< HEAD
 `protected` 지정자도 `protected`로 선언된 멤버를 파생된 클래스 내에서 접근할 수 있다는 점만 제외하면 `private`지정자와 매우 유사합니다. 예를 들면,
+=======
+`protected` 지정자도 `protected`로 선언된 멤버를 파생된 클래스 내에서 접근할 수 있다는 점만 제외하면 `private`지정자와 매우 유사하게 동작합니다. 예를 들면,
+>>>>>>> c543ba0174a636dc69d1df90b5a28c0cf396ba43
 
 ```ts
 class Person {
@@ -218,7 +226,11 @@ class Person {
     protected constructor(theName: string) { this.name = theName; }
 }
 
+<<<<<<< HEAD
 // Employee는 Person 확장합니다.
+=======
+// Employee는 Person을 확장할 수 있습니다.
+>>>>>>> c543ba0174a636dc69d1df90b5a28c0cf396ba43
 class Employee extends Person {
     private department: string;
 
