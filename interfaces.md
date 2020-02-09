@@ -140,3 +140,138 @@ a = ro as number[];
 
 `readonly`와 `const` 중에 어떤 것을 사용할 지 기억하기 가장 쉬운 방법은 변수에 쓸 것인지 프로퍼티에 쓸 것인지 질문해 보는 것입니다.
 변수는 `const`를 사용하고 프로퍼티는 `readonly`를 사용합니다
+
+# 초과 프로퍼티 검사 (Excess Property Checks)
+
+인터페이스의 첫 번째 예제에서 TypeScript가 `{ label: string; }`을 기대해도 `{ size: number; label: string; }`를 허용해주었습니다. 우리는 또 선택적 프로퍼티를 배우고, 소위 "option bags"을 기술할 때, 유용하다는 것을 배웠습니다.
+
+하지만, 순진하게 그 둘을 결합하면 에러가 발생할 수 있습니다.
+예를 들어, `createSquare`를 사용한 마지막 예제를 보겠습니다:
+
+```ts
+interface SquareConfig {
+    color?: string;
+    width?: number;
+}
+
+function createSquare(config: SquareConfig): { color: string; area: number } {
+    // ...
+}
+
+let mySquare = createSquare({ colour: "red", width: 100 });
+```
+
+`color`대신에 *`colour`* 로 인수를 잘못 전달했을 경우, 일반 JavaScript에선 이런 경우 조용히 에러가 발생합니다.
+
+`width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 작성되었다고 생각할 수 있습니다.
+
+하지만, TypeScript는 이 코드에 버그가 있을 수 있다고 생각할 것입니다.
+객체 리터럴은 다른 변수에 할당할 때나 인수로 전달할 때, 특별한 처리를 받고, *초과 프로퍼티 검사 (excess property checking)*를 받습니다.
+만약 객체 리터럴이 "대상 타입 (target type)"이 갖고 있지 않은 프로퍼티를 갖고 있으면, 에러가 발생합니다.
+
+```ts
+// error: Object literal may only specify known properties, but 'colour' does not exist in type 'SquareConfig'. Did you mean to write 'color'?
+let mySquare = createSquare({ colour: "red", width: 100 });
+```
+
+이 검사를 피하는 방법은 사실 정말 간단합니다.
+가장 간단한 방법은 타입 단언을 사용하는 것입니다:
+
+```ts
+let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
+```
+
+하지만, 객체가 특별한 경우에서 사용될 때, 추가 프로퍼티가 있음을 확신한다면, 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
+만약 `SquareConfig` `color`와 `width` 프로퍼티를 위와 같은 타입으로 갖고 있고, *또한* 다른 프로퍼티를 가질 수 있다면, 다음과 같이 정의할 수 있습니다.
+
+```ts
+interface SquareConfig {
+    color?: string;
+    width?: number;
+    [propName: string]: any;
+}
+```
+
+나중에 인데스 서명에 대해 좀 더 다룰 것입니다. 하지만 여기서는 `SquareConfig`가 여러 프로퍼티가 가질 수 있고, 그 프로퍼티들이 `color`나 `width`가 아니라면, 그들의 타입은 중요하지 않습니다.
+
+이 검사를 피하는 마지막 방법은 놀랍게도 객체를 다른 변수에 할당하는 것입니다.
+`squareOptions`가 추가 프로퍼티 검사를 받지 않기 때문에, 컴파일러는 에러를 주지 않습니다.
+
+```ts
+let squareOptions = { colour: "red", width: 100 };
+let mySquare = createSquare(squareOptions);
+```
+
+`squareOptions`와 `SquareConfig` 사이에 공통 프로퍼티가 있는 경우에만 위와 같은 방법을 사용할 수 있습니다.
+이 예제에서는, `width`가 그 경우입니다. 하지만 만약에 변수가 공통 객체 프로퍼티가 없으면 에러가 납니다. 예를 들어:
+
+```ts
+let squareOptions = { colour: "red" };
+let mySquare = createSquare(squareOptions);
+```
+
+위처럼 간단한 코드의 경우, 이 검사를 "피하는" 방법을 시도하지 않는 것이 좋습니다.
+메서드가 있고 상태를 가지는 등 더 복잡한 객체 리터럴에서 이 방법을 생각해볼 수 있습니다. 하지만 초과 프로퍼티 에러의 대부분은 실제 버그입니다.
+그 말은, 만약 옵션 백 같은 곳에서 초과 프로퍼티 검사 문제가 발생하면, 타입 정의를 수정해야 할 필요가 있습니다.
+예를 들어, 만약 `createSquare`에 `color`나 `colour` 모두 전달해도 괜찮다면, `squareConfig`가 이를 반영하도록 정의를 수정해야 합니다.
+
+# 함수 타입 (Function Type)
+
+인터페이스는 JavaScript 객체가 가질 수 있는 넓은 범위의 형태를 기술할 수 있습니다.
+프로퍼티로 객체를 기술하는 것 외에, 인터페이스는 함수 타입을 설명할 수 있습니다.
+
+인터페이스로 함수 타입을 기술하기 위해, 인터페이스에 호출 서명 (call signature)를 전달합니다.
+이는 매개변수 목록과 반환 타입만 주어진 함수 선언과 비슷합니다. 각 매개변수는 이름과 타입이 모두 필요합니다.
+
+```ts
+interface SearchFunc {
+    (source: string, subString: string): boolean;
+}
+```
+
+한번 정의되면, 이 함수 타입 인터페이스는 다른 인터페이스와 마찬가지로 사용할 수 있습니다.
+여기서 함수 타입의 변수를 만들고, 같은 타입의 함수 값으로 할당하는 방법을 보여줍니다.
+
+```ts
+let mySearch: SearchFunc;
+mySearch = function(source: string, subString: string) {
+    let result = source.search(subString);
+    return result > -1;
+}
+```
+
+함수 타입이 올바른 타입 검사를 위해서, 매개변수의 이름은 같지 않아도 괜찮습니다.
+예를 들어, 위의 예제를 아래와 같이 쓸 수 있습니다:
+
+```ts
+let mySearch: SearchFunc;
+mySearch = function(src: string, sub: string): boolean {
+    let result = src.search(sub);
+    return result > -1;
+}
+```
+
+함수 매개변수들은 같은 위치에 대응되는 매개변수끼리 한번에 하나씩 검사합니다.
+만약 타입을 전혀 지정하지 않고 싶다면, `SearchFunc` 타입의 변수로 직접 함수 값이 할당되었기 때문에 TypeScript의 문맥상 타이핑 (contextual typing)이 인수 타입을 추론할 수 있습니다.
+이 예제에서, 함수 표현의 반환 타입이 반환하는 값으로 추론됩니다. (여기서는 `false`와 `true`)
+
+```ts
+let mySearch: SearchFunc;
+mySearch = function(src, sub) {
+    let result = src.search(sub);
+    return result > -1;
+}
+```
+
+함수 표현식이 숫자 나 문자열을 반환했다면, 타입 체커는 반환 타입이 `SearchFunc` 인터페이스에 정의된 반환 타입과 일치하지 않는다는 에러를 발생시킵니다.
+
+```ts
+let mySearch: SearchFunc;
+
+// error: Type '(src: string, sub: string) => string' is not assignable to type 'SearchFunc'.
+// Type 'string' is not assignable to type 'boolean'.
+mySearch = function(src, sub) {
+  let result = src.search(sub);
+  return "string";
+};
+```
