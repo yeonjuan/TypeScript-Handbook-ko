@@ -264,7 +264,7 @@ class Octopus {
 }
 ```
 
-생성자에 짧아진 `readonly name: string` 파라미터를 사용하여 `theName`을 제거하고 `name` 멤버를 생성하고 초기화했습니다. 즉 선언과 할당을 한 곳으로 통합했습니다
+생성자에 짧아진 `readonly name: string` 파라미터를 사용하여 `theName`을 제거하고 `name` 멤버를 생성하고 초기화했습니다. 즉 선언과 할당을 한 곳으로 통합했습니다.
 
 매개변수 프로퍼티는 접근 지정자나 `readonly` 또는 둘 모두를 생성자 매개변수에 접두어로 붙여 선언합니다. 매개변수 프로퍼티에 `private`을 사용하면 비공개 멤버를 선언하고 초기화합니다. 마찬가지로, `public`, `protected`, `readonly`도 동일하게 작용합니다.
 
