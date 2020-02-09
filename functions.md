@@ -331,7 +331,7 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 나중에 호출할 콜백 함수를 라이브러리에 전달할 때 `this`로 인한 에러가 발생할 수 있습니다. 
 라이브러리는 당신의 콜백을 일반 함수처럼 호출하므로 `this`는 `undefined`가 될 겁니다. 일부 작업에서는 `this` 매개변수를 콜백 오류를 막는데 사용할 수 있습니다. 
 
-먼저 라이브러리 작성자는 콜백 타입을 `this`로 annotate 합니다.
+먼저 라이브러리 작성자는 콜백 타입에 `this`로 타입표시(annotate)를 해주어야 합니다.
 
 ```ts
 interface UIElement {
@@ -341,7 +341,7 @@ interface UIElement {
 
 `this: void`는 `addClickListener`가 `onclick`이 `this`타입을 요구하지 않는 함수가 될 것으로 예상하는 것을 의미합니다.
 
-두 번째로, 호출 코드에 `this`를 annotate 합니다.
+두 번째로, 호출 코드에 `this`로 타입표시를 해줍니다.
 
 ```ts
 class Handler {
@@ -355,7 +355,7 @@ let h = new Handler();
 uiElement.addClickListener(h.onClickBad); // 에러!
 ```
 
-`this`를 annotate 했다면 `onClickBad`가 반드시 `Handler`의 인스턴스로써 호출되어야 함을 명시해주어야 합니다. 그러면 타입스크립트는 `addClickListener`가 `this: void`를 갖는 함수를 필요로 한다는 것을 감지합니다. 
+`this`로 타입표시를 한 상태에서 `onClickBad`가 반드시 `Handler`의 인스턴스로써 호출되어야 함을 명시해주어야 합니다. 그러면 타입스크립트는 `addClickListener`가 `this: void`를 갖는 함수를 필요로 한다는 것을 감지합니다.
 
 에러를 고치기 위해 `this`의 타입을 바꿔줍니다:
 
