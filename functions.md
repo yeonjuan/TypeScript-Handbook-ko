@@ -1,17 +1,17 @@
 
 # 소개 (Introduction)
 
-함수는 자바스크립트로 된 모든 애플리케이션에서의 기본적인 구성 요소입니다. 자바스크립트 함수는 추상화 계층을 구축하거나 클래스 모방, 정보 은닉, 모듈에 대한 방법을 제공합니다.  
+함수는 JavaScript로 된 모든 애플리케이션에서의 기본적인 구성 요소입니다. JavaScript 함수는 추상화 계층을 구축하거나 클래스 모방, 정보 은닉, 모듈에 대한 방법을 제공합니다.  
 
-타입스크립트에서는 별도의 클래스, 네임스페이스와 모듈을 가지지만 함수는 여전히 '이 일을 어떻게 할 것인지'를 설명하는 데 있어 핵심 역할을 수행합니다.
+TypeScript에서는 별도의 클래스, 네임스페이스와 모듈을 가지지만 함수는 여전히 '이 일을 어떻게 할 것인지'를 설명하는 데 있어 핵심 역할을 수행합니다.
 
-타입스크립트에서는 표준 자바스크립트 함수에 작업을 수월하게 하기위한 몇 가지 새로운 기능을 추가합니다.
+TypeScript에서는 표준 JavaScript 함수에 작업을 수월하게 하기위한 몇 가지 새로운 기능을 추가합니다.
 
 # 함수(Function)
 
-타입스크립트 함수는 자바스크립트와 마찬가지로 기명 함수(named function)과 무명 함수(anonymous function)로 만들어질 수 있습니다. 이를 통해 당신이 API에서 함수리스트를 작성하든 일회성 함수를 써서 다른 함수로 전달하든 애플리케이션에 가장 적합한 방법을 선택할 수 있습니다.
+TypeScript 함수는 JavaScript와 마찬가지로 기명 함수(named function)과 무명 함수(anonymous function)로 만들어질 수 있습니다. 이를 통해 당신이 API에서 함수리스트를 작성하든 일회성 함수를 써서 다른 함수로 전달하든 애플리케이션에 가장 적합한 방법을 선택할 수 있습니다.
 
-자바스크립트에서의 이 두 가지 방법에 대한 예시:
+JavaScript에서의 이 두 가지 방법에 대한 예시:
 
 ```js
 // 기명 함수
@@ -24,8 +24,8 @@ let myAdd = function(x, y) { return x + y };
 
 ```
 
-자바스크립트에서 함수는 함수 외부의 변수를 참조 할 수 있습니다. 변수를 캡처( capture )한다고 합니다.
-이것이 어떻게 작동하는지 ( 그리고 이 기술을 사용할 때의 장단점 )를 이해하는 것은 이 본문의 주제를 벗어나는 것이지만, 이 메커니즘이 어떻게 작동하는지에 대한 확실한 이해는 자바스크립트 및 타입스크립트를 사용하는 데 있어 중요합니다.
+JavaScript에서 함수는 함수 외부의 변수를 참조 할 수 있습니다. 변수를 캡처( capture )한다고 합니다.
+이것이 어떻게 작동하는지 ( 그리고 이 기술을 사용할 때의 장단점 )를 이해하는 것은 이 본문의 주제를 벗어나는 것이지만, 이 메커니즘이 어떻게 작동하는지에 대한 확실한 이해는 JavaScript 및 TypeScript를 사용하는 데 있어 중요합니다.
 
 ```js
 let z = 100;
@@ -51,7 +51,7 @@ let myAdd = function(x: number, y: number): number {
 };
 ```
 
-각각의 파라미터와 함수 자신의 반환될 타입을 정해줄 수 있습니다. 타입스크립트는 return 문을 보고 반환 유형을 파악할 수 있음으로 반환 타입을 생략 할 수도 있습니다.
+각각의 파라미터와 함수 자신의 반환될 타입을 정해줄 수 있습니다. TypeScript는 return 문을 보고 반환 유형을 파악할 수 있음으로 반환 타입을 생략 할 수도 있습니다.
 
 ## 함수 타입 작성(Writing the function type)
 
@@ -80,7 +80,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 
 ## 타입의 추론(Infering the types)
 
-아래 예시를 직접 입력해보세요. 타입스크립트 컴파일러가 방정식(equation)의 한쪽에만 타입이 있더라도 타입을 알아낼 수 있다는 것을 알아채셨나요?
+아래 예시를 직접 입력해보세요. TypeScript 컴파일러가 방정식(equation)의 한쪽에만 타입이 있더라도 타입을 알아낼 수 있다는 것을 알아채셨나요?
 
 ```ts
 // 전체함수 타입을 가진(full function type) myAdd
@@ -96,7 +96,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 
 # 선택적, 기본 매개변수들 ( Optional and Default Parameter )
 
-타입스크립트에서는 모든 매개 변수가 함수에 필요하다고 가정합니다. 이것이 `null` 이나 `undefined`를 줄 수 없다는걸 의미하는 것은 아닙니다. 대신 함수가 호출될 때, 컴파일러는 각 매개변수에 대해 사용자가 값을 제공했는지를 체크합니다.
+TypeScript에서는 모든 매개 변수가 함수에 필요하다고 가정합니다. 이것이 `null` 이나 `undefined`를 줄 수 없다는걸 의미하는 것은 아닙니다. 대신 함수가 호출될 때, 컴파일러는 각 매개변수에 대해 사용자가 값을 제공했는지를 체크합니다.
 
 또한, 컴파일러는 이 매개변수들이 함수로 전달될 유일한 매개변수라고 가정합니다. 요약하자면, 함수에 주어진 인자의 수는 함수가 기대하는 매개변수의 수와 일치해야 합니다.
 
@@ -111,9 +111,9 @@ let result3 = buildName("Bob", "Adams");         // 아~ 딱 알맞네
 
 ```
 
-자바스크립트에서는 모든 매개변수가 선택적(optional)입니다. 그리고 사용자는 그게 적합하다고 생각되면 그대로 둘 수 있습니다. 그렇게 둔다면 그 값은 `undefined`가 됩니다.
+JavaScript에서는 모든 매개변수가 선택적(optional)입니다. 그리고 사용자는 그게 적합하다고 생각되면 그대로 둘 수 있습니다. 그렇게 둔다면 그 값은 `undefined`가 됩니다.
 
-타입스크립트에서도 이러한 선택적 매개변수를 원한다면 매개변수 이름 끝에 `?` 를 붙임으로써 해결 할 수 있습니다.
+TypeScript에서도 이러한 선택적 매개변수를 원한다면 매개변수 이름 끝에 `?` 를 붙임으로써 해결 할 수 있습니다.
 
 그 예시로 성(last name)을 선택적 매개변수로 하는 경우를 들어보겠습니다:
 
@@ -133,7 +133,7 @@ let result3 = buildName("Bob", "Adams");         // Bob Adams, 아~ 딱 알맞�
 어느 선택적 매개변수던 반드시 매개변수 정의가 필요합니다. 
 lastName 대신 firstName을 선택적으로 하고 싶다면 매개변수의 순서를 변경해야 합니다.
 
-타입스크립트에서는 유저가 값을 제공하지 않거나 `undefined`로 했을 때에 할당될 매개변수의 값을 정해 놓을 수도 있습니다. 이러한 것을 `default-initialized parameters`라고 합니다. 
+TypeScript에서는 유저가 값을 제공하지 않거나 `undefined`로 했을 때에 할당될 매개변수의 값을 정해 놓을 수도 있습니다. 이러한 것을 `default-initialized parameters`라고 합니다. 
 
 이전 예시에서 lastName을 `"Smith"` 라고 지정해 보겠습니다.
 
@@ -191,9 +191,9 @@ let result4 = buildName(undefined, "Adams");     // Will Adams
 필수(required), 선택적(optional), 기본(default) 매개변수는 한 번에 하나의 매개변수만을 가지고 이야기합니다.
 때때로 우리는 그룹으로써 다수의 매개변수를 가지고 작업하기를 원합니다. 또는, 함수가 최종적으로 얼마나 많은 매개변수를 취할지 모를 때도 있을 것 입니다.
 
-자바스크립트에서는 모든 함수 내부에 위치한 `arguments`라는 변수를 사용해 직접 인자를 가지고 작업할 수 있습니다.
+JavaScript에서는 모든 함수 내부에 위치한 `arguments`라는 변수를 사용해 직접 인자를 가지고 작업할 수 있습니다.
 
-타입스크립트에서는 이 인자들을 하나의 변수로 모을 수 있습니다:
+TypeScript에서는 이 인자들을 하나의 변수로 모을 수 있습니다:
 
 
 ```ts
@@ -222,13 +222,13 @@ let buildNameFun: (fname: string, ...rest: string[]) => string = buildName;
 
 # this
 
-`this` 가 자바스크립트에서 어떻게 쓰이는지 안다는 것은 일종의 통과의례입니다. 타입스크립트는 자바스크립트의 상위집합(superset)이므로 타입스크립트 개발자들 역시 this가 어떻게 쓰이는지 또는 이것이 잘못 쓰일 때를 발견하는 방법을 배울 필요가 있습니다.
+`this` 가 JavaScript에서 어떻게 쓰이는지 안다는 것은 일종의 통과의례입니다. TypeScript는 JavaScript의 상위집합(superset)이므로 TypeScript 개발자들 역시 this가 어떻게 쓰이는지 또는 이것이 잘못 쓰일 때를 발견하는 방법을 배울 필요가 있습니다.
 
-다행히도 타입스크립트는 몇 가지 기술들로 당신의 잘못된 `this` 사용을 잡아낼 수 있습니다. 만약 당신이 자바스크립트에서 this가 어떻게 동작하는지 알고 싶다면 먼저 Yehuda Katz’s의 글 [Understanding JavaScript Function Invocation and “this”](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) 을 읽도록 합니다. Yehuda의 글은 `this`의 내부 동작을 아주 잘 설명해 줍니다. 우리는 이곳의 기초를 다룰 것입니다.
+다행히도 TypeScript는 몇 가지 기술들로 당신의 잘못된 `this` 사용을 잡아낼 수 있습니다. 만약 당신이 JavaScript에서 this가 어떻게 동작하는지 알고 싶다면 먼저 Yehuda Katz’s의 글 [Understanding JavaScript Function Invocation and “this”](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) 을 읽도록 합니다. Yehuda의 글은 `this`의 내부 동작을 아주 잘 설명해 줍니다. 우리는 이곳의 기초를 다룰 것입니다.
 
 ## `this`와 화살표함수 ( this and arrow functions )
 
-자바스크립트에서, `this`는 함수가 호출될 때 정해지는 변수입니다. 이것은 매우 강력하고 유연한 기능이지만 이것은 항상 함수가 실행되는 context에 대해 알아야 한다는 수고가 생깁니다. 특히 함수를 반환하거나 인자로 넘길 때의 혼란스러움은 악명높습니다.
+JavaScript에서, `this`는 함수가 호출될 때 정해지는 변수입니다. 이것은 매우 강력하고 유연한 기능이지만 이것은 항상 함수가 실행되는 context에 대해 알아야 한다는 수고가 생깁니다. 특히 함수를 반환하거나 인자로 넘길 때의 혼란스러움은 악명높습니다.
 
 예시를 봅시다:
 
@@ -279,7 +279,7 @@ let pickedCard = cardPicker();
 alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 ```
 
-`--noImplicitThis` 플래그를 컴파일러에 전달하는 실수를 하게 된다면 타입스크립트는 경고를 표시할 것입니다. `this.suits[pickedSuit]` 의 `this`는 `any` 타입인 것을 짚고 넘어가겠습니다.
+`--noImplicitThis` 플래그를 컴파일러에 전달하는 실수를 하게 된다면 TypeScript는 경고를 표시할 것입니다. `this.suits[pickedSuit]` 의 `this`는 `any` 타입인 것을 짚고 넘어가겠습니다.
 
 ## `this` 매개변수 ( this parameter ) 
 
@@ -324,7 +324,7 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 
 ```
 
-이제 타입스크립트는 `createCardPicker`가 `Deck` 객체에서 호출된다는 것을 알게 됐습니다. 이것은 `this`가 `any` 타입이 아니라 `Deck` 타입이며 따라서 `--noImplicitThis` 플래그가 어떤 에러도 일으키지 않는다는 것을 의미합니다.
+이제 TypeScript는 `createCardPicker`가 `Deck` 객체에서 호출된다는 것을 알게 됐습니다. 이것은 `this`가 `any` 타입이 아니라 `Deck` 타입이며 따라서 `--noImplicitThis` 플래그가 어떤 에러도 일으키지 않는다는 것을 의미합니다.
 
 ## 콜백에서의 `this` 매개변수( `this` parameters in callbacks )
 
@@ -355,7 +355,7 @@ let h = new Handler();
 uiElement.addClickListener(h.onClickBad); // 에러!
 ```
 
-`this`로 타입표시를 한 상태에서 `onClickBad`가 반드시 `Handler`의 인스턴스로써 호출되어야 함을 명시해주어야 합니다. 그러면 타입스크립트는 `addClickListener`가 `this: void`를 갖는 함수를 필요로 한다는 것을 감지합니다.
+`this`로 타입표시를 한 상태에서 `onClickBad`가 반드시 `Handler`의 인스턴스로써 호출되어야 함을 명시해주어야 합니다. 그러면 TypeScript는 `addClickListener`가 `this: void`를 갖는 함수를 필요로 한다는 것을 감지합니다.
 
 에러를 고치기 위해 `this`의 타입을 바꿔줍니다:
 
@@ -388,7 +388,7 @@ class Handler {
 
 # 오버로드(Overloads)
 
-자바스크립트는 본질적으로 매우 동적인 언어입니다. 하나의 자바스크립트 함수가 전달된 인자 유형에 따라 다른 타입의 객체들을 반환하는 것은 흔한 일입니다.
+JavaScript는 본질적으로 매우 동적인 언어입니다. 하나의 JavaScript 함수가 전달된 인자 유형에 따라 다른 타입의 객체들을 반환하는 것은 흔한 일입니다.
 
 ```ts
 let suits = ["hearts", "spades", "clubs", "diamonds"];
@@ -451,7 +451,7 @@ alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
 ```
 
 위 코드에서 오버로드는 `pickCard` 함수에 대해 타입 검사 호출을 제공합니다.
-컴파일러가 알맞은 타입 체크를 하기 위해서는 자바스크립트와 비슷한 프로세스를 따릅니다.
+컴파일러가 알맞은 타입 체크를 하기 위해서는 JavaScript와 비슷한 프로세스를 따릅니다.
 
 (컴파일러가) 오버로드 목록에서 첫 번째 오버로드를 진행하면서 제공된 매개변수를 사용하여 함수를 호출하려고 시도합니다. 만약 일치하게 된다면 해당 오버로드를 알맞은 오버로드로 선택하여 작업을 수행합니다. 이러한 이유로 가장 구체적인 것부터 오버로드 리스팅을 하는 것이 일반적입니다.
 
