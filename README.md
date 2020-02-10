@@ -10,9 +10,9 @@
 - [Variable Declarations](./variable-declarations.md)
 - [Interfaces 작성중...](./interfaces.md)
 - [Classes](./classes.md)
-- [Functions 작성중 ...](./functions.md)
+- [Functions](./functions.md)
 - Generics
-- Enums
+- [Enums](./enums.md)
 - Type Inference
 - Type Compatibility
 - Advanced Types
