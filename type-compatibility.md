@@ -1,6 +1,6 @@
 # 소개 (Introduction)
 
-TypeScript에서 타입 호환성은 구조적 서브 타이핑(subtyping)을 기반으로 합니다. 구조적 타이핑이란 오직 멤버만으로 타입을 관계시키는 방식입니다. 명목 타이핑(nominal typing) 과는 반대입니다. 다음 코드를 살펴보겠습니다:
+TypeScript에서 타입 호환성은 구조적 서브 타이핑(subtyping)을 기반으로 합니다. 구조적 타이핑이란 오직 멤버만으로 타입을 관계시키는 방식입니다. 명목적 타이핑(nominal typing) 과는 반대입니다. 다음 코드를 살펴보겠습니다:
 
 ```ts
 interface Named {
