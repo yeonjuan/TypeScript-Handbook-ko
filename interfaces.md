@@ -275,3 +275,78 @@ mySearch = function(src, sub) {
   return "string";
 };
 ```
+
+# 인덱서블 타입 (Indexable Types)
+
+인터페이스로 함수 타입을 설명하는 방법과 유사하게, `a[10]` 이나 `ageMap["daniel"]` 처럼 타입을 "인덱스로" 기술할 수 있습니다.
+인덱서블 타입은 인덱싱 할때 해당 반환 유형과 함께 객체를 인덱싱하는 데 사용할 수 있는 타입을 기술하는 *인덱스 서명 (index signature)*를 가지고 있습니다.
+예제를 보겠습니다:
+
+```ts
+interface StringArray {
+    [index: number]: string;
+}
+
+let myArray: StringArray;
+myArray = ["Bob", "Fred"];
+
+let myStr: string = myArray[0];
+```
+
+위에서 인덱스 서명이 있는 `StringArray` 인터페이스가 있습니다.
+이 인덱스 서명은 `StringArray`가 `숫자`로 색인화(indexed)되면 `문자열`을 반환할 것을 나타냅니다.
+
+인덱스 서명을 지원하는 타입에는 두 가지가 있습니다: 문자열과 숫자.
+
+두 타입의 인덱서(indexer)를 모두 지원하는 것은 가능하지만, 숫자 인덱서에서 반환된 타입은 반드시 문자열 인덱서에서 반환된 타입의 하위 타입(subtype)이어야 합니다.
+이 이유는 `숫자`로 인덱싱 할 때, JavaScript는 실제로 객체로 인덱싱하기 전에 `문자열`로 변환하기 때문입니다.
+즉, `100` (`숫자`)로 인덱싱하는 것은 `"100"` (`문자열`)로 인덱싱하는 것과 같기 때문에, 서로 일관성 있어야 합니다.
+
+```ts
+class Animal {
+    name: string;
+}
+class Dog extends Animal {
+    breed: string;
+}
+
+// Error: indexing with a numeric string might get you a completely separate type of Animal!
+interface NotOkay {
+    [x: number]: Animal;
+    [x: string]: Dog;
+}
+```
+
+문자열 인덱스 서명은 "사전" 패턴을 기술하는데 강력한 방법이지만, 모든 프로퍼티들이 반환 타입과 일치하도록 강제합니다.
+문자열 인덱스가 `obj.property`가 `obj["property"]`로도 이용 가능함을 알려주기 때문입니다.
+다음 예제에서, `name`의 타입은 문자열 인덱스 타입과 일치하지 않고, 타입 체커는 에러를 발생시킵니다.
+
+```ts
+interface NumberDictionary {
+    [index: string]: number;
+    length: number;    // ok, length is a number
+    name: string;      // error, the type of 'name' is not a subtype of the indexer
+}
+```
+
+하지만, 인덱스 서명이 프로퍼티 타입들의 합집합이라면 다른 타입의 프로퍼티들도 허용할 수 있습니다:
+
+```ts
+interface NumberOrStringDictionary {
+    [index: string]: number | string;
+    length: number;    // ok, length is a number
+    name: string;      // ok, name is a string
+}
+```
+
+마지막으로, 인덱스의 할당을 막기 위해 인덱스 서명을 `읽기 전용`으로 만들 수 있습니다:
+
+```ts
+interface ReadonlyStringArray {
+    readonly [index: number]: string;
+}
+let myArray: ReadonlyStringArray = ["Alice", "Bob"];
+myArray[2] = "Mallory"; // error!
+```
+
+인덱스 서명이 읽기 전용이기 때문에 `myArray[2]`의 값을 할당할 수 없습니다.
