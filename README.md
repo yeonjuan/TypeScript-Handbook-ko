@@ -16,7 +16,7 @@
 - Type Inference
 - Type Compatibility
 - Advanced Types
-- Symbols
+- [Symbols](./symbols.md)
 - Iterators and Generators
 - Modules
 - Namespaces
