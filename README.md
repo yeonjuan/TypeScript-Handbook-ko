@@ -14,7 +14,7 @@
 - Generics
 - [Enums](./enums.md)
 - Type Inference
-- Type Compatibility
+- [Type Compatibility 작성중...](./type-compatibility.md)
 - Advanced Types
 - Symbols
 - Iterators and Generators
