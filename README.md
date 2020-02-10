@@ -1,18 +1,41 @@
 # Typescript-Handbook-ko
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 타입스크립트 핸드북 번역
 
 - [Basic Types](./basic-types.md)
-- [Variable Declarations 작성중...](./variable-declarations.md)
+- [Variable Declarations](./variable-declarations.md)
 - [Interfaces 작성중...](./interfaces.md)
-- [Classes 작성중...](./classes.md)
-- [Functions 작성중 ...](./functions.md)
+- [Classes](./classes.md)
+- [Functions](./functions.md)
+- Generics
+- [Enums](./enums.md)
+- Type Inference
+- Type Compatibility
+- Advanced Types
+- Symbols
+- Iterators and Generators
+- Modules
+- Namespaces
+- Namespaces and Modules
+- Module Resolution
+- Declaraion Merging
+- JSX
+- Decorators
+- Mixins
+- Triple-Slash Directives
+- Type Checking JavaScript Files
+- Utility Types
 
-## Contributors ✨
+
+## 참여하기
+
+누구나 참여 가능하며 참여하는 방법은 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참고해 주세요.
+
+## 컨트리뷰터 목록 ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -26,6 +49,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/Bumkeyy"><img src="https://avatars0.githubusercontent.com/u/16663226?v=4" width="100px;" alt=""/><br /><sub><b>Kibeom Kwon</b></sub></a><br /><a href="#translation-Bumkeyy" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/taemin-shin-abba95195/"><img src="https://avatars0.githubusercontent.com/u/24709996?v=4" width="100px;" alt=""/><br /><sub><b>Taemin Shin</b></sub></a><br /><a href="#translation-cprayer" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/badger93"><img src="https://avatars1.githubusercontent.com/u/38435151?v=4" width="100px;" alt=""/><br /><sub><b>badger93</b></sub></a><br /><a href="#translation-badger93" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/kok202"><img src="https://avatars2.githubusercontent.com/u/39543643?v=4" width="100px;" alt=""/><br /><sub><b>kok202</b></sub></a><br /><a href="#translation-kok202" title="Translation">🌍</a></td>
   </tr>
 </table>
 
