@@ -18,7 +18,7 @@
 - Advanced Types
 - [Symbols](./symbols.md)
 - Iterators and Generators
-- Modules
+- [Modules](./modules.md)
 - Namespaces
 - Namespaces and Modules
 - Module Resolution
