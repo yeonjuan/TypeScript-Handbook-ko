@@ -12,7 +12,7 @@ JavaScript에서 `var` 선언의 단점들에 대해 모두 알고 있다면 쉽
 
 # `var` 선언 (`var` declarations)
 
-전통적으로 JavaScript에서 변수 선언을 할 때는 `var` 키워드를 사용하였습니다.
+기존의 JavaScript에서는 변수 선언을 할 때는 `var` 키워드를 사용하였습니다.
 
 ```ts
 var a = 10;
