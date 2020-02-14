@@ -1,10 +1,10 @@
 # 소개 (Introduction)
 
-기존의 JavaScript는 재사용할 수 있는 컴포넌트를 만들기 위해 함수와 프로토타입 기반의 상속을 사용했지만, 함수를 상속받는 클래스에서 객체가 만들어질 때 객체 지향 접근 방식에 익숙한 프로그래머의 입장에서는 다소 어색함을 느낄 수 있습니다. ECMAScript 6로 알려진 ECMAScript 2015를 시작으로 JavaScript 프로그래머들은 이런 객체 지향적 클래스 기반의 접근 방식을 사용해서 애플리케이션을 만들 수 있습니다. TypeScript에서는 다음 버전의 JavaScript를 기다릴 필요 없이 개발자들이 이러한 기법들을 사용하여 기존의 JavaScript로 컴파일하여 주요 브라우저와 플랫폼에서 동작하게 합니다.
+기존의 JavaScript는 재사용할 수 있는 컴포넌트를 만들기 위해 함수와 프로토타입 기반의 상속을 사용했지만, 객체 지향 접근 방식에 익숙한 프로그래머의 입장에서는 클래스가 함수를 상속받고 이런 클래스에서 객체가 만들어지는 것에 다소 어색함을 느낄 수 있습니다. ECMAScript 6로도 알려진 ECMAScript 2015를 시작으로 JavaScript 프로그래머들은 이런 객체-지향적 클래스-기반의 접근 방식을 사용해서 애플리케이션을 만들 수 있습니다. TypeScript에서는 다음 버전의 JavaScript를 기다릴 필요 없이 개발자들이 이러한 기법들을 사용할 수 있게 해주며, 기존의 JavaScript로 컴파일하여 주요 브라우저와 플랫폼에서 동작하게 합니다.
 
 # 클래스 (Classes)
 
-간단한 클래스 기반 예제를 살펴보겠습니다.
+간단한 클래스-기반 예제를 살펴보겠습니다:
 
 ```ts
 class Greeter {
@@ -20,18 +20,17 @@ class Greeter {
 let greeter = new Greeter("world");
 ```
 
-C# 이나 Java를 사용해봤다면, 이 예제 코드는 익숙할 것입니다. `Greeter` 라는 새로운 클래스를 선언했습니다. 이 클래스는 3개의 멤버를 가지고 있습니다: 프로퍼티 `greeting`, 생성자 그리고 	`greet`라는 메소드 입니다.
+C# 이나 Java를 사용해봤다면, 이 구문은 익숙할 것입니다. `Greeter` 라는 새로운 클래스를 선언했습니다. 이 클래스는 3개의 멤버를 가지고 있습니다: 프로퍼티 `greeting`, 생성자 그리고 `greet`라는 메소드 입니다.
 
-클래스의 멤버를 참조할 때 클래스에서 `this`를 앞에 덧붙입니다. `this`는 멤버에 접근하는 것을 의미합니다.
-
+클래스 안에서 클래스의 멤버를 참조할 때 `this.`를 앞에 덧붙이는 것을 알 수 있습니다. 이것은 멤버에 접근하는 것을 의미합니다.
 
 마지막 줄에서, `new`를 사용하여 클래스 `Greeter`의 인스턴스를 생성합니다. 이 코드는 이전에 정의한 생성자를 호출하여 `Greeter` 형태의 새로운 객체를 만들고, 생성자를 이용하여 초기화합니다.
 
 # 상속 (Inheritance)
 
-TypeScript에서는, 일반적인 객체 지향 패턴을 사용할 수 있습니다. 이미 존재하는 클래스를 상속하여 확장된 클래스를 생성하는 방식은 클래스 기반의 프로그래밍에서 가장 기본적인 패턴 중 하나입니다.
+TypeScript에서는, 일반적인 객체-지향 패턴을 사용할 수 있습니다. 클래스-기반의 가장 기본적인 패턴 중 하나는 상속을 이용하여 이미 존재하는 클래스를 확장해 새로운 클래스를 만들 수 있다는 것입니다.
 
-예제를 살펴보겠습니다.
+예제를 살펴보겠습니다:
 
 ```ts
 class Animal {
@@ -92,7 +91,7 @@ tom.move(34);
 
 이 예제는 앞에서 언급하지 않은 몇 가지 기능에 대해 다룹니다. 이번에도 `extends` 키워드를 사용하여 `Animal`의 하위클래스인 `Horse`와 `Snake`를 생성합니다.
 
-이전 예제와 한 가지 다른 부분은 파생된 클래스의 생성자 함수는 기초 클래스의 생성자를 실행할 `super()`를 *호출해야 한다는 점*입니다. 더욱이 생성자 내에서 `this`에 있는 프로퍼티에 접근하기 전에 `super()`를 먼저 호출해야 합니다. 이 부분은 TypeScript에서 강하게 요구할 중요한 규칙입니다.
+이전 예제와 한 가지 다른 부분은 파생된 클래스의 생성자 함수는 기초 클래스의 생성자를 실행할 `super()`를 *호출해야 한다는 점*입니다. 더욱이 생성자 내에서 `this`에 있는 프로퍼티에 접근하기 전에 `super()`를 먼저 호출해야 합니다. 이 부분은 TypeScript에서 강요할 중요한 규칙입니다.
 
 또한 이 예제는 기초 클래스의 메서드를 하위클래스에 특화된 메서드로 오버라이드하는 방법을 보여줍니다. 여기서 `Snake`와 `Horse`는 `Animal`의 `move`를 오버라이드해서 각각 클래스의 특성에 맞게 기능을 가진 `move`를 생성합니다. `tom`은 `Animal`로 선언되었지만 `Horse`의 값을 가지므로 `tom.move(34)`는 `Horse`의 오버라이딩 메서드를 호출합니다.
 
@@ -105,11 +104,11 @@ Tommy the Palomino moved 34m.
 
 # Public, private 그리고 protected 지정자 (Public, private, and protected modifiers)
 
-## 기본적인 공개 (Public by default)
+## 기본적으로 공개 (Public by default)
 
 우리의 예제에서는, 프로그램 내에서 선언된 멤버들에게 자유롭게 접근할 수 있습니다. 다른 언어의 클래스가 익숙하다면, 위의 예제에서 `public`을 사용하지 않아도 된다는 점을 알 수 있습니다. 예를 들어, C#에서는 명시적으로 각 멤버에 `public`을 붙여야 합니다. TypeScript에서는 기본적으로 각 멤버는 `public`입니다.
 
-명시적으로 멤버를 `public`으로 표시할 수도 있습니다. 이전 섹션의 `Animal` 클래스를 다음과 같은 방식으로 작성할 수 있습니다.
+명시적으로 멤버를 `public`으로 표시할 수도 있습니다. 이전 섹션의 `Animal` 클래스를 다음과 같은 방식으로 작성할 수 있습니다:
 
 ```ts
 class Animal {
@@ -123,7 +122,7 @@ class Animal {
 
 ## ECMAScript 비공개 필드 (ECMAScript Private Fields)
 
-TypeScript 3.8에서, TypeScript는 비공개 필드에 관한 JavaScript의 새로운 문법을 지원합니다.
+TypeScript 3.8에서, TypeScript는 비공개 필드에 관한 JavaScript의 새로운 문법을 지원합니다:
 
 ```ts
 class Animal {
@@ -153,7 +152,7 @@ TypeScript는 구조적인 타입 시스템입니다. 두개의 다른 타입을
 
 그러나 `private` 및 `protected` 멤버가 있는 타입들을 비교할 때, 이러한 타입들은 다르게 처리합니다. 호환된다고 판단되는 두 개의 타입 중 한 쪽에서 `private` 멤버를 가지고 있다면, 다른 한 쪽도 무조건 동일한 선언에 `private` 멤버를 가지고 있어야 합니다. 이것은 `protected` 멤버에도 적용됩니다.
 
-실제로 어떻게 작동하는지 잘 알아보기 위해 다음 예제를 살펴보겠습니다.
+실제로 어떻게 작동하는지 잘 알아보기 위해 다음 예제를 살펴보겠습니다:
 
 ```ts
 class Animal {
@@ -324,4 +323,167 @@ if (employee.fullName) {
 
 먼저 접근자는 ECMAScript 5 이상을 출력하도록 컴파일러를 설정해야 합니다. ECMAScript 3으로의 하향 조정은 지원되지 않습니다. 둘째, `get`과 `set`이 없는 접근자는 자동으로 `readonly`로 유추됩니다. 이는 프로퍼티 내의 사용자들이 변경할 수 없음을 알 수 있기 때문에 코드 내에서 `.d.ts` 파일을 생성할 때 유용합니다.
 
- `작업중...`
+# 전역 프로퍼티 (Static Properties)
+
+지금까지는 인스턴스화될 때 객체에 보이는 *인스턴스* 멤버에 대해서만 살펴보았습니다. 또한 우리는 인스턴스가 아닌 클래스 자체에서 보이는 *전역* 멤버를 생성할 수 있습니다. 이 예제에서는 모든 grid의 일반적인 값이기 때문에 origin에 `static`을 사용합니다. 각 인스턴스는 클래스 이름을 앞에 붙여 이 값에 접근할 수 있습니다. 인스턴스 접근 앞에 `this.`를 붙이는 것과 비슷하게 여기선 전역 접근 앞에 `Grid.`를 붙입니다. 
+
+```ts
+class Grid {
+    static origin = {x: 0, y: 0};
+    calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+        let xDist = (point.x - Grid.origin.x);
+        let yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    }
+    constructor (public scale: number) { }
+}
+
+let grid1 = new Grid(1.0);  // 1x scale
+let grid2 = new Grid(5.0);  // 5x scale
+
+console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
+console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
+```
+
+# 추상 클래스 (Abstract Classes)
+
+추상 클래스는 다른 클래스들이 파생될 수 있는 기초 클래스입니다. 추상 클래스는 직접 인스턴스화할 수 없습니다. 추상 클래스는 인터페이스와 달리 멤버에 대한 구현 세부 정보를 포함할 수 있습니다. `abstract` 키워드는 추상 클래스뿐만 아니라 추상 클래스 내에서 추상 메서드를 정의하는데 사용됩니다.
+
+```ts
+abstract class Animal {
+    abstract makeSound(): void;
+    move(): void {
+        console.log("roaming the earth...");
+    }
+}
+```
+
+추상 클래스 내에서 추상으로 표시된 메서드는 구현을 포함하지 않으며 반드시 파생된 클래스에서 구현되어야 합니다. 추상 메서드는 인터페이스 메서드와 비슷한 문법을 공유합니다. 둘 다 메서드 본문을 포함하지 않고 메서드를 정의합니다. 그러나 추상 메서드는 반드시 `abstract` 키워드를 포함해야 하며, 선택적으로 접근 지정자를 포함할 수 있습니다.
+
+```ts
+abstract class Department {
+
+    constructor(public name: string) {
+    }
+
+    printName(): void {
+        console.log("Department name: " + this.name);
+    }
+
+    abstract printMeeting(): void; // 반드시 파생된 클래스에서 구현되어야 합니다.
+}
+
+class AccountingDepartment extends Department {
+
+    constructor() {
+        super("Accounting and Auditing"); // 파생된 클래스의 생성자는 반드시 super()를 호출해야 합니다.
+    }
+
+    printMeeting(): void {
+        console.log("The Accounting Department meets each Monday at 10am.");
+    }
+
+    generateReports(): void {
+        console.log("Generating accounting reports...");
+    }
+}
+
+let department: Department; // 추상 타입의 레퍼런스를 생성합니다
+department = new Department(); // 오류: 추상 클래스는 인스턴스화 할 수 없습니다
+department = new AccountingDepartment(); // 추상이 아닌 하위 클래스를 생성하고 할당합니다
+department.printName();
+department.printMeeting();
+department.generateReports(); // 오류: 선언된 추상 타입에 메서드가 존재하지 않습니다
+```
+
+# 고급 기법 (Advanced Techniques)
+
+## 생성자 함수 (Constructor functions)
+
+TypeScript에서는 클래스를 선언하면 실제로 여러 개의 선언이 동시에 생성됩니다. 첫 번째로 클래스의 인스턴스 타입입니다. 
+
+```ts
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter: Greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet()); // "Hello, world""
+```
+
+여기서 `let greeter: Greeter`라고 할 때, `Greeter` 클래스의 인스턴스 타입으로 `Greeter`를 사용합니다. 이것은 거의 다른 객체 지향 언어를 사용하는 프로그래머들에겐 자연스러운 성질입니다.
+
+또한 *생성자 함수*라고 불리는 또 다른 값을 생성하고 있습니다. 이것은 클래스의 인스턴스를 `new` 할 때 호출되는 함수입니다. 실제로 어떻게 보이는지 확인하기 위해 위의 예제에서 만들어진 JavaScript를 살펴보겠습니다.
+
+```ts
+let Greeter = (function () {
+    function Greeter(message) {
+        this.greeting = message;
+    }
+    Greeter.prototype.greet = function () {
+        return "Hello, " + this.greeting;
+    };
+    return Greeter;
+})();
+
+let greeter;
+greeter = new Greeter("world");
+console.log(greeter.greet()); // "Hello, world"
+```
+
+여기서, `let Greeter`는 생성자 함수를 할당받을 것입니다. `new`를 호출하고 이 함수를 실행할 때, 클래스의 인스턴스를 얻습니다. 또한 생성자 함수는 클래스의 모든 전역 변수들을 포함하고 있습니다. 각 클래스를 생각하는 또 다른 방법은 *인스턴스* 측면과 *정적* 측면이 있다는 것 입니다.
+
+이 차이를 보여주기 위해 예제를 수정해봅시다.
+
+```ts
+class Greeter {
+    static standardGreeting = "Hello, there";
+    greeting: string;
+    greet() {
+        if (this.greeting) {
+            return "Hello, " + this.greeting;
+        }
+        else {
+            return Greeter.standardGreeting;
+        }
+    }
+}
+
+let greeter1: Greeter;
+greeter1 = new Greeter();
+console.log(greeter1.greet()); // "Hello, there"
+
+let greeterMaker: typeof Greeter = Greeter;
+greeterMaker.standardGreeting = "Hey there!";
+
+let greeter2: Greeter = new greeterMaker();
+console.log(greeter2.greet()); // "Hey there!"
+```
+
+이 예제에서 `greeter1`은 이전과 비슷하게 작동합니다. `Greeter` 클래스를 인스턴스화하고 이 객체를 사용합니다. 이것은 전에 본 것입니다.
+
+다음으로, 클래스를 직접 사용합니다. 여기서 `greeterMaker`라는 새로운 변수를 생성합니다. 이 변수는 클래스 자체를 유지하거나 생성자 함수를 다르게 설명합니다. 여기서 `typeof Greeter`를 사용하여 인스턴스 타입이 아닌 "`Greeter` 클래스 자체의 타입을 제공합니다". 혹은 더 정확하게 생성자 함수의 타입인 "`Greeter`라는 심볼의 타입을 제공합니다". 이 타입은 `Greeter` 클래스의 인스턴스를 만드는 생성자와 함께 Greeter의 모든 정적 멤버를 포함할 것입니다. `greeterMaker`에 `new`를 사용함으로써 `Greeter`의 새로운 인스턴스를 생성하고 이전과 같이 호출합니다.
+
+## 인터페이스로써 클래스 사용하기 (Using a class as an interface)
+
+앞서 언급한 것처럼, 클래스 선언은 클래스의 인스턴스를 나타내는 타입과 생성자 함수라는 두 가지를 생성합니다. 클래스는 타입을 생성하기 때문에 인터페이스를 사용할 수 있는 동일한 위치에서 사용할 수 있습니다.
+
+```ts
+class Point {
+    x: number;
+    y: number;
+}
+
+interface Point3d extends Point {
+    z: number;
+}
+
+let point3d: Point3d = {x: 1, y: 2, z: 3};
+```
