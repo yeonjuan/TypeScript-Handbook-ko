@@ -460,3 +460,118 @@ const Clock: ClockConstructor = class Clock implements ClockInterface {
   }
 }
 ```
+# 인터페이스 확장하기 (Extending Interfaces)
+
+클래스 처럼, 인터페이스들끼리 확장 (extend)이 가능합니다.
+이는 한 인터페이스의 멤버를 다른 인터페이스에 복사하는 것을 가능하게 해주는데, 인터페이스를 재사용성 높은 컴포넌트로 쪼갤 때, 유연함을 재공해줍니다.
+
+```ts
+interface Shape {
+    color: string;
+}
+
+interface Square extends Shape {
+    sideLength: number;
+}
+
+let square = {} as Square;
+square.color = "blue";
+square.sideLength = 10;
+```
+
+인터페이스는 여러 인터페이스의 확장할 수 있어, 모든 인터페이스의 조합을 만들어낼 수 있습니다.
+
+```ts
+interface Shape {
+    color: string;
+}
+
+interface PenStroke {
+    penWidth: number;
+}
+
+interface Square extends Shape, PenStroke {
+    sideLength: number;
+}
+
+let square = {} as Square;
+square.color = "blue";
+square.sideLength = 10;
+square.penWidth = 5.0;
+```
+
+# 하이브리드 타입 (Hybrid Types)
+
+일찍이 언급했듯이, 인터페이스는 실제 JavaScript 세계에 존재하는 다양한 타입들을 기술할 수 있습니다.
+JavaScript의 동적이고 유연한 특성 때문에, 위에서 설명했던 몇몇 타입의 조합으로 동작하는 객체를 가끔 마주할 수 있습니다.
+
+그러한 예제 중 하나는 추가적인 프로퍼티와 함께, 함수와 객체 역할 모두 수행하는 객체입니다:
+
+```ts
+interface Counter {
+    (start: number): string;
+    interval: number;
+    reset(): void;
+}
+
+function getCounter(): Counter {
+    let counter = (function (start: number) { }) as Counter;
+    counter.interval = 123;
+    counter.reset = function () { };
+    return counter;
+}
+
+let c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0;
+```
+
+써드파티 (3rd-party) JavaScript와 상호작용할 때, 타입의 형태를 완전히 기술하기 위해 위와같은 패턴을 사용해야할 수도 있습니다.
+
+# 클래스를 확장한 인터페이스 (Interfaces Extending Classes)
+
+인터페이스 타입이 클래스 타입을 확장하면, 클래스의 멤버는 상속받지만 그들의 구현은 상속받지 않습니다.
+이것은 인터페이스가 구현을 제공하지 않고, 클래스의 멤버 모두를 선언한 것과 마찬가지입니다.
+인터페이스는 심지어 기초 클래스의 private과 protected 멤버도 상속받습니다.
+이것은 인터페이스가 private 혹은 protected 멤버를 포함한 클래스를 확장할 수 있다는 뜻이고, 인터페이스 타입은 그 클래스나 하위클래스에 의해서만 구현될 수 있습니다.
+
+이는 거대한 상속계층을 가지고 있을 때 유용하지만, 특정 프로퍼티를 가진 하위클래스에서만 코드가 동작하도록 지정하는데도 유용합니다.
+하위클래스는 기초클래스에서 상속하는 것 외에는 관련이 있을 필요가 없습니다.
+예를 들어:
+
+```ts
+class Control {
+    private state: any;
+}
+
+interface SelectableControl extends Control {
+    select(): void;
+}
+
+class Button extends Control implements SelectableControl {
+    select() { }
+}
+
+class TextBox extends Control {
+    select() { }
+}
+
+// Error: Property 'state' is missing in type 'Image'.
+class Image implements SelectableControl {
+    private state: any;
+    select() { }
+}
+
+class Location {
+
+}
+```
+
+위의 예제에서, `SelectableControl`은 private `state` 프로퍼티를 포함하여, `Control`의 모든 멤버를 가지고 있습니다.
+`state`는 private 멤버이기 때문에, `SelectableControl`를 구현하는 것은 `Control`의 자식에게만 가능합니다.
+`Control`의 자식만 같은 선언에서 유래 된 `state` private 멤버를 가질수 있기 때문이고, private 멤버들이 호환되기 위해 필요합니다.
+
+`Control` 클래스 안에서 `SelectableControl`의 인스턴스를 통해서 `state` private 멤버에 접근할 수 있습니다.
+`SelectableControl`은 `select` 메서드를 가진 `Control`과 같은 역할을 합니다.
+`Button`과 `TextBox` 클래스들은 `SelectableControl`의 하위타입이지만 (`Control`을 상속받고, `select` 메서드를 가지기 때문에), `Image`와 `Location` 클래스는 아닙니다.
