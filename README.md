@@ -26,7 +26,7 @@
 - JSX
 - Decorators
 - Mixins
-- Triple-Slash Directives
+- [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
 - Type Checking JavaScript Files
 - Utility Types
 
