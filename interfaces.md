@@ -527,7 +527,7 @@ c.reset();
 c.interval = 5.0;
 ```
 
-써드파티 (3rd-party) JavaScript와 상호작용할 때, 타입의 형태를 완전히 기술하기 위해 위와같은 패턴을 사용해야할 수도 있습니다.
+써드파티 (3rd-party) JavaScript와 상호작용할 때, 타입의 형태를 완전히 기술하기 위해 위와 같은 패턴을 사용해야할 수도 있습니다.
 
 # 클래스를 확장한 인터페이스 (Interfaces Extending Classes)
 
