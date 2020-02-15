@@ -570,7 +570,7 @@ class Location {
 
 위의 예제에서, `SelectableControl`은 private `state` 프로퍼티를 포함하여, `Control`의 모든 멤버를 가지고 있습니다.
 `state`는 private 멤버이기 때문에, `SelectableControl`를 구현하는 것은 `Control`의 자식에게만 가능합니다.
-`Control`의 자식만 같은 선언에서 유래 된 `state` private 멤버를 가질수 있기 때문이고, private 멤버들이 호환되기 위해 필요합니다.
+`Control`의 자식만 같은 선언에서 유래된 `state` private 멤버를 가질수 있기 때문이고, private 멤버들이 호환되기 위해 필요합니다.
 
 `Control` 클래스 안에서 `SelectableControl`의 인스턴스를 통해서 `state` private 멤버에 접근할 수 있습니다.
 `SelectableControl`은 `select` 메서드를 가진 `Control`과 같은 역할을 합니다.
