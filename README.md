@@ -8,7 +8,7 @@
 
 - [Basic Types](./basic-types.md)
 - [Variable Declarations](./variable-declarations.md)
-- [Interfaces 작성중...](./interfaces.md)
+- [Interfaces](./interfaces.md)
 - [Classes](./classes.md)
 - [Functions](./functions.md)
 - Generics
