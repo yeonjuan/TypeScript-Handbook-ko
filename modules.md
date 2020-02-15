@@ -65,7 +65,7 @@ export class ParseIntBasedZipCodeValidator {
     }
 }
 
-// 기존의 validator를 이름을 변경 후 내보냄 
+// 기존 validator의 이름을 변경 후 내보냄 
 export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 ```
 
