@@ -186,7 +186,7 @@ import validate from "./StaticZipCodeValidator";
 
 let strings = ["Hello", "98052", "101"];
 
-// Use function validate
+// 함수 타당성 검사
 strings.forEach(s => {
   console.log(`"${s}" ${validate(s) ? "matches" : "does not match"}`);
 });
