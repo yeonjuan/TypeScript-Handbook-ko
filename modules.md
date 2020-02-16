@@ -125,7 +125,7 @@ import type {APIResponseType} from "./api";
 
 `import type`은 항상 JavaScript에서 제거되며, 바벨 같은 도구는 컴파일러 플래그인 `isolatedModules`를 통해 코드에 대해 더 나은 가정을 할 수 있습니다. [3.8 릴리즈 정보](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에서 더 많은 정보를 읽을 수 있습니다.
 
-# 기본적인 내보내기 (Default exports)
+# 기본 내보내기 (Default exports)
 
 각 모듈은 선택적으로 `default` 내보내기(default export)를 내보낼 수 있습니다. 기본 내보내기는 `default` 키워드로 표시됩니다; 모듈당 하나의 `default` 내보내기만 가능합니다. `default` 내보내기는 다른 가져오기 양식을 사용하여 가져옵니다.
 
