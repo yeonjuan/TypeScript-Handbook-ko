@@ -15,7 +15,6 @@
 - [Enums](./enums.md)
 - Type Inference
 - [Type Compatibility](./type-compatibility.md)
-- Advanced Types
 - [Advanced Types 작성중...](./advanced-types.md)
 - [Symbols](./symbols.md)
 - [Iterators and Generators](./iterators-and-generators.md)
