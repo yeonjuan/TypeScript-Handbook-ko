@@ -13,8 +13,8 @@
 - [Functions](./functions.md)
 - Generics
 - [Enums](./enums.md)
+- [Type Compatibility](./type-compatibility.md)
 - [Type Inference](./type-inference.md)
-- [Type Compatibility 작성중...](./type-compatibility.md)
 - [Advanced Types 작성중...](./advanced-types.md)
 - [Symbols](./symbols.md)
 - [Iterators and Generators](./iterators-and-generators.md)
