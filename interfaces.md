@@ -86,7 +86,7 @@ interface SquareConfig {
 function createSquare(config: SquareConfig): { color: string; area: number } {
     let newSquare = {color: "white", area: 100};
     if (config.clor) {
-        // 오류: 'clor' 프로퍼티는 'SquareConfig` 타입 안에 존재하지 않습니다
+        // Error: Property 'clor' does not exist on type 'SquareConfig'
         newSquare.color = config.clor;
     }
     if (config.width) {
@@ -170,7 +170,7 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 만약 객체 리터럴이 "대상 타입 (target type)"이 갖고 있지 않은 프로퍼티를 갖고 있으면, 에러가 발생합니다.
 
 ```ts
-// 오류: 객체 리터럴은 알려진 프로퍼티만 명시할 수 있습니다, 하지만 'colour'는 'SquareConfig' 타입에 존재하지 않습니다. 'color'를 쓰려고 의도한 것입니까?
+// error: Object literal may only specify known properties, but 'colour' does not exist in type 'SquareConfig'. Did you mean to write 'color'?
 let mySquare = createSquare({ colour: "red", width: 100 });
 ```
 
@@ -268,8 +268,8 @@ mySearch = function(src, sub) {
 ```ts
 let mySearch: SearchFunc;
 
-// 오류: '(src: string, sub: string) => string' 타입은 'SearchFunc' 타입에 할당할 수 없습니다.
-// 'string' 타입은 'boolean' 타입에 할당할 수 없습니다.
+// error: Type '(src: string, sub: string) => string' is not assignable to type 'SearchFunc'.
+// Type 'string' is not assignable to type 'boolean'.
 mySearch = function(src, sub) {
   let result = src.search(sub);
   return "string";
@@ -557,7 +557,7 @@ class TextBox extends Control {
     select() { }
 }
 
-// 오류: 'Image' 타입에 'state' 프로퍼티가 빠졌습니다.
+// Error: Property 'state' is missing in type 'Image'.
 class Image implements SelectableControl {
     private state: any;
     select() { }
