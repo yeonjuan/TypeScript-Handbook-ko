@@ -1,12 +1,12 @@
 # 소개 (Introduction)
 
-타입스크립트의 핵심 원칙 중 하나는 타입 검사가 값(value)들이 가지고 있는 *형태(shape)*에 초점을 맞추고 있는 것입니다.
+TypeScript의 핵심 원칙 중 하나는 타입 검사가 값(value)들이 가지고 있는 *형태*에 초점을 맞추고 있다는 것입니다.
 이는 "덕 타이핑(duck typing)" 혹은 "구조적 서브타이핑 (structural subtyping)"이라고도 합니다.
-타입스크립트에서, 인터페이스는 이런 타입들의 이름을 짓는 역할을 하고 코드 안의 계약을 정의하는 것뿐만 아니라 프로젝트 외부에서 사용하는 계약을 정의합니다.
+TypeScript에서, 인터페이스는 이런 타입들의 이름을 짓는 역할을 하고 코드 안의 계약을 정의하는 것뿐만 아니라 프로젝트 외부에서 사용하는 코드의 계약을 정의하는 강력한 방법입니다.
 
 # 첫 번째 인터페이스 (Our First Interface)
 
-인터페이스가 어떻게 동작하는지 확인하기 위한 가장 간단한 예제:
+어떻게 인터페이스가 동작하는지 확인하는 가장 쉬운 방법은 간단한 예제로 시작하는 것입니다:
 
 ```ts
 function printLabel(labeledObj: { label: string }) {
@@ -19,10 +19,10 @@ printLabel(myObj);
 
 타입 체커는 `printLabel`에 대한 호출을 확인합니다.
 `printLabel` 함수는 `문자열` 타입의 `label`을 갖는 객체를 하나의 매개변수로 가집니다.
-이 객체가 실제로는 이보다 더 많은 프로퍼티를 갖고 있지만, 컴파일러는 *최소* 필요한 프로퍼티가 있고, 이것의 타입이 잘 맞는지만 검사합니다.
-타입스크립트가 관대하지 않은 몇 가지 케이스들이 있는데, 이는 나중에 다룰 것입니다.
+이 객체가 실제로는 이보다 더 많은 프로퍼티를 갖고 있지만, 컴파일러는 *적어도* 필요한 프로퍼티가 있고, 이것의 타입이 잘 맞는지만 검사합니다.
+TypeScript가 관대하지 않은 몇 가지 케이스들이 있는데, 이는 나중에 다룰 것입니다.
 
-이번엔 문자열 타입의 프로퍼티 `label`을 갖고 있음을 기술하는 인터페이스를 사용하여 같은 예제를 다시 사용해보겠습니다.
+이번엔 문자열 타입의 프로퍼티 `label`을 갖고 있음을 기술하는 인터페이스를 사용하여 같은 예제를 다시 사용해보겠습니다:
 
 ```ts
 interface LabeledValue {
@@ -74,8 +74,8 @@ let mySquare = createSquare({color: "black"});
 
 선택적 프로퍼티를 가지는 인터페이스는 다른 인터페이스와 비슷하게 작성되고, 선택적 프로퍼티는 선언에서 프로퍼티 이름 끝에 `?`를 붙여 표시합니다.
 
-선택적 프로퍼티의 이점은 인터페이스에 속하지 않는 프로퍼티 사용을 방지하면서, 사용 가능한 속성을 기술하는 것입니다.
-예를 들어, `createSquare`안의 `color` 프로퍼티 이름을 잘못 타이핑하면, 에러 메시지로 알려줍니다:
+선택적 프로퍼티의 이점은 인터페이스에 속하지 않는 프로퍼티의 사용을 방지하면서, 사용 가능한 속성을 기술하는 것입니다.
+예를 들어, `createSquare`안의 `color` 프로퍼티 이름을 잘못 입력하면, 오류 메시지로 알려줍니다:
 
 ```ts
 interface SquareConfig {
@@ -86,7 +86,7 @@ interface SquareConfig {
 function createSquare(config: SquareConfig): { color: string; area: number } {
     let newSquare = {color: "white", area: 100};
     if (config.clor) {
-        // Error: Property 'clor' does not exist on type 'SquareConfig'
+        // 오류: 'clor' 프로퍼티는 'SquareConfig` 타입 안에 존재하지 않습니다
         newSquare.color = config.clor;
     }
     if (config.width) {
@@ -115,7 +115,7 @@ interface Point {
 
 ```ts
 let p1: Point = { x: 10, y: 20 };
-p1.x = 5; // error!
+p1.x = 5; // 오류!
 ```
 
 TypeScript에서는 모든 변경 메서드(Mutating Methods)가 제거된 `Array<T>`와 동일한 `ReadonlyArray<T>` 타입을 제공합니다. 그래서 생성 후에 배열을 변경하지 않음을 보장할 수 있습니다.
@@ -123,10 +123,10 @@ TypeScript에서는 모든 변경 메서드(Mutating Methods)가 제거된 `Arra
 ```ts
 let a: number[] = [1, 2, 3, 4];
 let ro: ReadonlyArray<number> = a;
-ro[0] = 12; // error!
-ro.push(5); // error!
-ro.length = 100; // error!
-a = ro; // error!
+ro[0] = 12; // 오류!
+ro.push(5); // 오류!
+ro.length = 100; // 오류!
+a = ro; // 오류!
 ```
 
 예제 마지막 줄에서 일반 배열을 `ReadonlyArray`로 재할당하는 것이 금지됨을 확인할 수 있습니다.
@@ -161,7 +161,7 @@ function createSquare(config: SquareConfig): { color: string; area: number } {
 let mySquare = createSquare({ colour: "red", width: 100 });
 ```
 
-`color`대신에 *`colour`* 로 인수를 잘못 전달했을 경우, 일반 JavaScript에선 이런 경우 조용히 에러가 발생합니다.
+`color`대신에 *`colour`* 로 인수를 잘못 전달했을 경우, 일반 JavaScript에선 이런 경우 조용히 오류가 발생합니다.
 
 `width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 작성되었다고 생각할 수 있습니다.
 
@@ -170,7 +170,7 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 만약 객체 리터럴이 "대상 타입 (target type)"이 갖고 있지 않은 프로퍼티를 갖고 있으면, 에러가 발생합니다.
 
 ```ts
-// error: Object literal may only specify known properties, but 'colour' does not exist in type 'SquareConfig'. Did you mean to write 'color'?
+// 오류: 객체 리터럴은 알려진 프로퍼티만 명시할 수 있습니다, 하지만 'colour'는 'SquareConfig' 타입에 존재하지 않습니다. 'color'를 쓰려고 의도한 것입니까?
 let mySquare = createSquare({ colour: "red", width: 100 });
 ```
 
@@ -268,8 +268,8 @@ mySearch = function(src, sub) {
 ```ts
 let mySearch: SearchFunc;
 
-// error: Type '(src: string, sub: string) => string' is not assignable to type 'SearchFunc'.
-// Type 'string' is not assignable to type 'boolean'.
+// 오류: '(src: string, sub: string) => string' 타입은 'SearchFunc' 타입에 할당할 수 없습니다.
+// 'string' 타입은 'boolean' 타입에 할당할 수 없습니다.
 mySearch = function(src, sub) {
   let result = src.search(sub);
   return "string";
@@ -279,7 +279,7 @@ mySearch = function(src, sub) {
 # 인덱서블 타입 (Indexable Types)
 
 인터페이스로 함수 타입을 설명하는 방법과 유사하게, `a[10]` 이나 `ageMap["daniel"]` 처럼 타입을 "인덱스로" 기술할 수 있습니다.
-인덱서블 타입은 인덱싱 할때 해당 반환 유형과 함께 객체를 인덱싱하는 데 사용할 수 있는 타입을 기술하는 *인덱스 서명 (index signature)*를 가지고 있습니다.
+인덱서블 타입은 인덱싱 할때 해당 반환 유형과 함께 객체를 인덱싱하는 데 사용할 수 있는 타입을 기술하는 *인덱스 시그니처 (index signature)*를 가지고 있습니다.
 예제를 보겠습니다:
 
 ```ts
@@ -294,13 +294,13 @@ let myStr: string = myArray[0];
 ```
 
 위에서 인덱스 서명이 있는 `StringArray` 인터페이스가 있습니다.
-이 인덱스 서명은 `StringArray`가 `숫자`로 색인화(indexed)되면 `문자열`을 반환할 것을 나타냅니다.
+이 인덱스 서명은 `StringArray`가 `number`로 색인화(indexed)되면 `string`을 반환할 것을 나타냅니다.
 
 인덱스 서명을 지원하는 타입에는 두 가지가 있습니다: 문자열과 숫자.
 
 두 타입의 인덱서(indexer)를 모두 지원하는 것은 가능하지만, 숫자 인덱서에서 반환된 타입은 반드시 문자열 인덱서에서 반환된 타입의 하위 타입(subtype)이어야 합니다.
-이 이유는 `숫자`로 인덱싱 할 때, JavaScript는 실제로 객체로 인덱싱하기 전에 `문자열`로 변환하기 때문입니다.
-즉, `100` (`숫자`)로 인덱싱하는 것은 `"100"` (`문자열`)로 인덱싱하는 것과 같기 때문에, 서로 일관성 있어야 합니다.
+이 이유는 `number`로 인덱싱 할 때, JavaScript는 실제로 객체를 인덱싱하기 전에 `string`으로 변환하기 때문입니다.
+즉, `100` (`number`)로 인덱싱하는 것은 `"100"` (`string`)로 인덱싱하는 것과 같기 때문에, 서로 일관성 있어야 합니다.
 
 ```ts
 class Animal {
@@ -310,46 +310,46 @@ class Dog extends Animal {
     breed: string;
 }
 
-// Error: indexing with a numeric string might get you a completely separate type of Animal!
+// 오류: 숫자형 문자열로 인덱싱을 하면 완전히 다른 타입의 Animal을 얻게 될 것입니다!
 interface NotOkay {
     [x: number]: Animal;
     [x: string]: Dog;
 }
 ```
 
-문자열 인덱스 서명은 "사전" 패턴을 기술하는데 강력한 방법이지만, 모든 프로퍼티들이 반환 타입과 일치하도록 강제합니다.
+문자열 인덱스 시그니처는 "사전" 패턴을 기술하는데 강력한 방법이지만, 모든 프로퍼티들이 반환 타입과 일치하도록 강제합니다.
 문자열 인덱스가 `obj.property`가 `obj["property"]`로도 이용 가능함을 알려주기 때문입니다.
 다음 예제에서, `name`의 타입은 문자열 인덱스 타입과 일치하지 않고, 타입 체커는 에러를 발생시킵니다.
 
 ```ts
 interface NumberDictionary {
     [index: string]: number;
-    length: number;    // ok, length is a number
-    name: string;      // error, the type of 'name' is not a subtype of the indexer
+    length: number;    // 성공, length는 숫자입니다
+    name: string;      // 오류, `name`의 타입은 인덱서의 하위타입이 아닙니다
 }
 ```
 
-하지만, 인덱스 서명이 프로퍼티 타입들의 합집합이라면 다른 타입의 프로퍼티들도 허용할 수 있습니다:
+하지만, 인덱스 시그니처가 프로퍼티 타입들의 합집합이라면 다른 타입의 프로퍼티들도 허용할 수 있습니다:
 
 ```ts
 interface NumberOrStringDictionary {
     [index: string]: number | string;
-    length: number;    // ok, length is a number
-    name: string;      // ok, name is a string
+    length: number;    // 성공, length는 숫자입니다
+    name: string;      // 성공, name은 문자열입니다
 }
 ```
 
-마지막으로, 인덱스의 할당을 막기 위해 인덱스 서명을 `읽기 전용`으로 만들 수 있습니다:
+마지막으로, 인덱스의 할당을 막기 위해 인덱스 시그니처를 `읽기 전용`으로 만들 수 있습니다:
 
 ```ts
 interface ReadonlyStringArray {
     readonly [index: number]: string;
 }
 let myArray: ReadonlyStringArray = ["Alice", "Bob"];
-myArray[2] = "Mallory"; // error!
+myArray[2] = "Mallory"; // 오류!
 ```
 
-인덱스 서명이 읽기 전용이기 때문에 `myArray[2]`의 값을 할당할 수 없습니다.
+인덱스 시그니처가 읽기 전용이기 때문에 `myArray[2]`의 값을 할당할 수 없습니다.
 
 # 클래스 타입 (Class Types)
 
@@ -391,7 +391,7 @@ class Clock implements ClockInterface {
 ## 클래스의 스태틱과 인스턴스의 차이점 (Difference between the static and instance sides of classes)
 
 클래스와 인터페이스를 다룰 때, 클래스는 *두 가지* 타입을 가진다는 것을 기억하는 게 좋습니다: 스태틱 타입과 인스턴스 타입입니다.
-구성 서명 (construct signature)으로 인터페이스를 생성하고, 클래스를 생성하려고 한다면, 인터페이스를 implements 할 때, 에러가 발생하는 것을 확인할 수 있을 겁니다:
+생성 시그니처 (construct signature)로 인터페이스를 생성하고, 클래스를 생성하려고 한다면, 인터페이스를 implements 할 때, 에러가 발생하는 것을 확인할 수 있을 겁니다:
 
 ```ts
 interface ClockConstructor {
@@ -440,7 +440,7 @@ let digital = createClock(DigitalClock, 12, 17);
 let analog = createClock(AnalogClock, 7, 32);
 ```
 
-`createClock`의 첫 번째 매개변수는 `createClock(AnalogClock, 7, 32)`안에 `ClockConstructor` 타입이므로, `AnalogClock`이 올바른 생성자 서명을 갖고 있는지 검사합니다.
+`createClock`의 첫 번째 매개변수는 `createClock(AnalogClock, 7, 32)`안에 `ClockConstructor` 타입이므로, `AnalogClock`이 올바른 생성자 시그니처를 갖고 있는지 검사합니다.
 
 또 다른 쉬운 방법은 클래스 표현을 사용하는 것입니다.
 
@@ -557,7 +557,7 @@ class TextBox extends Control {
     select() { }
 }
 
-// Error: Property 'state' is missing in type 'Image'.
+// 오류: 'Image' 타입에 'state' 프로퍼티가 빠졌습니다.
 class Image implements SelectableControl {
     private state: any;
     select() { }
