@@ -1,7 +1,7 @@
-# Variable Declarations
+# 변수 선언 (Variable Declarations)
 
 `let`과 `const`는 JavaScript에서 비교적 새로운 두 가지 유형의 변수 선언입니다.
-[앞에서 언급했듯이](./basic-types.md#a-note-about-let), `let`은 `var`와 어느 정도 유사하지만, 사용자가 JavaScript에서 자주 사용하는 결함을 피할 수 있게 해줍니다.
+[앞에서 언급했듯이](./basic-types.md#let에-관하여), `let`은 `var`와 어느 정도 유사하지만, 사용자가 JavaScript에서 자주 사용하는 결함을 피할 수 있게 해줍니다.
 `const`는 `let`의 기능이 강화된 것으로 변수에 재할당을 방지합니다.
 
 TypeScript는 JavaScript의 상위 집합이므로, 당연히 `let`과 `const`를 지원합니다.
@@ -10,9 +10,9 @@ TypeScript는 JavaScript의 상위 집합이므로, 당연히 `let`과 `const`�
 만약, JavaScript를 아무렇게나 사용하고 있었다면, 다음 섹션이 기억을 새로 고치도록 도와줄 것입니다.
 JavaScript에서 `var` 선언의 단점들에 대해 모두 알고 있다면 쉽게 넘어갈 수 있을 것입니다.
 
-# `var` declarations
+# `var` 선언 (`var` declarations)
 
-전통적으로 JavaScript에서 변수 선언을 할 때는 `var` 키워드를 사용하였습니다.
+기존의 JavaScript에서는 변수 선언을 할 때는 `var` 키워드를 사용하였습니다.
 
 ```ts
 var a = 10;
@@ -67,7 +67,7 @@ function f() {
 f(); // '2' 반환
 ```
 
-## Scoping rules
+## 스코프 규칙 (Scoping rules)
 
 `var` 선언은 다른 언어에서 와는 다른 몇몇의 이상한 스코프 규칙을 가지고 있습니다.
 아래 예제를 살펴보겠습니다:
@@ -111,7 +111,7 @@ function sumMatrix(matrix: number[][]) {
 아마 쉽게 찾을 수 있겠지만, `i`가 같은 함수 스코프의 변수를 참조하고 있기 때문에 `for`-loop 안에서 실수로 변수 `i`를 덮어쓸 수도 있습니다
 경험 많은 개발자는 바로 알아차리겠지만, 비슷한 종류의 버그는 코드 리뷰를 거치며 좌절의 원인이 되기도 합니다.
 
-## Variable capturing quirks
+## 변수 캡쳐링의 단점 (Variable capturing quirks)
 
 다음 코드의 출력 결과를 예상해 보세요:
 ```ts
@@ -175,9 +175,9 @@ for (var i = 0; i < 10; i++) {
 이런 이상해 보이는 패턴이 사실 일반적인 패턴입니다.
 매개변수에 `i`가 `for` 루프의 `i`를 감춰 버립니다. 하지만 이름을 같게 했기 때문에 루프의 실행 부를 크게 수정할 필요가 없습니다.
 
-# `let` declarations
+# `let` 선언 (`let` declarations)
 
-이제, `var`에  몇 가지 문제점에 대해 알게 되었는데, 이런 이유 때문에 `let`이 도입되게 되었습니다.
+이제, `var`에  몇 가지 문제점에 대해 알게 되었는데, 이런 이유 때문에 `let`을 도입하게 되었습니다.
 사용되는 키워드를 빼고는 `let` 문은 `var`와 동일한 방법으로 작성됩니다.
 
 ```ts
@@ -186,7 +186,7 @@ let hello = "Hello!";
 
 주요한 차이점은 구문에 있다기 보단, 의미에 있는데, 이제 이 내용을 살펴볼 것입니다.
 
-## Block-scoping
+## 블록 스코프 (Block-scoping)
 
 변수가 `let`을 이용해 선언되었을 때, 이는 *렉시컬 스코핑(lexical-scoping)* 혹은 *블록 스코핑(block-scoping)* 이라 불리는 것을 사용합니다.
 `var`로 선언된 변수가 이를 포함한 함수까지 흘러나오는 것과 달리, 블록-스코프  변수들은 이를 가장 가깝게 감싸고 있는 블록 혹은 `for`-루프 밖에서 접근할 수 없습니다.
@@ -251,7 +251,7 @@ let a;
 
 temporal dead zone에 더 자세한 설명은 [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let)를 살펴보세요.
 
-## Re-declarations and Shadowing
+## 재선언과 쉐도잉 (Re-declarations and Shadowing)
 
 `var`로 선언하면 얼마나 변수를 많이 선언하는지는 중요하지 않다고 했었습니다. 단 하나만 생성됩니다.
 
@@ -272,19 +272,19 @@ function f(x) {
 
 ```ts
 let x = 10;
-let x = 20; // error: 'x'를 같은 스코프에 선언할 수 없습니다.
+let x = 20; // 오류: 'x'를 같은 스코프에 선언할 수 없습니다.
 ```
 
 TypeScript가 문제가 있음을 말해주기 때문에, 같은 변수는 같은 블록 스코프에 있을 필요가 없습니다.
 
 ```ts
 function f(x) {
-    let x = 100; // error: interferes with parameter declaration
+    let x = 100; // 오류: 매개 변수 선언을 방해합니다.
 }
 
 function g() {
     let x = 100;
-    var x = 100; // error: can't have both declarations of 'x'
+    var x = 100; // 오류: `x`를 중복해서 선언할 수 없습니다.
 }
 ```
 
@@ -384,7 +384,7 @@ for (let i = 0; i < 10 ; i++) {
 9
 ```
 
-# `const` declarations
+# `const` 선언 (`const` declarations)
 
 `const` 선언은 변수를 선언하는 또 다른 방법입니다.
 
@@ -423,4 +423,277 @@ kitty.numLives--;
 다행히, TypeScript를 사용하면 객체의 멤버가 `읽기 전용(readonly)`이라고 지정할 수 있습니다.
 [Interfaces 챕터](./Interfaces.md)에 자세히 설명되어 있습니다.
 
-`...작업중`
+# `let` vs. `const`
+
+유사한 스코프의 의미를 가지는 두 가지 유형의 변수 선언이 있기 때문에, 어느 것을 사용하는지는 스스로 선택해야 합니다.
+광범위한 질문처럼, 답은 '때에 따라 다르다'입니다. 
+
+[최소 권한의 원칙](https://en.wikipedia.org/wiki/Principle_of_least_privilege)을 적용하면, 수정하려는 선언 이외에 모든 선언은 `const`를 사용해야 합니다.
+
+그 이유는, 만약 변수가 수정될 필요가 없다면, 같은 코드베이스에서 작업하는 다른 사람들이 자동으로 객체를 수정할 수 없어야 하고, 그들이 정말 변수에 재할당할 필요가 있는지 고려할 필요가 있습니다.
+
+`const`를 사용하는 것은 데이터의 흐름을 추론할 때 코드를 더 예측하기 쉽게 해줍니다.
+
+최선의 판단을 하고, 해당되는 경우, 팀원들과 문제에 대해 상의하세요.
+
+이 핸드북은 대부분 `let` 선언을 사용합니다.
+
+# 구조 분해 (Destructuring)
+
+TypeScript가 가진 또 다른 ECMAScript 2015의 특징은 구조 분해입니다. 
+자세한 내용은, [the Mozilla Developer Network의 글](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)을 참고 하세요.
+이번 섹션에서는 간단하게 개요를 살펴보겠습니다.
+
+## 배열 구조 분해 (Array destructuring)
+
+구조 분해의 가장 단순한 형태는 배열 구조 분해 할당입니다:
+
+```ts
+let input = [1, 2];
+let [first, second] = input;
+console.log(first); // 1 출력
+console.log(second); // 2 출력
+```
+
+이는 `first`, `second`라는 이름의 새로운 두 변수를 생성합니다. 
+이는 인덱싱을 사용하는 것과 동일하지만 더 편리합니다:
+
+```ts
+first = input[0];
+second = input[1];
+```
+
+구조 분해 할당은 이미 선언된 변수에도 동작합니다:
+
+```ts
+// 변수를 스왑
+[first, second] = [second, first];
+```
+
+그리고, 함수의 매개변수에도 동작합니다:
+
+```ts
+function f([first, second]: [number, number]) {
+    console.log(first);
+    console.log(second);
+}
+f([1, 2]);
+```
+
+나머지 요소들에 대해 `...` 구문을 사용하여 변수를 생성할 수 있습니다:
+
+```ts
+let [first, ...rest] = [1, 2, 3, 4];
+console.log(first); // 1 출력
+console.log(rest); // [ 2, 3, 4 ] 출력
+```
+
+물론, 이는 JavaScript이기 때문에, 필요하지 않은 뒤따라 오는 요소들을 무시할 수 있습니다:
+
+```ts
+let [first] = [1, 2, 3, 4];
+console.log(first); // 1 출력
+```
+
+또는 그 밖에 요소들을 무시할 수 있습니다:
+
+```ts
+let [, second, , fourth] = [1, 2, 3, 4];
+console.log(second); // 2 출력
+console.log(fourth); // 4 출력
+```
+
+## 튜플 구조 분해 (Tuple destructuring)
+
+튜플은 배열처럼 구조 분해됩니다; 구조 분해된 변수는 튜플 요소와 일치하는 타입을 얻게 됩니다:
+
+``` ts
+let tuple: [number, string, boolean] = [7, "hello", true];
+
+let [a, b, c] = tuple; // a: number, b: string, c: boolean
+```
+
+튜플의 범위를 넘어선 구조 분해는 오류입니다:
+
+``` ts
+let [a, b, c, d] = tuple; // 오류, 인덱스 3에 요소가 없습니다.
+```
+
+배열과 마찬가지로, 더 짧은 튜플을 얻기 위해 `...`로 튜플의 나머지를 구조 분해할 수 있습니다.
+
+``` ts
+let [a, ...bc] = tuple; // bc: [string, boolean]
+let [a, b, c, ...d] = tuple; // d: [], 비어있는 튜플
+```
+
+또는, 뒤따라 오는 요소나 다른 요소를 무시할 수 있습니다:
+
+``` ts
+let [a] = tuple; // a: number
+let [, b] = tuple; // b: string
+```
+
+## 객체 구조 분해 (Object destructuring)
+
+또한 객체를 구조 분해할 수 있습니다:
+
+```ts
+let o = {
+    a: "foo",
+    b: 12,
+    c: "bar"
+};
+let { a, b } = o;
+```
+
+이는 `o.a`, `o.b`로 부터 새로운 변수 `a`와 `b`를 생성합니다.
+필요 없다면 `c`를 건너 뛸 수 있다는 걸 알아두세요.
+배열 구조 분해처럼, 선언 없이 할당할 수 있습니다.:
+
+```ts
+({ a, b } = { a: "baz", b: 101 });
+```
+
+이 구문을 괄호로 감싸고 있다는 것을 주의해 주세요.    
+JavaScript는 보통 `{`를 블록의 시작으로 파싱 합니다.
+객체 안에 나머지 요소들을 `...` 구문을 사용하여 변수로 생성할 수 있습니다:
+
+```ts
+let { a, ...passthrough } = o;
+let total = passthrough.b + passthrough.c.length;
+
+```
+
+### Property renaming
+
+프로퍼티들에 다른 이름을 붙히는 것도 가능합니다.
+
+```ts
+let { a: newName1, b: newName2 } = o;
+```
+
+여기서 구문이 혼란스러워지기 시작합니다.
+`a: newName1` 을 "`a`를 `newName1` 로" 와 같이 읽을 수 있습니다.
+여태 써왔던 것 처럼 방향은 왼쪽에서 오른쪽입니다:
+
+```ts
+let newName1 = o.a;
+let newName2 = o.b;
+```
+
+혼란스럽게도 여기서 콜론은 타입을 나타내지 않습니다.
+타입을 지정하는 경우, 전체 구조 분해 뒤에 작성해야 합니다:
+
+```ts
+let { a, b }: { a: string, b: number } = o;
+```
+
+### 기본 값 (Default values)
+
+기본 값은 프로퍼티가 정의되지 않은 경우, 기본값을 사용하도록 하는 것입니다:
+
+```ts
+function keepWholeObject(wholeObject: { a: string, b?: number }) {
+    let { a, b = 1001 } = wholeObject;
+}
+```
+
+예제에서 `b?`는 `b`가 선택적이라는 것을 의미합니다. 따라서 이는 `undefined` 일 수도 있습니다.
+`keepWholeObject`는 이제 `b`가 undefined 이더라도 `a`, `b` 프로퍼티와 함께 `wholeObject`라는 변수를 가집니다.
+
+## 함수 선언 (Function declarations)
+
+구조 분해는 함수 선언에서도 동작합니다.
+이것은 간단한 경우에는 직관적입니다:
+
+```ts
+type C = { a: string, b?: number }
+function f({ a, b }: C): void {
+    // ...
+}
+```
+
+그러나 매개 변수에는 기본값을 명시하는 것이 더 일반적이며, 구조 분해와 함께 기본값을 제대로 사용하는 것은 까다로울 수 있습니다.
+가장 먼저, 구조 분해 패턴을 기본값 앞에 넣어야 한다는 것을 기억해야 합니다.
+
+```ts
+function f({ a="", b=0 } = {}): void {
+    // ...
+}
+f();
+```
+
+> 위 코드는 타입 추론의 예제이며 이후 핸드북에서 설명합니다.
+
+그런 다음, 선택적 프로퍼티를 위해 기본 초기화 대신 구조 분해될 프로퍼티에 기본 값을 주어야 한다는 걸 기억해야 합니다.
+`C` 가 `b`를 선택적으로 정의했다는 것을 기억하세요:
+
+```ts
+function f({ a, b = 0 } = { a: "" }): void {
+    // ...
+}
+f({ a: "yes" }); // ok, 기본값으로 b = 0 입니다.
+f(); // ok, 기본 값은 { a: "" } 이고 b = 0 입니다.
+f({}); // 오류, 매개 변수가 주어지면 `a`가 필요합니다.
+```
+
+구조 분해를 주의해서 사용하세요.
+앞에 예제에서 알 수 있듯이, 가장 간단한 구조 분해 표현식 이외의 것들은 혼란스럽습니다.
+심지어 이름 변경, 기본값, 타입 표시가 없더라도 깊게 중첩된 구조 분해는 *정말* 이해하기가 힘듭니다.
+구조 분해 표현식을 작고 간단하게 유지하세요.
+당신은 언제나 구조 분해가 만드는 과제를 당신 손으로 만들 수 있습니다.
+
+## 전개 (Spread)
+
+전개 연산자는 구조 분해와 반대입니다.
+이는 배열을 다른 배열 안에, 혹은 객체를 다른 객체 안에 전개하도록 해줍니다.
+예를 보겠습니다:
+
+```ts
+let first = [1, 2];
+let second = [3, 4];
+let bothPlus = [0, ...first, ...second, 5];
+```
+
+이는 bothPlus에 `[0, 1, 2, 3, 4, 5]`라는 값을 줍니다.
+전개는 `first`와 `second`의 얕은 복사를 만듭니다.
+이들은 전개에 의해 변하지 않습니다.
+
+또한 객체를 전개할 수 있습니다:
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { ...defaults, food: "rich" };
+```
+
+여기서 `search`는 `{ food: "rich", price: "$$", ambiance: "noisy" }`입니다.
+객체 전개는 배열 전개보다 훨씬 복잡합니다.
+배열 전개처럼 왼쪽에서-오른쪽으로 진행되지만 그 결과는 여전히 객체입니다.
+이는 전개 객체 안에서 나중에 오는 프로퍼티가 이전에 오는 프로퍼티를 덮어쓰는 것을 의미합니다.
+그래서 만약에 우리가 이전 예제를 마지막에 전개하도록 수정하면:
+
+```ts
+let defaults = { food: "spicy", price: "$$", ambiance: "noisy" };
+let search = { food: "rich", ...defaults };
+```
+
+`defaults`안에 `food` 프로퍼티는 `food: "rich"`를 덮어쓰는데, 이 경우 우리가 의도한 것은 아닙니다.
+
+객체 전개는 또한 몇몇의 놀라운 제한점이 잇습니다.
+첫째로, 이는 오직 객체의 [본인의, 열거 가능한 프로퍼티](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)만 해당한다는 것입니다.
+기본적으로, 이는 객체의 인스턴스를 전개하면 메서드를 잃게 된다는 것을 뜻합니다:
+
+```ts
+class C {
+  p = 12;
+  m() {
+  }
+}
+let c = new C();
+let clone = { ...c };
+clone.p; // ok
+clone.m(); // 오류!
+```
+
+두 번째로, TypeScript 컴파일러는 제네릭 함수에서 타입 매개변수를 전개하는 것을 허용하지 않습니다.
+이 기능은 이후 버전에서 예상되는 기능입니다.

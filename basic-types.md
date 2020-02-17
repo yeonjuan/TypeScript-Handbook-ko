@@ -1,25 +1,25 @@
-# Table of Contents
-1. [Introduction](#introduction)
-2. [Boolean](#boolean)
-3. [Number](#number)
-4. [String](#string)
-5. [Array](#array)
-6. [Tuple](#tuple)
-7. [Enum](#enum)
+# 목차 (Table of Contents)
+1. [소개 (Introduction)](#소개-introduction)
+2. [불리언 (Boolean)](#불리언-boolean)
+3. [숫자 (Number)](#숫자-number)
+4. [문자열 (String)](#문자열-string)
+5. [배열 (Array)](#배열-array)
+6. [튜플 (Tuple)](#튜플-tuple)
+7. [열거 (Enum)](#열거-enum)
 8. [Any](#any)
 9. [Void](#void)
 10. [Null and Undefined](#null-and-undefined)
 11. [Never](#never)
-12. [Object](#object)
-13. [Type assertions](#type-assertions)
-14. [A note about 'let'](#a-note-about-let)
+12. [객체 (Object)](#객체-object)
+13. [타입 단언 (Type assertions)](#type-assertions)
+14. ['let'에 관하여](#let에-관하여)
 
-# Introduction
+# 소개 (Introduction)
 
 프로그램이 유용하려면 숫자, 문자열, 구조체, 부울 값과 같은 몇 가지 가장 간단한 데이터의 단위가 필요합니다.
 TypeScript에서는 JavaScript에서 지원하는 거의 동일한 데이터 타입을 지원하며, 열거 타입을 사용하여 이를 더 편리하게 사용할 수 있습니다.
 
-# Boolean
+# 불리언 (Boolean)
 
 가장 기본적인 데이터 타입은 JavaScript, TypeScript에서 `boolean` 값이라고 일컫는 참/거짓(true/false) 값입니다.
 
@@ -27,9 +27,9 @@ TypeScript에서는 JavaScript에서 지원하는 거의 동일한 데이터 타
 let isDone: boolean = false;
 ```
 
-# Number
+# 숫자 (Number)
 
-JavaScript처럼, TypesScript의 모든 숫자는 부동 소수 값입니다.
+JavaScript처럼, TypeScript의 모든 숫자는 부동 소수 값입니다.
 이런 부동 소수에는 `number`라는 타입이 붙혀집니다.
 TypeScript는 16진수, 10진수 리터럴에 더불어, ECMAScript 2015에 소개된 2진수, 8진수 리터럴도 지원합니다.
 
@@ -40,9 +40,9 @@ let binary: number = 0b1010;
 let octal: number = 0o744;
 ```
 
-# String
+# 문자열 (String)
 
-웹 페이지, 서버 같은 프로그램을 JavaScript로 만들 때 기본적으로 텍스트 데이터 다루는 작업이 필요합니다.
+웹 페이지, 서버 같은 프로그램을 JavaScript로 만들 때 기본적으로 텍스트 데이터를 다루는 작업이 필요합니다.
 다른 언어들처럼, TypeScript에서는 텍스트 테이터 타입을 `string`으로 표현합니다.
 JavaScript처럼 TypeScript도 큰따옴표 (`"`)나 작은따옴표 (`'`)를 문자열 데이터를 감싸는데 사용합니다.
 
@@ -68,7 +68,7 @@ let sentence: string = "Hello, my name is " + fullName + ".\n\n" +
     "I'll be " + (age + 1) + " years old next month.";
 ```
 
-# Array
+# 배열 (Array)
 
 TypeScript는 JavaScript처럼 값들을 배열로 다룰 수 있게 해줍니다.
 배열 타입은 두 가지 방법으로 쓸 수 있습니다.
@@ -84,7 +84,7 @@ let list: number[] = [1, 2, 3];
 let list: Array<number> = [1, 2, 3];
 ```
 
-# Tuple
+# 튜플 (Tuple)
 
 튜플 타입을 통해, 요소들의 타입이 정해져 있고, 개수가 고정된 배열을 표현할 수 있습니다. 단 요소들의 타입이 모두 같을 필요는 없습니다. 예를 들어, `number`, `string` 이 쌍으로 있는 값을 나타내고 싶을 수 있습니다:
 
@@ -112,7 +112,7 @@ x[3] = "world"; // Error, '[string, number]' 타입에는 프로퍼티 '3'이 �
 console.log(x[5].toString()); // '[string, number]' 타입에는 프로퍼티 '5'가 없습니다.
 ```
 
-# Enum
+# 열거 (Enum)
 
 JavaScript의 표준 자료형 집합과 사용하면 도움이 될만한 데이터 형은 `enum`입니다.
 C# 같은 언어처럼, `enum`은 값의 집합에 더 나은 이름을 붙여줄 수 있습니다.
@@ -150,7 +150,7 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 
 # Any
 
-애플리케이션을 만들 때, 알지 못하는 타입을 표현해야할 수도 있습니다.
+애플리케이션을 만들 때, 알지 못하는 타입을 표현해야 할 수도 있습니다.
 이 값들은 동적인 콘텐츠에서 올 수도 있습니다. 예) 사용자로부터 받은 데이터. 혹은 3rd party library.
 이 경우 타입 검사를 하지 않고, 그 값들이 컴파일 시간에 검사를 통과하길 원합니다.
 이를 위해, `any` 타입을 사용할 수 있습니다:
@@ -174,7 +174,7 @@ let prettySure: Object = 4;
 prettySure.toFixed(); // Error: 프로퍼티 'toFixed'는 'Object'에 존재하지 않습니다.
 ```
 
-> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object` 를 no-primitive `object` 대신에 사용하지 마세요.
+> Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object`를 no-primitive `object` 대신에 사용하지 마세요.
 
 또한, any 타입은 만약 타입의 일부를 알지만 전체를 알지는 못할 때 유용합니다.
 예를 들어, 여러 다른 타입이 섞인 배열을 다룰 수 있습니다.
@@ -215,11 +215,11 @@ let n: null = null;
 ```
 
 기본적으로 `null` 과 `undefined`는 다른 모든 타입의 하위 타입니다.
-이건, null과 undefined를 `number` 같은 타입 에 할당할 수 있다는 것을 의미합니다.
+이건, null과 undefined를 `number` 같은 타입에 할당할 수 있다는 것을 의미합니다.
 
 하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
-이 경우, `string` 또는 `null` 또는 `undefined` 를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
+이 경우, `string` 또는 `null` 또는 `undefined`를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
 Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 
@@ -254,7 +254,7 @@ function infiniteLoop(): never {
 }
 ```
 
-# Object
+# 객체 (Object)
 
 `object`는 원시 타입이 아닌 타입을 나타냅니다. 예를 들어, `number`, `string`, `boolean`, `bigint`, `symbol`, `null`, 또는 `undefined` 가 아닌 나머지를 의미합니다.
 
@@ -272,17 +272,17 @@ create(false); // Error
 create(undefined); // Error
 ```
 
-# Type assertions
+# 타입 단언 (Type assertions)
 
 가끔, TypeScript보다 개발자가 값에 대해 더 잘 알고 일을 때가 있습니다.
 대개, 이런 경우는 어떤 엔티티의 실제 타입이 현재 타입보다 더 구체적일 때 발생합니다.
 
-*Type assertions* 은 컴파일러이게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
-`type assertion` 은 다른 언어의 타입 변환 (형 변환) 과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
+*타입 단언(Type assertions)* 은 컴파일러에게 "날 믿어, 난 내가 뭘 하고 있는지 알아"라고 말해주는 방법입니다.
+`타입 단언`은 다른 언어의 타입 변환(형 변환)과 유사하지만, 다른 특별한 검사를 하거나 데이터를 재구성하지는 않습니다.
 이는 런타임에 영향을 미치지 않으며, 온전히 컴파일러만 이를 사용합니다.
 타입 스크립트는 개발자가 필요한 어떤 특정 검사를 수행했다고 인지합니다.
 
-Type assertion 은 두 가지 형태가 있습니다.
+타입 단언에는 두 가지 형태가 있습니다.
 하나는, "angle-bracket" 문법입니다: 
 
 ```ts
@@ -299,9 +299,9 @@ let strLength: number = (someValue as string).length;
 ```
 
 위 두 예제는 동일합니다.
-어떤 것을 사용할지는 주로 선호에 따른 선택입니다. 하지만 TypeScript를 JSX와 함께 사용할 때는, `as`-스타일의 assertion만 허용됩니다.
+어떤 것을 사용할지는 주로 선호에 따른 선택입니다. 하지만 TypeScript를 JSX와 함께 사용할 때는, `as`-스타일의 단언만 허용됩니다.
 
-# A note about `let`
+# `let`에 관하여
 
 지금까지 더 익숙할 수도 있는 JavaScript의 `var`키워드 대신 `let` 키워드를 이용했다는 걸 알 수 있습니다.
 `let` 키워드는 JavaScript ES2015에서 소개되었고, `var`보다 안전하다는 이유로, 현재 표준으로 여겨지고 있습니다.
