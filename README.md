@@ -1,7 +1,7 @@
 # Typescript-Handbook-ko
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 타입스크립트 핸드북 번역
@@ -51,6 +51,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/badger93"><img src="https://avatars1.githubusercontent.com/u/38435151?v=4" width="100px;" alt=""/><br /><sub><b>badger93</b></sub></a><br /><a href="#translation-badger93" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/kok202"><img src="https://avatars2.githubusercontent.com/u/39543643?v=4" width="100px;" alt=""/><br /><sub><b>kok202</b></sub></a><br /><a href="#translation-kok202" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/ye-geeee"><img src="https://avatars1.githubusercontent.com/u/60929159?v=4" width="100px;" alt=""/><br /><sub><b>Yeji Kang</b></sub></a><br /><a href="#translation-ye-geeee" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Myoji"><img src="https://avatars2.githubusercontent.com/u/12138415?v=4" width="100px;" alt=""/><br /><sub><b>Myoji</b></sub></a><br /><a href="#translation-Myoji" title="Translation">🌍</a></td>
   </tr>
 </table>
 
