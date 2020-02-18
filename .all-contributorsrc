@@ -67,6 +67,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "Myoji",
+      "name": "Myoji",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12138415?v=4",
+      "profile": "https://github.com/Myoji",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,
