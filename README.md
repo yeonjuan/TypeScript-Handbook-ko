@@ -23,7 +23,7 @@
 - Namespaces and Modules
 - Module Resolution
 - Declaraion Merging
-- JSX
+- [JSX](./jsx.md)
 - Decorators
 - Mixins
 - [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
