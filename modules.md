@@ -222,4 +222,43 @@ export * as utilities from "./utilities";
 import { utilities } from "./index";
 ```
 
+# `export =`와 `import = require()` (`export =` and `import = require()`)
+
+CommonJS와 AMD 둘 다 일반적으로 모듈의 모든 내보내기를 포함하는 `exports` 객체의 개념을 가지고 있습니다.
+
+또한 `exports` 객체를 사용자 정의 단일 객체로 대체하는 기능도 지원합니다. 기본 내보내기는 이 동작에서 대체 역할을 합니다; 하지만 둘은 호환되지는 않습니다. TypeScript는 기존의 CommonJS와 AMD 워크플로우를 모델링 하기 위해 `export =`를 지원합니다.
+
+`export =` 구문은 모듈에서 내보내지는 단일 객체를 지정합니다. 클래스, 인터페이스, 네임스페이스, 함수 혹은 열거형이 될 수 있습니다.
+
+`export = `를 사용하여 모듈을 내보낼 때, TypeScript에 특정한 `import module = require("module")`를 사용하여 모듈을 가져와야 합니다.
+
+##### ZipCodeValidator.ts
+
+```ts
+let numberRegexp = /^[0-9]+$/;
+class ZipCodeValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+export = ZipCodeValidator;
+```
+
+##### Test.ts
+
+```ts
+import zip = require("./ZipCodeValidator");
+
+// 시험용 샘플
+let strings = ["Hello", "98052", "101"];
+
+// 사용할 Validators
+let validator = new zip();
+
+// 각 문자열이 각 validator를 통과했는지 보여줍니다
+strings.forEach(s => {
+  console.log(`"${ s }" - ${ validator.isAcceptable(s) ? "matches" : "does not match" }`);
+});
+```
+
 `작업중...`
