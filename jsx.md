@@ -2,34 +2,34 @@
 
 ## 목차 (Table of contents)
 
-[소개 (Introduction)](#소개-(Introduction))
+[소개 (Introduction)](#소개-Introduction)
 
-[기본 사용법 (Basic usage)](#기본-사용법-(Basic-usage))
+[기본 사용법 (Basic usage)](#기본-사용법-Basic-usage)
 
-[as 연산자 (The as operator)](#as-연산자-(The-as-operator))
+[as 연산자 (The as operator)](#as-연산자-The-as-operator)
 
-[타입 검사 (Type Checking)](#타입-검사-(Type-Checking))
+[타입 검사 (Type Checking)](#타입-검사-Type-Checking)
 
-* [고유 요소 (Intrinsic elements)](#고유-요소-(Intrinsic-elements))
-* [값-기반 요소 (Value-based elements)](#값-기반-요소-((Value-based-elements)))
-* [함수형 컴포넌트 (Function Component)](#함수형-컴포넌트-(Function-Component))
-* [클래스형 컴포넌트 (Class Component)](#클래스형-컴포넌트-(Class-Component))
-* [속성 타입 검사 (Attribute type checking)](#속성-타입-검사-(Attribute-type-checking))
-* [자식 타입 검사 (Children Type Checking)](#자식-타입-검사-(Children-Type-Checking))
+* [고유 요소 (Intrinsic elements)](#고유-요소-Intrinsic-elements)
+* [값-기반 요소 (Value-based elements)](#값-기반-요소-Value-based-elements)
+* [함수형 컴포넌트 (Function Component)](#함수형-컴포넌트-Function-Component)
+* [클래스형 컴포넌트 (Class Component)](#클래스형-컴포넌트-Class-Component)
+* [속성 타입 검사 (Attribute type checking)](#속성-타입-검사-Attribute-type-checking)
+* [자식 타입 검사 (Children Type Checking)](#자식-타입-검사-Children-Type-Checking)
 
-[JSX 결과 타입 (The JSX result type)](#JSX-결과-타입-(The-JSX-result-type))
+[JSX 결과 타입 (The JSX result type)](#JSX-결과-타입-The-JSX-result-type)
 
-[표현식 포함하기 (Embedding Expressions)](#표현식-포함하기-(Embedding-Expressions))
+[표현식 포함하기 (Embedding Expressions)](#표현식-포함하기-Embedding-Expressions)
 
-[리액트와 통합하기 (React integration)](#리액트와-통합하기-(React-integration))
+[리액트와 통합하기 (React integration)](#리액트와-통합하기-React-integration)
 
-[팩토리 함수 (Factory Functions)](#팩토리-함수-(Factory-Functions))
+[팩토리 함수 (Factory Functions)](#팩토리-함수-Factory-Functions)
 
 ## 소개 (Introduction)
 
 [↥ 위로](#JSX)
 
-[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 문법입니다. 구현 방법에 따라 변환된 출력물의 의미가 다를 수 있지만, JSX는 유효한 JavaScript로 변환되도록 이루어져 있습니다. JSX는 [리액트](https://reactjs.org/)에 의해 큰 인기를 얻었습니다만, 이후엔 다른 구현도 등장했습니다. TypeScript(TypeScript)는 JavaScript(JavaScript)로의 컴파일, 타입 검사, 임베딩을 지원합니다.
+[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 문법입니다. 구현 방법에 따라 변환된 출력물의 의미가 다를 수 있지만, JSX는 유효한 JavaScript로 변환되도록 이루어져 있습니다. JSX는 [리액트](https://reactjs.org/)에 의해 큰 인기를 얻었습니다만, 이후엔 다른 구현도 등장했습니다. TypeScript는 JavaScript로의 컴파일, 타입 검사, 임베딩을 지원합니다.
 
 ## 기본 사용법 (Basic usage)
 
