@@ -4,7 +4,7 @@
 [유니언 타입 (Union Types)](#유니언-타입-union-types)
 [타입 가드와 차별 타입 (Type Guards and Differentiating Types)](#타입-가드와-차별-타입-type-guards-and-differentiating-types)
 * [사용자-정의 타입 가드 (User-Defined Type Guards)](#사용자-정의-타입-가드-user-defined-type-guards)
-  * [타입 명제 사용하기 (Using type predicates)](#타입-명제-사용하기-using-type-predicates)
+  * [타입 서술어 사용하기 (Using type predicates)](#타입-서술어-사용하기-using-type-predicates)
   * [`in` 연산자 사용하기 (Using the `in` operator)](#in-연산자-사용하기-using-the-in-operator)
 
 # 교차 타입 (Intersection Types)
@@ -175,9 +175,9 @@ if ((pet as Fish).swim) {
 마침 TypeScript에는 *타입 가드*라는 것이 있습니다.
 타입 가드는 어떤 스코프 안에서의 타입을 보장하는 런타임 검사를 시행한다는 표현입니다.
 
-### 타입 명제 사용하기 (Using type predicates)
+### 타입 서술어 사용하기 (Using type predicates)
 
-타입 가드를 정의하기 위해, 간단하게 반환 타입이 *타입 명제*인 함수를 정의하면 됩니다:
+타입 가드를 정의하기 위해, 간단하게 반환 타입이 *타입 서술어*인 함수를 정의하면 됩니다:
 
 ```ts
 function isFish(pet: Fish | Bird): pet is Fish {
@@ -186,7 +186,7 @@ function isFish(pet: Fish | Bird): pet is Fish {
 ```
 
 `pet is Fish`는 이 예제에서의 타입 명제입니다.
-명제는 `parameterName is Type` 형태이고, `parameterName`는 반드시 현재 함수 시그니처에서 매개변수의 이름이어야 합니다.
+서술어는 `parameterName is Type` 형태이고, `parameterName`는 반드시 현재 함수 시그니처에서 매개변수의 이름이어야 합니다.
 
 `isFish`가 어떤 변수와 함께 호출될 때마다, TypeScript는 기존 타입과 호환된다면 그 변수를 특정 타입으로 *제한*할 것입니다.
 
