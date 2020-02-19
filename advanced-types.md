@@ -185,7 +185,7 @@ function isFish(pet: Fish | Bird): pet is Fish {
 }
 ```
 
-`pet is Fish`는 이 예제에서의 타입 명제입니다.
+`pet is Fish`는 이 예제에서의 타입 서술어입니다.
 서술어는 `parameterName is Type` 형태이고, `parameterName`는 반드시 현재 함수 시그니처에서 매개변수의 이름이어야 합니다.
 
 `isFish`가 어떤 변수와 함께 호출될 때마다, TypeScript는 기존 타입과 호환된다면 그 변수를 특정 타입으로 *제한*할 것입니다.
