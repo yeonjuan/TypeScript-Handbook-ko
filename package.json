@@ -17,7 +17,14 @@
     "url": "https://github.com/yeonjuan/Typescript-Handbook-ko/issues"
   },
   "homepage": "https://github.com/yeonjuan/Typescript-Handbook-ko#readme",
-  "dependencies": {
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm lint",
+      "pre-push": "npm lint"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
     "markdownlint": "^0.19.0"
   }
 }
