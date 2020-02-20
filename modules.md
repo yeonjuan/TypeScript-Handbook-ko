@@ -65,7 +65,7 @@ export class ParseIntBasedZipCodeValidator {
     }
 }
 
-// 기존 validator의 이름을 변경 후 내보냄 
+// 기존 validator의 이름을 변경 후 내보냄
 export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 ```
 
@@ -258,6 +258,140 @@ let validator = new zip();
 // 각 문자열이 각 validator를 통과했는지 보여줍니다
 strings.forEach(s => {
   console.log(`"${ s }" - ${ validator.isAcceptable(s) ? "matches" : "does not match" }`);
+});
+```
+
+# 모듈을 위한 코드 생성 (Code Generation for Modules)
+
+컴파일 중에는 지정된 모듈 대상에 따라 컴파일러는 Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), 또는 [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) 모듈-로딩 시스템에 적합한 코드를 생성합니다. 생성된 코드의 `define`, `require` 그리고 `register` 호출 기능에 대한 자세한 정보는 각 모듈 로더의 문서를 확인하세요.
+
+이 간단한 예제는 가져오기 및 내보내기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
+
+##### SimpleModule.ts
+
+```ts
+import m = require("mod");
+export let t = m.something + 1;
+```
+
+##### AMD / RequireJS SimpleModule.js
+
+```js
+define(["require", "exports", "./mod"], function (require, exports, mod_1) {
+    exports.t = mod_1.something + 1;
+});
+```
+
+##### CommonJS / Node SimpleModule.js
+
+```js
+var mod_1 = require("./mod");
+exports.t = mod_1.something + 1;
+```
+
+##### UMD SimpleModule.js
+
+```js
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports); if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./mod"], factory);
+    }
+})(function (require, exports) {
+    var mod_1 = require("./mod");
+    exports.t = mod_1.something + 1;
+});
+```
+
+##### System SimpleModule.js
+
+```js
+System.register(["./mod"], function(exports_1) {
+    var mod_1;
+    var t;
+    return {
+        setters:[
+            function (mod_1_1) {
+                mod_1 = mod_1_1;
+            }],
+        execute: function() {
+            exports_1("t", t = mod_1.something + 1);
+        }
+    }
+});
+```
+
+##### Native ECMAScript 2015 modules SimpleModule.js
+
+```js
+import { something } from "./mod";
+export var t = something + 1;
+```
+
+# 간단한 예제 (Simple Example)
+
+아래에서는 각 모듈에서 단일 이름으로 내보내기 위해 이전 예제에서 사용한 Validator 구현을 통합합니다.
+
+컴파일 하려면, 명령 줄에서 모듈 대상을 지정해야 합니다. Node.js의 경우, `--module commonjs`를 사용하세요; require.js의 경우 `--module amd`를 사용하세요. 예를 들면:
+
+```Shell
+tsc --module commonjs Test.ts
+```
+
+컴파일이 되면, 각 모듈은 별도의 `.js`파일이 됩니다. 참조 태그와 마찬가지로, 컴파일러는 `import`문을 따라 의존적인 파일들을 컴파일 합니다.
+
+##### Validation.ts
+
+```ts
+export interface StringValidator {
+    isAcceptable(s: string): boolean;
+}
+```
+
+##### LettersOnlyValidator.ts
+
+```ts
+import { StringValidator } from "./Validation";
+const lettersRegexp = /^[A-Za-z]+$/;
+export class LettersOnlyValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return lettersRegexp.test(s);
+    }
+}
+```
+
+##### ZipCodeValidator.ts
+
+```ts
+import { StringValidator } from "./Validation";
+const numberRegexp = /^[0-9]+$/;
+export class ZipCodeValidator implements StringValidator {
+    isAcceptable(s: string) {
+        return s.length === 5 && numberRegexp.test(s);
+    }
+}
+```
+
+##### Test.ts
+
+```ts
+import { StringValidator } from "./Validation";
+import { ZipCodeValidator } from "./ZipCodeValidator";
+import { LettersOnlyValidator } from "./LettersOnlyValidator";
+// 시험용 샘플
+let strings = ["Hello", "98052", "101"];
+// 사용할 validator
+let validators: { [s: string]: StringValidator; } = {};
+validators["ZIP code"] = new ZipCodeValidator();
+validators["Letters only"] = new LettersOnlyValidator();
+// 각 문자열이 validator를 통과하는지 보여줌
+strings.forEach(s => {
+    for (let name in validators) {
+        console.log(`"${ s }" - ${ validators[name].isAcceptable(s) ? "matches" :
+        "does not match" } ${ name }`);
+    }
 });
 ```
 
