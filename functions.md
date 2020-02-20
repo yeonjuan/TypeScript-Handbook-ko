@@ -130,10 +130,10 @@ let result2 = buildName("Bob", "Adams", "Sr.");  // 에러, 너무 많은 매개
 let result3 = buildName("Bob", "Adams");         // Bob Adams, 아~ 딱 알맞네
 ```
 
-어느 선택적 매개변수던 반드시 매개변수 정의가 필요합니다. 
+어느 선택적 매개변수던 반드시 매개변수 정의가 필요합니다.
 lastName 대신 firstName을 선택적으로 하고 싶다면 매개변수의 순서를 변경해야 합니다.
 
-TypeScript에서는 유저가 값을 제공하지 않거나 `undefined`로 했을 때에 할당될 매개변수의 값을 정해 놓을 수도 있습니다. 이러한 것을 `default-initialized parameters`라고 합니다. 
+TypeScript에서는 유저가 값을 제공하지 않거나 `undefined`로 했을 때에 할당될 매개변수의 값을 정해 놓을 수도 있습니다. 이러한 것을 `default-initialized parameters`라고 합니다.
 
 이전 예시에서 lastName을 `"Smith"` 라고 지정해 보겠습니다.
 
@@ -168,6 +168,7 @@ function buildName(firstName: string, lastName = "Smith") {
 }
 
 ```
+
 는 `(firstName: string, lastName?: string) => string` 라는 공통된 타입을 공유합니다. `lastName`의 기본값은 타입에서 사라지고 오직 선택적 매개변수라는 사실만 남깁니다.
 
 순수한 선택적 매개변수와는 다르게 ( 역주 - 필수 매개변수는 선택적 매개변수 뒤에 올 수 없습니다. ) `default-initialized parameters`는 필수 매개변수 뒤에 오는 것이 강요되지 않습니다. 만약 `default-initialized parameter`가 필수 매개변수보다 앞에 오게 된다면 사용자가 명시적으로 `undefined` 를 전달해 주어야 `default-initialized parameter`를 볼 수 있습니다.
@@ -195,7 +196,6 @@ JavaScript에서는 모든 함수 내부에 위치한 `arguments`라는 변수�
 
 TypeScript에서는 이 인자들을 하나의 변수로 모을 수 있습니다:
 
-
 ```ts
 function buildName(firstName: string, ...restOfName: string[]) {
     return firstName + " " + restOfName.join(" ");
@@ -208,7 +208,6 @@ let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 나머지 매개변수(rest parameters)는 선택적 매개변수들의 수를 무한으로 취급합니다. 나머지 매개변수로 인자들을 넘겨줄 때는 당신이 원하는 만큼 넘겨 줄 수도 있습니다. ( 아무것도 넘겨주지 않을 수도 있습니다. )
 
 컴파일러는 `...` 부호 뒤의 이름으로 전달된 인자 배열을 빌드하여 함수에서 사용 할 수 있도록 합니다.
-
 
 `...` 부호는 나머지 매개변수가 있는 함수의 타입에도 사용됩니다.
 
@@ -281,9 +280,9 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 
 `--noImplicitThis` 플래그를 컴파일러에 전달하는 실수를 하게 된다면 TypeScript는 경고를 표시할 것입니다. `this.suits[pickedSuit]` 의 `this`는 `any` 타입인 것을 짚고 넘어가겠습니다.
 
-## `this` 매개변수 ( this parameter ) 
+## `this` 매개변수 ( this parameter )
 
-불행히도 `this.suits[pickedSuit]`의 타입은 여전히 `any`입니다. `this`가 객체 리터럴 내부의 함수에서 왔기 때문입니다. 이것을 고치기 위해 명백한 `this` 매개변수를 줄 수 있습니다. `this` 매개변수는 함수의 매개변수 목록에서 가장 먼저 나오는 가짜 매개변수입니다. 
+불행히도 `this.suits[pickedSuit]`의 타입은 여전히 `any`입니다. `this`가 객체 리터럴 내부의 함수에서 왔기 때문입니다. 이것을 고치기 위해 명백한 `this` 매개변수를 줄 수 있습니다. `this` 매개변수는 함수의 매개변수 목록에서 가장 먼저 나오는 가짜 매개변수입니다.
 
 ```ts
 function f(this: void) {
@@ -328,8 +327,8 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 
 ## 콜백에서의 `this` 매개변수( `this` parameters in callbacks )
 
-나중에 호출할 콜백 함수를 라이브러리에 전달할 때 `this`로 인한 에러가 발생할 수 있습니다. 
-라이브러리는 당신의 콜백을 일반 함수처럼 호출하므로 `this`는 `undefined`가 될 겁니다. 일부 작업에서는 `this` 매개변수를 콜백 오류를 막는데 사용할 수 있습니다. 
+나중에 호출할 콜백 함수를 라이브러리에 전달할 때 `this`로 인한 에러가 발생할 수 있습니다.
+라이브러리는 당신의 콜백을 일반 함수처럼 호출하므로 `this`는 `undefined`가 될 겁니다. 일부 작업에서는 `this` 매개변수를 콜백 오류를 막는데 사용할 수 있습니다.
 
 먼저 라이브러리 작성자는 콜백 타입에 `this`로 타입표시(annotate)를 해주어야 합니다.
 
@@ -371,7 +370,7 @@ let h = new Handler();
 uiElement.addClickListener(h.onClickGood);
 ```
 
-`onClickGood`이 `this` 타입을 `void`로 지정하고 있기 때문에 `addClickListener`로 넘겨지는데 적합합니다. 물론, 이것이 `this.info`를 쓸 수 없는 것을 의미하기도 합니다. 
+`onClickGood`이 `this` 타입을 `void`로 지정하고 있기 때문에 `addClickListener`로 넘겨지는데 적합합니다. 물론, 이것이 `this.info`를 쓸 수 없는 것을 의미하기도 합니다.
 
 만약 당신이 `this.info`까지 원한다면 화살표 함수를 사용해야 할 겁니다:
 
@@ -415,7 +414,7 @@ let pickedCard2 = pickCard(15);
 alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
 ```
 
-여기 사용자가 전달하는 것에 따라 두 가지 다른 결과를 반환하는 함수가 있습니다. 사용자가 deck을 의미하는 객체 값을 전달한다면 함수가 카드를 선택합니다. 사용자가 카드를 선택하면 선택한 카드가 무엇인지 대답해줍니다. 
+여기 사용자가 전달하는 것에 따라 두 가지 다른 결과를 반환하는 함수가 있습니다. 사용자가 deck을 의미하는 객체 값을 전달한다면 함수가 카드를 선택합니다. 사용자가 카드를 선택하면 선택한 카드가 무엇인지 대답해줍니다.
 
 하지만 타입 시스템에서 이것을 어떻게 구현할 것입니까?
 
