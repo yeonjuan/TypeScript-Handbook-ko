@@ -114,6 +114,7 @@ function sumMatrix(matrix: number[][]) {
 ## 변수 캡쳐링의 단점 (Variable capturing quirks)
 
 다음 코드의 출력 결과를 예상해 보세요:
+
 ```ts
 for (var i = 0; i < 10; i++) {
     setTimeout(function() { console.log(i); }, 100 * i);
@@ -123,6 +124,7 @@ for (var i = 0; i < 10; i++) {
 익숙하지 않은 분들을 위해 말씀드리자면, `setTimeout`은 특정 밀리 초 후에 함수를 실행하려고 할것입니다.(다른 작업의 실행이 멈추는 것을 기다리며)
 
 준비됐나요? 살펴보겠습니다:
+
 ```text
 10
 10
@@ -136,7 +138,7 @@ for (var i = 0; i < 10; i++) {
 10
 ```
 
-많은 JavaScript 개발자들은 이런 동작에 익숙한 편이지만, 만약 놀랐더라도 당신 혼자만 놀란 것은 아닙니다. 
+많은 JavaScript 개발자들은 이런 동작에 익숙한 편이지만, 만약 놀랐더라도 당신 혼자만 놀란 것은 아닙니다.
 많은 사람들이 출력 결과가 다음과 같을 거라고 생각합니다.
 
 ```text
@@ -233,7 +235,7 @@ let a;
 ```
 
 주의할 점은 여전히 선언되기 전에 블록-스코프 변수를 *잡아둘* 수 있다는 것입니다.
-선언되기 전에 함수를 실행하는 것이 안된 다는 것만 알아두면 됩니다. 
+선언되기 전에 함수를 실행하는 것이 안된 다는 것만 알아두면 됩니다.
 ES2015를 대상으로한, 현대 런타임은 에러를 던질 것입니다; 하지만 현재 TypeScript에서는 허용되며, 에러를 보고하지 않습니다.
 
 ```ts
@@ -426,7 +428,7 @@ kitty.numLives--;
 # `let` vs. `const`
 
 유사한 스코프의 의미를 가지는 두 가지 유형의 변수 선언이 있기 때문에, 어느 것을 사용하는지는 스스로 선택해야 합니다.
-광범위한 질문처럼, 답은 '때에 따라 다르다'입니다. 
+광범위한 질문처럼, 답은 '때에 따라 다르다'입니다.
 
 [최소 권한의 원칙](https://en.wikipedia.org/wiki/Principle_of_least_privilege)을 적용하면, 수정하려는 선언 이외에 모든 선언은 `const`를 사용해야 합니다.
 
@@ -440,7 +442,7 @@ kitty.numLives--;
 
 # 구조 분해 (Destructuring)
 
-TypeScript가 가진 또 다른 ECMAScript 2015의 특징은 구조 분해입니다. 
+TypeScript가 가진 또 다른 ECMAScript 2015의 특징은 구조 분해입니다.
 자세한 내용은, [the Mozilla Developer Network의 글](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)을 참고 하세요.
 이번 섹션에서는 간단하게 개요를 살펴보겠습니다.
 
@@ -455,7 +457,7 @@ console.log(first); // 1 출력
 console.log(second); // 2 출력
 ```
 
-이는 `first`, `second`라는 이름의 새로운 두 변수를 생성합니다. 
+이는 `first`, `second`라는 이름의 새로운 두 변수를 생성합니다.
 이는 인덱싱을 사용하는 것과 동일하지만 더 편리합니다:
 
 ```ts
@@ -554,7 +556,7 @@ let { a, b } = o;
 ({ a, b } = { a: "baz", b: 101 });
 ```
 
-이 구문을 괄호로 감싸고 있다는 것을 주의해 주세요.    
+이 구문을 괄호로 감싸고 있다는 것을 주의해 주세요.
 JavaScript는 보통 `{`를 블록의 시작으로 파싱 합니다.
 객체 안에 나머지 요소들을 `...` 구문을 사용하여 변수로 생성할 수 있습니다:
 

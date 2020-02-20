@@ -1,4 +1,5 @@
 # 목차 (Table of Contents)
+
 1. [소개 (Introduction)](#소개-introduction)
 2. [불리언 (Boolean)](#불리언-boolean)
 3. [숫자 (Number)](#숫자-number)
@@ -145,7 +146,7 @@ let c: Color = Color.Green;
 enum Color {Red = 1, Green, Blue}
 let colorName: string = Color[2];
 
-console.log(colorName); // 값이 2인 'Green'이 출력됩니다. 
+console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 ```
 
 # Any
@@ -163,7 +164,7 @@ notSure = false; // okay, definitely a boolean
 
 `any` 타입은 기존에 존재하는 JavaScript로 작업할 수 있는 강력한 방법으로, 컴파일 중에 점진적으로 타입 검사를 하거나 하지 않을 수 있습니다.
 혹 다른 언어에서 그렇듯, `Object`가 비슷한 역할을 할 수 있을 것 같다고 생각할 수도 있습니다.
-그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다: 
+그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다:
 
 ```ts
 let notSure: any = 4;
@@ -206,7 +207,7 @@ unusable = null; // OK  `--strictNullChecks` 을 사용하지 않을때만
 # Null and Undefined
 
 TypeScript는 `undefined` 과 `null` 둘 다 각각 자신의 타입 이름으로 `undefined` , `null`로 사용합니다.
-`void`처럼 그 자체로 유용한 경우는 거의 없습니다: 
+`void`처럼 그 자체로 유용한 경우는 거의 없습니다:
 
 ```ts
 // 이 밖에 이 변수들에 할당할 수 있는 값이 없습니다.
@@ -283,13 +284,14 @@ create(undefined); // Error
 타입 스크립트는 개발자가 필요한 어떤 특정 검사를 수행했다고 인지합니다.
 
 타입 단언에는 두 가지 형태가 있습니다.
-하나는, "angle-bracket" 문법입니다: 
+하나는, "angle-bracket" 문법입니다:
 
 ```ts
 let someValue: any = "this is a string";
 
 let strLength: number = (<string>someValue).length;
 ```
+
 다른 하나는 `as`-문법 입니다.
 
 ```ts
