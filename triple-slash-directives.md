@@ -50,7 +50,7 @@
 이 지시어는 `d.ts` 파일을 직접 작성할 때만 사용하십시오.
 
 컴파일 동안 선언 파일이 생성되기 위해서, 컴파일러는 자동으로 `/// <reference types="..." />`를 추가합니다;
-오직 결과 파일이 참조된 패키지의 선언문을 사용하는 경우에만 생성된 선언 파일의 `/// <reference types="..." />` 가 추가됩니다.
+오직 결과 파일이 참조된 패키지의 선언문을 사용하는 경우에만 생성된 선언 파일 안에 `/// <reference types="..." />` 가 추가됩니다.
 
 `.ts` 파일에서 `@type`의 패키지의 의존성을 선언하려면, 커맨드 라인에 `--types` 을 사용하거나  `tsconfig.json`을 사용하세요.
 [`tsconfig.json`에서 `@types`, `typeRoots` 과 `types` 사용하기](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#types-typeroots-and-types)에서 더 자세한 것을 확인할 수 있습니다.
