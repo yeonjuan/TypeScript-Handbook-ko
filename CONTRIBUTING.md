@@ -7,7 +7,7 @@
 * 다른 참여자가 진행하고 있는 작업과 중복을 피하기 위해 작업 전 [이슈](https://github.com/yeonjuan/Typescript-Handbook-ko/issues)를 확인해 주세요.
 * 중복된 작업을 피하기 위해 작업 전, [이슈-번역 담당](https://github.com/yeonjuan/Typescript-Handbook-ko/issues/new?assignees=&labels=%EB%B2%88%EC%97%AD+%EB%8B%B4%EB%8B%B9&template=-----.md&title=)에 번역할 범위, 기간을 등록해 주세요.
 * 번역할 범위, 기간은 짧게 하는 것을 권장 드리며, 범위의 경우 최소 한 문단까지 가능합니다.
-   > ex) Basic Types introduction만 번역 
+   > ex) Basic Types introduction만 번역
 
 ## 번역 규칙
 

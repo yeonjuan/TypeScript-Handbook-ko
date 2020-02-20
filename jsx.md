@@ -29,7 +29,7 @@
 
 [↥ 위로](#JSX)
 
-[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 문법입니다. 구현 방법에 따라 변환된 출력물의 의미가 다를 수 있지만, JSX는 유효한 JavaScript로 변환되도록 이루어져 있습니다. JSX는 [리액트](https://reactjs.org/)에 의해 큰 인기를 얻었습니다만, 이후엔 다른 구현도 등장했습니다. TypeScript는 JavaScript로의 컴파일, 타입 검사, 임베딩을 지원합니다.
+[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 문법입니다. 구현 방법에 따라 변환된 출력물의 의미가 다를 수 있지만, JSX는 유효한 JavaScript로 변환되도록 이루어져 있습니다. JSX는 [리액트](https://reactjs.org/)에 의해 큰 인기를 얻었습니다만, 이후엔 다른 구현도 등장했습니다. TypeScript는 JavaScript로의 컴파일, 타입 검사, 임베딩을 지원합니다.
 
 ## 기본 사용법 (Basic usage)
 
@@ -48,7 +48,7 @@ TypeScript엔 `preserve`, `react`, `react-native`라는 세 가지의 JSX 모드
 |`react`|`<div />`|`React.createElement("div")`|`.js`|
 |`react-native`|`<div />`|`<div />`|`.js`|
 
-이러한 모드는 `--jsx` 플래그 혹은 [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)의 해당 옵션을 사용하여 지정할 수 있습니다.
+이러한 모드는 `--jsx` 플래그 혹은 [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)의 해당 옵션을 사용하여 지정할 수 있습니다.
 > *참고: `--jsxFactory` 옵션으로 리액트의 JSX를 생성할 때 사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
 
 ## `as` 연산자 (The `as` operator)
