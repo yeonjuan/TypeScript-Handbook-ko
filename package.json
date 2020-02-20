@@ -4,7 +4,8 @@
   "description": "TypeScript Handbook in Korean",
   "main": "none",
   "scripts": {
-    "lint": "npx markdownlint **/*.md"
+    "lint": "npx markdownlint **/*.md",
+    "lint-fix": "npx markdownlint **/*.md --fix"
   },
   "repository": {
     "type": "git",
