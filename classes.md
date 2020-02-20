@@ -133,11 +133,11 @@ class Animal {
 new Animal("Cat").#name; // 프로퍼티 '#name'은 비공개 식별자이기 때문에 'Animal' 클래스 외부에선 접근할 수 없습니다.
 ```
 
-이 문법은 JavaScript 런타임에 내장되어 있으며, 각각의 비공개 필드의 격리를 더 잘 보장할 수 있습니다. 현재 TypeScript 3.8 [릴리즈 노트](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에 이러한 비공개 필드에 대해 자세히 나와있습니다. 
+이 문법은 JavaScript 런타임에 내장되어 있으며, 각각의 비공개 필드의 격리를 더 잘 보장할 수 있습니다. 현재 TypeScript 3.8 [릴리즈 노트](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에 이러한 비공개 필드에 대해 자세히 나와있습니다.
 
 ## TypeScript의 `private` 이해하기 (Understanding TypeScript’s `private`)
 
-TypeScript에는 멤버를 포함하는 클래스 외부에서 이 멤버에 접근하지 못하도록 멤버를 `private`으로 표시하는 방법이 있습니다. 예: 
+TypeScript에는 멤버를 포함하는 클래스 외부에서 이 멤버에 접근하지 못하도록 멤버를 `private`으로 표시하는 방법이 있습니다. 예:
 
 ```ts
 class Animal {
@@ -209,7 +209,7 @@ console.log(howard.name); // 오류
 
 `Person` 외부에서 `name`을 사용할 수 없지만, `Employee`는 `Person`에서 파생되었기 때문에 `Employee`의 인스턴스 메서드 내에서는 여전히 사용할 수 있습니다.
 
-생성자 또한 `protected`로 표시될 수도 있습니다. 이는 클래스를 포함하는 클래스 외부에서 인스턴스화 할 수 없지만 확장 할 수 있음을 의미합니다. 예를 들면,
+생성자 또한 `protected`로 표시될 수도 있습니다. 이는 클래스를 포함하는 클래스 외부에서 인스턴스화 할 수 없지만 확장 할 수 있음을 의미합니다. 예를 들면,
 
 ```ts
 class Person {
@@ -285,7 +285,7 @@ if (employee.fullName) {
 }
 ```
 
-사람들이 임의로 `fullName`을 직접 설정할 수 있도록 허용하는 것은 매우 편리하지만, 우리는 `fullName`이 설정될 때 몇 가지 제약 조건이 적용되는 것을 원할 수 있습니다.
+사람들이 임의로 `fullName`을 직접 설정할 수 있도록 허용하는 것은 매우 편리하지만, 우리는 `fullName`이 설정될 때 몇 가지 제약 조건이 적용되는 것을 원할 수 있습니다.
 
 이 버전에서는 백업 데이터베이스 필드의 최대 길이와 호환되는지 확인하기 위해 `newName`의 길이를 확인하는 setter를 추가합니다. 만약 최대 길이를 초과한다면, 클라이언트 코드에 문제가 있다는 것을 알리기 위해 오류를 발생시킵니다.
 
@@ -305,7 +305,7 @@ class Employee {
         if (newName && newName.length > fullNameMaxLength) {
             throw new Error("fullName has a max length of " + fullNameMaxLength);
         }
-        
+
         this._fullName = newName;
     }
 }
@@ -325,7 +325,7 @@ if (employee.fullName) {
 
 # 전역 프로퍼티 (Static Properties)
 
-지금까지는 인스턴스화될 때 객체에 보이는 *인스턴스* 멤버에 대해서만 살펴보았습니다. 또한 우리는 인스턴스가 아닌 클래스 자체에서 보이는 *전역* 멤버를 생성할 수 있습니다. 이 예제에서는 모든 grid의 일반적인 값이기 때문에 origin에 `static`을 사용합니다. 각 인스턴스는 클래스 이름을 앞에 붙여 이 값에 접근할 수 있습니다. 인스턴스 접근 앞에 `this.`를 붙이는 것과 비슷하게 여기선 전역 접근 앞에 `Grid.`를 붙입니다. 
+지금까지는 인스턴스화될 때 객체에 보이는 *인스턴스* 멤버에 대해서만 살펴보았습니다. 또한 우리는 인스턴스가 아닌 클래스 자체에서 보이는 *전역* 멤버를 생성할 수 있습니다. 이 예제에서는 모든 grid의 일반적인 값이기 때문에 origin에 `static`을 사용합니다. 각 인스턴스는 클래스 이름을 앞에 붙여 이 값에 접근할 수 있습니다. 인스턴스 접근 앞에 `this.`를 붙이는 것과 비슷하게 여기선 전역 접근 앞에 `Grid.`를 붙입니다.
 
 ```ts
 class Grid {
@@ -347,7 +347,7 @@ console.log(grid2.calculateDistanceFromOrigin({x: 10, y: 10}));
 
 # 추상 클래스 (Abstract Classes)
 
-추상 클래스는 다른 클래스들이 파생될 수 있는 기초 클래스입니다. 추상 클래스는 직접 인스턴스화할 수 없습니다. 추상 클래스는 인터페이스와 달리 멤버에 대한 구현 세부 정보를 포함할 수 있습니다. `abstract` 키워드는 추상 클래스뿐만 아니라 추상 클래스 내에서 추상 메서드를 정의하는데 사용됩니다.
+추상 클래스는 다른 클래스들이 파생될 수 있는 기초 클래스입니다. 추상 클래스는 직접 인스턴스화할 수 없습니다. 추상 클래스는 인터페이스와 달리 멤버에 대한 구현 세부 정보를 포함할 수 있습니다. `abstract` 키워드는 추상 클래스뿐만 아니라 추상 클래스 내에서 추상 메서드를 정의하는데 사용됩니다.
 
 ```ts
 abstract class Animal {
@@ -400,7 +400,7 @@ department.generateReports(); // 오류: 선언된 추상 타입에 메서드가
 
 ## 생성자 함수 (Constructor functions)
 
-TypeScript에서는 클래스를 선언하면 실제로 여러 개의 선언이 동시에 생성됩니다. 첫 번째로 클래스의 인스턴스 타입입니다. 
+TypeScript에서는 클래스를 선언하면 실제로 여러 개의 선언이 동시에 생성됩니다. 첫 번째로 클래스의 인스턴스 타입입니다.
 
 ```ts
 class Greeter {
