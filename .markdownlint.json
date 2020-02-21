@@ -1,6 +1,5 @@
 {
     "default": false,
-    "heading-increment": "atx",
     "ul-style": {
         "style": "asterisk"
     },
