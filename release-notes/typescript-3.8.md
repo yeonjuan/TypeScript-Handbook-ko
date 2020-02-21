@@ -441,7 +441,7 @@ When this option is enabled, TypeScript will avoid rechecking/rebuilding all tru
 
 For example, consider a file `fileD.ts` that imports `fileC.ts` that imports `fileB.ts` that imports `fileA.ts` as follows:
 
-```
+```text
 fileA.ts <- fileB.ts <- fileC.ts <- fileD.ts
 ```
 
