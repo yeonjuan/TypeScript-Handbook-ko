@@ -1,11 +1,17 @@
 # 목차 (Table of contents)
 
 [교차 타입 (Intersection Types)](#교차-타입-Intersection-Types)
+
 [유니언 타입 (Union Types)](#유니언-타입-union-types)
+
 [타입 가드와 차별 타입 (Type Guards and Differentiating Types)](#타입-가드와-차별-타입-type-guards-and-differentiating-types)
 * [사용자-정의 타입 가드 (User-Defined Type Guards)](#사용자-정의-타입-가드-user-defined-type-guards)
   * [타입 서술어 사용하기 (Using type predicates)](#타입-서술어-사용하기-using-type-predicates)
   * [`in` 연산자 사용하기 (Using the `in` operator)](#in-연산자-사용하기-using-the-in-operator)
+
+[널러블 타입 (Nullable types)](#널러블-타입-nullable-types)
+* [선택적 매개변수와 프로퍼티 (Optional parameters and properties)](#선택적-매개변수와-프로퍼티-optional-parameters-and-properties)
+* [타입 가드와 타입 단언 (Type guards and type assertions)](#타입-가드와-타입-단언-type-guards-and-type-assertions)
 
 # 교차 타입 (Intersection Types)
 
@@ -217,3 +223,108 @@ function move(pet: Fish | Bird) {
     return pet.fly();
 }
 ```
+
+# 널러블 타입 (Nullable types)
+
+TypeScript는 두 가지 특별한 타입 `null`과 `undefined`가 있는데, 각각 값이 null과 undefined를 가집니다.
+
+[기본 타입](./basic-types.md)에서 짧게 언급한 바 있습니다.
+기본적으로, 타입 체커는 `null`과 `undefined`를 아무것에나 할당할 수 있다고 간주합니다.
+실제로 `null`과 `undefined`는 모든 타입의 유효한 값입니다.
+즉, 막고 싶어도 모든 타입에 할당되는 것을 *막을 수* 없습니다.
+`null`의 개발자, Tony Hoare는 이를 두고["백만 불짜리 실수 (billion dollar mistake)"](https://en.wikipedia.org/wiki/Null_pointer#History)라고 부릅니다.
+
+`--strictNullChecks` 플래그는 이를 해결합니다: 변수를 선언할 때, 자동으로 `null`이나 `undefined`를 포함하지 않습니다.
+유니언 타입을 사용하여 명시적으로 포함할 수 있습니다.
+
+```ts
+let s = "foo";
+s = null; // error, 'null' is not assignable to 'string'
+let sn: string | null = "bar";
+sn = null; // 성공
+
+sn = undefined; // error, 'undefined' is not assignable to 'string | null'
+```
+
+TypeScript는 JavaScript에서의 의미와 맞추기 위해 `null`과 `undefined`를 다르게 처리합니다.
+`string | null`은 `string | undefined`와 `string | undefined | null`과는 다른 타입입니다.
+
+TypeScript 3.7 이후부터는 널러블 타입을 간단하게 다룰 수 있게 [optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)를 사용할 수 있습니다.
+
+## 선택적 매개변수와 프로퍼티 (Optional parameters and properties)
+
+`--strictNullChecks`를 적용하면, 자동으로 선택적 매개변수 `| undefined`가 추가됩니다.
+
+```ts
+function f(x: number, y?: number) {
+    return x + (y || 0);
+}
+f(1, 2);
+f(1);
+f(1, undefined);
+f(1, null); // error, 'null' is not assignable to 'number | undefined'
+```
+
+선택적 프로퍼티도 마찬가지입니다.
+
+```ts
+class C {
+    a: number;
+    b?: number;
+}
+let c = new C();
+c.a = 12;
+c.a = undefined; // error, 'undefined' is not assignable to 'number'
+c.b = 13;
+c.b = undefined; // 성공
+c.b = null; // error, 'null' is not assignable to 'number | undefined'
+```
+
+## 타입 가드와 타입 단언 (Type guards and type assertions)
+
+널러블 타입이 유니언으로 구현되기 때문에, `null`을 제거하기 위해 타입 가드를 사용할 필요가 있습니다
+다행히, JavaScript에서 작성했던 코드와 동일합니다.
+
+```ts
+function f(sn: string | null): string {
+    if (sn == null) {
+        return "default";
+    }
+    else {
+        return sn;
+    }
+}
+```
+
+여기서 `null`의 제거는 명백해 보이지만, 간단한 연산자를 사용할 수도 있습니다.
+
+```ts
+function f(sn: string | null): string {
+    return sn || "default";
+}
+```
+
+컴파일러가 `null`이나 `undefined`를 제거할 수 없는 상황에서, 타입 단언 연산자를 사용하여 수동으로 제거할 수 있습니다.
+구문은 `!`를 후위 표기하는 방법입니다: `identifier!`는 `null`과 `undefined`를 `identifier`의 타입에서 제거합니다.
+
+```ts
+function broken(name: string | null): string {
+  function postfix(epithet: string) {
+    return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+  }
+  name = name || "Bob";
+  return postfix("great");
+}
+
+function fixed(name: string | null): string {
+  function postfix(epithet: string) {
+    return name!.charAt(0) + '.  the ' + epithet; // ok
+  }
+  name = name || "Bob";
+  return postfix("great");
+}
+```
+
+예제는 중첩 함수를 사용합니다. 왜냐하면 컴파일러가 중첩 함수안에서는 null을 제거할 수 없기 때문입니다 (즉시-호출된 함수 표현은 예외).
+특히 외부 함수에서 반환할 경우, 중첩 함수에 대한 모든 호출을 추적할 수 없기 때문입니다.
+함수가 어디에서 호출되었는지 알 수 없으면, body가 실행될 때 `name`의 타입을 알 수 없습니다.
