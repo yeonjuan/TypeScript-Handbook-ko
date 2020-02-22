@@ -55,4 +55,20 @@
 `.ts` 파일에서 `@type`의 패키지의 의존성을 선언하려면, 커맨드 라인에 `--types` 을 사용하거나  `tsconfig.json`을 사용하세요.
 [`tsconfig.json`에서 `@types`, `typeRoots` 과 `types` 사용하기](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#types-typeroots-and-types)에서 더 자세한 것을 확인할 수 있습니다.
 
+## `/// <reference lib="..." />`
+
+이 지시어는 파일이 명시적으로 기존 내장 _lib_ 파일을 포함하도록 합니다.
+
+내장 _lib_ 파일은 _tsconfig.json_의` "lib"`컴파일러 옵션과 같은 방식으로 참조됩니다 (예 :`lib = "es2015.d"ts`가 아닌 `lib = "es2015"`사용 등).
+
+DOM API 또는`Symbol` 또는 `Iterable`과 같은 내장 JS 런타임 생성자와 같은 내장 타입에 의존하는 선언 파일 작성자에게는 트리플 슬래시 참조 lib 지시어를 사용하는 것이 권장됩니다. 이전에는 이런 .d.ts 파일은 그런 타입의 전달/중복 선언을 추가했어야 했습니다.
+
+예를 들어 컴파일에서 파일 중 하나에 `/// <reference lib="es2017.string" />`를 추가한 것 것은 `--lib es2017.string`으로 컴파일 하는 것과 같습니다.
+
+```ts
+/// <reference lib="es2017.string" />
+
+"foo".padStart(4);
+```
+
 작성중...
