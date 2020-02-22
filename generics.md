@@ -1,21 +1,20 @@
 # 소개 (Introduction)
 
-잘 정의되고 일관된 API뿐만 아닌 재사용 가능한 컴포넌트(component)를 구축하는 것도 소프트웨어 엔지니어링에서의 주요한 부분입니다.
-
+잘 정의되고 일관된 API뿐만 아닌 재사용 가능한 컴포넌트를 구축하는 것도 소프트웨어 엔지니어링에서의 주요한 부분입니다.
 현재의 데이터와 미래의 데이터 모두를 다룰 수 있는 컴포넌트는 거대한 소프트웨어 시스템을 구성하는 데 있어 가장 유연한 능력을 제공할 것입니다.
 
-C# 이나 Java 같은 언어에서는 툴박스(toolbox)의 주요 기능 중 하나로서 재사용 가능한 컴포넌트를 생성하기 위한 _`제네릭(generics)`_ 이라는 도구가 있습니다. `제네릭`으로 다양한 타입을 통해 작동할 수 있는 컴포넌트를 생성할 수 있습니다.
+C# 이나 Java 같은 언어에서는 툴박스(toolbox)의 주요 기능 중 하나로서 재사용 가능한 컴포넌트를 생성하기 위한 *제네릭(generics)* 이라는 도구가 있습니다. `제네릭`으로 다양한 타입을 통해 작동할 수 있는 컴포넌트를 생성할 수 있습니다.
 사용자는 제네릭을 통해 여러 타입의 컴포넌트나 자신만의 타입을 사용할 수 있습니다.
 
 # 제네릭 맛보기 (Hello Wolrd of Generics)
 
-처음 시작은 제네릭의 "hello world"를 해보는 것으로 합시다. ( 예시의 identity 함수를 말합니다. ) identity 함수는 인수로 무엇이 오던 항상 반환합니다. `echo` 커맨드와 비슷하게 생각 할 수 있겠네요.
+처음 시작은 제네릭의 "hello world"를 해보는 것으로 합시다: identity 함수 identity 함수는 인수로 무엇이 오던 항상 반환합니다. `echo` 커맨드와 비슷하게 생각 할 수 있겠네요.
 
-제네릭이 없다면 identity함수에 특정 타입을 주어야 합니다:
+제네릭이 없다면 identity 함수에 특정 타입을 주어야 합니다:
 
 ```ts
 function identity(arg: number): number {
-  return arg;
+    return arg;
 }
 ```
 
@@ -23,24 +22,24 @@ function identity(arg: number): number {
 
 ```ts
 function identity(arg: any): any {
-  return arg;
+    return arg;
 }
 ```
 
-`any`를 쓰는 것은 함수의 arg가 어떤 타입이든 받을 수 있다는 점에서 제네릭이지만, 실제로 함수가 반환할 때 어떤 타입인지에 대한 정보를 잃게 됩니다. 만약 number 타입을 넘긴다고 해도 any 타입이 반환된다는 정보만 얻을 뿐입니다.
+`any`를 쓰는 것은 함수의 `arg`가 어떤 타입이든 받을 수 있다는 점에서 제네릭이지만, 실제로 함수가 반환할 때 어떤 타입인지에 대한 정보를 잃게 됩니다. 만약 number 타입을 넘긴다고 해도 any 타입이 반환된다는 정보만 얻을 뿐입니다.
 
 대신에 우리는 무엇이 반환되는지 표시하기 위해 인수의 타입을 캡처할 방법이 필요합니다.
-여기서는 값이 아닌 타입에 적용되는 타입변수(_type variable_)를 사용할 것입니다.
+여기서는 값이 아닌 타입에 적용되는 *타입변수(type variable)*를 사용할 것입니다.
 
 ```ts
 function identity<T>(arg: T): T {
-  return arg;
+    return arg;
 }
 ```
 
 identity 함수에 `T`라는 타입변수를 추가했습니다. `T`는 유저가 준 인수의 타입을 캡처합니다. (예 - `number`), 그래서 이 정보를 나중에 사용할 수 있게 합니다. 예시에서 함수의 반환 타입으로써 `T`를 또 사용해 주었습니다. 인수와 반환 타입이 같은 타입을 사용하고 있는 것을 확인하실 수 있습니다. 이것으로 타입 정보(type information)를 함수의 한쪽에서 다른 한쪽으로 운반할 수 있게끔 합니다.
 
-위 버전의 identity 함수는 타입을 불문하고 동작하므로 제네릭이라 할 수 있습니다. `any`를 쓰는 것과는 다르게 인수와 반환 타입에 number를 사용한 첫번째 identity 함수만큼 정확합니다. ( 즉, 어떤 정보도 잃지 않습니다. )
+위 버전의 identity 함수는 타입을 불문하고 동작하므로 제네릭이라 할 수 있습니다. `any`를 쓰는 것과는 다르게 인수와 반환 타입에 number를 사용한 첫번째 `identity` 함수만큼 정확합니다. ( 즉, 어떤 정보도 잃지 않습니다. )
 
 제네릭 함수를 작성하면 두 가지 방법 중 하나로 호출 할 수 있습니다. 첫 번째 방법은 함수에 타입인수(type argument)를 포함한 인수를 통과시키는 방법입니다.
 
@@ -76,7 +75,7 @@ function identity<T>(arg: T): T {
 
 ```ts
 function loggingIdentity<T>(arg: T): T {
-  console.log(arg.length); // Error: T 에는 .length 속성이 없습니다.
+  console.log(arg.length); // Error: T 에는 .length 가 없습니다.
   return arg;
 }
 ```
@@ -87,7 +86,7 @@ function loggingIdentity<T>(arg: T): T {
 
 ```ts
 function loggingIdentity<T>(arg: T[]): T[] {
-  console.log(arg.length); // 배열은 .length 속성 가지고 있습니다. 따라서 에러는 없습니다.
+  console.log(arg.length); // 배열은 .length를 가지고 있습니다. 따라서 에러는 없습니다.
   return arg;
 }
 ```
@@ -98,7 +97,7 @@ function loggingIdentity<T>(arg: T[]): T[] {
 
 ```ts
 function loggingIdentity<T>(arg: Array<T>): Array<T> {
-  console.log(arg.length); // 배열은 .length 속성 가지고 있습니다. 따라서 에러는 없습니다.
+  console.log(arg.length); // 배열은 .length를 가지고 있습니다. 따라서 에러는 없습니다.
   return arg;
 }
 ```
@@ -186,7 +185,7 @@ myGenericNumber.zeroValue = 0;
 myGenericNumber.add = function(x, y) { return x + y; };
 ```
 
-이것은 `GenericNumber` 클래스의 문자 그대로의 사용입니다만 number 타입만 쓰도록 제한하는 것은 없습니다. 대신 문자열이나 훨씬 복잡한 객체를 사용할 수 있습니다.
+이것은 `GenericNumber` 클래스의 문자 그대로의 사용입니다만 `number` 타입만 쓰도록 제한하는 것은 없습니다. 대신 `string`이나 훨씬 복잡한 객체를 사용할 수 있습니다.
 
 ```ts
 let stringNumeric = new GenericNumber<string>();
@@ -196,7 +195,7 @@ stringNumeric.add = function(x, y) { return x + y; };
 console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 ```
 
-인터페이스와 마찬가지로 클래스 자체에 타입 매개변수를 넣는 것으로 클래스의 모든 속성(properties)이 동일한 타입으로 동작한다는 것을 확인할 수 있습니다.
+인터페이스와 마찬가지로 클래스 자체에 타입 매개변수를 넣는 것으로 클래스의 모든 프로퍼티(properties)가 동일한 타입으로 동작한다는 것을 확인할 수 있습니다.
 
 우리가 [클래스][https://github.com/yeonjuan/Typescript-Handbook-ko/blob/master/classes.md] 에서 다뤘던것 처럼 클래스는 그것의 타입으로 _정적_(static) 측면과 _인스턴스_(instance) 측면 두 가지 면을 가집니다. 제네릭 클래스는 정적 측면이 아닌 인스턴스 측면에서만 제네릭 이므로 클래스로 작업 할 때 정적 멤버는 클래스의 타입 매개변수를 쓸 수 없습니다.
 
@@ -204,19 +203,19 @@ console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 # 제네릭 제약 (Generic Constraints)
 
 여러분이 앞쪽의 예시를 기억한다면 특정 타입들로만 동작하는 제네릭 함수를 만들고 싶을지도 모릅니다.
-앞서 `loggingIdentity` 예제에서  우리는`arg`의 속성 `.length`에 접근하기를 원했습니다. 그러나 컴파일러는 모든 타입에서 `.length` 속성을 가짐을 증명할 수 없으므로 경고를 주었습니다.
+앞서 `loggingIdentity` 예제에서  우리는`arg`의 프로퍼티 `.length`에 접근하기를 원했습니다. 그러나 컴파일러는 모든 타입에서 `.length` 프로퍼티를 가짐을 증명할 수 없으므로 경고를 주었습니다.
 
 ```ts
 function loggingIdentity<T>(arg: T): T {
-    console.log(arg.length);  // Error: T 에는 .length 속성이 없습니다.
+    console.log(arg.length);  // Error: T 에는 .length 가 없습니다.
     return arg;
 }
 ```
 
-함수를 모든 타입에서 동작하는 대신 `.length` 속성을 가지는 모든 타입들에서 작동하는 것으로 제한하고 싶습니다. 타입이 최소한 이 멤버(`.length`)를 가지는 한 동작을 허용할 것입니다.
+함수를 모든 타입에서 동작하는 대신 `.length` 프로퍼티를 가지는 모든 타입들에서 작동하는 것으로 제한하고 싶습니다. 타입이 최소한 `.length` 프로퍼티를 가지는 한 동작을 허용할 것입니다.
 그렇게 하려면 `T` 가 무엇이 될 수 있는지에 대한 제약 조건을 나열해야 합니다.
 
-이를 위해 우리의 제약조건이 명시되어 있는 인터페이스를 만들도록 하겠습니다. 여기 하나의 `.length` 속성을 가진 인터페이스를 생성하였고, 우리의 제약사항을 `extends` 키워드로 표현한 인터페이스를 이용해 명시하겠습니다:
+이를 위해 우리의 제약조건이 명시되어 있는 인터페이스를 만들도록 하겠습니다. 여기 하나의 프로퍼티 `.length`를 가진 인터페이스를 생성하였고, 우리의 제약사항을 `extends` 키워드로 표현한 인터페이스를 이용해 명시하겠습니다:
 
 ```ts
 interface Lengthwise {
@@ -224,7 +223,7 @@ interface Lengthwise {
 }
 
 function loggingIdentity<T extends Lengthwise>(arg: T): T {
-    console.log(arg.length);  // 이제 .length 속성이 있는 것을 알기 때문에 더이상 에러가 발생하지 않습니다.
+    console.log(arg.length);  // 이제 .length 가 있는 것을 알기 때문에 더이상 에러가 발생하지 않습니다.
     return arg;
 }
 ```
@@ -232,10 +231,10 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 제네릭 함수는 이제 제한되어 있기 때문에 모든 타입에 대해서는 동작하지 않습니다:
 
 ```ts
-loggingIdentity(3);  // Error, number는 .length 속성이 없습니다.
+loggingIdentity(3);  // Error, number는 .length 가 없습니다.
 ```
 
-대신 필요한 속성들이 있는 타입의 값을 전달해야 합니다:
+대신 필요한 프로퍼티들이 있는 타입의 값을 전달해야 합니다:
 
 ```ts
 loggingIdentity({length: 10, value: 3});
@@ -243,7 +242,7 @@ loggingIdentity({length: 10, value: 3});
 
 ## 제네릭 제한에서의 타입 매개변수 사용 (Using Type Parameters in Generic Constraints)
 
-다른 타입 매개변수로 제한된 타입 매개변수를 선언할 수 있습니다. 이름이 있는 객체에서 속성을 가져오고 싶은 경우를 예로 들어 봅시다. 실수로 `obj`에 존재하지 않는 속성을 가져오지 않도록 하기 위해 두 가지 타입에 제약조건을 두었습니다.
+다른 타입 매개변수로 제한된 타입 매개변수를 선언할 수 있습니다. 이름이 있는 객체에서 프로퍼티를 가져오고 싶은 경우를 예로 들어 봅시다. 실수로 `obj`에 존재하지 않는 프로퍼티를 가져오지 않도록 하기 위해 두 가지 타입에 제약조건을 두었습니다.
 
 ```ts
 function getProperty<T, K extends keyof T>(obj: T, key: K) {
@@ -266,7 +265,7 @@ function create<T>(c: {new(): T; }): T {
 }
 ```
 
-고급 예제에서는 prototype 속성을 사용하여 생성자 함수와 인스턴스 사이의 관계를 유추하고 제한합니다.
+고급 예제에서는 prototype 프로퍼티를 사용하여 생성자 함수와 인스턴스 사이의 관계를 유추하고 제한합니다.
 
 ```ts
 class BeeKeeper {
@@ -295,5 +294,4 @@ function createInstance<A extends Animal>(c: new () => A): A {
 
 createInstance(Lion).keeper.nametag;  // typechecks!
 createInstance(Bee).keeper.hasMask;   // typechecks!
-
 ```
