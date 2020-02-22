@@ -197,7 +197,7 @@ console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 
 인터페이스와 마찬가지로 클래스 자체에 타입 매개변수를 넣는 것으로 클래스의 모든 프로퍼티(properties)가 동일한 타입으로 동작한다는 것을 확인할 수 있습니다.
 
-우리가 [클래스][https://github.com/yeonjuan/Typescript-Handbook-ko/blob/master/classes.md] 에서 다뤘던것 처럼 클래스는 그것의 타입으로 _정적_(static) 측면과 _인스턴스_(instance) 측면 두 가지 면을 가집니다. 제네릭 클래스는 정적 측면이 아닌 인스턴스 측면에서만 제네릭 이므로 클래스로 작업 할 때 정적 멤버는 클래스의 타입 매개변수를 쓸 수 없습니다.
+우리가 [클래스][./classes.md] 에서 다뤘던것 처럼 클래스는 그것의 타입으로 _정적_(static) 측면과 _인스턴스_(instance) 측면 두 가지 면을 가집니다. 제네릭 클래스는 정적 측면이 아닌 인스턴스 측면에서만 제네릭 이므로 클래스로 작업 할 때 정적 멤버는 클래스의 타입 매개변수를 쓸 수 없습니다.
 
 
 # 제네릭 제약 (Generic Constraints)
