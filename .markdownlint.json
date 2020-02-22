@@ -26,7 +26,7 @@
     },
     "list-marker-space": true,
     "blanks-around-fences": true,
-    "blanks-around-lists": true,
+    "blanks-around-lists": false,
     "no-bare-urls": true,
     "hr-style": "---",
     "no-space-in-emphasis": true,
