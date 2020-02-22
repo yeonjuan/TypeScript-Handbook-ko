@@ -199,7 +199,6 @@ console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 
 우리가 [클래스][./classes.md] 에서 다뤘던것 처럼 클래스는 그것의 타입으로 _정적_(static) 측면과 _인스턴스_(instance) 측면 두 가지 면을 가집니다. 제네릭 클래스는 정적 측면이 아닌 인스턴스 측면에서만 제네릭 이므로 클래스로 작업 할 때 정적 멤버는 클래스의 타입 매개변수를 쓸 수 없습니다.
 
-
 # 제네릭 제약 (Generic Constraints)
 
 여러분이 앞쪽의 예시를 기억한다면 특정 타입들로만 동작하는 제네릭 함수를 만들고 싶을지도 모릅니다.
