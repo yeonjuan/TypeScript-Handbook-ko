@@ -11,7 +11,7 @@
 - [Interfaces](./interfaces.md)
 - [Classes](./classes.md)
 - [Functions](./functions.md)
-- Generics
+- [Generics](./generics.md)
 - [Enums](./enums.md)
 - [Type Compatibility](./type-compatibility.md)
 - [Type Inference](./type-inference.md)
