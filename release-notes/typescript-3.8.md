@@ -297,7 +297,8 @@ main()
     .catch(e => console.error(e))
 ```
 
-이전의 JavaScript(유사한 기능을 가진 다른 언어들과 함께)에서 `await`은 `async` 함수 내에서 만 허용되었기 때문입니다. 하지만 최상위-레벨 `await`에서, 우리는 모듈의 최상위-레벨에서 `await`을 사용할 수 있습니다.
+이전의 JavaScript(유사한 기능을 가진 다른 언어들과 함께)에서 `await`은 `async` 함수 내에서 만 허용되었기 때문입니다.
+하지만 최상위-레벨 `await`로, 우리는 모듈의 최상위 레벨에서 `await`을 사용할 수 있습니다.
 
 ```ts
 const response = await fetch("...");
