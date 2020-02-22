@@ -21,14 +21,14 @@
 - [Modules 작성중...](./modules.md)
 - Namespaces
 - Namespaces and Modules
-- Module Resolution
+- [Module Resolution(en)](./module-resolution.md)
 - Declaraion Merging
 - [JSX](./jsx.md)
-- Decorators
+- [Decorators(en)](./decorators.md)
 - Mixins
 - [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
-- Type Checking JavaScript Files
-- Utility Types
+- [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
+- [Utility Types(en)](./utility-types.md)
 
 
 ## 참여하기
