@@ -48,7 +48,7 @@ identity 함수에 `T`라는 타입변수를 추가했습니다. `T`는 유저�
 let output = identity<string>("myString"); // output 의 타입은 'string'이 될겁니다.
 ```
 
-여기서 우리는 함수를 호출할 때의 인수 중 하나로써 `T`를 `string`으로 명시해 주고 인수 주변에 `()` 대신 `<>`로 감싸주었습니다.
+여기서 우리는 함수를 호출할 때의 타입인수 중 하나로써 `T`를 `string`으로 명시해 주고 타입인수 주변에 `()` 대신 `<>`로 감싸주었습니다.
 
 두 번째 방법은 아마 가장 일반적인 방법일 것입니다. 타입인수추론(type argument inference)을 쓰는 것인데요. 우리가 전달하는 인수에 따라서 컴파일러가 `T`의 값을 자동으로 정하게끔 하는 것입니다:
 
@@ -58,7 +58,7 @@ let output = identity<string>("myString"); // output 의 타입은 'string'이 �
 let output = identity("myString"); //output 의 타입은 'string'이 될겁니다.
 ```
 
-타입을 꺾쇠괄호(`<>`)에 담아 명시적으로 전달해 주지 않은 것을 주목해주세요. 컴파일러는 값인 `"myString"`를 보기만 해도 그것의 타입으로 `T`를 정합니다. 타입인수추론은 코드를 간결하게 하고 가독성 있게 하는 데 있어 유용한 도구가 될 수 있습니다만, 더 복잡한 예시에서 컴파일러가 타입을 유추할 수 없는 경우엔 명시적인 타입인수 전달이 필요할 수도 있습니다.
+타입인수를 꺾쇠괄호(`<>`)에 담아 명시적으로 전달해 주지 않은 것을 주목해주세요. 컴파일러는 값인 `"myString"`를 보기만 해도 그것의 타입으로 `T`를 정합니다. 타입인수추론은 코드를 간결하고 가독성 있게 하는 데 있어 유용하지만 더 복잡한 예시에서 컴파일러가 타입을 유추할 수 없는 경우엔 명시적인 타입인수 전달이 필요할 수도 있습니다.
 
 # 제네릭 타입 변수 작업 (Working with Generic Type Variables)
 
@@ -76,34 +76,34 @@ function identity<T>(arg: T): T {
 
 ```ts
 function loggingIdentity<T>(arg: T): T {
-  console.log(arg.length); // Error: T doesn't have .length
+  console.log(arg.length); // Error: T 에는 .length 속성이 없습니다.
   return arg;
 }
 ```
 
-이렇게 하면 컴파일러는 `arg`의 멤버 `.length`를 사용하고 있다는 오류를 낼 것입니다. 어떤 곳에서도 `arg`가 이 멤버를 가지고 있다는 것을 알려주지 않습니다. 이전에 이러한 변수 타입은 `any`나 모든 타입을 의미한다고 했던것을 기억하십시오. 따라서 이 함수를 쓰고 있는 사용자는 `.length` 멤버가 없는 `number`를 대신 전달할 수 있습니다
+이렇게 하면 컴파일러는 `arg`의 멤버 `.length`를 사용하고 있다는 오류를 낼 것입니다. 어떤 곳에서도 `arg`가 이 멤버가 있다는 것이 명시되어 있지 않습니다. 이전에 이러한 변수 타입은 `any`나 모든 타입을 의미한다고 했던것을 기억하십시오. 따라서 이 함수를 쓰고 있는 사용자는 `.length` 멤버가 없는 `number`를 대신 전달할 수도 있습니다
 
 실제로 `T`를 바로 쓰는 것이 아닌 `T`의 배열에서 이 함수를 동작하도록 의도한다고 해봅시다. 배열로 동작하기 때문에 `.length` 멤버는 사용 가능할 겁니다. 다른 타입들의 배열을 만드는 것처럼 표현할 수 있습니다.
 
 ```ts
 function loggingIdentity<T>(arg: T[]): T[] {
-  console.log(arg.length); // 배열은 .length를 가지고 있습니다. 따라서 에러는 없습니다.
+  console.log(arg.length); // 배열은 .length 속성 가지고 있습니다. 따라서 에러는 없습니다.
   return arg;
 }
 ```
 
-여러분들은 `loggingIdentity`의 타입을 "제너릭 함수 loggingIdentity는 타입 인수 `T`와 `T` 배열의 인수 `arg`를 취하고 `T`의 배열을 반환한다."라고 읽을 수 있습니다. 만약 우리가 number의 배열을 넘기고자 한다면, `number`로 바인드 될 `T`로써 number 배열을 다시 가져와야 합니다. 전체 타입변수를 쓰는 것보다 하나의 타입으로써 타입 제네릭 타입변수 `T`를 사용하는 것은 굉장한 유연함을 제공합니다.
+여러분들은 `loggingIdentity`의 타입을 "제너릭 함수 loggingIdentity는 타입 인수 `T`와 `T` 배열인 인수 `arg`를 취하고 `T` 배열을 반환한다."라고 읽을 수 있습니다. 만약 우리가 number 배열을 넘기면 `T`가 `number`에 바인딩 되므로 함수는 number 배열을 얻게 됩니다. 전체 타입변수를 쓰는 것보다 하나의 타입으로써 제네릭 타입변수 `T`를 사용하는 것은 굉장한 유연함을 제공합니다.
 
 위 예제를 이렇게도 대체할 수 있습니다.
 
 ```ts
 function loggingIdentity<T>(arg: Array<T>): Array<T> {
-  console.log(arg.length); // 배열은 .length를 가지고 있습니다. 따라서 에러는 없습니다.
+  console.log(arg.length); // 배열은 .length 속성 가지고 있습니다. 따라서 에러는 없습니다.
   return arg;
 }
 ```
 
-여러분들은 다른 언어들과 같은 이런 타입 스타일이 이미 익숙할지도 모릅니다. 다음 섹션에서는 여러분들이 어떻게 `Array<T>`와 같은 고유한 제너릭 타입을 만들 수있는지에 대해 다루도록 하겠습니다.
+다른 언어들과 비슷한 이런 타입 스타일이 이미 익숙하실지도 모르겠습니다. 다음 섹션에서는 여러분들이 어떻게 `Array<T>`와 같은 고유한 제너릭 타입을 만들 수있는지에 대해 다루도록 하겠습니다.
 
 # 제너릭 타입 (Generic Types)
 
@@ -139,7 +139,7 @@ function identity<T>(arg: T): T {
 let myIdentity: { <T>(arg: T): T } = identity;
 ```
 
-이것들은 우리가 우리의 첫 번째 제네릭 인터페이스를 작성하도록 이끕니다. 인터페이스로 앞서 예제의 객체 리터럴을 가져오도록 합시다:
+이것들로 우리의 첫 번째 제네릭 인터페이스를 작성할 수 있습니다. 인터페이스로 앞서 예제의 객체 리터럴을 가져오도록 합시다:
 
 ```ts
 interface GenericIdentityFn {
@@ -167,13 +167,13 @@ function identity<T>(arg: T): T {
 let myIdentity: GenericIdentityFn<number> = identity;
 ```
 
-예시에 아주 작은 변화가 있었습니다. 제네릭 함수를 작성하는 것 대신 우리는 제네릭 타입의 일부인 비-제네릭 함수식을 가집니다. 우리가 `GenericIdentityFn` 함수를 사용할 때, 기본 호출문이 사용할 것을 효과적으로 제한할 특정한 타입인수가 필요합니다 (여기서는 `number`). 타입 매개변수를 호출문에 바로 넣을 때와 인터페이스 자체에 넣을 때를 이해하는 것은 타입의 어떤 부분이 제네릭인지 설명하는 데 도움이 됩니다.
+예시에 아주 작은 변화가 있었습니다. 제네릭 함수를 작성하는 것 대신 우리는 제네릭 타입의 일부인 비-제네릭 함수 시그니처(non-generic function signature)을 가집니다. 우리가 `GenericIdentityFn` 함수를 사용할 때, 시그니처가 사용할 것을 제한할 특정한 타입인수가 필요합니다 (여기서는 `number`). 타입 매개변수를 호출문에 바로 넣을 때와 인터페이스 자체에 넣을 때를 이해하는 것은 타입의 어떤 부분이 제네릭인지 설명하는 데 도움이 됩니다.
 
 제네릭 인터페이스 말고도 제네릭 클래스(generic classes)를 만들 수 있습니다. 제네릭 enum과 네임스페이스(namespasce)는 만들 수 없음을 참고해 주십시오.
 
 # 제네릭 클래스(Generic Classes)
 
-제네릭 클래스와 제네릭 인터페이스는 그 모습이 비슷합니다. 제네릭 클래스는 클래스 이름 뒤에 꺾쇠괄호(`<>`) 안쪽에 나열된 제네릭 매개변수를 가집니다.
+제네릭 클래스와 제네릭 인터페이스는 그 모습이 비슷합니다. 제네릭 클래스는 클래스 이름 뒤에 꺾쇠괄호(`<>`) 안쪽에 제네릭 매개변수를 가집니다.
 
 ```ts
 class GenericNumber<T> {
@@ -203,12 +203,12 @@ console.log(stringNumeric.add(stringNumeric.zeroValue, "test"));
 
 # 제네릭 제약 (Generic Constraints)
 
-여러분이 앞쪽의 예시를 기억한다면 특정 타입들로 동작하는 제네릭 함수를 만들고 싶을지도 모릅니다.
+여러분이 앞쪽의 예시를 기억한다면 특정 타입들로만 동작하는 제네릭 함수를 만들고 싶을지도 모릅니다.
 앞서 `loggingIdentity` 예제에서  우리는`arg`의 속성 `.length`에 접근하기를 원했습니다. 그러나 컴파일러는 모든 타입에서 `.length` 속성을 가짐을 증명할 수 없으므로 경고를 주었습니다.
 
 ```ts
 function loggingIdentity<T>(arg: T): T {
-    console.log(arg.length);  // Error: T doesn't have .length
+    console.log(arg.length);  // Error: T 에는 .length 속성이 없습니다.
     return arg;
 }
 ```
@@ -266,7 +266,7 @@ function create<T>(c: {new(): T; }): T {
 }
 ```
 
-고급 예제에서는 prototype 속성을 사용하여 생성자 함수와 인스턴스 사이의 관계를 유추하거나 제한합니다.
+고급 예제에서는 prototype 속성을 사용하여 생성자 함수와 인스턴스 사이의 관계를 유추하고 제한합니다.
 
 ```ts
 class BeeKeeper {
