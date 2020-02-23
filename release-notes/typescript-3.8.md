@@ -3,8 +3,8 @@
 * [`export * as ns` 구문](#export-star-as-namespace-syntax)
 * [최상위-레벨 `await`](#top-level-await)
 * [JSDoc 프로퍼티 지정자](#jsdoc-modifiers)
-* [Better Directory Watching on Linux and `watchOptions`](#better-directory-watching)
-* ["Fast and Loose" Incremental Checking](#assume-direct-dependencies)
+* [리눅스에서 더 나은 디렉터리 감시와 `watchOptions`](#better-directory-watching)
+* ["빠르고 느슨한" 증분 검사](#assume-direct-dependencies)
 
 ## <span id="type-only-imports-exports" /> 타입-전용 Imports 와 Exports (Type-Only Imports and Exports)
 
@@ -373,75 +373,75 @@ new Foo().stuff++;
 // 'stuff'는 읽기-전용(read-only) 프로퍼티이기 때문에 할당할 수 없습니다.
 ```
 
-## <span id="better-directory-watching" /> Better Directory Watching on Linux and `watchOptions`
+## <span id="better-directory-watching" /> 리눅스에서 더 나은 디렉터리 감시와 `watchOptions`
 
-TypeScript 3.8 ships a new strategy for watching directories, which is crucial for efficiently picking up changes to `node_modules`.
+TypeScript 3.8에서는 `node_modules`의 변경사항을 효율적으로 수집하는데 중요한 새로운 디렉터리 감시 전략을 제공합니다.
 
-For some context, on operating systems like Linux, TypeScript installs directory watchers (as opposed to file watchers) on `node_modules` and many of its subdirectories to detect changes in dependencies.
-This is because the number of available file watchers is often eclipsed by the of files in `node_modules`, whereas there are way fewer directories to track.
+리눅스와 같은 운영체제에서 TypeScript는 `node_modules`에 디렉터리 왓쳐(파일 왓쳐와는 반대로)를 설치하고, 종속성의 변화를 감지하기 위해 많은 하위 디렉터리를 설치합니다.
+왜냐하면 사용 가능한 파일 왓쳐의 수는 종종 `node_modules`의 파일 수에 의해 가려지기 때문이고, 추적할 디렉터리 수가 적기 때문입니다.
 
-Older versions of TypeScript would *immediately* install directory watchers on folders, and at startup that would be fine; however, during an npm install, a lot of activity will take place within `node_modules` and that can overwhelm TypeScript, often slowing editor sessions to a crawl.
-To prevent this, TypeScript 3.8 waits slightly before installing directory watchers to give these highly volatile directories some time to stabilize.
+TypeScript의 이전 버전은 폴더에 디렉터리 왓쳐를 *즉시* 설치하고, 초기에는 괜찮을 겁니다; 하지만, npm install 할 때, `node_modules`안에서 많은 일들이 발생할 것이고, TypeScript를 압도하여, 종종 에디터 세션을 아주 느리게 만듭니다.
+이를 방지하기 위해, TypeScript 3.8은 디렉터리 왓쳐를 설치하기 전에 조금 기다려서 변동성이 높은 디렉터리에게 안정될 수 있는 시간을 줍니다.
 
-Because every project might work better under different strategies, and this new approach might not work well for your workflows, TypeScript 3.8 introduces a new `watchOptions` field in `tsconfig.json` and `jsconfig.json` which allows users to tell the compiler/language service which watching strategies should be used to keep track of files and directories.
+왜냐하면 모든 프로젝트는 다른 전략에서 작동을 더 잘할 수 있고, 이 새로운 방법은 당신의 작업 흐름에서는 잘 맞지 않을 수 있습니다. TypeScript 3.8은 파일과 디렉터리를 감시하는데 어떤 감시 전략을 사용할지 컴파일러/언어 서비스에 알려줄 수 있도록 `tsconfig.json`과 `jsconfig.json`에 `watchOptions`란 새로운 필드를 제공합니다.
 
 ```json5
 {
-    // Some typical compiler options
+    // 일반적인 컴파일러 옵션들
     "compilerOptions": {
         "target": "es2020",
         "moduleResolution": "node",
         // ...
     },
 
-    // NEW: Options for file/directory watching
+    // NEW: 파일/디렉터리 감시를 위한 옵션
     "watchOptions": {
-        // Use native file system events for files and directories
+        // 파일과 디렉터리에 네이티브 파일 시스템 이벤트 사용
         "watchFile": "useFsEvents",
         "watchDirectory": "useFsEvents",
 
-        // Poll files for updates more frequently
-        // when they're updated a lot.
+        // 업데이트가 빈번할 때
+        // 업데이트하기 위해 더 자주 파일을 폴링
         "fallbackPolling": "dynamicPriority"
     }
 }
 ```
 
-`watchOptions` contains 4 new options that can be configured:
+`watchOptions`는 구성할 수 있는 4가지 새로운 옵션이 포함되어 있습니다.
 
-* `watchFile`: the strategy for how individual files are watched. This can be set to
-    * `fixedPollingInterval`: Check every file for changes several times a second at a fixed interval.
-    * `priorityPollingInterval`: Check every file for changes several times a second, but use heuristics to check certain types of files less frequently than others.
-    * `dynamicPriorityPolling`: Use a dynamic queue where less-frequently modified files will be checked less often.
-    * `useFsEvents` (the default): Attempt to use the operating system/file system's native events for file changes.
-    * `useFsEventsOnParentDirectory`: Attempt to use the operating system/file system's native events to listen for changes on a file's containing directories. This can use fewer file watchers, but might be less accurate.
-* `watchDirectory`: the strategy for how entire directory trees are watched under systems that lack recursive file-watching functionality. This can be set to:
-    * `fixedPollingInterval`: Check every directory for changes several times a second at a fixed interval.
-    * `dynamicPriorityPolling`: Use a dynamic queue where less-frequently modified directories will be checked less often.
-    * `useFsEvents` (the default): Attempt to use the operating system/file system's native events for directory changes.
-* `fallbackPolling`: when using file system events, this option specifies the polling strategy that gets used when the system runs out of native file watchers and/or doesn't support native file watchers. This can be set to
-    * `fixedPollingInterval`: *(See above.)*
-    * `priorityPollingInterval`: *(See above.)*
-    * `dynamicPriorityPolling`: *(See above.)*
-* `synchronousWatchDirectory`: Disable deferred watching on directories. Deferred watching is useful when lots of file changes might occur at once (e.g. a change in `node_modules` from running `npm install`), but you might want to disable it with this flag for some less-common setups.
+* `watchFile`: 각 파일의 감시 방법 전략. 다음과 같이 설정할 수 있습니다:
+    * `fixedPollingInterval`: 고정된 간격으로 모든 파일의 변경을 1초에 여러 번 검사합니다.
+    * `priorityPollingInterval`: 모든 파일의 변경을 1초에 여러 번 검사합니다, 하지만 휴리스틱을 사용하여 특정 타입의 파일은 다른 타입의 파일보다 덜 자주 검사합니다.
+    * `dynamicPriorityPolling`: 동적 큐를 사용하여 덜-자주 수정된 파일은 적게 검사합니다.
+    * `useFsEvents` (디폴트): 파일 변화에 운영체제/파일 시스템의 네이티브 이벤트를 사용합니다.
+    * `useFsEventsOnParentDirectory`: 파일을 포함하고 있는 디렉터리 변경을 감지할 때, 운영체제/파일 시스템의 네이티브 이벤트를 사용합니다. 파일 검사자를 적게 사용할 수 있지만, 덜 정확할 수 있습니다.
+* `watchDirectory`: 재귀적인 파일-감시 기능이 없는 시스템 안에서 전체 디렉터리 트리가 감시되는 전략. 다음과 같이 설정할 수 있습니다:
+    * `fixedPollingInterval`: 고정된 간격으로 모든 디렉터리의 변경을 1초에 여러 번 검사합니다.
+    * `dynamicPriorityPolling`: 동적 큐를 사용하여 덜-자주 수정된 디렉터리는 적게 검사합니다.
+    * `useFsEvents` (디폴트): 디렉터리 변경에 운영체제/파일 시스템의 네이티브 이벤트를 사용합니다.
+* `fallbackPolling`: 파일 시스템 이벤트를 사용할 때, 이 옵션은 시스템이 네이티브 파일 왓쳐가 부족하거나/혹은 지원하지 않을 때, 사용되는 폴링 전략을 지정합니다. 다음과 같이 설정할 수 있습니다.
+    * `fixedPollingInterval`: *(위를 참조하세요.)*
+    * `priorityPollingInterval`: *(위를 참조하세요.)*
+    * `dynamicPriorityPolling`: *(위를 참조하세요.)*
+* `synchronousWatchDirectory`: 디렉터리의 연기된 감시를 비활성화합니다. 연기된 감시는 많은 파일이 한 번에 변경될 때 유용합니다 (예를 들어, `npm install`을 실행하여 `node_modules`의 변경), 하지만 덜-일반적인 설정을 위해 비활성화할 수도 있습니다.
 
-For more information on these changes, [head over to GitHub to see the pull request](https://github.com/microsoft/TypeScript/pull/35615) to read more.
+이 변경의 더 자세한 내용은 [head over to GitHub to see the pull request](https://github.com/microsoft/TypeScript/pull/35615)를 읽어보세요.
 
-## <span id="assume-direct-dependencies" /> "Fast and Loose" Incremental Checking
+## <span id="assume-direct-dependencies" /> "빠르고 느슨한" 증분 검사
 
-TypeScript 3.8 introduces a new compiler option called `assumeChangesOnlyAffectDirectDependencies`.
-When this option is enabled, TypeScript will avoid rechecking/rebuilding all truly possibly-affected files, and only recheck/rebuild files that have changed as well as files that directly import them.
+TypeScript 3.8은 새로운 컴파일러 옵션 `assumeChangesOnlyAffectDirectDepencies`을 제공합니다.
+이 옵션이 활성화되면, TypeScript는 정말로 영향을 받은 파일들은 재검사/재빌드하지않고, 변경된 파일뿐만 아니라 직접 import 한 파일만 재검사/재빌드 합니다.
 
-For example, consider a file `fileD.ts` that imports `fileC.ts` that imports `fileB.ts` that imports `fileA.ts` as follows:
+예를 들어, 다음과 같이 `fileA.ts`를 import 한 `fileB.ts`를 import 한 `fileC.ts`를 import 한 `fileD.ts`를 살펴봅시다:
 
 ```text
 fileA.ts <- fileB.ts <- fileC.ts <- fileD.ts
 ```
 
-In `--watch` mode, a change in `fileA.ts` would typically mean that TypeScript would need to at least re-check `fileB.ts`, `fileC.ts`, and `fileD.ts`.
-Under `assumeChangesOnlyAffectDirectDependencies`, a change in `fileA.ts` means that only `fileA.ts` and `fileB.ts` need to be re-checked.
+`--watch` 모드에서는, `fileA.ts`의 변경이 `fileB.ts`, `fileC.ts` 그리고 `fileD.ts`를 TypeScript가 재-검사해야 한다는 의미입니다.
+`assumeChangesOnlyAffectDirectDependencies`에서는 `fileA.ts`의 변경은 `fileA.ts`와 `fileB.ts`만 재-검사하면 됩니다.
 
-In a codebase like Visual Studio Code, this reduced rebuild times for changes in certain files from about 14 seconds to about 1 second.
-While we don't necessarily recommend this option for all codebases, you might be interested if you have an extremely large codebase and are willing to defer full project errors until later (e.g. a dedicated build via a `tsconfig.fullbuild.json` or in CI).
+Visual Studio Code와 같은 코드 베이스에서는, 특정 파일의 변경에 대해 약 14초에서 약 1초로 재빌드 시간을 줄여주었습니다.
+이 옵션을 모든 코드 베이스에서 추천하는 것은 아니지만, 큰 코드 베이스를 가지고 있고, 나중까지 전체 프로젝트 오류를 기꺼이 연기하겠다면 (예를 들어, `tsconfig.fullbuild.json`이나 CI를 통한 전용 빌드) 흥미로울 것입니다.
 
-For more details, you can [see the original pull request](https://github.com/microsoft/TypeScript/pull/35711).
+더 자세한 내용은 [see the original pull request](https://github.com/microsoft/TypeScript/pull/35711)에서 보실 수 있습니다.
