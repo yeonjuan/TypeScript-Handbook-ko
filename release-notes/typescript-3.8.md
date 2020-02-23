@@ -8,7 +8,7 @@
 
 ## <span id="type-only-imports-exports" /> 타입-전용 Imports 와 Exports (Type-Only Imports and Exports)
 
-이 기능은 대부분의 사용자가 생각할 필요가 없을 수도 있지만; `--isolatedModules`, TypeScript의 `transpileModule` API, 또는 Babel에서 문제가 발생하면 이 기능이 관련 있을 수 있습니다.
+이 기능은 대부분의 사용자에겐 생각할 필요가 없을 수도 있지만; `--isolatedModules`, TypeScript의 `transpileModule` API, 또는 Babel에서 문제가 발생하면 이 기능과 관련이 있을 수 있습니다.
 
 TypeScript 3.8은 타입-전용 imports, exports를 위한 새로운 구문이 추가되었습니다.
 
