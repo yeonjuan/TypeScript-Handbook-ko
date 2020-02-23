@@ -237,7 +237,7 @@ class C {
 
 console.log(new C().#foo); // SyntaxError
 //                  ~~~~
-// TypeScropt 는 오류를 보고 하며 *또한*
+// TypeScript 는 오류를 보고 하며 *또한*
 // 런타임에도 동작하지 않습니다.
 
 console.log(new C()["#foo"]); // undefined 출력
