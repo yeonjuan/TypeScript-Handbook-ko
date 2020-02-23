@@ -271,7 +271,7 @@ import * as utilities from "./utilities.js";
 export { utilities };
 ```
 
-이는 매우 흔해서 ECMAScript2020은 최근에 이 패턴을 지원하기 위해서 새로운 구문을 추가했습니다.
+이는 매우 일반적이어서 ECMAScript2020은 최근에 이 패턴을 지원하기 위해서 새로운 구문을 추가했습니다.
 
 ```ts
 export * as utilities from "./utilities.js";
