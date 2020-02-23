@@ -145,7 +145,7 @@ console.log(instance.cHelper()); // '10' 출력
 console.log(instance.dHelper()); // '20' 출력
 ```
 
-알아 두면 좋은 또 다른 점은 다른 타입으로 비공개 필드에 접근하는 것은 `TypeError` 라는것 입니다.
+알아 두면 좋은 또 다른 점은 다른 타입으로 비공개 필드에 접근하면 `TypeError` 를 발생한다는 것입니다.
 
 ```ts
 class Square {
