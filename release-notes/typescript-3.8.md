@@ -52,7 +52,7 @@ import type Foo, { Bar, Baz } from "some-module";
 // error! A type-only import can specify a default import or named bindings, but not both.
 ```
 
-`import type`과 함께, TypeScript 3.8은 런타임 시 사용되지 않는 import에서 발생하는 작업을 제어하기 위해 새로운 컴파일러 플래그를 추가합니다.: `importsNotUsedAsValues`.
+`import type`과 함께, TypeScript 3.8은 런타임 시 사용되지 않는 import에서 발생하는 작업을 제어하기 위해 새로운 컴파일러 플래그를 추가합니다: `importsNotUsedAsValues`.
 이 플래그는 3 가지 다른 값을 가집니다:
 
 * `remove`: 이는 imports를 제거하는 현재 동작이며, 계속 기본값으로 작동할 것이며, 기존 동작을 바꾸는 변화가 아닙니다.
