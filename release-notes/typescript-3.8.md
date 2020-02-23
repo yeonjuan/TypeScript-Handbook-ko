@@ -444,4 +444,4 @@ fileA.ts <- fileB.ts <- fileC.ts <- fileD.ts
 Visual Studio Code와 같은 코드 베이스에서는, 특정 파일의 변경에 대해 약 14초에서 약 1초로 재빌드 시간을 줄여주었습니다.
 이 옵션을 모든 코드 베이스에서 추천하는 것은 아니지만, 큰 코드 베이스를 가지고 있고, 나중까지 전체 프로젝트 오류를 기꺼이 연기하겠다면 (예를 들어, `tsconfig.fullbuild.json`이나 CI를 통한 전용 빌드) 흥미로울 것입니다.
 
-더 자세한 내용은 [see the original pull request](https://github.com/microsoft/TypeScript/pull/35711)에서 보실 수 있습니다.
+더 자세한 내용은 [the original pull request](https://github.com/microsoft/TypeScript/pull/35711)에서 보실 수 있습니다.
