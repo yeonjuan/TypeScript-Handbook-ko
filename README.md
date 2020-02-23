@@ -30,6 +30,14 @@
 - Type Checking JavaScript Files
 - Utility Types
 
+<details>
+    <summary>릴리즈 노트</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+ * [TypeScript 3.8](./release-notes/typescript-3.8.md)
+
+</details>
+
 
 ## 참여하기
 
