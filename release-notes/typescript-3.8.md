@@ -56,7 +56,7 @@ import type Foo, { Bar, Baz } from "some-module";
 이 플래그는 3 가지 다른 값을 가집니다:
 
 * `remove`: 이는 imports를 제거하는 현재 동작이며, 계속 기본값으로 작동할 것이며, 기존 동작을 바꾸는 변화가 아닙니다.
-* `preserve`: 이는 사용되지 않는 값들을 모두 *보존*합니다. 이로 인해 imports/사이트-이펙트가 보존될 수 있습니다.
+* `preserve`: 이는 사용되지 않는 값들을 모두 *보존*합니다. 이로 인해 imports/side-effects가 보존될 수 있습니다.
 * `error`: 이는 모든 (`preserve` option 처럼) 모든 imports를 보존하지만, import 값이 타입으로만 사용될 경우 오류를 발생시킵니다. 이는 실수로 값을 import하지 않지만 사이드 이팩트 import를 명시적으로 만들고 싶을 때 유용합니다.
 
 이 기능에 대한 더 자세한 정보는, `import type`선언이 사용될수 있는 범위를 확대하는 [pull request](https://github.com/microsoft/TypeScript/pull/35200), 와 [관련된 변경 사항](https://github.com/microsoft/TypeScript/pull/36092/)에서 찾을 수 있습니다.
