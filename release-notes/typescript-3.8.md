@@ -313,7 +313,7 @@ export {};
 
 이러한 경우가 예상되는 모든 환경에서 최상위 레벨 `await`은 동작하지 않을 수 있습니다. 현재, `target` 컴파일러 옵션이 `es2017` 이상이고, `module`이 `esnext` 또는 `system`인 경우에만 최상위 레벨 `await`을 사용할 수 있습니다. 몇몇 환경과 번들러내에서의 지원은 제한적으로 작동하거나 실험적 지원을 활성화해야 할 수도 있습니다.
 
-구현에 관한 더 자세한 정보는 [original pull request을 확인하세요](https://github.com/microsoft/TypeScript/pull/35813).
+구현에 관한 더 자세한 정보는 [the original pull request을 확인하세요](https://github.com/microsoft/TypeScript/pull/35813).
 
 ## <span id="es2020-for-target-and-module" /> `es2020`용 `target`과 `module`   (`es2020` for `target` and `module`)
 
