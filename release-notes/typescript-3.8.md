@@ -201,7 +201,7 @@ class C {
 
 구현에 대한 더 많은 정보는, [the original pull request](https://github.com/Microsoft/TypeScript/pull/30829)를 참고하세요
 
-### Which should I use?
+### 어떤 것을 사용해야 할까요? (Which should I use?)
 
 이미 TypeScript 유저로서 어떤 종류의 비공개를 사용해야 하는지에 대한 많은 질문을 받았습니다: 주로, "`private` 키워드를 사용해야 하나요 아니면 ECMAScript의 해시/우물 (`#`) 비공개 필드를 사용해야 하나요?"
 상황마다 다릅니다!
