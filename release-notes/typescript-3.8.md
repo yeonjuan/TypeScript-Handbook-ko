@@ -425,7 +425,7 @@ TypeScript의 이전 버전은 폴더에 디렉터리 왓쳐를 *즉시* 설치�
     * `dynamicPriorityPolling`: *(위를 참조하세요.)*
 * `synchronousWatchDirectory`: 디렉터리의 연기된 감시를 비활성화합니다. 연기된 감시는 많은 파일이 한 번에 변경될 때 유용합니다 (예를 들어, `npm install`을 실행하여 `node_modules`의 변경), 하지만 덜-일반적인 설정을 위해 비활성화할 수도 있습니다.
 
-이 변경의 더 자세한 내용은 [head over to GitHub to see the pull request](https://github.com/microsoft/TypeScript/pull/35615)를 읽어보세요.
+이 변경의 더 자세한 내용은 Github으로 이동하여 [the pull request](https://github.com/microsoft/TypeScript/pull/35615)를 읽어보세요.
 
 ## <span id="assume-direct-dependencies" /> "빠르고 느슨한" 증분 검사
 
