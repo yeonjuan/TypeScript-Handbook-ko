@@ -327,7 +327,8 @@ TypeScript 3.8은 `es2020`을 `module`과 `target` 옵션으로 지원합니다.
 
 TypeScript 3.8는 `allowJs` 플래그를 사용하여 JavaScript 파일을 지원하고 `checkJs` 옵션이나 `// @ts-check` 주석을 `.js` 파일 맨 위에 추가하여 JavaScript 파일의 *타입-검사*를 지원합니다.
 
-JavaScript 파일에는 타입-검사를 위한 전용 구문이 없기 때문에 TypeScript는 JSDoc을 활용합니다. TypeScript 3.8은 프로퍼티에 대한 몇 가지 새로운 JSDoc 태그를 인식합니다.
+JavaScript 파일에는 타입-검사를 위한 전용 구문이 없기 때문에 TypeScript는 JSDoc을 활용합니다.
+TypeScript 3.8은 프로퍼티에 대한 몇 가지 새로운 JSDoc 태그를 인식합니다.
 
 먼저 접근 지정자입니다: `@public`, `@private` 그리고 `@protected`입니다.
 이 태그들은 TypeScript 내에서 각각 `public`, `private`, `protected`와 동일하게 동작합니다.
