@@ -1,8 +1,8 @@
 * [타입-전용 Imports 와 Exports](#type-only-imports-exports)
 * [ECMAScript 비공개 필드](#ecmascript-private-fields)
-* [`export * as ns` Syntax](#export-star-as-namespace-syntax)
-* [Top-Level `await`](#top-level-await)
-* [JSDoc Property Modifiers](#jsdoc-modifiers)
+* [`export * as ns` 구문](#export-star-as-namespace-syntax)
+* [최상위-레벨 `await`](#top-level-await)
+* [JSDoc 프로퍼티 지정자](#jsdoc-modifiers)
 * [Better Directory Watching on Linux and `watchOptions`](#better-directory-watching)
 * ["Fast and Loose" Incremental Checking](#assume-direct-dependencies)
 
@@ -262,29 +262,29 @@ TypeScript의 `private`프로퍼티 선언에서는, 사용자는 여전히 상�
 반면에, `#` 비공개 필드는 `WeakMap`을 이용해 다운 레벨 되기 때문에 사용 속도가 느려질 수 있습니다.
 어떤 런타임은 `#` 비공개 필드 구현을 최적화 하고, 더 빠른 `WeakMap`을 구현하고 싶을 수 있지만, 모든 런타임에서 그렇지 않을 수 있습니다.
 
-## <span id="export-star-as-namespace-syntax" /> `export * as ns` Syntax
+## <span id="export-star-as-namespace-syntax" /> `export * as ns` 구문 (`export * as ns` Syntax)
 
-It's often common to have a single entry-point that exposes all the members of another module as a single member.
+다른 모듈의 모든 멤버를 하나의 멤버로 내보내는 단일 진입점을 갖는 것은 일반적입니다.
 
 ```ts
 import * as utilities from "./utilities.js";
 export { utilities };
 ```
 
-This is so common that ECMAScript 2020 recently added a new syntax to support this pattern!
+이는 매우 흔해서 ECMAScript2020은 최근에 이 패턴을 지원하기 위해서 새로운 구문을 추가했습니다.
 
 ```ts
 export * as utilities from "./utilities.js";
 ```
 
-This is a nice quality-of-life improvement to JavaScript, and TypeScript 3.8 implements this syntax.
-When your module target is earlier than `es2020`, TypeScript will output something along the lines of the first code snippet.
+이것은 JavaScript에 대한 훌륭한 삶의 질의 향상이며, TypeScript 3.8은 이 구문을 지원합니다.
+모듈 대상이 `es2020` 이전인 경우, TypeScript는 첫 번째 줄의 코드 스니펫을 따라서 무언가를 출력할 것입니다.
 
-## <span id="top-level-await" /> Top-Level `await`
+## <span id="top-level-await" /> 최상위-레벨 `await` (Top-Level `await`)
 
-TypeScript 3.8 provides support for a handy upcoming ECMAScript feature called "top-level `await`".
+TypeScript 3.8은 "최상위-레벨 `await`"이라는 편리한 ECMAScript 기능을 지원합니다.
 
-JavaScript users often introduce an `async` function in order to use `await`, and then immediately called the function after defining it.
+JavaScript 사용자는 `await`을 사용하기 위해 `async` 함수를 도입하는 경우가 많으며, 이를 정의한 후 즉시 함수를 호출합니다.
 
 ```js
 async function main() {
@@ -297,42 +297,35 @@ main()
     .catch(e => console.error(e))
 ```
 
-This is because previously in JavaScript (along with most other languages with a similar feature), `await` was only allowed within the body of an `async` function.
-However, with top-level `await`, we can use `await` at the top level of a module.
+이전의 JavaScript(유사한 기능을 가진 다른 언어들과 함께)에서 `await`은 `async` 함수 내에서 만 허용되었기 때문입니다.
+하지만 최상위-레벨 `await`로, 우리는 모듈의 최상위 레벨에서 `await`을 사용할 수 있습니다.
 
 ```ts
 const response = await fetch("...");
 const greeting = await response.text();
 console.log(greeting);
 
-// Make sure we're a module
+// 모듈인지 확인
 export {};
 ```
 
-Note there's a subtlety: top-level `await` only works at the top level of a *module*, and files are only considered modules when TypeScript finds an `import` or an `export`.
-In some basic cases, you might need to write out `export {}` as some boilerplate to make sure of this.
+유의할 점이 있습니다: 최상위-레벨 `await`은 *module*의 최상위 레벨에서만 동작하며, 파일은 TypeScript가`import`나 `export`를 찾을 때에만 모듈로 간주됩니다. 일부 기본적인 경우에 `export {}`와 같은 보일러 플레이트를 작성하여 이를 확인할 필요가 있습니다.
 
-Top level `await` may not work in all environments where you might expect at this point.
-Currently, you can only use top level `await` when the `target` compiler option is `es2017` or above, and `module` is `esnext` or `system`.
-Support within several environments and bundlers may be limited or may require enabling experimental support.
+이러한 경우가 예상되는 모든 환경에서 최상위 레벨 `await`은 동작하지 않을 수 있습니다. 현재, `target` 컴파일러 옵션이 `es2017` 이상이고, `module`이 `esnext` 또는 `system`인 경우에만 최상위 레벨 `await`을 사용할 수 있습니다. 몇몇 환경과 번들러내에서의 지원은 제한적으로 작동하거나 실험적 지원을 활성화해야 할 수도 있습니다.
 
-For more information on our implementation, you can [check out the original pull request](https://github.com/microsoft/TypeScript/pull/35813).
+구현에 관한 더 자세한 정보는 [original pull request을 확인하세요](https://github.com/microsoft/TypeScript/pull/35813).
 
-## <span id="es2020-for-target-and-module" /> `es2020` for `target` and `module`
+## <span id="es2020-for-target-and-module" /> `es2020`용 `target`과 `module`   (`es2020` for `target` and `module`)
 
-TypeScript 3.8 supports `es2020` as an option for `module` and `target`.
-This will preserve newer ECMAScript 2020 features like optional chaining, nullish coalescing, `export * as ns`, and dynamic `import(...)` syntax.
-It also means `bigint` literals now have a stable `target` below `esnext`.
+TypeScript 3.8은 `es2020`을 `module`과 `target` 옵션으로 지원합니다. 이를 통해 선택적 체이닝 (optional chaining), nullish 병합 (nullish coalescing), `export * as ns` 그리고 동적인 `import(...)` 구문과 같은 ECMAScript 2020 기능이 유지됩니다. 또한 `bigint` 리터럴이 `esnext` 아래에 안정적인 `target`을 갖는 것을 의미합니다.
 
-## <span id="jsdoc-modifiers" /> JSDoc Property Modifiers
+## <span id="jsdoc-modifiers" /> JSDoc 프로퍼티 지정자 (JSDoc Property Modifiers)
 
-TypeScript 3.8 supports JavaScript files by turning on the `allowJs` flag, and also supports *type-checking* those JavaScript files via the `checkJs` option or by adding a `// @ts-check` comment to the top of your `.js` files.
+TypeScript 3.8는 `allowJs` 플래그를 사용하여 JavaScript 파일을 지원하고 `checkJs` 옵션이나 `// @ts-check` 주석을 `.js` 파일 맨 위에 추가하여 JavaScript 파일의 *타입-검사*를 지원합니다.
 
-Because JavaScript files don't have dedicated syntax for type-checking, TypeScript leverages JSDoc.
-TypeScript 3.8 understands a few new JSDoc tags for properties.
+JavaScript 파일에는 타입-검사를 위한 전용 구문이 없기 때문에 TypeScript는 JSDoc을 활용합니다. TypeScript 3.8은 프로퍼티에 대한 몇 가지 새로운 JSDoc 태그를 인식합니다.
 
-First are the accessibility modifiers: `@public`, `@private`, and `@protected`.
-These tags work exactly like `public`, `private`, and `protected` respectively work in TypeScript.
+먼저 접근 지정자입니다: `@public`, `@private` 그리고 `@protected`입니다. 이 태그들은 TypeScript 내에서 각각 `public`, `private`, `protected`와 동일하게 동작합니다.
 
 ```js
 // @ts-check
@@ -350,14 +343,14 @@ class Foo {
 
 new Foo().stuff;
 //        ~~~~~
-// error! Property 'stuff' is private and only accessible within class 'Foo'.
+// 오류! 'stuff' 프로퍼티는 private 이기 때문에 오직 'Foo' 클래스 내에서만 접근이 가능합니다.
 ```
 
-* `@public` is always implied and can be left off, but means that a property can be reached from anywhere.
-* `@private` means that a property can only be used within the containing class.
-* `@protected` means that a property can only be used within the containing class, and all derived subclasses, but not on dissimilar instances of the containing class.
+* `@public`은 항상 암시적이며 생략될 수 있지만, 어디서든 해당 프로퍼티에 접근 가능을 의미합니다.
+* `@private`은 오직 프로퍼티를 포함하는 클래스 내에서 해당 프로퍼티 사용 가능을 의미합니다.
+* `@protected`는 프로퍼티를 포함하는 클래스와 파생된 모든 하위 클래스내에서 해당 프로퍼티를 사용할 수 있지만, 포함하는 클래스의 인스턴스에서는 해당 프로퍼티를 사용할 수 없습니다.
 
-Next, we've also added the `@readonly` modifier to ensure that a property is only ever written to during initialization.
+다음으로 `@readonly` 지정자를 추가하여 프로퍼티가 초기화 과정 내에서만 값이 쓰이는 것을 보장합니다.
 
 ```js
 // @ts-check
@@ -371,13 +364,13 @@ class Foo {
     writeToStuff() {
         this.stuff = 200;
         //   ~~~~~
-        // Cannot assign to 'stuff' because it is a read-only property.
+        // 'stuff'는 읽기-전용(read-only) 프로퍼티이기 때문에 할당할 수 없습니다.
     }
 }
 
 new Foo().stuff++;
 //        ~~~~~
-// Cannot assign to 'stuff' because it is a read-only property.
+// 'stuff'는 읽기-전용(read-only) 프로퍼티이기 때문에 할당할 수 없습니다.
 ```
 
 ## <span id="better-directory-watching" /> Better Directory Watching on Linux and `watchOptions`
