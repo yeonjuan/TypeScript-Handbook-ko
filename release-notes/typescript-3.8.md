@@ -264,7 +264,7 @@ TypeScript의 `private`프로퍼티 선언에서는, 사용자는 여전히 상�
 
 ## <span id="export-star-as-namespace-syntax" /> `export * as ns` 구문 (`export * as ns` Syntax)
 
-다른 모듈의 모든 멤버를 하나의 멤버로 내보내는 단일 진입점을 갖는 것은 일반적입니다.
+다른 모듈의 모든 멤버를 하나의 멤버로 내보내는 단일 진입점을 갖는 것은 종종 일반적입니다.
 
 ```ts
 import * as utilities from "./utilities.js";
