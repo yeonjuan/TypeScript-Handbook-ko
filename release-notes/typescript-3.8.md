@@ -23,7 +23,7 @@ export type { SomeThing };
 마찬가지로, `export type`은 타입 문맥에 사용할 export만 제공하며, 이 또한 TypeScript의 출력물에서 제거됩니다.
 
 클래스는 런타임에 값을 가지고 있고 디자인-타임에 타입이 있으며 사용은 상황에-따라 다르다는 것을 유의해야 합니다.
-클래스를 import 하기 위해 `import type`을 사용하면, 확장 같은 것을 할 수 없습니다.
+클래스를 import 하기 위해 `import type`을 사용하면, 확장 같은 것은 할 수 없습니다.
 
 ```ts
 import type { Component } from "react";
