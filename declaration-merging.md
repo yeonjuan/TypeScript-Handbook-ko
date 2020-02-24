@@ -275,7 +275,7 @@ o.map(x => x.toFixed());
 1. 확장에 새로운 최상위 선언을 할 수는 없습니다 -- 기존 선언에 대한 패치만 가능할 뿐입니다.
 2. 디폴트 내보내기(default exports)는 확장할 수 없으며, 이름을 갖는 내보내기(해당 이름으로 확장시켜야 하며, `default`는 예약어입니다)만 확장할 수 있습니다 - 자세한 내용은 [#14080](https://github.com/Microsoft/TypeScript/issues/14080)을 참고하세요.
 
-### 전역 확장
+### 전역 확장 (Global augmentation)
 
 모듈 내부의 전역 범위에 선언을 추가할 수도 있습니다.
 
