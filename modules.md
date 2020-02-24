@@ -395,7 +395,6 @@ strings.forEach(s => {
 });
 ```
 
-
 # 선택적 모듈 로딩과 기타 고급 로딩 시나리오 (Optional Module Loading and Other Advanced Loading Scenarios)
 
 상황에 따라 특정 조건에서만 모듈을 로드하도록 만들 수 있습니다. TypeScript에서는 아래에 있는 패턴을 사용하여 이 시나리오와 다른 고급 로딩 시나리오를 구현하여 타입의 안전성을 잃지 않고 모듈 로더를 직접 호출할 수 있습니다.
