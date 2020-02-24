@@ -155,7 +155,7 @@ namespace Animal {
 }
 ```
 
-`haveMuscles`이 내보내지지 않았기 때문에, 동일하게 병합되지 않은 네임스페이스를 공유하는 `animalsHaveMuscles` 함수만이 이 심볼(symbol)을 볼 수 있습니다. `doAnimalsHaveMuscles` 함수가 병합된 `Animal`의 멤버일지라도, 내보내지지 않은 멤버는 볼 수 없습니다. 
+`haveMuscles`이 내보내지지 않았기 때문에, 동일하게 병합되지 않은 네임스페이스를 공유하는 `animalsHaveMuscles` 함수만이 이 심볼(symbol)을 볼 수 있습니다. `doAnimalsHaveMuscles` 함수가 병합된 `Animal`의 멤버일지라도, 내보내지지 않은 멤버는 볼 수 없습니다.
 
 ## 클래스, 함수, 열거형과 네임스페이스의 병합 (Merging Namespaces with Classes, Functions, and Enums)
 
