@@ -22,14 +22,20 @@
 - Namespaces
 - Namespaces and Modules
 - [Module Resolution(en)](./module-resolution.md)
-- Declaraion Merging
+- [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
-- Mixins
 - [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
 - [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
 - [Utility Types(en)](./utility-types.md)
 
+<details>
+    <summary>릴리즈 노트</summary>
+
+<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
+ * [TypeScript 3.8](./release-notes/typescript-3.8.md)
+
+</details>
 
 ## 참여하기
 
