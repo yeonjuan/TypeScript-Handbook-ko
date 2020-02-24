@@ -22,7 +22,7 @@
 - Namespaces
 - Namespaces and Modules
 - [Module Resolution(en)](./module-resolution.md)
-- Declaraion Merging
+- [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
 - Mixins
