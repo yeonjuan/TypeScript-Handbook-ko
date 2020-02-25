@@ -418,7 +418,7 @@ declare function interfaced(arg: Interface): Interface;
 TypeScript의 이전 버전에서, 타입 별칭은 extend 하거나 implement 할 수 없었습니다 (다른 타입을 extend/implement 할 수도 없습니다).
 2.7 버전부터, 타입 별칭은 교차 타입을 생성함으로써 extend 할 수 있습니다. 예를 들어, `type Cat = Animal & { purrs: true }`.
 
-왜냐하면 [소프트웨어의 이상적인 프로퍼티는 확장에 열려있는 것이다](https://en.wikipedia.org/wiki/Open/closed_principle), 가능하면 항상 타입 별칭보다 인터페이스를 사용해야 하기 때문입니다.
+[소프트웨어의 이상적인 특징은 확장에 개방되어 있기 때문에](https://en.wikipedia.org/wiki/Open/closed_principle), 가능하면 항상 타입 별칭보다 인터페이스를 사용해야 하기 때문입니다.
 
 반면에, 만약 인터페이스로 어떤 형태를 표현할 수 없고 유니언이나 튜플 타입을 사용해야 한다면, 일반적으로 타입 별칭을 사용합니다.
 
