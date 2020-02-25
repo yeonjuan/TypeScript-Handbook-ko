@@ -13,6 +13,15 @@
 * [선택적 매개변수와 프로퍼티 (Optional parameters and properties)](#선택적-매개변수와-프로퍼티-optional-parameters-and-properties)
 * [타입 가드와 타입 단언 (Type guards and type assertions)](#타입-가드와-타입-단언-type-guards-and-type-assertions)
 
+[타입 별칭 (Type Aliases)](#타입-별칭-type-aliases)
+* [인터페이스 vs. 타입 별칭 (Interfaces vs. Type Aliases)](#인터페이스-vs-타입-별칭-interfaces-vs-type-aliases)
+
+[문자열 리터럴 타입 (String Literal Types)](#문자열-리터럴-타입-string-literal-types)
+
+[숫자 리터럴 타입 (Numeric Literal Types)](#숫자-리터럴-타입-numeric-literal-types)
+
+[열거형 멤버 타입 (Enum Member Types)](#열거형-멤버-타입-enum-member-types)
+
 # 교차 타입 (Intersection Types)
 
 교차 타입은 여러 타입을 하나로 결합합니다.
@@ -328,3 +337,161 @@ function fixed(name: string | null): string {
 예제는 중첩 함수를 사용합니다. 왜냐하면 컴파일러가 중첩 함수안에서는 null을 제거할 수 없기 때문입니다 (즉시-호출된 함수 표현은 예외).
 특히 외부 함수에서 반환할 경우, 중첩 함수에 대한 모든 호출을 추적할 수 없기 때문입니다.
 함수가 어디에서 호출되었는지 알 수 없으면, body가 실행될 때 `name`의 타입을 알 수 없습니다.
+
+# 타입 별칭 (Type Aliases)
+
+타입 별칭은 타입의 새로운 이름을 만듭니다.
+타입 별칭은 때때로 인터페이스와 유사합니다만, 원시 값, 유니언, 튜플 그리고 손으로 작성해야 하는 다른 타입의 이름을 지을 수 있습니다.
+
+```ts
+type Name = string;
+type NameResolver = () => string;
+type NameOrResolver = Name | NameResolver;
+function getName(n: NameOrResolver): Name {
+    if (typeof n === "string") {
+        return n;
+    }
+    else {
+        return n();
+    }
+}
+```
+
+별칭은 실제로 새로운 타입을 만드는 것은 아닙니다 - 그 타입을 나타내는 새로운 *이름* 을 만드는 것입니다.
+원시 값의 별칭을 짓는 것은 문서화의 형태로 사용할 수 있지만, 아주 유용하지 않습니다.
+
+인터페이스처럼, 타입 별칭은 제네릭이 될 수 있습니다 - 타입 매개변수를 추가하고 별칭 선언의 오른쪽에 사용하면 됩니다:
+
+```ts
+type Container<T> = { value: T };
+```
+
+프로퍼티 안에서 자기 자신을 참조하는 타입 별칭을 가질 수 있습니다:
+
+```ts
+type Tree<T> = {
+    value: T;
+    left: Tree<T>;
+    right: Tree<T>;
+}
+```
+
+교차 타입과 같이 사용하면, 아주 놀라운 타입을 만들 수 있습니다.
+
+```ts
+type LinkedList<T> = T & { next: LinkedList<T> };
+
+interface Person {
+    name: string;
+}
+
+var people: LinkedList<Person>;
+var s = people.name;
+var s = people.next.name;
+var s = people.next.next.name;
+var s = people.next.next.next.name;
+```
+
+하지만, 타입 별칭을 선언의 오른쪽 이외에 사용하는 것은 불가능합니다.
+
+```ts
+type Yikes = Array<Yikes>; // 오류
+```
+
+## 인터페이스 vs. 타입 별칭 (Interfaces vs. Type Aliases)
+
+위에서 언급했듯이, 타입 별칭은 인터페이스와 같은 역할을 할 수 있습니다, 하지만, 약간의 미묘한 차이가 있습니다
+
+한 가지 차이점은 인터페이스는 어디에서나 사용할 수 있는 새로운 이름을 만들 수 있습니다.
+타입 별칭은 새로운 이름을 만들지 못합니다 &mdash; 예를 들어, 오류 메시지는 별칭 이름을 사용하지 않습니다.
+아래의 코드에서, 에디터 안에서 `interfaced`에 마우스를 올리면  `Interface`를 반환한다고 보여줍니다, 하지만 `aliased`는 객체 리터럴 타입을 반환한다고 보여줍니다.
+
+```ts
+type Alias = { num: number }
+interface Interface {
+    num: number;
+}
+declare function aliased(arg: Alias): Alias;
+declare function interfaced(arg: Interface): Interface;
+```
+
+TypeScript의 이전 버전에서, 타입 별칭은 extend 하거나 implement 할 수 없었습니다 (다른 타입을 extend/implement 할 수도 없습니다).
+2.7 버전부터, 타입 별칭은 교차 타입을 생성함으로써 extend 할 수 있습니다. 예를 들어, `type Cat = Animal & { purrs: true }`.
+
+[소프트웨어의 이상적인 특징은 확장에 개방되어 있기 때문에](https://en.wikipedia.org/wiki/Open/closed_principle), 가능하면 항상 타입 별칭보다 인터페이스를 사용해야 하기 때문입니다.
+
+반면에, 만약 인터페이스로 어떤 형태를 표현할 수 없고 유니언이나 튜플 타입을 사용해야 한다면, 일반적으로 타입 별칭을 사용합니다.
+
+# 문자열 리터럴 타입 (String Literal Types)
+
+문자열 리터럴 타입은 문자열이 가져야 하는 정확한 값을 지정할 수 있게 해줍니다.
+예제에서 문자열 리터럴 타입은 유니언 타입, 타입 가드, 그리고 타입 별칭과 잘 결합됩니다.
+이 기능을 열거형-같은 행동을 문자열과 함께 사용할 수 있습니다.
+
+```ts
+type Easing = "ease-in" | "ease-out" | "ease-in-out";
+class UIElement {
+    animate(dx: number, dy: number, easing: Easing) {
+        if (easing === "ease-in") {
+            // ...
+        }
+        else if (easing === "ease-out") {
+        }
+        else if (easing === "ease-in-out") {
+        }
+        else {
+            // 오류! null이나 undefined를 전달하면 안됩니다
+        }
+    }
+}
+
+let button = new UIElement();
+button.animate(0, 0, "ease-in");
+button.animate(0, 0, "uneasy"); // 오류: "uneasy"는 여기서 허용하지 않습니다
+```
+
+허용되는 3개의 문자열 아무거나 전달할 수 있지만, 그 외 다른 문자열들은 오류를 발생시킵니다.
+
+```text
+Argument of type '"uneasy"' is not assignable to parameter of type '"ease-in" | "ease-out" | "ease-in-out"'
+```
+
+문자열 리터럴 타입은 오버로드를 구별하기 위해 같은 방법으로 사용할 수 있습니다.
+
+```ts
+function createElement(tagName: "img"): HTMLImageElement;
+function createElement(tagName: "input"): HTMLInputElement;
+// ... 더 많은 오버로드 ...
+function createElement(tagName: string): Element {
+    // ... 이곳에 코드를 ...
+}
+```
+
+# 숫자 리터럴 타입 (Numeric Literal Types)
+
+TypeScript는 또한 숫자 리터럴 타입을 갖고 있습니다.
+
+```ts
+function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {
+    // ...
+}
+```
+
+좀처럼 명시적으로 작성하지 않지만, 이슈를 좁히고 버그를 잡는데 유용할 수 있습니다.
+
+```ts
+function foo(x: number) {
+    if (x !== 1 || x !== 2) {
+        //         ~~~~~~~
+        // '!==' 연산자는 '1'과 '2' 타입에 적용할 수 없습니다.
+    }
+}
+```
+
+다른 말로, `x`는 `2`와 비교될 때, 반드시 `1`이어야 합니다, 위의 검사에서 유효하지 않은 비교를 만드는 것을 의미합니다.
+
+# 열거형 멤버 타입 (Enum Member Types)
+
+[열거형 섹션](./enums.md#유니언-열거형과-열거형-멤버-타입-union-enums-and-enum-member-types)에서 언급했듯이, 열거형 멤버는 모든 멤버가 리터럴로-초기화될 때 타입을 가집니다.
+
+"싱글톤 타입"에 대해 이야기하는 대부분의 시간에, 비록 많은 유저가 "싱글톤 타입"과 "리터럴 타입"을 서로 교환 가능하게 사용할 것이지만, 열거형 멤버 타입과 숫자/문자열 리터럴 타입 모두 참조합니다.
