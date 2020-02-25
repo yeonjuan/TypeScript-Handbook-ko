@@ -1,39 +1,38 @@
-TypeScript 2.3 and later support type-checking and reporting errors in `.js` files with `--checkJs`.
+# JavaScript 파일의 타입 검사 (Type Checking JavaScript Files)
 
-You can skip checking some files by adding a `// @ts-nocheck` comment to them; conversely, you can choose to check only a few `.js` files by adding a `// @ts-check` comment to them without setting `--checkJs`.
-You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
-Note that if you have a `tsconfig.json`, JS checking will respect strict flags like `noImplicitAny`, `strictNullChecks`, etc.
-However, because of the relative looseness of JS checking, combining strict flags with it may be surprising.
+TypeScript 2.3 이상의 버전에서는 `--checkJs`를 사용하는 `.js` 파일에서 타입 검사 및 오류 보고를 지원합니다.
 
-Here are some notable differences on how checking works in `.js` files compared to `.ts` files:
+`// @ts-nocheck` 주석을 달아 일부 파일에서 타입 검사를 건너뛸 수 있으며; 반대로 `// @ts-check` 주석을 달아 `--checkJs`를 사용하지 않고 일부 `.js` 파일에 대해서만 타입 검사를 하도록 선택할 수 있습니다.
+또한 특정 부분의 앞 줄에 `// @ts-ignore`를 달아 에러를 무시할 수도 있습니다. `tsconfig.json`이 있는 경우, JavaScript 검사는 `noImplicitAny`, `strictNullChecks` 등의 엄격한 플래그를 우선시 한다는 점을 알아두세요.
+하지만, JavaScript 검사의 상대적인 느슨함 덕분에 엄격한 플래그와 결합하여 사용하는 것은 놀라운 결과를 보여줄 것입니다.
 
-## JSDoc types are used for type information
+`.ts` 파일과 `.js` 파일은 타입을 검사하는 방법에 몇 가지 주목할만한 차이점이 있습니다:
 
-In a `.js` file, types can often be inferred just like in `.ts` files.
-Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations are used in a `.ts` file.
-Just like Typescript, `--noImplicitAny` will give you errors on the places that the compiler could not infer a type.
-(With the exception of open-ended object literals; see below for details.)
+## 타입 정보에 쓰일 수 있는 JSDoc 타입 (JSDoc types are used for type information)
 
-JSDoc annotations adorning a declaration will be used to set the type of that declaration. For example:
+`.js` 파일에서는, 흔히 `.ts` 파일처럼 타입을 추론해볼 수 있습니다. 타입을 추론할 수 없는 경우, `.ts`의 타입 표시와 같은 방법으로 JSDoc을 사용해 이를 지정할 수 있습니다.
+TypeScript와 마찬가지로, `--noImplicitAny`는 컴파일러가 타입을 유추할 수 없는 부분에서 오류를 보고할 것입니다. (확장 가능한(open-ended) 객체 리터럴을 제외하고; 자세한 내용은 아래를 참고하세요.)
+
+선언에 JSDoc 표시를 사용하면 해당 선언의 타입을 설정할 수 있습니다. 예를 들면:
 
 ```js
 /** @type {number} */
 var x;
 
-x = 0;      // OK
-x = false;  // Error: boolean is not assignable to number
+x = 0;      // 성공
+x = false;  // 오류: 불리언(boolean)에는 숫자를 할당할 수 없음
 ```
 
-You can find the full list of supported JSDoc patterns [below](#supported-jsdoc).
+사용 가능한 JSDoc 패턴 목록은 [이곳](#supported-jsdoc)에서 확인할 수 있습니다.
 
-## Properties are inferred from assignments in class bodies
+## 클래스 본문의 할당으로부터 추론된 프로퍼티 (Properties are inferred from assignments in class bodies)
 
-ES2015 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like object literals.
+ES2015에는 클래스에 프로퍼티를 선언할 수 있는 수단이 없습니다. 프로퍼티는 객체 리터럴과 같이 동적으로 할당됩니다.
 
-In a `.js` file, the compiler infers properties from property assignments inside the class body.
-The type of a property is the type given in the constructor, unless it's not defined there, or the type in the constructor is undefined or null.
-In that case, the type is the union of the types of all the right-hand values in these assignments.
-Properties defined in the constructor are always assumed to exist, whereas ones defined just in methods, getters, or setters are considered optional.
+`.js` 파일에서, 컴파일러는 클래스 본문 내부에서 할당된 프로퍼티로부터 프로퍼티들을 추론합니다.
+생성자가 정의되어 있지 않거나, 생성자에서 정의된 타입이 `undefined`나 `null`이 아닐 경우, 프로퍼티의 타입은 생성자에서 주어진 타입과 동일합니다.
+전자에 해당 프로퍼티의 경우, 할당되었던 모든 값들의 타입을 가진 유니언 타입이 됩니다.
+생성자에 정의된 프로퍼티는 항상 존재하는 것으로 가정하는 반면, 메서드, getter, setter에서만 정의된 프로퍼티는 선택적인 것으로 간주합니다.
 
 ```js
 class C {
@@ -42,19 +41,19 @@ class C {
         this.constructorUnknown = undefined
     }
     method() {
-        this.constructorOnly = false // error, constructorOnly is a number
-        this.constructorUnknown = "plunkbat" // ok, constructorUnknown is string | undefined
-        this.methodOnly = 'ok'  // ok, but methodOnly could also be undefined
+        this.constructorOnly = false // 오류, constructorOnly는 Number 타입임
+        this.constructorUnknown = "plunkbat" // 성공, constructorUnknown의 타입은 string | undefined
+        this.methodOnly = 'ok'  // 성공, 그러나 methodOnly는 undefined 타입 또한 허용됨
     }
     method2() {
-        this.methodOnly = true  // also, ok, methodOnly's type is string | boolean | undefined
+        this.methodOnly = true  // 이 또한 성공, methodOnly의 타입은 string | boolean | undefined
     }
 }
 ```
 
-If properties are never set in the class body, they are considered unknown.
-If your class has properties that are only read from, add and then annotate a declaration in the constructor with JSDoc to specify the type.
-You don't even have to give a value if it will be initialised later:
+프로퍼티가 클래스 본문에서 설정되지 않았다면, 알 수 없는 것으로 간주합니다.
+클래스에 읽기 전용 프로퍼티가 있는 경우, 생성자에서 선언에 JSDoc을 사용하여 타입을 추가하여 표시합니다.
+이후엔 초기화 하더라도 값을 지정할 필요가 없습니다.
 
 ```js
 class C {
@@ -67,15 +66,15 @@ class C {
 }
 
 let c = new C();
-c.prop = 0;          // OK
-c.count = "string";  // Error: string is not assignable to number|undefined
+c.prop = 0;          // 성공
+c.count = "string";  // 오류: string 은 number|undefined에 할당할 수 없음
 ```
 
-## Constructor functions are equivalent to classes
+## 생성자 함수와 클래스는 동일합니다 (Constructor functions are equivalent to classes)
 
-Before ES2015, Javascript used constructor functions instead of classes.
-The compiler supports this pattern and understands constructor functions as equivalent to ES2015 classes.
-The property inference rules described above work exactly the same way.
+ES2015 이전에는, JavaScript는 클래스 대신 생성자 함수를 사용했습니다.
+컴파일러는 이러한 패턴을 지원하며 생성자 함수를 ES2015 클래스와 동일한 것으로 이해합니다.
+앞서 설명한 프로퍼티 추론 규칙 또한 정확히 같은 방식으로 작용합니다.
 
 ```js
 function C() {
@@ -83,34 +82,34 @@ function C() {
     this.constructorUnknown = undefined
 }
 C.prototype.method = function() {
-    this.constructorOnly = false // error
-    this.constructorUnknown = "plunkbat" // OK, the type is string | undefined
+    this.constructorOnly = false // 오류
+    this.constructorUnknown = "plunkbat" // 성공, 타입은 string | undefined가 됨
 }
 ```
 
-## CommonJS modules are supported
+## CommonJS 모듈 지원 (CommonJS modules are supported)
 
-In a `.js` file, Typescript understands the CommonJS module format.
-Assignments to `exports` and `module.exports` are recognized as export declarations.
-Similarly, `require` function calls are recognized as module imports. For example:
+`.js` 파일에서, TypeScript는 CommonJS 모듈 포맷을 이해합니다.
+`exports`와 `module.exports` 할당은 내보내기(export) 선언으로 인식됩니다.
+마찬가지로, `require` 함수 호출은 모듈 가져오기(import)로 인식됩니다. 예를 들어:
 
 ```js
-// same as `import module "fs"`
+// `import module "fs"`와 같음
 const fs = require("fs");
 
-// same as `export function readFile`
+// `export function readFile`과 같음
 module.exports.readFile = function(f) {
     return fs.readFileSync(f);
 }
 ```
 
-The module support in Javascript is much more syntactically forgiving than Typescript's module support.
-Most combinations of assignments and declarations are supported.
+JavaScript의 모듈 지원은 TypeScript의 모듈 지원보다 구문적으로 훨씬 관용적입니다.
+따라서 대부분의 할당과 선언의 조합이 지원됩니다.
 
-## Classes, functions, and object literals are namespaces
+## 클래스, 함수, 객체 리터럴은 네임스페이스임 (Classes, functions, and object literals are namespaces)
 
-Classes are namespaces in `.js` files.
-This can be used to nest classes, for example:
+`.js` 파일에 있는 클래스는 네임스페이스입니다.
+예를 들어, 다음과 같이 클래스를 중첩하는 데에 사용할 수 있습니다:
 
 ```js
 class C {
@@ -119,7 +118,7 @@ C.D = class {
 }
 ```
 
-And, for pre-ES2015 code, it can be used to simulate static methods:
+그리고 pre-ES2015에선, 정적 메서드를 나타내는 데에 사용할 수도 있습니다.
 
 ```js
 function Outer() {
@@ -130,7 +129,7 @@ Outer.Inner = function() {
 }
 ```
 
-It can also be used to create simple namespaces:
+또한 간단한 네임스페이스를 생성하는 데에 사용할 수도 있습니다:
 
 ```js
 var ns = {}
@@ -140,49 +139,50 @@ ns.func = function() {
 }
 ```
 
-Other variants are allowed as well:
+다른 번형도 허용됩니다:
 
 ```js
-// IIFE
+// 즉시 호출 함수(IIFE)
 var ns = (function (n) {
   return n || {};
 })();
 ns.CONST = 1
 
-// defaulting to global
+// 전역으로 기본 설정
 var assign = assign || function() {
-  // code goes here
+  // 여기엔 코드를
 }
 assign.extra = 1
 ```
 
-## Object literals are open-ended
+## 객체 리터럴은 확장 가능 (Object literals are open-ended)
 
-In a `.ts` file, an object literal that initializes a variable declaration gives its type to the declaration.
-No new members can be added that were not specified in the original literal.
-This rule is relaxed in a `.js` file; object literals have an open-ended type (an index signature) that allows adding and looking up properties that were not defined originally.
-For instance:
+`.ts` 파일에서, 변수 선언을 초기화하는 객체 리터럴은 선언에 해당 타입을 부여합니다.
+원본 리터럴에 명시되어 있지 않은 새 멤버는 추가될 수 없습니다.
+이 규칙은 `.js` 파일에선 완화됩니다; 객체 리터럴은 원본에 정의되지 않은 새로운 프로퍼티를 조회하고 추가하는 것이 허용되는 확장 가능한 타입(인덱스 시그니처(index signature))을 갖습니다.
+예를 들어:
 
 ```js
 var obj = { a: 1 };
-obj.b = 2;  // Allowed
+obj.b = 2;  // 허용됨
 ```
 
-Object literals behave as if they have an index signature `[x:string]: any` that allows them to be treated as open maps instead of closed objects.
+객체 리터럴은 마치 닫힌 객체가 아니라 열린 맵(maps)으로 다뤄지도록 `[x:string]: any`와 같은 인덱스 시그니처를 가진 것처럼 동작합니다.
 
-Like other special JS checking behaviors, this behavior can be changed by specifying a JSDoc type for the variable. For example:
+다른 특정 JavaScript 검사 동작과 마찬가지로, 해당 동작은 변수에 JSDoc 타입을 지정하여 변경할 수 있습니다.
+예를 들어:
 
 ```js
 /** @type {{a: number}} */
 var obj = { a: 1 };
-obj.b = 2;  // Error, type {a: number} does not have property b
+obj.b = 2;  // 오류, {a: number}타입엔 b 프로퍼티가 없음
 ```
 
-## null, undefined, and empty array initializers are of type any or any[]
+## null, undefined 및 빈 배열 이니셜라이저는 any 혹은 any[] 타입임 (null, undefined, and empty array initializers are of type any or any[])
 
-Any variable, parameter or property that is initialized with null or undefined will have type any, even if strict null checks is turned on.
-Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
-The only exception is for properties that have multiple initializers as described above.
+null 또는 undefined로 초기화된 변수나 매개변수 또는 프로퍼티는, 엄격한 null 검사가 있더라도 any 타입을 갖게 될 것입니다.
+[]로 초기화된 변수나 매개변수 또는 프로퍼티는, 엄격한 null 검사가 있더라도 any[] 타입을 갖게 될 것입니다.
+위에서 설명한 여러 이니셜라이저(initializer)를 갖는 프로퍼티만이 유일한 예외입니다.
 
 ```js
 function Foo(i = null) {
@@ -196,7 +196,7 @@ foo.l.push(foo.i);
 foo.l.push("end");
 ```
 
-## Function parameters are optional by default
+## 함수 매개변수는 기본적으로 선택 사항임 (Function parameters are optional by default)
 
 Since there is no way to specify optionality on parameters in pre-ES2015 Javascript, all function parameters in `.js` file are considered optional.
 Calls with fewer arguments than the declared number of parameters are allowed.
