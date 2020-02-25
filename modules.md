@@ -455,4 +455,120 @@ if (needZipValidation) {
 }
 ```
 
+# 다른 JavaScript 라이브러리와 함께 사용하기 (Working with Other JavaScript Libraries)
+
+TypeScript로 작성되지 않은 라이브러리의 형태를 설명하려면, 라이브러리를 노출하는 API를 선언해야 합니다.
+
+우리는 구현을 정의하지 않은 선언을 "ambient"라고 부릅니다.
+이 선언들은 일반적으로 `.d.ts` 파일에 정의되어 있습니다.
+C/C++에 익숙하다면, `.h` 파일이라고 생각할 수 있습니다.
+몇 가지 예제를 살펴보겠습니다.
+
+## Ambient 모듈 (Ambient Modules)
+
+Node.js에서는 대부분의 작업은 하나 이상의 모듈을 로드하여 수행합니다.
+최상위-레벨의 내보내기 선언으로 각 모듈을 `.d.ts` 파일로 정의할 수 있지만, 더 큰 `.d.ts` 파일로 모듈들을  작성하는 것이 더 편리합니다.
+이를 위해, ambient 네임스페이스와 유사한 구조를 사용하지만, 나중에 가져올 수 있는 인용된 모듈 이름과 `module` 키워드를 사용합니다.
+예를 들면:
+
+##### node.d.ts (간단한 발췌)
+
+```ts
+declare module "url" {
+    export interface Url {
+        protocol?: string;
+        hostname?: string;
+        pathname?: string;
+    }
+
+    export function parse(urlStr: string, parseQueryString?, slashesDenoteHost?): Url;
+}
+
+declare module "path" {
+    export function normalize(p: string): string;
+    export function join(...paths: any[]): string;
+    export var sep: string;
+}
+```
+
+이제 `/// <reference>` `node.d.ts`를 수행한 다음, `import url = require("url");` 또는 `import * as URL from "url"`을 사용하여 모듈을 로드할 수 있습니다.
+
+```ts
+/// <reference path="node.d.ts"/>
+import * as URL from "url";
+let myUrl = URL.parse("http://www.typescriptlang.org");
+```
+
+### 속기 ambient 모듈 (Shorthand ambient modules)
+
+새로운 모듈을 사용하기 전에 선언을 작성하지 않으려는 경우, 속기 선언(shorthand declaration)을 사용하여 빠르게 시작할 수 있습니다.
+
+##### declarations.d.ts
+
+```ts
+declare module "hot-new-module";
+```
+
+속기 모듈로부터 모든 가져오기는 `any` 타입을 가집니다.
+
+```ts
+import x, {y} from "hot-new-module";
+x(y);
+```
+
+### 와일드카드 모듈 선언 (Wildcard module declarations)
+
+[SystemJS](https://github.com/systemjs/systemjs/blob/master/docs/overview.md#plugin-syntax)나 [AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md)와 같은 모듈 로더는 비-JavaScirpt 내용을 가져올 수 있습니다.
+이 둘은 일반적으로 접두사 또는 접미사를 사용하여 특수한 로딩 의미를 표시합니다.
+이러한 경우를 다루기 위해 와일드카드 모듈 선언을 사용할 수 있습니다.
+
+```ts
+declare module "*!text" {
+    const content: string;
+    export default content;
+}
+// 일부는 다른 방법으로 사용합니다.
+declare module "json!*" {
+    const value: any;
+    export default value;
+}
+```
+
+이제 `"*!text"` 나 `"json!*"`와 일치하는 것들을 가져올 수 있습니다.
+
+```ts
+import fileContent from "./xyz.txt!text";
+import data from "json!http://example.com/data.json";
+console.log(data, fileContent);
+```
+
+### UMD 모듈 (UMD modules)
+
+일부 라이브러리는 많은 모듈 로더에서 사용되거나, 모듈 로딩 (전역 변수) 없이 사용되도록 설계되었습니다.
+이를 [UMD](https://github.com/umdjs/umd) 모듈이라고 합니다.
+이러한 라이브러리는 가져오기나 전역 변수를 통해 접근할 수 있습니다.
+예를 들면:
+
+##### math-lib.d.ts
+
+```ts
+export function isPrime(x: number): boolean;
+export as namespace mathLib;
+```
+
+라이브러리는 모듈 내에서 가져오기로 사용할 수 있습니다.
+
+```ts
+import { isPrime } from "math-lib";
+isPrime(2);
+mathLib.isPrime(2); // 오류: 모듈 내부에서 전역 정의를 사용할 수 없습니다.
+```
+
+전역 변수로도 사용할 수 있지만, 스크립트 내에서만 사용할 수 있습니다.
+(스크립트는 가져오기나 내보내기가 없는 파일입니다.)
+
+```ts
+mathLib.isPrime(2);
+```
+
 `작업중...`
