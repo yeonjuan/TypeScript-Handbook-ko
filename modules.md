@@ -395,4 +395,64 @@ strings.forEach(s => {
 });
 ```
 
+# 선택적 모듈 로딩과 기타 고급 로딩 시나리오 (Optional Module Loading and Other Advanced Loading Scenarios)
+
+상황에 따라 특정 조건에서만 모듈을 로드하도록 만들 수 있습니다.
+TypeScript에서는 아래에 있는 패턴을 사용하여 이 시나리오와 다른 고급 로딩 시나리오를 구현하여 타입의 안전성을 잃지 않고 모듈 로더를 직접 호출할 수 있습니다.
+
+컴파일러는 노출된 JavaScript 안에서 각 모듈의 사용 여부를 감지합니다. 모듈 식별자가 표현식이 아닌 타입 표시로만 사용된다면 그 모듈에 대한 `require` 호출은 발생하지 않습니다.
+사용하지 않는 참조를 제거하면 성능을 최적화할 수 있으며, 해당 모듈을 선택적으로 로딩 할 수 있습니다.
+
+이 패턴의 핵심 아이디어는 `import id = require("...")` 문을 통해 모듈로 노출된 타입에 접근이 가능하다는 것입니다.
+아래 `if` 블록에 보이는 것처럼, 모듈 로더는 (`require`을 통해) 동적으로 호출됩니다.
+이 기능은 참조-제거 최적화를 활용하므로 필요할 때만 모듈을 로드 할 수 있습니다.
+해당 패턴이 동작하려면 `import`를 통해 정의된 심볼은 오직 타입 위치(즉, JavaScript로 방출되는 위치에서는 사용 안 함)에서만 사용되는 것이 중요합니다.
+
+타입 안전성을 유지하기 위해, `typeof` 키워드를 사용할 수 있습니다.
+`typeof` 키워드는 타입 위치에서 사용될 때는 값의 타입, 이 경우에는 모듈의 타입을 생성합니다.
+
+##### Node.js에서 동적 모듈 로딩 (Dynamic Module Loading in Node.js)
+
+```ts
+declare function require(moduleName: string): any;
+
+import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+
+if (needZipValidation) {
+    let ZipCodeValidator: typeof Zip = require("./ZipCodeValidator");
+    let validator = new ZipCodeValidator();
+    if (validator.isAcceptable("...")) { /* ... */ }
+}
+```
+
+##### 샘플: require.js에서 동적 모듈 로딩 (Sample: Dynamic Module Loading in require.js)
+
+```ts
+declare function require(moduleNames: string[], onLoad: (...args: any[]) => void): void;
+
+import * as Zip from "./ZipCodeValidator";
+
+if (needZipValidation) {
+    require(["./ZipCodeValidator"], (ZipCodeValidator: typeof Zip) => {
+        let validator = new ZipCodeValidator.ZipCodeValidator();
+        if (validator.isAcceptable("...")) { /* ... */ }
+    });
+}
+```
+
+##### 샘플: System.js에서 동적 모듈 로딩 (Sample: Dynamic Module Loading in System.js)
+
+```ts
+declare const System: any;
+
+import { ZipCodeValidator as Zip } from "./ZipCodeValidator";
+
+if (needZipValidation) {
+    System.import("./ZipCodeValidator").then((ZipCodeValidator: typeof Zip) => {
+        var x = new ZipCodeValidator();
+        if (x.isAcceptable("...")) { /* ... */ }
+    });
+}
+```
+
 `작업중...`

@@ -25,7 +25,6 @@
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
-- Mixins
 - [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
 - [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
 - [Utility Types(en)](./utility-types.md)
@@ -37,7 +36,6 @@
  * [TypeScript 3.8](./release-notes/typescript-3.8.md)
 
 </details>
-
 
 ## 참여하기
 
