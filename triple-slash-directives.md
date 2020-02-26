@@ -115,9 +115,9 @@ define("NamedModule", ["require", "exports"], function (require, exports) {
 
 > **Note**: 이 지시어는 deprecated 되었습니다. 않습니다. 대신 `import "moduleName";` 문을 사용하세요.
 
-`/// <amd-dependency path="x" />`는 컴파일러에게 TS-가 아닌 모듈의 의존성이 모듈의 require 호출의 결과에 주입되어야 한다고 알립니다. 
+`/// <amd-dependency path="x" />`는 컴파일러에게 TS-가 아닌 모듈의 의존성이 모듈의 require 호출의 결과에 주입되어야 한다고 알립니다.
 
-`amd-dependeny` 지시어는 선택적으로 `name` 프로퍼티를 가집니다; 이는 amd-dependency에게 선택적으로 이름을 넘겨줄 수 있도록 해줍니다: 
+`amd-dependeny` 지시어는 선택적으로 `name` 프로퍼티를 가집니다; 이는 amd-dependency에게 선택적으로 이름을 넘겨줄 수 있도록 해줍니다:
 
 ```ts
 /// <amd-dependency path="legacy/moduleA" name="moduleA"/>
