@@ -25,7 +25,7 @@
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
-- [Triple-Slash Directives 작성중...](./triple-slash-directives.md)
+- [Triple-Slash Directives](./triple-slash-directives.md)
 - [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
 - [Utility Types(en)](./utility-types.md)
 
