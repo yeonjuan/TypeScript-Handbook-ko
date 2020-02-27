@@ -113,7 +113,7 @@ define("NamedModule", ["require", "exports"], function (require, exports) {
 
 ## `/// <amd-dependency />`
 
-> **Note**: 이 지시어는 deprecated 되었습니다. 않습니다. 대신 `import "moduleName";` 문을 사용하세요.
+> **Note**: 이 지시어는 deprecated 되었습니다. 대신 `import "moduleName";` 문을 사용하세요.
 
 `/// <amd-dependency path="x" />`는 컴파일러에게 TS-가 아닌 모듈의 의존성이 모듈의 require 호출의 결과에 주입되어야 한다고 알립니다.
 
