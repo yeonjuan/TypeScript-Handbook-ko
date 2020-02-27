@@ -71,4 +71,64 @@ DOM API 또는`Symbol` 또는 `Iterable`과 같은 내장 JS 런타임 생성자
 "foo".padStart(4);
 ```
 
-작성중...
+## `/// <reference no-default-lib="true"/>`
+
+이 지시어는 파일을 *기본 라이브러리*라고 표시합니다.
+이 주석은 `lib.d.ts`와 이를 변형한 것들의 맨 상단에서 볼 수 있습니다.
+
+이 지시어는 컴파일러에게 기본 라이브러리(예.`lib.d.ts`)를 컴파일에 포함시키지 *않도록* 지시합니다.
+이는 커맨드 라인에 `--nolib`을 넘겨주는 것과 비슷한 영향을 줍니다.
+
+또한 `--skipDefaultLibCheck`를 넘겨주면, 컴파일러가 `/// <reference no-default-lib="true"/>` 이 있는 파일을 검사하지 않는다는 것을 유의하세요.
+
+## `/// <amd-module />`
+
+기본적으로 AMD 모듈은 익명으로 생성됩니다.
+이는 모듈로 만들어 내는 과정에 번들러(예. `r.js`)와 같은 다른 툴을 사용할 경우 문제를 발생시킬 수 있습니다.
+
+`amd-module` 지시어는 컴파일러에게 선택적으로 모듈의 이름을 넘길 수 있도록 해줍니다:
+
+##### amdModule.ts
+
+```ts
+///<amd-module name="NamedModule"/>
+export class C {
+}
+```
+
+이는 AMD `define` 호출의 일부로 `NamedModule` 이름을 모듈에 할당하는 결과를 만들어 낼 것입니다:
+
+##### amdModule.js
+
+```js
+define("NamedModule", ["require", "exports"], function (require, exports) {
+    var C = (function () {
+        function C() {
+        }
+        return C;
+    })();
+    exports.C = C;
+});
+```
+
+## `/// <amd-dependency />`
+
+> **Note**: 이 지시어는 deprecated 되었습니다. 대신 `import "moduleName";` 문을 사용하세요.
+
+`/// <amd-dependency path="x" />`는 컴파일러에게 TS-가 아닌 모듈의 의존성이 모듈의 require 호출의 결과에 주입되어야 한다고 알립니다.
+
+`amd-dependeny` 지시어는 선택적으로 `name` 프로퍼티를 가집니다; 이는 amd-dependency에게 선택적으로 이름을 넘겨줄 수 있도록 해줍니다:
+
+```ts
+/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
+declare var moduleA:MyType
+moduleA.callStuff()
+```
+
+생성된 JS 코드:
+
+```js
+define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
+    moduleA.callStuff()
+});
+```
