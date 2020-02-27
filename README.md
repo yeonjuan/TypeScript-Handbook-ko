@@ -19,7 +19,7 @@
 - [Symbols](./symbols.md)
 - [Iterators and Generators](./iterators-and-generators.md)
 - [Modules 작성중...](./modules.md)
-- Namespaces
+- [Namespaces](./namespaces.md)
 - Namespaces and Modules
 - [Module Resolution(en)](./module-resolution.md)
 - [Declaraion Merging](./declaration-merging.md)
