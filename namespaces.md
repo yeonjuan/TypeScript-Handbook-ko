@@ -8,7 +8,7 @@
 * [단일 파일 검사기 (Validators in a single file)](#단일-파일-검사기-validators-in-a-single-file)  
 
 [Namespacing](#Namespacing)  
-* [Namespaced Validators](##Namespaced-Validators)  
+* [Namespaced Validators](#Namespaced-Validators)  
 
 [파일 간 분할 (Splitting Across Files)](#파일-간-분할-Splitting-Across-Files)  
 * [다중 파일 네임 스페이스 (Multi-file namespaces)](#다중-파일-네임-스페이스-Multi-file-namespaces)  
@@ -253,7 +253,7 @@ C/C++에 익숙하다면 이를 `.h` 파일로 생각할 수 있습니다.
 널리 사용되는 D3 라이브러리는 `d3`이라는 전역 객체에서 기능을 정의합니다.
 이 라이브러리는 `<script>` 태그를 통해 로드되므로(모듈 로더 대신) 형태를 정의하기 위해 선언할 때 네임스페이스를 사용합니다.
 TypeScript 컴파일러는 이 형태를 보기 위해 앰비언트 네임스페이스 선언을 사용합니다.
-예를 들어 다음과 같이 작성을 시작할 수 있습니다.
+예를 들어 다음과 같이 작성할 수 있습니다.
 
 _D3.d.ts (간단한 발췌) #_
 
