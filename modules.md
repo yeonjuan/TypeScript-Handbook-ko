@@ -84,7 +84,7 @@ export * from "./ParseIntBasedZipCodeValidator"; // 'ParseIntBasedZipCodeValidat
 
 # 가져오기 (Import)
 
-가져오기는 모듈에서 내보내기 만큼 쉽습니다. 
+가져오기는 모듈에서 내보내기 만큼 쉽습니다.
 내보낸 선언은 아래의 `import` 양식 중 하나를 사용하여 가져옵니다.
 
 ## 모듈에서 단일 내보내기를 가져오기 (Import a single export from a module)
@@ -106,7 +106,7 @@ let myValidator = new validator.ZipCodeValidator();
 
 ## 부수효과만을 위해 모듈 가져오기 (Import a module for side-effects only)
 
-권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다. 
+권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다.
 이러한 모듈은 어떤 내보내기도 없거나, 사용자가 내보내기에 관심이 없습니다. 이러한 모듈을 가져오기 위해, 다음처럼 사용하세요:
 
 ```ts
@@ -115,7 +115,7 @@ import "./my-module.js"
 
 ## 타입 가져오기 (Importing Types)
 
-TypeScript 3.8 이전에서는 `import`를 사용하여 타입을 가져올 수 있습니다. 
+TypeScript 3.8 이전에서는 `import`를 사용하여 타입을 가져올 수 있습니다.
 TypeScript 3.8에서는 `import` 문을 사용하거나 `import type`을 사용하여 타입을 가져올 수 있습니다.
 
 ```ts
