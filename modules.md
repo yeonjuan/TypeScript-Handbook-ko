@@ -84,7 +84,8 @@ export * from "./ParseIntBasedZipCodeValidator"; // 'ParseIntBasedZipCodeValidat
 
 # 가져오기 (Import)
 
-가져오기는 모듈에서 내보내기 만큼 쉽습니다. 내보낸 선언은 아래의 `import` 양식 중 하나를 사용하여 가져옵니다.
+가져오기는 모듈에서 내보내기 만큼 쉽습니다. 
+내보낸 선언은 아래의 `import` 양식 중 하나를 사용하여 가져옵니다.
 
 ## 모듈에서 단일 내보내기를 가져오기 (Import a single export from a module)
 
@@ -105,7 +106,8 @@ let myValidator = new validator.ZipCodeValidator();
 
 ## 부수효과만을 위해 모듈 가져오기 (Import a module for side-effects only)
 
-권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다. 이러한 모듈은 어떤 내보내기도 없거나, 사용자가 내보내기에 관심이 없습니다. 이러한 모듈을 가져오기 위해, 다음처럼 사용하세요:
+권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다. 
+이러한 모듈은 어떤 내보내기도 없거나, 사용자가 내보내기에 관심이 없습니다. 이러한 모듈을 가져오기 위해, 다음처럼 사용하세요:
 
 ```ts
 import "./my-module.js"
@@ -113,7 +115,8 @@ import "./my-module.js"
 
 ## 타입 가져오기 (Importing Types)
 
-TypeScript 3.8 이전에서는 `import`를 사용하여 타입을 가져올 수 있습니다. TypeScript 3.8에서는 `import` 문을 사용하거나 `import type`을 사용하여 타입을 가져올 수 있습니다.
+TypeScript 3.8 이전에서는 `import`를 사용하여 타입을 가져올 수 있습니다. 
+TypeScript 3.8에서는 `import` 문을 사용하거나 `import type`을 사용하여 타입을 가져올 수 있습니다.
 
 ```ts
 // 동일한 import를 재사용하기
@@ -123,7 +126,8 @@ import {APIResponseType} from "./api";
 import type {APIResponseType} from "./api";
 ```
 
-`import type`은 항상 JavaScript에서 제거되며, 바벨 같은 도구는 컴파일러 플래그인 `isolatedModules`를 통해 코드에 대해 더 나은 가정을 할 수 있습니다. [3.8 릴리즈 정보](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에서 더 많은 정보를 읽을 수 있습니다.
+`import type`은 항상 JavaScript에서 제거되며, 바벨 같은 도구는 컴파일러 플래그인 `isolatedModules`를 통해 코드에 대해 더 나은 가정을 할 수 있습니다.
+[3.8 릴리즈 정보](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에서 더 많은 정보를 읽을 수 있습니다.
 
 # 기본 내보내기 (Default exports)
 
@@ -146,7 +150,8 @@ import $ from "jquery";
 $("button.continue").html( "Next Step..." );
 ```
 
-클래스 및 함수 선언은 기본 내보내기로 직접 작성될 수 있습니다. 기본 내보내기 클래스 및 함수 선언 이름은 선택사항 입니다.
+클래스 및 함수 선언은 기본 내보내기로 직접 작성될 수 있습니다.
+기본 내보내기 클래스 및 함수 선언 이름은 선택사항 입니다.
 
 ##### ZipCodeValidator.ts
 
@@ -226,7 +231,9 @@ import { utilities } from "./index";
 
 CommonJS와 AMD 둘 다 일반적으로 모듈의 모든 내보내기를 포함하는 `exports` 객체의 개념을 가지고 있습니다.
 
-또한 `exports` 객체를 사용자 정의 단일 객체로 대체하는 기능도 지원합니다. 기본 내보내기는 이 동작에서 대체 역할을 합니다; 하지만 둘은 호환되지는 않습니다. TypeScript는 기존의 CommonJS와 AMD 워크플로우를 모델링 하기 위해 `export =`를 지원합니다.
+또한 `exports` 객체를 사용자 정의 단일 객체로 대체하는 기능도 지원합니다.
+기본 내보내기는 이 동작에서 대체 역할을 합니다; 하지만 둘은 호환되지는 않습니다.
+TypeScript는 기존의 CommonJS와 AMD 워크플로우를 모델링 하기 위해 `export =`를 지원합니다.
 
 `export =` 구문은 모듈에서 내보내지는 단일 객체를 지정합니다. 클래스, 인터페이스, 네임스페이스, 함수 혹은 열거형이 될 수 있습니다.
 
@@ -263,7 +270,8 @@ strings.forEach(s => {
 
 # 모듈을 위한 코드 생성 (Code Generation for Modules)
 
-컴파일 중에는 지정된 모듈 대상에 따라 컴파일러는 Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), 또는 [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) 모듈-로딩 시스템에 적합한 코드를 생성합니다. 생성된 코드의 `define`, `require` 그리고 `register` 호출 기능에 대한 자세한 정보는 각 모듈 로더의 문서를 확인하세요.
+컴파일 중에는 지정된 모듈 대상에 따라 컴파일러는 Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), 또는 [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) 모듈-로딩 시스템에 적합한 코드를 생성합니다.
+생성된 코드의 `define`, `require` 그리고 `register` 호출 기능에 대한 자세한 정보는 각 모듈 로더의 문서를 확인하세요.
 
 이 간단한 예제는 가져오기 및 내보내기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
 
@@ -400,7 +408,8 @@ strings.forEach(s => {
 상황에 따라 특정 조건에서만 모듈을 로드하도록 만들 수 있습니다.
 TypeScript에서는 아래에 있는 패턴을 사용하여 이 시나리오와 다른 고급 로딩 시나리오를 구현하여 타입의 안전성을 잃지 않고 모듈 로더를 직접 호출할 수 있습니다.
 
-컴파일러는 노출된 JavaScript 안에서 각 모듈의 사용 여부를 감지합니다. 모듈 식별자가 표현식이 아닌 타입 표시로만 사용된다면 그 모듈에 대한 `require` 호출은 발생하지 않습니다.
+컴파일러는 노출된 JavaScript 안에서 각 모듈의 사용 여부를 감지합니다.
+모듈 식별자가 표현식이 아닌 타입 표시로만 사용된다면 그 모듈에 대한 `require` 호출은 발생하지 않습니다.
 사용하지 않는 참조를 제거하면 성능을 최적화할 수 있으며, 해당 모듈을 선택적으로 로딩 할 수 있습니다.
 
 이 패턴의 핵심 아이디어는 `import id = require("...")` 문을 통해 모듈로 노출된 타입에 접근이 가능하다는 것입니다.
@@ -571,4 +580,18 @@ mathLib.isPrime(2); // 오류: 모듈 내부에서 전역 정의를 사용할 �
 mathLib.isPrime(2);
 ```
 
-`작업중...`
+# 모듈 구조화에 대한 지침 (Guidance for structuring modules)
+
+## 가능한 최상위-레벨에 가깝게 내보내기 (Export as close to top-level as possible)
+
+모듈의 사용자는 내보내기 모듈을 사용할 때 가능한 마찰이 적어야 합니다.
+너무 많은 중첩 수준을 추가하면 성가신 경향이 있으므로, 어떻게 구조를 구성할지 신중하게 생각해야 합니다.
+
+모듈에서 네임스페이스를 내보내는 것은 너무 많은 중첩 레이어를 추가하는 예입니다.
+네임스페이스는 때때로 용도가 있지만, 모듈을 사용할 때 추가적인 레벨의 간접 참조를 추가합니다.
+이것은 사용자에게 빠르게 고통이 될 수 있으며, 일반적으로 불필요합니다.
+
+내보낸 클래스의 정적 메서드에도 비슷한 문제가 있습니다 - 클래스 자체에 중첩 레이어가 추가됩니다.
+표현이나 의도를 명확하게 유용한 방식으로 높이지 않는 한 간단하게 헬퍼 함수를 내보내는 것을 고려하세요.
+
+`작성중...`
