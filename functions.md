@@ -85,7 +85,6 @@ let myAdd: (baseValue: number, increment: number) => number =
 
 아래 예시를 직접 입력해보세요. TypeScript 컴파일러가 방정식(equation)의 한쪽에만 타입이 있더라도 타입을 알아낼 수 있다는 것을 알아채셨나요?
 
-
 ```ts
 // 전체함수 타입을 가진(full function type) myAdd
 let myAdd = function(x: number, y: number): number { return  x + y; };
