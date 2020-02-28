@@ -594,4 +594,215 @@ mathLib.isPrime(2);
 내보낸 클래스의 정적 메서드에도 비슷한 문제가 있습니다 - 클래스 자체에 중첩 레이어가 추가됩니다.
 표현이나 의도를 명확하게 유용한 방식으로 높이지 않는 한 간단하게 헬퍼 함수를 내보내는 것을 고려하세요.
 
+### 단일 `class`나 `function`을  내보낼 경우, `export default`를 사용하세요 (If you're only exporting a single `class` or `function`, use `export default`)
+
+"최상위-레벨에 가까운 내보내기"가 모듈 사용자의 마찰을 줄여주는 것처럼, 기본 내보내기(default export)를 도입하는 것도 마찬가지입니다.
+모듈의 주요 목적이 한 개의 특정 내보내기를 저장하는 것이라면, 기본 내보내기로 내보내는 것을 고려해야 합니다.
+이렇게 하면 가져오기와 실제로 가져오기를 사용하는 것을 더 쉽게 만듭니다.
+예를 들면:
+
+#### MyClass.ts
+
+```ts
+export default class SomeType {
+  constructor() { ... }
+}
+```
+
+#### MyFunc.ts
+
+```ts
+export default function getThing() { return "thing"; }
+```
+
+#### Consumer.ts
+
+```ts
+import t from "./MyClass";
+import f from "./MyFunc";
+let x = new t();
+console.log(f());
+```
+
+이것은 사용자에게 최적입니다. 타입에 원하는 이름(이 경우에는 `t`)을 지정할 수 있고 객체를 찾기 위해 과도한 점을 찍지 않아도 됩니다.
+
+### 여러 객체를 내보내는 경우, 최상위-레벨에 두세요 (If you're exporting multiple objects, put them all at top-level)
+
+#### MyThings.ts
+
+```ts
+export class SomeType { /* ... */ }
+export function someFunc() { /* ... */ }
+```
+
+반대로 가져올 때:
+
+### 가져온 이름을 명시적으로 나열 (Explicitly list imported names)
+
+#### Consumer.ts
+
+```ts
+import { SomeType, someFunc } from "./MyThings";
+let x = new SomeType();
+let y = someFunc();
+```
+
+### 많은 것을 가져오는 경우, 네임스페이스 가져오기 패턴을 사용하세요 (Use the namespace import pattern if you're importing a large number of things)
+
+#### MyLargeModule.ts
+
+```ts
+export class Dog { ... }
+export class Cat { ... }
+export class Tree { ... }
+export class Flower { ... }
+```
+
+#### Consumer.ts
+
+```ts
+import * as myLargeModule from "./MyLargeModule.ts";
+let x = new myLargeModule.Dog();
+```
+
+## 확장을 위한 다시-내보내기 (Re-export to extend)
+
+종종 모듈의 기능을 확장해야 할 필요가 있습니다.
+일반적인 JS 패턴은 JQuery 확장이 작동하는 방식과 유사하게 *확장(extenstions)* 으로 기존의 객체를 보강하는 것입니다.
+앞에서 언급했듯이 모듈은 전역 네임스페이스 객체와 같이 *병합(merge)* 하지 않습니다.
+여기서 추천하는 방법은 기존의 객체를 *변형하지 않고* 새로운 기능을 제공하는 개체(entity)를 내보내는 것입니다.
+
+`Calculator.ts` 모듈에 정의된 간단한 계산기 구현을 생각해보세요.
+이 모듈도 입력 문자열 목록을 전달하고 결과를 작성하여 계산기의 기능을 테스트할 수 있는 헬퍼 함수를 내보냅니다.
+
+#### Calculator.ts
+
+```ts
+export class Calculator {
+    private current = 0;
+    private memory = 0;
+    private operator: string;
+
+    protected processDigit(digit: string, currentValue: number) {
+        if (digit >= "0" && digit <= "9") {
+            return currentValue * 10 + (digit.charCodeAt(0) - "0".charCodeAt(0));
+        }
+    }
+
+    protected processOperator(operator: string) {
+        if (["+", "-", "*", "/"].indexOf(operator) >= 0) {
+            return operator;
+        }
+    }
+
+    protected evaluateOperator(operator: string, left: number, right: number): number {
+        switch (this.operator) {
+            case "+": return left + right;
+            case "-": return left - right;
+            case "*": return left * right;
+            case "/": return left / right;
+        }
+    }
+
+    private evaluate() {
+        if (this.operator) {
+            this.memory = this.evaluateOperator(this.operator, this.memory, this.current);
+        }
+        else {
+            this.memory = this.current;
+        }
+        this.current = 0;
+    }
+
+    public handleChar(char: string) {
+        if (char === "=") {
+            this.evaluate();
+            return;
+        }
+        else {
+            let value = this.processDigit(char, this.current);
+            if (value !== undefined) {
+                this.current = value;
+                return;
+            }
+            else {
+                let value = this.processOperator(char);
+                if (value !== undefined) {
+                    this.evaluate();
+                    this.operator = value;
+                    return;
+                }
+            }
+        }
+        throw new Error(`Unsupported input: '${char}'`);
+    }
+
+    public getResult() {
+        return this.memory;
+    }
+}
+
+export function test(c: Calculator, input: string) {
+    for (let i = 0; i < input.length; i++) {
+        c.handleChar(input[i]);
+    }
+
+    console.log(`result of '${input}' is '${c.getResult()}'`);
+}
+```
+
+노출된 `test` 함수를 사용하는 간단한 계산기 테스트입니다.
+
+#### TestCalculator.ts
+
+```ts
+import { Calculator, test } from "./Calculator";
+
+
+let c = new Calculator();
+test(c, "1+2*33/11="); // 9 출력
+```
+
+10이 아닌 숫자를 입력 받을 수 있도록 이것을 확장하여 `ProgrammerCalculator.ts`을 만들어보겠습니다.
+
+```ts
+import { Calculator } from "./Calculator";
+
+class ProgrammerCalculator extends Calculator {
+    static digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
+
+    constructor(public base: number) {
+        super();
+        const maxBase = ProgrammerCalculator.digits.length;
+        if (base <= 0 || base > maxBase) {
+            throw new Error(`base has to be within 0 to ${maxBase} inclusive.`);
+        }
+    }
+
+    protected processDigit(digit: string, currentValue: number) {
+        if (ProgrammerCalculator.digits.indexOf(digit) >= 0) {
+            return currentValue * this.base + ProgrammerCalculator.digits.indexOf(digit);
+        }
+    }
+}
+
+// 새로 확장된  calculator를 Calculator로 내보내기
+export { ProgrammerCalculator as Calculator };
+
+// 또한 헬퍼 함수도 내보내기
+export { test } from "./Calculator";
+```
+
+새로운 `ProgrammerCalculator` 모듈은 `Calculator` 모듈과 유사한 API 형태를 내보내지만, 원래 모듈의 객체를 보강하지는 않습니다.
+다음은 ProgrammerCalculator 클래스에 대한 테스트입니다:
+
+#### TestProgrammerCalculator.ts
+
+```ts
+import { Calculator, test } from "./ProgrammerCalculator";
+
+let c = new Calculator(2);
+test(c, "001+010="); // 3 출력
+```
+
 `작성중...`
