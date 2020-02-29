@@ -70,7 +70,7 @@ c.prop = 0;          // 성공
 c.count = "string";  // 오류: string 은 number|undefined에 할당할 수 없음
 ```
 
-## 생성자 함수와 클래스는 동일합니다 (Constructor functions are equivalent to classes)
+## 생성자 함수와 클래스는 동일 (Constructor functions are equivalent to classes)
 
 ES2015 이전에는, JavaScript는 클래스 대신 생성자 함수를 사용했습니다.
 컴파일러는 이러한 패턴을 지원하며 생성자 함수를 ES2015 클래스와 동일한 것으로 이해합니다.
