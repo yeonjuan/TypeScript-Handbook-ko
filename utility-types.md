@@ -1,8 +1,8 @@
-# Introduction
+# 소개 (Introduction)
 
-TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally.
+TypeScript는 공통 타입 변환을 용이하게 하기 위해 몇가지 유틸리티 타입을 제공합니다. 이런 유틸리티들은 전역적으로 사용 가능합니다.
 
-## Table of contents
+## 목차 (Table of contents)
 
 * [`Partial<T>`](#partialt)
 * [`Readonly<T>`](#readonlyt)
@@ -23,7 +23,7 @@ TypeScript provides several utility types to facilitate common type transformati
 
 # `Partial<T>`
 
-Constructs a type with all properties of `T` set to optional. This utility will return a type that represents all subsets of a given type.
+`T`의 모든 프로퍼티를 선택적으로 만드는 타입을 구성합니다. 이 유틸리티는 주어진 타입의 모든 하위 타입 집합을 나타내는 타입을 반환합니다.
 
 ##### Example
 
@@ -49,7 +49,7 @@ const todo2 = updateTodo(todo1, {
 
 # `Readonly<T>`
 
-Constructs a type with all properties of `T` set to `readonly`, meaning the properties of the constructed type cannot be reassigned.
+`T`의 모든 프로퍼티를 `읽기 전용(readonly)`으로 설정한 타입을 구성합니다, 즉 생성된 타입의 프로티들은 재할당 될 수 없습니다.
 
 ##### Example
 
@@ -65,7 +65,7 @@ const todo: Readonly<Todo> = {
 todo.title = 'Hello'; // Error: cannot reassign a readonly property
 ```
 
-This utility is useful for representing assignment expressions that will fail at runtime (i.e. when attempting to reassign properties of a [frozen object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)).
+이 유틸리티는 런타임에 실패할 할당 표현식을 나타낼 때 유용합니다.(예, [frozen 객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)의 프로퍼티에 재할당 하려고 하는 경우)
 
 ##### `Object.freeze`
 
@@ -75,7 +75,7 @@ function freeze<T>(obj: T): Readonly<T>;
 
 # `Record<K,T>`
 
-Constructs a type with a set of properties `K` of type `T`. This utility can be used to map the properties of a type to another type.
+타입 `T`의 프로퍼티의 집합 `K`로 타입을 구성합니다. 이 유틸리티는 타입의 프로퍼티들을 다른 타입에 매칭시키는 데 사용될 수 있습니다.
 
 ##### Example
 
@@ -95,7 +95,7 @@ const x: Record<Page, PageInfo> = {
 
 # `Pick<T,K>`
 
-Constructs a type by picking the set of properties `K` from `T`.
+`T`에서 프로퍼티 `K`의 집합을 선택해 타입을 구성합니다.
 
 ##### Example
 
@@ -116,7 +116,7 @@ const todo: TodoPreview = {
 
 # `Omit<T,K>`
 
-Constructs a type by picking all properties from `T` and then removing `K`.
+`T`에서 모든 프로퍼티를 선택한 다음 `K`를 제거한 타입을 구성합니다.
 
 ##### Example
 
@@ -137,7 +137,7 @@ const todo: TodoPreview = {
 
 # `Exclude<T,U>`
 
-Constructs a type by excluding from `T` all properties that are assignable to `U`.
+`T` 에서 `U`에 할당 할수 있는 모든 속성을 제외한 타입을 구성합니다.
 
 ##### Example
 
@@ -149,7 +149,7 @@ type T2 = Exclude<string | number | (() => void), Function>;  // string | number
 
 # `Extract<T,U>`
 
-Constructs a type by extracting from `T` all properties that are assignable to `U`.
+`T`에서 `U`에 할당 할수 있는 모든 속성을 추출하여 타입을 구성합니다.
 
 ##### Example
 
@@ -160,7 +160,7 @@ type T1 = Extract<string | number | (() => void), Function>;  // () => void
 
 # `NonNullable<T>`
 
-Constructs a type by excluding `null` and `undefined` from `T`.
+`T`에서 `null` 과 `undefined`를 제외한 타입을 구성합니다.
 
 ##### Example
 
@@ -171,7 +171,7 @@ type T1 = NonNullable<string[] | null | undefined>;  // string[]
 
 # `Parameters<T>`
 
-Constructs a tuple type of the types of the parameters of a function type `T`.
+함수 타입 `T`의 매개변수 타입들의 튜플 타입을 구성합니다.
 
 ##### Example
 
@@ -189,7 +189,7 @@ type T8 = Parameters<Function>;  // Error
 
 # `ConstructorParameters<T>`
 
-The `ConstructorParameters<T>` type lets us extract all parameter types of a constructor function type. It produces a tuple type with all the parameter types (or the type `never` if `T` is not a function).
+`ConstructorParameters<T>` 타입은 생성자 함수 타입의 모든 매개변수 타입을 추출할 수 있게 해줍니다. 모든 매개변수 타입을 가지는 튜플 타입(`T`가 함수가 아닌 경우 `never`)을 생성합니다.
 
 ##### Example
 
@@ -201,7 +201,7 @@ type T2 = ConstructorParameters<RegExpConstructor>;  // [string, (string | undef
 
 # `ReturnType<T>`
 
-Constructs a type consisting of the return type of function `T`.
+함수 `T`의 반환 타입으로 구성된 타입을 만듭니다.
 
 ##### Example
 
@@ -220,7 +220,7 @@ type T8 = ReturnType<Function>;  // Error
 
 # `InstanceType<T>`
 
-Constructs a type consisting of the instance type of a constructor function type `T`.
+생성자 함수 타입 `T`의 인스턴스 타입으로 구성된 타입을 만듭니다.
 
 ##### Example
 
@@ -239,7 +239,7 @@ type T4 = InstanceType<Function>;  // Error
 
 # `Required<T>`
 
-Constructs a type consisting of all properties of `T` set to required.
+`T`의 모든 프로퍼티가 필수로 설정된 타입을 구성합니다.
 
 ##### Example
 
@@ -256,9 +256,9 @@ const obj2: Required<Props> = { a: 5 }; // Error: property 'b' missing
 
 # `ThisParameterType`
 
-Extracts the type of the `this` parameter of a function type, or `unknown` if the function type has no `this` parameter.
+함수 타입의 `this` 매개변수의 타입, 혹은 함수 타입에 `this` 메개변수가 없을 경우 `unknown`을 추출합니다.
 
-Note: This type only works correctly if `--strictFunctionTypes` is enabled. See [#32964](https://github.com/microsoft/TypeScript/issues/32964).
+유의: 이 타입은 `--strictFunctionTypes`가 활성화 되었을 때만 올바르게 동작합니다. [#32964](https://github.com/microsoft/TypeScript/issues/32964)를 참고하세요.
 
 ##### Example
 
@@ -274,9 +274,9 @@ function numberToString(n: ThisParameterType<typeof toHex>) {
 
 # `OmitThisParameter`
 
-Removes the 'this' parameter from a function type.
+함수 타입에서 'this' 매개변수를 제거합니다.
 
-Note: This type only works correctly if `--strictFunctionTypes` is enabled. See [#32964](https://github.com/microsoft/TypeScript/issues/32964).
+유의: 이 타입은 `--strictFunctionTypes`가 활성화 되었을 때만 올바르게 동작합니다. [#32964](https://github.com/microsoft/TypeScript/issues/32964)를 참고하세요.
 
 ##### Example
 
