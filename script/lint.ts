@@ -14,7 +14,7 @@ class Emitter <T extends string, D>{
         this.listeners = listeners;
     }
     emit(type: T, data: D) {
-        this.listeners.map(listener => listener[type]?.(data));
+        this.listeners.forEach(listener => listener[type]?.(data));
     }
 }
 
