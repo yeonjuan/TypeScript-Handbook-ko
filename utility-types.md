@@ -276,7 +276,7 @@ function numberToString(n: ThisParameterType<typeof toHex>) {
 
 함수 타입에서 'this' 매개변수를 제거합니다.
 
-유의: 이 타입은 `--strictFunctionTypes`가 활성화 되었을 때만 올바르게 동작합니다. [#32964](https://github.com/microsoft/TypeScript/issues/32964)를 참고하세요.
+유의: 이 타입은 `--strictFunctionTypes`가 활성화되었을 때만 올바르게 동작합니다. [#32964](https://github.com/microsoft/TypeScript/issues/32964)를 참고하세요.
 
 ##### Example
 
@@ -285,7 +285,7 @@ function toHex(this: Number) {
     return this.toString(16);
 }
 
-// The return type of `bind` is already using `OmitThisParameter`, this is just for demonstration.
+// `bind`의 반환 타입은 이미 `OmitThisParameter`을 사용하고 있습니다, 이는 단지 예제를 위한 것입니다.
 const fiveToHex: OmitThisParameter<typeof toHex> = toHex.bind(5);
 
 console.log(fiveToHex());
@@ -293,16 +293,16 @@ console.log(fiveToHex());
 
 # `ThisType<T>`
 
-This utility does not return a transformed type. Instead, it serves as a marker for a contextual `this` type. Note that the `--noImplicitThis` flag must be enabled to use this utility.
+이 유틸리티는 변형된 타입을 반환하지 않습니다. 대신, 문맥적 `this`타입에 표시를 하는 역할을 합니다. 이 유틸리티를 사용하기 위해선 `--noImplicitThis` 플래그를 사용해야한다는 것을 유의하세요.
 
 ##### Example
 
 ```ts
-// Compile with --noImplicitThis
+// --noImplicitThis 로 컴파일
 
 type ObjectDescriptor<D, M> = {
     data?: D;
-    methods?: M & ThisType<D & M>;  // Type of 'this' in methods is D & M
+    methods?: M & ThisType<D & M>;  // 메서드 안의 'this 타입은 D & M 입니다.
 }
 
 function makeObject<D, M>(desc: ObjectDescriptor<D, M>): D & M {
@@ -315,8 +315,8 @@ let obj = makeObject({
     data: { x: 0, y: 0 },
     methods: {
         moveBy(dx: number, dy: number) {
-            this.x += dx;  // Strongly typed this
-            this.y += dy;  // Strongly typed this
+            this.x += dx;  // 강하게 타입이 정해진 this
+            this.y += dy;  // 강하게 타입이 정해진 this
         }
     }
 });
@@ -326,6 +326,6 @@ obj.y = 20;
 obj.moveBy(5, 5);
 ```
 
-In the example above, the `methods` object in the argument to `makeObject` has a contextual type that includes `ThisType<D & M>` and therefore the type of `this` in methods within the `methods` object is `{ x: number, y: number } & { moveBy(dx: number, dy: number): number }`. Notice how the type of the `methods` property simultaneously is an inference target and a source for the `this` type in methods.
+위 예제에서, `makeObject`의 인자로 넘겨지는 `method` 객체는 `ThisType<D & M>`를 포함한 문맥적 타입을 가지고 있고, 따라서 `methods` 객체의 메서드 안에 `this` 타입은` { x: number, y: number } & { moveBy(dx: number, dy: number): number }`입니다. `method` 프로퍼티의 타입이 추론의 대상이며 동시에 메서드 안의 `this` 타입의 출처인 것을 주목하세요.
 
-The `ThisType<T>` marker interface is simply an empty interface declared in `lib.d.ts`. Beyond being recognized in the contextual type of an object literal, the interface acts like any empty interface.
+`ThisType<T>` 마커 인터페이스는 단지 `lib.d.ts`에 선언된 빈 인터페이스입니다. 객체 리터럴의 문맥적 타입으로 인식되는 것을 넘어, 그 인터페이스는 빈 인터페이스처럼 동작합니다.
