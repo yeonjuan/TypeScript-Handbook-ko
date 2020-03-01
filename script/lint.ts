@@ -18,7 +18,7 @@ class Emitter <T extends string, D>{
     }
 }
 
-type Data = { filename: string, text: string}
+type Data = { filename: string, text: string, line: number, col?: number }
 
 enum Node {
     Char = "Char",
@@ -39,10 +39,10 @@ function print(filename: string, message: string) {
 function checkNonPrintableChar(): Listener<Node, Data> {
     const NON_PRINTABLE_CHAR_CODES = [0x1B, 0x1C, 0x8];
     return {
-        [Node.Char]({filename, text: char}) {
+        [Node.Char]({filename, text: char, line, col = 0}) {
             const charCode = char.charCodeAt(0);
             if (NON_PRINTABLE_CHAR_CODES.includes(char.charCodeAt(0))) {
-                print(filename,`출력할 수 없는 문자 ${charCode} 가 있습니다.`);
+                print(filename, `출력할 수 없는 문자 ${charCode} 가 있습니다. (${line}:${col})`);
             }
         }
     }
@@ -67,9 +67,9 @@ const rules = [
                 throw new Error(err.message);
             }
             const lines = file.split("\n");
-            lines.forEach(line => {
-                emitter.emit(Node.Line, ({filename, text: line}));
-                [...line].forEach(char => emitter.emit(Node.Char, ({filename, text: char})));
+            lines.forEach((text, line) => {
+                emitter.emit(Node.Line, ({filename, text, line}));
+                [...text].forEach((char, col) => emitter.emit(Node.Char, ({filename, text: char, line, col })));
             });
         });
     });
