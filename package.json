@@ -5,7 +5,9 @@
   "main": "none",
   "scripts": {
     "test": "npx markdownlint .",
-    "lint-fix": "npx markdownlint . --fix"
+    "lint-fix": "npx markdownlint . --fix",
+    "lint-beta": "npm run build && node ./bin/lint '**/*.md'",
+    "build": "npx tsc"
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,10 @@
   },
   "devDependencies": {
     "husky": "^4.2.3",
-    "markdownlint-cli": "^0.22.0"
+    "markdownlint-cli": "^0.22.0",
+    "typescript": "^3.8.3",
+    "@types/glob": "^7.1.1",
+    "@types/requireindex": "^1.2.0",
+    "glob": "^7.1.6"
   }
 }
