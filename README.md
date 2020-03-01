@@ -18,7 +18,7 @@
 - [Advanced Types 작성중...](./advanced-types.md)
 - [Symbols](./symbols.md)
 - [Iterators and Generators](./iterators-and-generators.md)
-- [Modules 작성중...](./modules.md)
+- [Modules](./modules.md)
 - [Namespaces](./namespaces.md)
 - Namespaces and Modules
 - [Module Resolution(en)](./module-resolution.md)
