@@ -20,7 +20,7 @@
 - [Iterators and Generators](./iterators-and-generators.md)
 - [Modules](./modules.md)
 - [Namespaces](./namespaces.md)
-- Namespaces and Modules
+- [Namespaces and Modules](./namespaces-and-modules.md)
 - [Module Resolution(en)](./module-resolution.md)
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
