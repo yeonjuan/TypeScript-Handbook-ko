@@ -27,7 +27,7 @@
 - [Decorators(en)](./decorators.md)
 - [Triple-Slash Directives](./triple-slash-directives.md)
 - [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
-- [Utility Types(en)](./utility-types.md)
+- [Utility Types](./utility-types.md)
 
 <details>
     <summary>릴리즈 노트</summary>
