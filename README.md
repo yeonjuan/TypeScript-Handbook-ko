@@ -26,7 +26,7 @@
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
 - [Triple-Slash Directives](./triple-slash-directives.md)
-- [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
+- [Type Checking JavaScript Files](./type-checking-javascript-files.md)
 - [Utility Types](./utility-types.md)
 
 <details>
