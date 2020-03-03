@@ -322,4 +322,4 @@ function createInstance<A extends Animal>(c: new () => A): A {
 
 createInstance(Lion).keeper.nametag;  // 타입검사!
 createInstance(Bee).keeper.hasMask;   // 타입검사!
-```s
+```
