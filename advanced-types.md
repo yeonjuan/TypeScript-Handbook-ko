@@ -1134,7 +1134,7 @@ type T10 = Foo<{ a: string, b: string }>;  // string
 type T11 = Foo<{ a: string, b: number }>;  // string | number
 ```
 
-마찬가지로, 반-변 (contra-variant) 위치에서 같은 타입 변수에 대한 여러 후보가 교차 타입을 추론합니다:
+마찬가지로, 반-변(contra-variant) 위치에서 같은 타입 변수에 대한 여러 후보가 교차 타입을 추론합니다:
 
 ```ts
 type Bar<T> = T extends { a: (x: infer U) => void, b: (x: infer U) => void } ? U : never;
