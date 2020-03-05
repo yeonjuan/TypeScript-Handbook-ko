@@ -2,6 +2,7 @@
 
 ## 번역 작업
 
+* 번역의 진행 상황은 [이곳](https://github.com/yeonjuan/Typescript-Handbook-ko/projects/1)에서 확인할 수 있습니다.
 * 경어체를 사용하여 번역합니다.
 * 공통된 용어를 사용하여 번역합니다. 공통된 용어는 [번역 용어](https://github.com/yeonjuan/Typescript-Handbook-ko/wiki/%EB%B2%88%EC%97%AD-%EC%9A%A9%EC%96%B4-%ED%86%B5%EC%9D%BC)를 참고해주세요.
 * 다른 참여자가 진행하고 있는 작업과 중복을 피하기 위해 작업 전 [이슈](https://github.com/yeonjuan/Typescript-Handbook-ko/issues)를 확인해 주세요.
