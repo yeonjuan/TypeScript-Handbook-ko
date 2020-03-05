@@ -40,6 +40,7 @@
 ## 참여하기
 
 누구나 참여 가능하며 참여하는 방법은 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참고해 주세요.
+현재 프로젝트의 진행 상황은 [이곳](https://github.com/yeonjuan/Typescript-Handbook-ko/projects/1)에서 확인할 수 있습니다.
 
 ## 컨트리뷰터 목록 ✨
 
