@@ -85,6 +85,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "heeveloper",
+      "name": "Heeveloper",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17620671?v=4",
+      "profile": "https://heeveloper.github.io/",
+      "contributions": [
+        "translation"
+      ]
     }
   ],
   "contributorsPerLine": 7,

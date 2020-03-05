@@ -1,7 +1,7 @@
 # Typescript-Handbook-ko
 
 [![Build Status](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko.svg?branch=master)](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 타입스크립트 핸드북 번역
@@ -61,6 +61,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://github.com/Myoji"><img src="https://avatars2.githubusercontent.com/u/12138415?v=4" width="100px;" alt=""/><br /><sub><b>Myoji</b></sub></a><br /><a href="#translation-Myoji" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/dvlprsh"><img src="https://avatars1.githubusercontent.com/u/48552752?v=4" width="100px;" alt=""/><br /><sub><b>seoheePark</b></sub></a><br /><a href="#translation-dvlprsh" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://heeveloper.github.io/"><img src="https://avatars3.githubusercontent.com/u/17620671?v=4" width="100px;" alt=""/><br /><sub><b>Heeveloper</b></sub></a><br /><a href="#translation-heeveloper" title="Translation">🌍</a></td>
   </tr>
 </table>
 
