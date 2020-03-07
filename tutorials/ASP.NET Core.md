@@ -1,12 +1,15 @@
 # ASP.NET Core + TypeScript
 
-## Setup 
-### Install ASP.NET Core and TypeScript 
+## Setup
+
+### Install ASP.NET Core and TypeScript
+
 First, install [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) if you need it. This quick-start guide requires Visual Studio 2015 or 2017.
 
 Next, if your version of Visual Studio does not already have the latest TypeScript, you can [install it](https://www.typescriptlang.org/index.html#download-links).
 
-### Create a new project 
+### Create a new project
+<!-- markdownlint-disable MD029-->
 1. Choose **File**
 2. Choose **New Project** (Ctrl + Shift + N)
 3. Search for **.NET Core** in the project search bar
@@ -26,13 +29,15 @@ Run the application and make sure that it works.
 
 ![](../../assets/images/tutorials/aspnet/workingsite.png)
 
-### Set up the server 
+### Set up the server
+
 Open **Dependencies > Manage NuGet Packages > Browse.** Search and install `Microsoft.AspNetCore.StaticFiles` and `Microsoft.TypeScript.MSBuild`:
 
 ![](../../assets/images/tutorials/aspnet/downloaddependency.png)
 
 Open up your `Startup.cs` file and edit your `Configure` function to look like this:
-``` 
+
+```cs
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     if (env.IsDevelopment())
@@ -47,20 +52,21 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 You may need to restart VS for the red squiggly lines below `UseDefaultFiles` and `UseStaticFiles` to disappear.
 
-## Add TypeScript 
+## Add TypeScript
+
 Next we will add a new folder and call it `scripts`.
 
 ![](../../assets/images/tutorials/aspnet/newfolder.png)
 
 ![](../../assets/images/tutorials/aspnet/scripts.png)
 
-### Add TypeScript code 
+### Add TypeScript code
 
 Right click on `scripts` and click **New Item**. Then choose **TypeScript File** and name the file `app.ts`
 
 ![](../../assets/images/tutorials/aspnet/tsfile.png)
 
-### Add example code 
+### Add example code
 
 Add the following code to the `app.ts` file.
 
@@ -71,7 +77,8 @@ function sayHello() {
     return `Hello from ${compiler} and ${framework}!`;
 }
 ```
-### Set up the build 
+
+### Set up the build
 
 *Configure the TypeScript compiler*
 
@@ -80,7 +87,8 @@ First we need to tell TypeScript how to build. Right click on `scripts` and clic
 ![](../../assets/images/tutorials/aspnet/tsconfig.png)
 
 Replace the contents of the `tsconfig.json` file with:
-```
+
+```json
 {
   "compilerOptions": {
     "noEmitOnError": true,
@@ -94,12 +102,13 @@ Replace the contents of the `tsconfig.json` file with:
   "compileOnSave": true
 }
 ```
+
 * `onEmitOnError` : Do not emit outputs if any errors were reported.
 * `noImplicitAny` : Raise error on expressions and declarations with an implied `any` type.
 * `sourceMap` : Generates corresponding `.map` file.
-* `target` : Specify ECMAScript target version. 
+* `target` : Specify ECMAScript target version.
 
-Note: `"ESNext"` targets latest supported 
+Note: `"ESNext"` targets latest supported
 
 `"noImplicitAny"` is good idea whenever you’re writing new code — you can make sure that you don’t write any untyped code by mistake. `"compileOnSave"` makes it easy to update your code in a running web app.
 
@@ -111,7 +120,7 @@ We need to setup NPM so that JavaScript packages can be downloaded. Right click 
 
 Inside the `"devDependencies"` section of the `package.json` file, add *gulp* and *del*
 
-```
+```json
 "devDependencies": {
     "gulp": "4.0.2",
     "del": "5.1.0"
@@ -150,9 +159,10 @@ gulp.task('default', function () {
     gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/scripts'))
 });
 ```
+
 The first line tells Visual Studio to run the task ‘default’ after the build finishes. It will also run the ‘clean’ task when you ask Visual Studio to clean the build.
 
-Now right-click on `gulpfile.js` and click Task Runner Explorer. 
+Now right-click on `gulpfile.js` and click Task Runner Explorer.
 
 ![](../../assets/images/tutorials/aspnet/taskrunner.png)
 
@@ -160,11 +170,11 @@ If ‘default’ and ‘clean’ tasks don’t show up, refresh the explorer:
 
 ![](../../assets/images/tutorials/aspnet/taskrunnerrefresh.png)
 
-### Write a HTML page 
+### Write a HTML page
 
 Right click on the `wwwroot` folder (if you don't see the folder try building the project) and add a New Item named `index.html` inside. Use the following code for `index.html `
 
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -182,7 +192,7 @@ Right click on the `wwwroot` folder (if you don't see the folder try building th
 </html>
 ```
 
-### Test 
+### Test
 
 1. Run the project
 2. As you type on the boxes you should see the message appear/change!
@@ -199,5 +209,3 @@ Right click on the `wwwroot` folder (if you don't see the folder try building th
 ![](../../assets/images/tutorials/aspnet/debugger.png)
 
 Congrats you've built your own .NET Core project with a TypeScript frontend.
-
-
