@@ -174,7 +174,7 @@ interface Square {
 }
 
 let c: Circle = {
-    kind: ShapeKind.Square, // 오류! 'ShapeKind.Circle' 타입에 'ShapeKind.Square' 타입을 할당 할 수 없습니다.
+    kind: ShapeKind.Square, // 오류! 'ShapeKind.Circle' 타입에 'ShapeKind.Square' 타입을 할당할 수 없습니다.
     radius: 100,
 }
 ```
