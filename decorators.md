@@ -124,7 +124,7 @@ f(): called
 3. *매개 변수 데코레이터*는 생성자에 적용됩니다.
 4. *클래스 데코레이터*는 클래스에 적용됩니다.
 
-**## 클래스 데코레이터 (Class Decorators)**
+## 클래스 데코레이터 (Class Decorators)
 
 **클래스 데코레이터**는 클래스 선언 직전에 선언됩니다.
 
@@ -189,7 +189,7 @@ class Greeter {
 console.log(new Greeter("world"));
 ```
 
-**## 메서드 데코레이터 (Method Decorators)**
+## 메서드 데코레이터 (Method Decorators)
 
 *메소드 데코레이터*는 메소드 선언 직전에 선언됩니다.
 
