@@ -1,4 +1,4 @@
-#Mixin
+# Mixin
 
 ## 소개(Introduction)
 전통적인 객쳬지향 계층과 함께, 재사용 가능한 컴포넌트로 부터 클래스를 빌드하는 또 다른 일반적인 방법으로, 간단한 부분클래스를 결합하여 빌드하는 것입니다. 스칼라 등의 언어를 통해서, 믹스인에 대한 개념과 특성은 익숙할 수 있을 것이며, 패턴은 JavaScript 커뮤니티에서도 어느 정도의 인기를 얻었습니다.
@@ -55,7 +55,7 @@ function applyMixins(derivedCtor: any, baseCtors: any[]) {
 }
 ```
 
-#예시 알아보기(Understanding the sample)
+## 예시 알아보기(Understanding the sample)
 예시 코드는 `mixin`을 수행하는 두 클래스로 시작합니다. 두 클래스는 각각 부분적인 기능에 집중되어 있음을 알 수 있습니다. 이후에는 두 기능을 모두 사용하여 새로운 클래스를 만들기 위해 이들을 혼합(mix)할 것입니다.
 
 ```ts
