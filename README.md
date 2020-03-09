@@ -21,7 +21,7 @@
 - [Modules](./modules.md)
 - [Namespaces](./namespaces.md)
 - [Namespaces and Modules](./namespaces-and-modules.md)
-- [Module Resolution(en)](./module-resolution.md)
+- [Module Resolution](./module-resolution.md)
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
 - [Decorators(en)](./decorators.md)
