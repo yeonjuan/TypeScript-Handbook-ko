@@ -239,7 +239,7 @@ module.exports = {
 
 [여기](https://webpack.js.org/concepts)에서 Webpack 구성에 대해 자세히 알아볼 수 있습니다.
 
-# 함께 모으기 (Putting it all together)
+# 모든 것을 함께 모아서 (Putting it all together)
 
 그냥 실행합니다:
 
