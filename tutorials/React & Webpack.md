@@ -1,20 +1,20 @@
-This guide will teach you how to wire up TypeScript with [React](https://reactjs.org/) and [webpack](https://webpack.js.org/).
+이 가이드는 TypeScript를 [React](https://reactjs.org/) 및 [webpack](https://webpack.js.org/)에 연결하는 방법을 알려줍니다.
 
-If you're starting a brand new project, take a look at the [React Quick Start guide](https://create-react-app.dev/docs/adding-typescript) first.
+새로운 프로젝트를 시작하는 경우, 먼저 [React Quick Start guide](https://create-react-app.dev/docs/adding-typescript)를 살펴보세요.
 
-Otherwise, we assume that you're already using [Node.js](https://nodejs.org/) with [npm](https://www.npmjs.com/).
+그렇지 않으면 이미 [npm](https://www.npmjs.com/)과 함께 [Node.js](https://nodejs.org/)를 사용하고 있다고 가정합니다.
 
-# Lay out the project
+# 프로젝트 배치 (Lay out the project)
 
-Let's start out with a new directory.
-We'll name it `proj` for now, but you can change it to whatever you want.
+새 디렉토리부터 시작하겠습니다.
+지금은 이름을 `proj`라고 지정하지만, 원하는대로 변경할 수 있습니다.
 
 ```shell
 mkdir proj
 cd proj
 ```
 
-To start, we're going to structure our project in the following way:
+시작하기 위해, 다음과 같은 방식으로 프로젝트를 구성하겠습니다:
 
 ```text
 proj/
@@ -23,10 +23,10 @@ proj/
    └─ components/
 ```
 
-TypeScript files will start out in your `src` folder, run through the TypeScript compiler, then webpack, and end up in a `main.js` file in `dist`.
-Any components that we write will go in the `src/components` folder.
+TypeScript 파일은 `src` 폴더에서 시작하여, TypeScript 컴파일러를 통해 실행한 다음, webpack을 거쳐 `dist`의 `main.js` 파일로 끝납니다.
+우리가 작성하는 모든 컴포넌트는 `src/components` 폴더 안에 있습니다.
 
-Let's scaffold this out:
+이것을 기본 뼈대로 구성합니다:
 
 ```shell
 mkdir src
@@ -35,62 +35,62 @@ mkdir components
 cd ..
 ```
 
-Webpack will eventually generate the `dist` directory for us.
+Webpack으로 마지막엔 `dist`폴더를 생성할 것입니다.
 
-# Initialize the project
+# 프로젝트 초기화 (Initialize the project)
 
-Now we'll turn this folder into an npm package.
+이 폴더에 npm 패키지를 설정합니다.
 
 ```shell
 npm init -y
 ```
 
-This creates a `package.json` file with default values.
+기본값으로 `package.json` 파일이 생성됩니다.
 
-# Install our dependencies
+# 의존성 설치 (Install our dependencies)
 
-First ensure Webpack is installed.
+먼저 Webpack이 설치되어 있는지 확인합니다.
 
 ```shell
 npm install --save-dev webpack webpack-cli
 ```
 
-Webpack is a tool that will bundle your code and optionally all of its dependencies into a single `.js` file.
+Webpack은 코드와 선택적으로 모든 의존성을 하나의 `.js`파일로 묶는 도구입니다.
 
-Let's now add React and React-DOM, along with their declaration files, as dependencies to your `package.json` file:
+이제 선언 파일과 함께 React 및 React-DOM을 `package.json` 파일에 의존성으로 추가하겠습니다:
 
 ```shell
 npm install --save react react-dom
 npm install --save-dev @types/react @types/react-dom
 ```
 
-That `@types/` prefix means that we also want to get the declaration files for React and React-DOM.
-Usually when you import a path like `"react"`, it will look inside of the `react` package itself;
-however, not all packages include declaration files, so TypeScript also looks in the `@types/react` package as well.
-You'll see that we won't even have to think about this later on.
+`@types/` 접두사는 React와 React-DOM의 선언 파일을 가져오고 싶다는 것을 의미합니다.
+일반적으로 `"react"`와 같은 경로를 가져오면, `react` 패키지 자체를 살펴볼 것입니다;
+그러나 모든 패키지에 선언 파일이 포함되어 있지 않기 때문에, TypeScript는 `@types/react` 패키지도 찾습니다.
+나중에는 이것에 대해 생각할 필요가 없다는 것을 알 수 있습니다.
 
-Next, we'll add development-time dependencies on the [ts-loader](https://www.npmjs.com/package/ts-loader) and [source-map-loader](https://www.npmjs.com/package/source-map-loader).
+다음으로, 개발 시 필요한 의존성에 [ts-loader](https://www.npmjs.com/package/ts-loader)와[source-map-loader](https://www.npmjs.com/package/source-map-loader)를 추가합니다.
 
 ```shell
 npm install --save-dev typescript ts-loader source-map-loader
 ```
 
-Both of these dependencies will let TypeScript and webpack play well together.
-ts-loader helps Webpack compile your TypeScript code using the TypeScript's standard configuration file named `tsconfig.json`.
-source-map-loader uses any sourcemap outputs from TypeScript to inform webpack when generating *its own* sourcemaps.
-This will allow you to debug your final output file as if you were debugging your original TypeScript source code.
+이 두 가지 의존성 모두 TypeScript와 Webpack을 함께 사용할 수 있습니다.
+ts-loader는 Webpack이 `tsconfig.json`이라는 TypeScript 표준 구성 파일을 사용하여 TypeScript 코드를 컴파일하도록 도와줍니다.
+source-map-loader는 TypeScript의 소스 맵 출력을 사용하여 *고유한* 소스 맵을 생성할 때 Webpack에 알립니다.
+이렇게 하면 기존의 TypeScript 소스 코드를 디버깅하는 것 처럼 최종 출력 파일을 디버깅 할 수 있습니다.
 
-Please note that ts-loader is not the only loader for typescript.
+ts-loader는 TypeScript의 유일한 로더는 아닙니다.
 
-Notice that we installed TypeScript as a development dependency.
-We could also have linked TypeScript to a global copy with `npm link typescript`, but this is a less common scenario.
+개발 의존성으로 TypeScript를 설치했습니다.
+`npm link typescript`를 사용하여 TypeScript를 전역 복사본에 연결할 수도 있지만, 덜 일반적인 시나리오입니다.
 
-# Add a TypeScript configuration file
+# TypeScript 구성 파일 추가 (Add a TypeScript configuration file)
 
-You'll want to bring your TypeScript files together - both the code you'll be writing as well as any necessary declaration files.
+작성하려는 코드와 필요한 선언 파일 모두 TypeScript 파일로 가져오기를 원할 것입니다.
 
-To do this, you'll need to create a `tsconfig.json` which contains a list of your input files as well as all your compilation settings.
-Simply create a new file in your project root named `tsconfig.json` and fill it with the following contents:
+이렇게 하려면, 입력 파일 목록과 모든 컴파일 설정을 포함하는 `tsconfig.json` 파일을 만들어야 합니다.
+프로젝트 루트에 `tsconfig.json`이라는 새 파일을 생성하고, 다음 내용을 채우세요.
 
 ```json
 {
@@ -105,7 +105,7 @@ Simply create a new file in your project root named `tsconfig.json` and fill it 
 }
 ```
 
-You can learn more about `tsconfig.json` files [here](./tsconfig.json.md).
+`tsconfig.json` 파일에 대한 자세한 내용은 [여기](./tsconfig.json.md)를 참조하세요.
 
 # Write some code
 
