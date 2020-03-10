@@ -107,10 +107,10 @@ ts-loader는 TypeScript의 유일한 로더는 아닙니다.
 
 `tsconfig.json` 파일에 대한 자세한 내용은 [여기](./tsconfig.json.md)를 참조하세요.
 
-# Write some code
+# 코드 작성하기 (Write some code)
 
-Let's write our first TypeScript file using React.
-First, create a file named `Hello.tsx` in `src/components` and write the following:
+React를 사용하여 첫 번째 TypeScript 파일을 작성해 봅시다.
+먼저, `src/components`에 `Hello.tsx` 파일을 만들고 다음과 같이 작성하세요:
 
 ```ts
 import * as React from "react";
@@ -120,15 +120,15 @@ export interface HelloProps { compiler: string; framework: string; }
 export const Hello = (props: HelloProps) => <h1>Hello from {props.compiler} and {props.framework}!</h1>;
 ```
 
-Note that while this example uses [function components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components), we could also make our example a little *classier* as well.
+이 예제는 [함수 컴포넌트](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)를 사용하지만, 예제를 조금 더 *고급스럽게* 만들 수 있습니다.
 
 ```ts
 import * as React from "react";
 
 export interface HelloProps { compiler: string; framework: string; }
 
-// 'HelloProps' describes the shape of props.
-// State is never set so we use the '{}' type.
+// 'HelloProps'는 props의 형태를 나타냅니다.
+// state는 설정되지 않으므로, `{}` 타입을 사용합니다.
 export class Hello extends React.Component<HelloProps, {}> {
     render() {
         return <h1>Hello from {this.props.compiler} and {this.props.framework}!</h1>;
@@ -136,7 +136,7 @@ export class Hello extends React.Component<HelloProps, {}> {
 }
 ```
 
-Next, let's create an `index.tsx` in `src` with the following source:
+다음 소스를 이용하여 `src`에 `index.tsx`를 생성합니다.
 
 ```ts
 import * as React from "react";
@@ -150,12 +150,12 @@ ReactDOM.render(
 );
 ```
 
-We just imported our `Hello` component into `index.tsx`.
-Notice that unlike with `"react"` or `"react-dom"`, we used a *relative path* to `Hello.tsx` - this is important.
-If we hadn't, TypeScript would've instead tried looking in our `node_modules` folder.
+방금 `Hello` 컴포넌트를 `index.tsx`로 가져왔습니다.
+`"react"`나 `"react-dom"`과는 달리, `Hello.tsx`에 대한 *상대 경로*를 사용했습니다. - 이것은 중요합니다.
+그렇지 않은 경우, TypeScript는 대신 `node_modules` 폴더를 찾았습니다.
 
-We'll also need a page to display our `Hello` component.
-Create a file at the root of `proj` named `index.html` with the following contents:
+`Hello` 컴포넌트를 표시 할 페이지도 필요합니다.
+`proj`의 루트에 `index.html` 파일을 생성하고 다음과 같이 작성하세요:
 
 ```html
 <!DOCTYPE html>
@@ -177,24 +177,24 @@ Create a file at the root of `proj` named `index.html` with the following conten
 </html>
 ```
 
-Notice that we're including files from within `node_modules`.
-React and React-DOM's npm packages include standalone `.js` files that you can include in a web page, and we're referencing them directly to get things moving faster.
-Feel free to copy these files to another directory, or alternatively, host them on a content delivery network (CDN).
-Facebook makes CDN-hosted versions of React available, and you can [read more about that here](http://facebook.github.io/react/downloads.html#development-vs.-production-builds).
+우리는 `node_modules`의 파일을 포함시킵니다.
+React와 React-DOM의 npm 패키지에는 웹 페이지에 포함 할 수 있는 독립형 `.js` 파일이 있으며, 보다 빠르게 이동하기 위해 직접 찹조합니다.
+이런 파일을 다른 디렉토리에 복사하거나, CDN(Content Delivery Network)에서 호스팅합니다.
+Facebook은 CDN-호스트 버전의 React를 제공하며, [여기에서 자세한 내용을 읽을 수 있습니다](http://facebook.github.io/react/downloads.html#development-vs.-production-builds).
 
-# Create a webpack configuration file
+# Webpack 구성 파일 생성하기 (Create a webpack configuration file)
 
-Create a `webpack.config.js` file at the root of the project directory.
+프로젝트 디렉토리의 루트에 `webpack.config.js` 파일을 생성합니다.
 
 ```js
 module.exports = {
     mode: "production",
 
-    // Enable sourcemaps for debugging webpack's output.
+    // Webpack의 출력물에서 디버깅을 하기위해 소스 맵을 허용합니다.
     devtool: "source-map",
 
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
+        // 확인 가능한 확장자로 '.ts' 나 '.tsx' 를 추가합니다.
         extensions: [".ts", ".tsx"]
     },
 
@@ -209,7 +209,7 @@ module.exports = {
                     }
                 ]
             },
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+            // 모든 '.js' 출력 파일은 'source-map-loader'에서 다시 처리한 소스 맵이 있습니다.
             {
                 enforce: "pre",
                 test: /\.js$/,
@@ -218,10 +218,10 @@ module.exports = {
         ]
     },
 
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
+    // 경로가 다음 중 하나와 일치하는 모듈을 가져올 때,
+    // 해당 전역 변수가 있다고 가정하고 사용합니다.
+    // 브라우저가 빌드간에 라이브러리를 캐시 할 수 있도록
+    // 모든 의존성을 묶지 않아도 되기 때문에 중요합니다.
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
@@ -229,23 +229,23 @@ module.exports = {
 };
 ```
 
-You might be wondering about that `externals` field.
-We want to avoid bundling all of React into the same file, since this increases compilation time and browsers will typically be able to cache a library if it doesn't change.
+`externals` 필드에 대해 궁금할 것 입니다.
+컴파일 시간이 증가하고 브라우저가 라이브러리를 변경하지 않으면, 일반적으로 라이브러리를 캐시 할 수 있기 때문에 모든 React를 동일한 파일에 묶지 않는 것이 좋습니다.
 
-Ideally, we'd just import the React module from within the browser, but most browsers still don't quite support modules yet.
-Instead libraries have traditionally made themselves available using a single global variable like `jQuery` or `_`.
-This is called the "namespace pattern", and webpack allows us to continue leveraging libraries written that way.
-With our entry for `"react": "React"`, webpack will work its magic to make any import of `"react"` load from the `React` variable.
+이상적으로 브라우저 내에서 React 모듈을 가져오지만, 대부분의 브라우저는 아직 모듈을 지원하지 않습니다.
+대신 라이브러리는 전통적으로 `jQuery` 나 `_` 와 같은 단일 전역 변수를 사용하여 사용할 수 있습니다.
+이런 방식을 "namespace pattern"이라고 하며, Webpack을 사용하면 이 방식으로 작성된 라이브러리를 계속 활용할 수 있습니다.
+`"react": "React"`를 입력하면 Webpack은 `React` 변수에서 `"react"`를 불러오기 위해 마법을 사용할 것 입니다.
 
-You can learn more about configuring webpack [here](https://webpack.js.org/concepts).
+[여기](https://webpack.js.org/concepts)에서 Webpack 구성에 대해 자세히 알아볼 수 있습니다.
 
-# Putting it all together
+# 함께 모으기 (Putting it all together)
 
-Just run:
+그냥 실행합니다:
 
 ```shell
 npx webpack
 ```
 
-Now open up `index.html` in your favorite browser and everything should be ready to use!
-You should see a page that says "Hello from TypeScript and React!"
+이제 즐겨 찾는 브라우저에서 `index.html`을 열고 모든 것을 사용할 준비가 되었습니다!
+"Hello from TypeScript and React!" 라는 페이지가 나타납니다.
