@@ -24,7 +24,7 @@
 - [Module Resolution](./module-resolution.md)
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
-- [Decorators(en)](./decorators.md)
+- [Decorators](./decorators.md)
 - [Triple-Slash Directives](./triple-slash-directives.md)
 - [Type Checking JavaScript Files](./type-checking-javascript-files.md)
 - [Utility Types](./utility-types.md)
