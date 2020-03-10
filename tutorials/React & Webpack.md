@@ -39,7 +39,7 @@ Webpack으로 마지막엔 `dist`폴더를 생성할 것입니다.
 
 # 프로젝트 초기화 (Initialize the project)
 
-이 폴더에 npm 패키지를 설정합니다.
+이제 이 폴더를 npm 패키지로 바꿀 것 입니다.
 
 ```shell
 npm init -y
