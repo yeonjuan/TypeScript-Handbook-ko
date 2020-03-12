@@ -80,7 +80,7 @@ ts-loader는 Webpack이 `tsconfig.json`이라는 TypeScript 표준 구성 파일
 source-map-loader는 TypeScript의 소스 맵 출력을 사용하여 *고유한* 소스 맵을 생성할 때 Webpack에 알립니다.
 이렇게 하면 기존의 TypeScript 소스 코드를 디버깅하는 것 처럼 최종 출력 파일을 디버깅 할 수 있습니다.
 
-ts-loader는 TypeScript의 유일한 로더는 아닙니다.
+ts-loader가 TypeScript의 유일한 로더는 아님을 유의해주세요
 
 개발 의존성으로 TypeScript를 설치했습니다.
 `npm link typescript`를 사용하여 TypeScript를 전역 복사본에 연결할 수도 있지만, 덜 일반적인 시나리오입니다.
