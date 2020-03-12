@@ -154,7 +154,7 @@ ReactDOM.render(
 `"react"`나 `"react-dom"`과는 달리, `Hello.tsx`에 대한 *상대 경로*를 사용했습니다. - 이것은 중요합니다.
 그렇지 않은 경우, TypeScript는 대신 `node_modules` 폴더를 찾았습니다.
 
-`Hello` 컴포넌트를 표시 할 페이지도 필요합니다.
+`Hello` 컴포넌트를 표시할 페이지도 필요합니다.
 `proj`의 루트에 `index.html` 파일을 생성하고 다음과 같이 작성하세요:
 
 ```html
