@@ -82,7 +82,7 @@ source-map-loader는 TypeScript의 소스 맵 출력을 사용하여 *고유한*
 
 ts-loader가 TypeScript의 유일한 로더는 아님을 유의해주세요
 
-개발 의존성으로 TypeScript를 설치했습니다.
+TypeScript를 개발 의존성으로  설치했다는 것에 유의하세요.
 `npm link typescript`를 사용하여 TypeScript를 전역 복사본에 연결할 수도 있지만, 덜 일반적인 시나리오입니다.
 
 # TypeScript 구성 파일 추가 (Add a TypeScript configuration file)
