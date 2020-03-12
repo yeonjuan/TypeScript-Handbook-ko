@@ -75,7 +75,7 @@ npm install --save-dev @types/react @types/react-dom
 npm install --save-dev typescript ts-loader source-map-loader
 ```
 
-이 두 가지 의존성 모두 TypeScript와 Webpack을 함께 사용할 수 있습니다.
+이 의존성들은  TypeScript와 Webpack을 같이 쓸 수 있게 해줍니다.
 ts-loader는 Webpack이 `tsconfig.json`이라는 TypeScript 표준 구성 파일을 사용하여 TypeScript 코드를 컴파일하도록 도와줍니다.
 source-map-loader는 TypeScript의 소스 맵 출력을 사용하여 *고유한* 소스 맵을 생성할 때 Webpack에 알립니다.
 이렇게 하면 기존의 TypeScript 소스 코드를 디버깅하는 것 처럼 최종 출력 파일을 디버깅 할 수 있습니다.
