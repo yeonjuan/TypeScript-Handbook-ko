@@ -194,7 +194,7 @@ module.exports = {
     devtool: "source-map",
 
     resolve: {
-        // 확인 가능한 확장자로 '.ts' 나 '.tsx' 를 추가합니다.
+        // 확인 가능한 확장자로 '.ts' 와 '.tsx' 를 추가합니다.
         extensions: [".ts", ".tsx"]
     },
 
