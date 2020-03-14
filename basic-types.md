@@ -12,13 +12,13 @@
 10. [Null and Undefined](#null-and-undefined)
 11. [Never](#never)
 12. [객체 (Object)](#객체-object)
-13. [타입 단언 (Type assertions)](#type-assertions)
+13. [타입 단언 (Type assertions)](#타입-단언-type-assertions)
 14. ['let'에 관하여](#let에-관하여)
 
 # 소개 (Introduction)
 
-프로그램이 유용하려면 숫자, 문자열, 구조체, 부울 값과 같은 몇 가지 가장 간단한 데이터의 단위가 필요합니다.
-TypeScript에서는 JavaScript에서 지원하는 거의 동일한 데이터 타입을 지원하며, 열거 타입을 사용하여 이를 더 편리하게 사용할 수 있습니다.
+프로그램이 유용하려면 숫자, 문자열, 구조체, 불리언 값과 같은 몇 가지 가장 간단한 데이터의 단위가 필요합니다.
+TypeScript에서는 JavaScript와 거의 동일한 데이터 타입을 지원하며, 열거 타입을 사용하여 이를 더 편리하게 사용할 수 있습니다.
 
 # 불리언 (Boolean)
 
@@ -93,22 +93,22 @@ let list: Array<number> = [1, 2, 3];
 // 튜플 타입으로 선언
 let x: [string, number];
 // 초기화
-x = ["hello", 10]; // OK
+x = ["hello", 10]; // 성공
 // 잘못된 초기화
-x = [10, "hello"]; // Error
+x = [10, "hello"]; // 오류
 ```
 
 정해진 인덱스에 위치한 요소에 접근하면 그에 맞는 타입이 나타납니다.
 
 ```ts
-console.log(x[0].substring(1)); // OK
-console.log(x[1].substring(1)); // Error, 'number'에는 'substring' 이 없습니다.
+console.log(x[0].substring(1)); // 성공
+console.log(x[1].substring(1)); // 오류, 'number'에는 'substring' 이 없습니다.
 ```
 
 정해진 인덱스 외에 다른 인덱스에 있는 요소에 접근하면, 에러가 발생하며 실패합니다.
 
 ```ts
-x[3] = "world"; // Error, '[string, number]' 타입에는 프로퍼티 '3'이 없습니다.
+x[3] = "world"; // 오류, '[string, number]' 타입에는 프로퍼티 '3'이 없습니다.
 
 console.log(x[5].toString()); // '[string, number]' 타입에는 프로퍼티 '5'가 없습니다.
 ```
@@ -123,7 +123,7 @@ enum Color {Red, Green, Blue}
 let c: Color = Color.Green;
 ```
 
-기본적으로, `enum`은 멤버들에 0부터 시작해 번호를 매깁니다.
+기본적으로, `enum`은 멤버들에 `0`부터 시작해 번호를 매깁니다.
 멤버 중 하나에 수동으로 설정해 이를 바꿀 수도 있습니다.
 예를 들어, 위 예제를 `0`대신 `1`부터 시작해 번호를 매기도록 바꿀 수 있습니다.
 
@@ -159,20 +159,20 @@ console.log(colorName); // 값이 2인 'Green'이 출력됩니다.
 ```ts
 let notSure: any = 4;
 notSure = "maybe a string instead";
-notSure = false; // okay, definitely a boolean
+notSure = false; // 성공, 분명히 부울입니다.
 ```
 
-`any` 타입은 기존에 존재하는 JavaScript로 작업할 수 있는 강력한 방법으로, 컴파일 중에 점진적으로 타입 검사를 하거나 하지 않을 수 있습니다.
+`any` 타입은 기존에 JavaScript로 작업할 수 있는 강력한 방법으로, 컴파일 중에 점진적으로 타입 검사를 하거나 하지 않을 수 있습니다.
 혹 다른 언어에서 그렇듯, `Object`가 비슷한 역할을 할 수 있을 것 같다고 생각할 수도 있습니다.
 그런데, `Object`로 선언된 변수들은 오직 어떤 값이든 그 변수에 할당할 수 있게 해주지만 실제로 메서드가 존재하더라도, 임의로 호출할 수는 없습니다:
 
 ```ts
 let notSure: any = 4;
-notSure.ifItExists(); // okay, ifItExists 는 런타임엔 존재할 것입니다.
-notSure.toFixed(); // okay, toFixed는 존재합니다. (하지만 컴파일러는 검사하지 않음)
+notSure.ifItExists(); // 성공, ifItExists 는 런타임엔 존재할 것입니다.
+notSure.toFixed(); // 성공, toFixed는 존재합니다. (하지만 컴파일러는 검사하지 않음)
 
 let prettySure: Object = 4;
-prettySure.toFixed(); // Error: 프로퍼티 'toFixed'는 'Object'에 존재하지 않습니다.
+prettySure.toFixed(); // 오류: 프로퍼티 'toFixed'는 'Object'에 존재하지 않습니다.
 ```
 
 > Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object`를 no-primitive `object` 대신에 사용하지 마세요.
@@ -201,7 +201,7 @@ function warnUser(): void {
 
 ```ts
 let unusable: void = undefined;
-unusable = null; // OK  `--strictNullChecks` 을 사용하지 않을때만
+unusable = null; // 성공  `--strictNullChecks` 을 사용하지 않을때만
 ```
 
 # Null and Undefined
@@ -210,7 +210,7 @@ TypeScript는 `undefined` 과 `null` 둘 다 각각 자신의 타입 이름으�
 `void`처럼 그 자체로 유용한 경우는 거의 없습니다:
 
 ```ts
-// 이 밖에 이 변수들에 할당할 수 있는 값이 없습니다.
+// 이 밖에 이 변수들에 할당할 수 있는 값이 없습니다!
 let u: undefined = undefined;
 let n: null = null;
 ```
@@ -220,9 +220,9 @@ let n: null = null;
 
 하지만, `--strictNullChecks`를 사용하면, `null`과  `undefined`는 오직 `any`와 각자 자신들 타입에만 할당 가능합니다. (예외적으로 `undefined`는 `void`에 할당 가능합니다)
 이건 많은 일반적인 에러를 방지하는 데 도움을 줍니다.
-이 경우, `string` 또는 `null` 또는 `undefined`를 허용하고 싶은 경우 union 타입인 `string | null | undefined`를 사용할 수 있습니다.
+이 경우, `string` 또는 `null` 또는 `undefined`를 허용하고 싶은 경우 유니언 타입인 `string | null | undefined`를 사용할 수 있습니다.
 
-Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
+유니언 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 
 > As a note: 가능한 경우 `--structNullChecks`를 사용할 것을 권장합니다. 하지만 핸드북의 목적에 따라, 사용하지 않는다고 가정합니다.
 
@@ -232,13 +232,13 @@ Union 타입은 상급 주제로, 이후 챕터에서 다룹니다.
 예를 들어, `never`는 함수 표현식이나 화살표 함수 표현식에서 항상 에러를 발생시키거나 절대 반환하지 않는 반환 타입으로 쓰입니다.
 변수 또한 타입 가드에 의해 아무 타입도 얻지 못하게 좁혀지면 `never` 타입을 얻게 될 수 있습니다.
 
-`never`타입은 모든 타입에 할당 가능한 하위 타입입니다. 하지만 어떤 타입도 `never`에 할당할 수 있거나, 하위 타입이 아닙니다.(never 자신은 제외)
+`never`타입은 모든 타입에 할당 가능한 하위 타입입니다. 하지만 어떤 타입도 `never`에 할당할 수 있거나, 하위 타입이 아닙니다.(`never` 자신은 제외)
 심지어 `any` 도 `never`에 할당할 수 없습니다.
 
 `never`를 반환하는 몇 가지 예제입니다:
 
 ```ts
-// never를 반환하는 함수는 함수의 마지막에 도달 할 수 없다.
+// never를 반환하는 함수는 함수의 마지막에 도달할 수 없다.
 function error(message: string): never {
     throw new Error(message);
 }
@@ -248,7 +248,7 @@ function fail() {
     return error("Something failed");
 }
 
-// never를 반환하는 함수는 함수의 마지막에 도달 할 수 없다.
+// never를 반환하는 함수는 함수의 마지막에 도달할 수 없다.
 function infiniteLoop(): never {
     while (true) {
     }
@@ -264,13 +264,13 @@ function infiniteLoop(): never {
 ```ts
 declare function create(o: object | null): void;
 
-create({ prop: 0 }); // OK
-create(null); // OK
+create({ prop: 0 }); // 성공
+create(null); // 성공
 
-create(42); // Error
-create("string"); // Error
-create(false); // Error
-create(undefined); // Error
+create(42); // 오류
+create("string"); // 오류
+create(false); // 오류
+create(undefined); // 오류
 ```
 
 # 타입 단언 (Type assertions)
@@ -305,6 +305,6 @@ let strLength: number = (someValue as string).length;
 
 # `let`에 관하여
 
-지금까지 더 익숙할 수도 있는 JavaScript의 `var`키워드 대신 `let` 키워드를 이용했다는 걸 알 수 있습니다.
+지금까지 더 익숙할 수도 있는 JavaScript의 `var` 키워드 대신 `let` 키워드를 이용했다는 걸 알 수 있습니다.
 `let` 키워드는 JavaScript ES2015에서 소개되었고, `var`보다 안전하다는 이유로, 현재 표준으로 여겨지고 있습니다.
 나중에 더 자세히 살펴보겠지만, 대부분의 JavaScript의 문제들이 `let`을 사용해서 해결되며, 때문에 가능한 경우 최대한 `var`대신 `let`을 사용하셔야 합니다.
