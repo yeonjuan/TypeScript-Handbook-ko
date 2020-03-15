@@ -22,7 +22,7 @@ printLabel(myObj);
 이 객체가 실제로는 더 많은 프로퍼티를 갖고 있지만, 컴파일러는 *최소한* 필요한 프로퍼티가 있는지와 타입이 잘 맞는지만 검사합니다.
 TypeScript가 관대하지 않은 몇 가지 경우는 나중에 다루겠습니다.
 
-이번엔 문자열 타입의 프로퍼티 `label`을 가진 인터페이스를 사용하여 같은 예제를 다시 작성해 보겠습니다:
+이번엔 같은 예제를, 문자열 타입의 프로퍼티 `label`을 가진 인터페이스로 다시 작성해 보겠습니다:
 
 ```ts
 interface LabeledValue {
@@ -100,7 +100,7 @@ let mySquare = createSquare({color: "black"});
 
 # 읽기전용 프로퍼티 (Readonly properties)
 
-어떤 프로퍼티들은 객체가 생성될 때만 수정 가능해야합니다.
+일부 프로퍼티들은 객체가 처음 생성될 때만 수정 가능해야합니다.
 프로퍼티 이름 앞에 `readonly`를 넣어서 이를 지정할 수 있습니다:
 
 ```ts
@@ -129,8 +129,8 @@ ro.length = 100; // 오류!
 a = ro; // 오류!
 ```
 
-예제 마지막 줄에서 일반 배열을 `ReadonlyArray`로 재할당하는 것이 금지됨을 확인할 수 있습니다.
-타입 단언(type assertion)으로 오버라이드하는 것은 가능합니다.
+예제 마지막 줄에서 `ReadonlyArray`를 일반 배열에 재할당이 불가능한 것을 확인할 수 있습니다.
+타입 단언(type assertion)으로 오버라이드하는 것은 가능합니다:
 
 ```ts
 a = ro as number[];
@@ -138,14 +138,14 @@ a = ro as number[];
 
 ## `readonly` vs `const`
 
-`readonly`와 `const` 중에 어떤 것을 사용할 지 기억하기 가장 쉬운 방법은 변수에 쓸 것인지 프로퍼티에 쓸 것인지 질문해 보는 것입니다.
+`readonly`와 `const` 중에 어떤 것을 사용할 지 기억하기 가장 쉬운 방법은 변수와 프로퍼티중 어디에 사용할지 질문해 보는 것입니다.
 변수는 `const`를 사용하고 프로퍼티는 `readonly`를 사용합니다
 
 # 초과 프로퍼티 검사 (Excess Property Checks)
 
-인터페이스의 첫 번째 예제에서 TypeScript가 `{ label: string; }`을 기대해도 `{ size: number; label: string; }`를 허용해주었습니다. 우리는 또 선택적 프로퍼티를 배우고, 소위 "option bags"을 기술할 때, 유용하다는 것을 배웠습니다.
+인터페이스의 첫 번째 예제에서 TypeScript가 `{ label: string; }`을 기대해도 `{ size: number; label: string; }`를 허용해주었습니다. 또한 선택적 프로퍼티를 배우고, 소위 "option bags"을 기술할 때, 유용하다는 것을 배웠습니다.
 
-하지만, 순진하게 그 둘을 결합하면 에러가 발생할 수 있습니다.
+하지만, 그냥 그 둘을 결합하면 에러가 발생할 수 있습니다.
 예를 들어, `createSquare`를 사용한 마지막 예제를 보겠습니다:
 
 ```ts
@@ -161,11 +161,12 @@ function createSquare(config: SquareConfig): { color: string; area: number } {
 let mySquare = createSquare({ colour: "red", width: 100 });
 ```
 
-`color`대신에 *`colour`* 로 인수를 잘못 전달했을 경우, 일반 JavaScript에선 이런 경우 조용히 오류가 발생합니다.
+`createSquare`의 매개변수가 `color`대신 `colour`로 전달된 것에 유의하세요.
+이 경우 JavaScript에선 조용히 오류가 발생합니다.
 
 `width` 프로퍼티는 적합하고, `color` 프로퍼티는 없고, 추가 `colour` 프로퍼티는 중요하지 않기 때문에, 이 프로그램이 올바르게 작성되었다고 생각할 수 있습니다.
 
-하지만, TypeScript는 이 코드에 버그가 있을 수 있다고 생각할 것입니다.
+하지만, TypeScript는 이 코드에 버그가 있을 수 있다고 생각합니다.
 객체 리터럴은 다른 변수에 할당할 때나 인수로 전달할 때, 특별한 처리를 받고, *초과 프로퍼티 검사 (excess property checking)*를 받습니다.
 만약 객체 리터럴이 "대상 타입 (target type)"이 갖고 있지 않은 프로퍼티를 갖고 있으면, 에러가 발생합니다.
 
@@ -174,14 +175,14 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 let mySquare = createSquare({ colour: "red", width: 100 });
 ```
 
-이 검사를 피하는 방법은 사실 정말 간단합니다.
+이 검사를 피하는 방법은 정말 간단합니다.
 가장 간단한 방법은 타입 단언을 사용하는 것입니다:
 
 ```ts
 let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
 ```
 
-하지만, 객체가 특별한 경우에서 사용될 때, 추가 프로퍼티가 있음을 확신한다면, 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
+하지만, 특별한 경우에, 추가 프로퍼티가 있음을 확신한다면 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
 만약 `SquareConfig` `color`와 `width` 프로퍼티를 위와 같은 타입으로 갖고 있고, *또한* 다른 프로퍼티를 가질 수 있다면, 다음과 같이 정의할 수 있습니다.
 
 ```ts
@@ -215,7 +216,7 @@ let mySquare = createSquare(squareOptions);
 그 말은, 만약 옵션 백 같은 곳에서 초과 프로퍼티 검사 문제가 발생하면, 타입 정의를 수정해야 할 필요가 있습니다.
 예를 들어, 만약 `createSquare`에 `color`나 `colour` 모두 전달해도 괜찮다면, `squareConfig`가 이를 반영하도록 정의를 수정해야 합니다.
 
-# 함수 타입 (Function Type)
+# 함수 타입 (Function Types)
 
 인터페이스는 JavaScript 객체가 가질 수 있는 넓은 범위의 형태를 기술할 수 있습니다.
 프로퍼티로 객체를 기술하는 것 외에, 인터페이스는 함수 타입을 설명할 수 있습니다.
@@ -229,7 +230,7 @@ interface SearchFunc {
 }
 ```
 
-한번 정의되면, 이 함수 타입 인터페이스는 다른 인터페이스와 마찬가지로 사용할 수 있습니다.
+한번 정의되면, 이 함수 타입 인터페이스는 다른 인터페이스처럼 사용할 수 있습니다.
 여기서 함수 타입의 변수를 만들고, 같은 타입의 함수 값으로 할당하는 방법을 보여줍니다.
 
 ```ts
@@ -240,7 +241,7 @@ mySearch = function(source: string, subString: string) {
 }
 ```
 
-함수 타입이 올바른 타입 검사를 위해서, 매개변수의 이름은 같지 않아도 괜찮습니다.
+올바른 함수 타입 검사를 위해, 매개변수의 이름이 같을 필요는 없습니다.
 예를 들어, 위의 예제를 아래와 같이 쓸 수 있습니다:
 
 ```ts
@@ -263,7 +264,7 @@ mySearch = function(src, sub) {
 }
 ```
 
-함수 표현식이 숫자 나 문자열을 반환했다면, 타입 체커는 반환 타입이 `SearchFunc` 인터페이스에 정의된 반환 타입과 일치하지 않는다는 에러를 발생시킵니다.
+함수 표현식이 숫자 나 문자열을 반환했다면, 타입 검사는 반환 타입이 `SearchFunc` 인터페이스에 정의된 반환 타입과 일치하지 않는다는 에러를 발생시킵니다.
 
 ```ts
 let mySearch: SearchFunc;
@@ -319,7 +320,7 @@ interface NotOkay {
 
 문자열 인덱스 시그니처는 "사전" 패턴을 기술하는데 강력한 방법이지만, 모든 프로퍼티들이 반환 타입과 일치하도록 강제합니다.
 문자열 인덱스가 `obj.property`가 `obj["property"]`로도 이용 가능함을 알려주기 때문입니다.
-다음 예제에서, `name`의 타입은 문자열 인덱스 타입과 일치하지 않고, 타입 체커는 에러를 발생시킵니다.
+다음 예제에서, `name`의 타입은 문자열 인덱스 타입과 일치하지 않고, 타입 검사는 에러를 발생시킵니다.
 
 ```ts
 interface NumberDictionary {
@@ -368,7 +369,7 @@ class Clock implements ClockInterface {
 }
 ```
 
-클래스에 구현된 메서드를 아래 예제의 `setTime`에서처럼 인터페이스 안에서도 기술할 수 있습니다.
+아래 예제의 `setTime` 처럼 클래스에 구현된 메서드를 인터페이스 안에서도 기술할 수 있습니다.
 
 ```ts
 interface ClockInterface {
@@ -463,7 +464,7 @@ const Clock: ClockConstructor = class Clock implements ClockInterface {
 
 # 인터페이스 확장하기 (Extending Interfaces)
 
-클래스 처럼, 인터페이스들끼리 확장(extend)이 가능합니다.
+클래스처럼, 인터페이스들끼리 확장(extend)이 가능합니다.
 이는 한 인터페이스의 멤버를 다른 인터페이스에 복사하는 것을 가능하게 해주는데, 인터페이스를 재사용성 높은 컴포넌트로 쪼갤 때, 유연함을 제공해줍니다.
 
 ```ts
@@ -480,7 +481,7 @@ square.color = "blue";
 square.sideLength = 10;
 ```
 
-인터페이스는 여러 인터페이스의 확장할 수 있어, 모든 인터페이스의 조합을 만들어낼 수 있습니다.
+인터페이스는 여러 인터페이스를 확장할 수 있어, 모든 인터페이스의 조합을 만들어낼 수 있습니다.
 
 ```ts
 interface Shape {
@@ -532,7 +533,7 @@ c.interval = 5.0;
 
 # 클래스를 확장한 인터페이스 (Interfaces Extending Classes)
 
-인터페이스 타입이 클래스 타입을 확장하면, 클래스의 멤버는 상속받지만 그들의 구현은 상속받지 않습니다.
+인터페이스 타입이 클래스 타입을 확장하면, 클래스의 멤버는 상속받지만 구현은 상속받지 않습니다.
 이것은 인터페이스가 구현을 제공하지 않고, 클래스의 멤버 모두를 선언한 것과 마찬가지입니다.
 인터페이스는 심지어 기초 클래스의 private과 protected 멤버도 상속받습니다.
 이것은 인터페이스가 private 혹은 protected 멤버를 포함한 클래스를 확장할 수 있다는 뜻이고, 인터페이스 타입은 그 클래스나 하위클래스에 의해서만 구현될 수 있습니다.
@@ -569,7 +570,7 @@ class Location {
 }
 ```
 
-위의 예제에서, `SelectableControl`은 private `state` 프로퍼티를 포함하여, `Control`의 모든 멤버를 가지고 있습니다.
+위 예제에서, `SelectableControl`은 private `state` 프로퍼티를 포함하여, `Control`의 모든 멤버를 가지고 있습니다.
 `state`는 private 멤버이기 때문에, `SelectableControl`를 구현하는 것은 `Control`의 자식에게만 가능합니다.
 `Control`의 자식만 같은 선언에서 유래된 `state` private 멤버를 가질수 있기 때문이고, private 멤버들이 호환되기 위해 필요합니다.
 
