@@ -177,7 +177,7 @@ prettySure.toFixed(); // 오류: 프로퍼티 'toFixed'는 'Object'에 존재하
 
 > Note: [Do's and Don'ts](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#general-types)에 설명 했듯이 `Object`를 no-primitive `object` 대신에 사용하지 마세요.
 
-또한, any 타입은 타입의 일부를 알지만 전체를 알지는 못할 때 유용합니다.
+또한, any 타입은 타입의 일부만 알고 전체는 알지 못할 때 유용합니다.
 예를 들어, 여러 다른 타입이 섞인 배열을 다룰 수 있습니다.
 
 ```ts
