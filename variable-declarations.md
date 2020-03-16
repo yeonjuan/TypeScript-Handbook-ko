@@ -1,7 +1,7 @@
 # 변수 선언 (Variable Declarations)
 
 `let`과 `const`는 JavaScript에서 비교적 새로운 두 가지 유형의 변수 선언입니다.
-[앞에서 언급했듯이](./basic-types.md#let에-관하여), `let`은 `var`와 어느 정도 유사하지만, 사용자가 JavaScript에서 실행하는 일반적인 결함을 피할 수 있게 해줍니다.
+[앞에서 언급했듯이](./basic-types.md#let에-관하여), `let`은 `var`와 어느 정도 유사하지만, 사용자가 JavaScript에서 자주 마주치는 결함을 피할 수 있게 해줍니다.
 `const`는 `let`의 기능이 강화된 것으로 변수에 재할당을 방지합니다.
 
 TypeScript는 JavaScript의 상위 집합이므로, 당연히 `let`과 `const`를 지원합니다.
