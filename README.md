@@ -1,7 +1,7 @@
 # Typescript-Handbook-ko
 
 [![Build Status](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko.svg?branch=master)](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 타입스크립트 핸드북 번역
@@ -15,18 +15,18 @@
 - [Enums](./enums.md)
 - [Type Compatibility](./type-compatibility.md)
 - [Type Inference](./type-inference.md)
-- [Advanced Types 작성중...](./advanced-types.md)
+- [Advanced Types](./advanced-types.md)
 - [Symbols](./symbols.md)
 - [Iterators and Generators](./iterators-and-generators.md)
 - [Modules](./modules.md)
 - [Namespaces](./namespaces.md)
-- Namespaces and Modules
-- [Module Resolution(en)](./module-resolution.md)
+- [Namespaces and Modules](./namespaces-and-modules.md)
+- [Module Resolution](./module-resolution.md)
 - [Declaraion Merging](./declaration-merging.md)
 - [JSX](./jsx.md)
-- [Decorators(en)](./decorators.md)
+- [Decorators](./decorators.md)
 - [Triple-Slash Directives](./triple-slash-directives.md)
-- [Type Checking JavaScript Files(en)](./type-checking-javascript-files.md)
+- [Type Checking JavaScript Files](./type-checking-javascript-files.md)
 - [Utility Types](./utility-types.md)
 
 <details>
@@ -40,6 +40,7 @@
 ## 참여하기
 
 누구나 참여 가능하며 참여하는 방법은 [CONTRIBUTING.md](./CONTRIBUTING.md)를 참고해 주세요.
+현재 프로젝트의 진행 상황은 [이곳](https://github.com/yeonjuan/Typescript-Handbook-ko/projects/1)에서 확인할 수 있습니다.
 
 ## 컨트리뷰터 목록 ✨
 
@@ -60,6 +61,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Myoji"><img src="https://avatars2.githubusercontent.com/u/12138415?v=4" width="100px;" alt=""/><br /><sub><b>Myoji</b></sub></a><br /><a href="#translation-Myoji" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/dvlprsh"><img src="https://avatars1.githubusercontent.com/u/48552752?v=4" width="100px;" alt=""/><br /><sub><b>seoheePark</b></sub></a><br /><a href="#translation-dvlprsh" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://heeveloper.github.io/"><img src="https://avatars3.githubusercontent.com/u/17620671?v=4" width="100px;" alt=""/><br /><sub><b>Heeveloper</b></sub></a><br /><a href="#translation-heeveloper" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/bobfull"><img src="https://avatars1.githubusercontent.com/u/48228621?v=4" width="100px;" alt=""/><br /><sub><b>bobfull</b></sub></a><br /><a href="#translation-bobfull" title="Translation">🌍</a></td>
   </tr>
 </table>
 
