@@ -182,7 +182,7 @@ let mySquare = createSquare({ colour: "red", width: 100 });
 let mySquare = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
 ```
 
-하지만, 특별한 경우에, 추가 프로퍼티가 있음을 확신한다면 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
+하지만 특별한 경우에, 추가 프로퍼티가 있음을 확신한다면, 문자열 인덱스 서명(string index signatuer)을 추가하는 것이 더 나은 방법입니다.
 만약 `SquareConfig` `color`와 `width` 프로퍼티를 위와 같은 타입으로 갖고 있고, *또한* 다른 프로퍼티를 가질 수 있다면, 다음과 같이 정의할 수 있습니다.
 
 ```ts
