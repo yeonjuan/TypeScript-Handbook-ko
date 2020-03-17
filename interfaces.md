@@ -464,7 +464,7 @@ const Clock: ClockConstructor = class Clock implements ClockInterface {
 
 # 인터페이스 확장하기 (Extending Interfaces)
 
-클래스처럼, 인터페이스들끼리 확장(extend)이 가능합니다.
+클래스처럼, 인터페이스들도 확장(extend)이 가능합니다.
 이는 한 인터페이스의 멤버를 다른 인터페이스에 복사하는 것을 가능하게 해주는데, 인터페이스를 재사용성 높은 컴포넌트로 쪼갤 때, 유연함을 제공해줍니다.
 
 ```ts
