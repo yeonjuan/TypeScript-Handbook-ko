@@ -82,7 +82,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 캡처된 변수는 타입에 반영되지 않습니다.
 사실상 캡처된 변수는 함수의 숨겨진 상태의 일부이고 API를 구성하지 않습니다.
 
-## 타입의 추론 (Infering the types)
+## 타입의 추론 (Inferring the types)
 
 아래 예시를 직접 입력해보세요. TypeScript 컴파일러가 방정식의 한쪽에만 타입이 있더라도 타입을 알아낼 수 있다는 것을 알아채셨나요?
 
