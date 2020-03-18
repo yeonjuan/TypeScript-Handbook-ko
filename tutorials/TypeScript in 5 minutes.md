@@ -45,7 +45,7 @@ tsc greeter.ts
 JavaScript 앱에서 TypeScript를 사용하여 시작했습니다!
 
 이제 TypeScript가 제공하는 몇 가지 새로운 기능을 이용할 수 있습니다.
-다음과 같이 `: string` 타입 어노테이션(type annotation)을 'person' 함수의 인수에 추가하세요.
+다음과 같이 `: string` 타입 표기를 'person' 함수의 인수에 추가하세요.
 
 ```ts
 function greeter(person: string) {
