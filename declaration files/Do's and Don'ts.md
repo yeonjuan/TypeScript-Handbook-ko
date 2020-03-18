@@ -3,7 +3,7 @@
 ## `Number`, `String`, `Boolean`, `Symbol` and `Object`
 
 `Number`, `String`, `Boolean`, `Symbol`, `Object` 타입을 사용*하지 마세요*.
-이 타입들은 JavaScript 코드에 거의 사용되지 않는 비-원시형 박싱된 객체를 가르킵니다.
+이 타입들은 JavaScript 코드에서 거의 사용되지 않는 비-원시형 박싱된 객체를 가르킵니다.
 
 ```ts
 /* WRONG */
