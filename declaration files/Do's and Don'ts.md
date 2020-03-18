@@ -43,7 +43,7 @@ function fn(x: () => any) {
 사용하지 않는 콜백의 반환 값 타입은 `void`를 사용*하세요*:  
 
 ```ts
-/* OK */
+/* 좋음 */
 function fn(x: () => void) {
     x();
 }
