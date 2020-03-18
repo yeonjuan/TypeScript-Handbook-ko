@@ -6,7 +6,7 @@
 이 타입들은 JavaScript 코드에서 거의 사용되지 않는 비-원시형 박싱된 객체를 가르킵니다.
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 function reverse(s: String): String;
 ```
 
