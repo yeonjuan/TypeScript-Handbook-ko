@@ -80,7 +80,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 
 참고로, 매개변수 타입과 반환 타입만이 함수 타입을 구성합니다.
 캡처된 변수는 타입에 반영되지 않습니다.
-사실상 캡처된 변수는 함수의 숨겨진 상태의 일부이고 API를 구성하지 않습니다.
+사실상 캡처된 변수는 함수의 "숨겨진 상태"의 일부이고 API를 구성하지 않습니다.
 
 ## 타입의 추론 (Inferring the types)
 
