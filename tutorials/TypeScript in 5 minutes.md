@@ -57,7 +57,7 @@ let user = "Jane User";
 document.body.textContent = greeter(user);
 ```
 
-## 타입 어노테이션 (Type annotations)
+## 타입 표기 (Type annotations)
 
 TypeScript의 타입 어노테이션은 함수나 변수의 의도된 계약을 기록하는 간단한 방법입니다.
 아래의 경우, greeter 함수를 단일 문자열 매개변수와 함께 호출하려고 합니다.
