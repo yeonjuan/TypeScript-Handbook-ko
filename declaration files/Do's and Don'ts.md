@@ -58,7 +58,7 @@ function fn(x: () => void) {
 }
 ```
 
-## 콜백에 선택적 매개변수 (Optional Parameters in Callbacks)
+## 콜백에서 선택적 매개변수 (Optional Parameters in Callbacks)
 
 정말 의도한 것이 아니라면 콜백에 선택적 매개변수를 사용*하지 마세요*:
 
