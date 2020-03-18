@@ -42,7 +42,7 @@ tsc greeter.ts
 ```
 
 결과는 동일한 JavaScript 코드를 포함하고 있는 `greeter.js` 파일이 될 것입니다.
-JavaScript 앱에서 TypeScript를 실행 중인 상태가 되었습니다!
+JavaScript 앱에서 TypeScript를 사용하여 시작했습니다!
 
 이제 TypeScript가 제공하는 몇 가지 새로운 기능을 이용할 수 있습니다.
 다음과 같이 `: string` 타입 어노테이션(type annotation)을 'person' 함수의 인수에 추가하세요.
