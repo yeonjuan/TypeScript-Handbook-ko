@@ -60,7 +60,7 @@ let output = identity<string>("myString"); // 출력의 타입은 'string'입니
 두 번째 방법은 아마 가장 일반적인 방법입니다. 여기서는 *타입 인수 추론* 을 사용합니다 -- 즉, 우리가 전달하는 인수에 따라서 컴파일러가 `T`의 값을 자동으로 정하게 하는 것입니다:
 
 ```ts
-let output = identity("myString"); //출력ㄱ의 타입은 'string'입니다.
+let output = identity("myString"); //출력의 타입은 'string'입니다.
 ```
 
 타입 인수를 꺾쇠괄호(`<>`)에 담아 명시적으로 전달해 주지 않은 것을 주목하세요; 컴파일러는 값인 `"myString"`를 보고 그것의 타입으로 `T`를 정합니다.
