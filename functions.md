@@ -254,7 +254,7 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 ```
 
 `createCardPicker`가 자기 자신을 반환하는 함수임을 주목해 주세요.
-이 예제를 작동시키면 기대했던 얼럿 창 대신 에러가 발생할 것입니다.
+이 예제를 작동시키면 기대했던 경보 창 대신 오류가 발생할 것입니다.
 `createCardPicker`에 의해 생성된 함수에서 사용 중인 `this`가 `deck` 객체가 아닌 `window`에 설정되었기 때문입니다.
 `cardPicker()`의 자체적인 호출 때문에 생긴 일입니다.
 최상위 레벨에서의 비-메서드 문법의 호출은 `this`를 `window`로 합니다.
