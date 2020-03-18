@@ -140,7 +140,7 @@ document.body.textContent = greeter(user);
 ```
 
 `tsc greeter.ts`를 재실행하면 생성된 JavaScript 코드가 이전의 코드와 동일하다는 것을 알 수 있습니다.
-TypeScript의 클래스는 단지 JavaScript에서 자주 사용되는 프로토타입 기반 OO의 축약형일 뿐입니다.
+TypeScript의 클래스는 단지 JavaScript에서 자주 사용되는 프로토타입-기반 OO의 축약형일 뿐입니다.
 
 ## TypeScript 웹 앱 실행하기 (Running your TypeScript web app)
 
