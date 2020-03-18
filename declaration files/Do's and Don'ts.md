@@ -1,38 +1,37 @@
-# General Types
+# 일반 타입 (General Types)
 
 ## `Number`, `String`, `Boolean`, `Symbol` and `Object`
 
-*Don't* ever use the types `Number`, `String`, `Boolean`, `Symbol`, or `Object`
-These types refer to non-primitive boxed objects that are almost never used appropriately in JavaScript code.
+`Number`, `String`, `Boolean`, `Symbol`, `Object` 타입을 사용*하지 마세요*.
+이 타입들은 JavaScript 코드에서 거의 사용되지 않는 비-원시형 박싱된 객체를 가르킵니다.
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 function reverse(s: String): String;
 ```
 
-*Do* use the types `number`, `string`, `boolean`, and `symbol`.
+`number`, `string`, `boolean`, `symbol` 타입을 사용 *하세요*.
 
 ```ts
-/* OK */
+/* 좋음 */
 function reverse(s: string): string;
 ```
 
-Instead of `Object`, use the non-primitive `object` type ([added in TypeScript 2.2](../release%20notes/TypeScript%202.2.md#object-type)).
+`Object` 대신에, [TypeScript 2.2 에 추가된](../release%20notes/TypeScript%202.2.md#object-type) 비-원시형 `object`타입을 사용*하세요*.
 
-## Generics
+## 제네릭 (Generics)
 
-*Don't* ever have a generic type which doesn't use its type parameter.
-See more details in [TypeScript FAQ page](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-type-inference-work-on-this-interface-interface-foot---).
+타입 매개변수를 사용하지 않는 제네릭 타입을 사용*하지 마세요*. 더 자세한 내용은 [TypeScript FAQ 페이지](https://github.com/Microsoft/TypeScript/wiki/FAQ#why-doesnt-type-inference-work-on-this-interface-interface-foot---)에서 확인하세요.
 
 <!-- TODO: More -->
 
-# Callback Types
+# 콜백 타입 (Callback Types)
 
-## Return Types of Callbacks
+## 콜백의 반환 타입 (Return Types of Callbacks)
 
 <!-- TODO: Reword; these examples make no sense in the context of a declaration file -->
 
-*Don't* use the return type `any` for callbacks whose value will be ignored:
+사용하지 않는 콜백의 반환 값 타입에 `any`를 사용*하지 마세요*:
 
 ```ts
 /* WRONG */
@@ -41,16 +40,16 @@ function fn(x: () => any) {
 }
 ```
 
-*Do* use the return type `void` for callbacks whose value will be ignored:
+사용하지 않는 콜백의 반환 값 타입은 `void`를 사용*하세요*:  
 
 ```ts
-/* OK */
+/* 좋음 */
 function fn(x: () => void) {
     x();
 }
 ```
 
-*Why*: Using `void` is safer because it prevents you from accidentally using the return value of `x` in an unchecked way:
+*이유*: `void`를 사용하면 실수로 `x`의 반환 값을 사용하는 것을 방지 할 수 있기 때문에 더 안전합니다.:
 
 ```ts
 function fn(x: () => void) {
@@ -59,9 +58,9 @@ function fn(x: () => void) {
 }
 ```
 
-## Optional Parameters in Callbacks
+## 콜백에서 선택적 매개변수 (Optional Parameters in Callbacks)
 
-*Don't* use optional parameters in callbacks unless you really mean it:
+정말 의도한 것이 아니라면 콜백에 선택적 매개변수를 사용*하지 마세요*:
 
 ```ts
 /* WRONG */
