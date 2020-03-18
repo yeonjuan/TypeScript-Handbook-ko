@@ -11,7 +11,7 @@
     "no-trailing-spaces": true,
     "no-hard-tabs": true,
     "no-reversed-links": true,
-    "no-multiple-blanks": true,
+    "no-multiple-blanks": false,
     "no-missing-space-atx": true,
     "no-multiple-space-atx": true,
     "blanks-around-headings": true,
