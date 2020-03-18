@@ -52,7 +52,7 @@ identity 함수에 `T`라는 타입 변수를 추가했습니다.
 첫 번째 방법은 함수에 타입 인수를 포함한 모든 인수를 전달하는 방법입니다.
 
 ```ts
-let output = identity<string>("myString"); // 출력의 타입은 'string'입니다.
+let output = identity<string>("myString"); // 출력 타입은 'string'입니다.
 ```
 
 여기서 우리는 함수를 호출할 때의 인수 중 하나로써 `T`를 `string`으로 명시해 주고 인수 주변에 `()` 대신 `<>`로 감싸주었습니다.
