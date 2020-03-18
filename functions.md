@@ -23,7 +23,7 @@ let myAdd = function(x, y) { return x + y };
 ```
 
 JavaScript에서처럼, 함수는 함수 외부의 변수를 참조할 수 있습니다.
-이 경우, 변수를 *캡처(capture)* 한다고 합니다.
+이런 경우를, 변수를 *캡처(capture)* 한다고 합니다.
 이것이 어떻게 작동하는지 (그리고 이 기술을 사용할 때의 장단점)를 이해하는 것은 이 본문의 주제를 벗어나는 것이지만, 이 메커니즘이 어떻게 작동하는지에 대한 확실한 이해는 JavaScript 및 TypeScript를 사용하는 데 있어 중요합니다.
 
 ```js
@@ -75,8 +75,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 
 두 번째로 반환 타입입니다.
 매개변수 타입들과 반환 타입 사이에 '화살표 표기'( `=>` )를 써서 반환 타입을 분명히 할 수 있습니다.
-이전에 언급했듯이, 함수 표기에 필요한 부분입니다.
-만약 함수가 값을 반환하지 않는다면 비워두는 대신 `void`를 써서 표시해 줍니다.
+이전에 언급했듯이, 함수 표기에 필요한 부분입니다, 그래서 만약 함수가 값을 반환하지 않는다면 비워두는 대신 `void`를 써서 표시해 줍니다.
 
 참고로, 매개변수 타입과 반환 타입만이 함수 타입을 구성합니다.
 캡처된 변수는 타입에 반영되지 않습니다.
@@ -85,6 +84,7 @@ let myAdd: (baseValue: number, increment: number) => number =
 ## 타입의 추론 (Inferring the types)
 
 아래 예시를 직접 입력해보세요. TypeScript 컴파일러가 방정식의 한쪽에만 타입이 있더라도 타입을 알아낼 수 있다는 것을 알아채셨나요?
+
 
 ```ts
 // myAdd는 전체 함수 타입을 가지고 있다.
@@ -95,12 +95,13 @@ let myAdd: (baseValue: number, increment: number) => number =
     function(x, y) { return x + y; };
 ```
 
-이러한 타입 추론 형태를 `"contextual typing"` 이라 부릅니다. 이를 통해 여러분의 프로그램에서 타입을 유지하기 위한 노력을 줄일 수 있습니다.
+이러한 타입 추론 형태를 `"contextual typing"` 이라 부릅니다.
+이를 통해 여러분의 프로그램에서 타입을 유지하기 위한 노력을 줄일 수 있습니다.
 
 # 선택적 매개변수와 기본 매개변수 (Optional and Default Parameter)
 
-TypeScript에서는 모든 매개변수가 함수에 필요하다고 가정합니다. 이것이 `null` 이나 `undefined`를 줄 수 없다는 걸 의미하는 것은 아닙니다. 대신 함수가 호출될 때, 컴파일러는 각 매개변수에 대해 사용자가 값을 제공했는지를 검사합니다.
-
+TypeScript에서는 모든 매개변수가 함수에 필요하다고 가정합니다.
+이것이 `null` 이나 `undefined`를 줄 수 없다는 걸 의미하는 것은 아닙니다. 대신 함수가 호출될 때, 컴파일러는 각 매개변수에 대해 사용자가 값을 제공했는지를 검사합니다.
 또한, 컴파일러는 매개변수들이 함수로 전달될 유일한 매개변수라고 가정합니다. 요약하자면, 함수에 주어진 인자의 수는 함수가 기대하는 매개변수의 수와 일치해야 합니다.
 
 ```ts
@@ -151,14 +152,12 @@ let result4 = buildName("Bob", "Adams");         // 정확함
 ```
 
 모든 필수 매개변수 뒤에 오는 `기본-초기화 매개변수`는 선택적으로 처리되며, 선택적 매개변수와 마찬가지로 해당 함수를 호출할 때 생략할 수 있습니다.
-이는 선택적 매개변수와 뒤따르는 기본 매개변수의 타입들이 공통성을 공유함을 의미합니다.
-그래서 이 두 가지:
+이는 선택적 매개변수와 뒤따르는 기본 매개변수의 타입들이 공통성을 공유함을 의미합니다, 그래서 이 두 가지
 
 ```ts
 function buildName(firstName: string, lastName?: string) {
     // ...
 }
-
 ```
 
 와
@@ -167,14 +166,13 @@ function buildName(firstName: string, lastName?: string) {
 function buildName(firstName: string, lastName = "Smith") {
     // ...
 }
-
 ```
 
-는 `(firstName: string, lastName?: string) => string` 라는 공통된 타입을 공유합니다. `lastName`의 기본값은 타입에서 사라지고 오직 선택적 매개변수라는 사실만 남깁니다.
+는 `(firstName: string, lastName?: string) => string` 라는 공통된 타입을 공유합니다.
+`lastName`의 기본값은 타입에서 사라지고 오직 선택적 매개변수라는 사실만 남깁니다.
 
 순수한 선택적 매개변수와는 다르게 `기본-초기화 매개변수`는 필수 매개변수 뒤에 오는 것이 강요되지 않습니다.
 만약 `기본-초기화 매개변수`가 필수 매개변수보다 앞에 오게 된다면 사용자가 명시적으로 `undefined` 를 전달해 주어야 `기본-초기화 매개변수`를 볼 수 있습니다.
-
 앞서 사용했던 예시에 기본 초기화를 `firstName`에 적용한 것입니다:
 
 ```ts
@@ -186,7 +184,6 @@ let result1 = buildName("Bob");                  // 오류, 너무 적은 매개
 let result2 = buildName("Bob", "Adams", "Sr.");  // 오류, 너무 많은 매개변수
 let result3 = buildName("Bob", "Adams");         // 성공, "Bob Adams" 반환
 let result4 = buildName(undefined, "Adams");     // 성공, "Will Adams" 반환
-
 ```
 
 # 나머지 매개변수 (Rest Parameters)
@@ -206,11 +203,11 @@ function buildName(firstName: string, ...restOfName: string[]) {
 let employeeName = buildName("Joseph", "Samuel", "Lucas", "MacKinzie");
 ```
 
-나머지 매개변수는 선택적 매개변수들의 수를 무한으로 취급합니다.
-나머지 매개변수로 인자들을 넘겨줄 때는 당신이 원하는 만큼 넘겨 줄 수도 있습니다; 아무것도 넘겨주지 않을 수도 있습니다
+*나머지 매개변수*는 선택적 매개변수들의 수를 무한으로 취급합니다.
+나머지 매개변수로 인자들을 넘겨줄 때는 당신이 원하는 만큼 넘겨 줄 수도 있습니다; 아무것도 넘겨주지 않을 수도 있습니다.
 컴파일러는 생략 부호 (`...`) 뒤의 이름으로 전달된 인자 배열을 빌드하여 함수에서 사용할 수 있도록 합니다.
 
-생략 부호는 나머지 매개변수가 있는 함수의 타입에도 사용됩니다.
+생략 부호는 나머지 매개변수가 있는 함수의 타입에도 사용됩니다:
 
 ```ts
 function buildName(firstName: string, ...restOfName: string[]) {
@@ -224,7 +221,6 @@ let buildNameFun: (fname: string, ...rest: string[]) => string = buildName;
 
 `this` 가 JavaScript에서 어떻게 쓰이는지 아는 것은 일종의 통과의례입니다.
 TypeScript는 JavaScript의 상위 집합이므로 TypeScript 개발자들 역시 this가 어떻게 쓰이는지 또는 this가 잘못 쓰일 때를 발견하는 방법을 배울 필요가 있습니다.
-
 다행히도 TypeScript는 몇 가지 기술들로 잘못된 `this` 사용을 잡아낼 수 있습니다.
 만약 JavaScript에서 this가 어떻게 동작하는지 알고 싶다면 먼저 Yehuda Katz의 글 [JavaScript 함수 호출과 "this" 이해하기](https://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/) 을 읽도록 합니다.
 Yehuda의 글은 `this`의 내부 동작을 아주 잘 설명하므로, 여기서는 기본만 다룰 것입니다.
@@ -266,8 +262,7 @@ alert("card: " + pickedCard.card + " of " + pickedCard.suit);
 
 이 문제는 나중에 사용할 함수를 반환하기 전에 바인딩을 알맞게 하는 것으로 해결할 수 있습니다.
 이 방법대로라면 나중에 사용하는 방법에 상관없이 원본 `deck` 객체를 계속해서 볼 수 있습니다.
-
-이를 위해 함수 표현식을 ES6의 화살표 함수로 바꿀 것입니다.
+이를 위해, 함수 표현식을 ES6의 화살표 함수로 바꿀 것입니다.
 화살표 함수는 함수가 호출 된 곳이 아닌 함수가 생성된 쪽의 `this`를 캡처합니다:
 
 ```ts
@@ -337,13 +332,12 @@ let cardPicker = deck.createCardPicker();
 let pickedCard = cardPicker();
 
 alert("card: " + pickedCard.card + " of " + pickedCard.suit);
-
 ```
 
 이제 TypeScript는 `createCardPicker`가 `Deck` 객체에서 호출된다는 것을 알게 됐습니다.
 이것은 `this`가 `any` 타입이 아니라 `Deck` 타입이며 따라서 `--noImplicitThis` 플래그가 어떤 오류도 일으키지 않는다는 것을 의미합니다.
 
-## 콜백에서 `this` 매개변수 (`this` parameters in callbacks)
+### 콜백에서 `this` 매개변수 (`this` parameters in callbacks)
 
 나중에 호출할 콜백 함수를 라이브러리에 전달할 때 `this` 때문에 오류가 발생할 수 있습니다.
 라이브러리는 콜백을 일반 함수처럼 호출하므로 `this`는 `undefined`가 됩니다.
@@ -399,7 +393,6 @@ class Handler {
 ```
 
 이러한 작업은 화살표 함수가 외부의 `this`를 사용하기 때문에 가능하므로 `this: void`일 것으로 기대하는 무언가라면 전달에 문제가 없습니다.
-
 `Handler` 타입 객체마다 하나의 화살표 함수가 작성된다는 점이 단점입니다.
 반면, 메서드들은 하나만 작성되어 `Handler`의 프로토타입에 붙습니다.
 그들은 `Handler` 타입의 모든 객체 간에 공유됩니다.
@@ -437,7 +430,6 @@ alert("card: " + pickedCard2.card + " of " + pickedCard2.suit);
 여기 사용자가 전달하는 것에 따라 두 가지 다른 결과를 반환하는 함수가 있습니다.
 사용자가 deck을 의미하는 객체 값을 전달한다면 함수가 카드를 선택합니다.
 사용자가 카드를 선택하면 선택한 카드가 무엇인지 대답해 줍니다.
-
 하지만 타입 시스템에서 이것을 어떻게 구현할 것입니까?
 
 정답은 오버로드 목록으로 동일한 함수에 다중 함수 타입을 제공하는 것입니다.
