@@ -59,7 +59,7 @@ document.body.textContent = greeter(user);
 
 ## 타입 표기 (Type annotations)
 
-TypeScript의 타입 어노테이션은 함수나 변수의 의도된 계약을 기록하는 간단한 방법입니다.
+TypeScript의 타입 표기는 함수나 변수의 의도된 계약을 기록하는 간단한 방법입니다.
 아래의 경우, greeter 함수를 단일 문자열 매개변수와 함께 호출하려고 합니다.
 우리는 greeter 함수 호출 시 매개변수로 배열을 전달하도록 변경해 볼 수도 있습니다:
 
