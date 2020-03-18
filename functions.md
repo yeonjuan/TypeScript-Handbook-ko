@@ -49,7 +49,7 @@ let myAdd = function(x: number, y: number): number { return x + y };
 ```
 
 각 파라미터와 함수 자신의 반환될 타입을 정해줄 수 있습니다.
-TypeScript는 반환 문을 보고 반환 타입을 파악할 수 있으므로 반환 타입을 생략할 수도 있습니다.
+TypeScript는 반환 문을 보고 반환 타입을 파악할 수 있으므로 반환 타입을 생략할 수 있습니다.
 
 ## 함수 타입 작성하기 (Writing the function type)
 
