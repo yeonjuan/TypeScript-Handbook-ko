@@ -165,7 +165,7 @@ TypeScript의 클래스는 단지 JavaScript에서 자주 사용되는 프로토
 greeter 함수 참조 위에 커서를 올려놓고, F12 키를 눌러 해당 정의로 이동할 수 있습니다.
 또한, 심벌을 마우스 오른쪽 버튼으로 클릭하고 리팩토링을 사용하여 이름을 바꿀 수 있습니다.
 
-제공된 타입 정보는 애플리케이션 규모(application scale)에서 JavaScript로 작동하는 도구와 함께 작동합니다.
+제공된 타입 정보는 애플리케이션 규모에서 JavaScript로 작동하는 도구와 함께 작동합니다.
 TypeScript와 관련된 더 많은 예시를 보려면, 웹사이트의 Samples 섹션을 참고하세요.
 
 ![Visual Studio picture](/assets/images/docs/greet_person.png)
