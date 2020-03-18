@@ -8,7 +8,7 @@ TypeScript에서는 표준 JavaScript 함수가 작업을 수월하게 하도록
 # 함수 (Function)
 
 TypeScript 함수는 JavaScript와 마찬가지로 기명 함수(named function)과 익명 함수(anonymous function)로 만들 수 있습니다.
-이를 통해 당신이 API에서 함수 목록을 작성하든 일회성 함수를 써서 다른 함수로 전달하든 애플리케이션에 가장 적합한 방법을 선택할 수 있습니다.
+이를 통해 API에서 함수 목록을 작성하든 일회성 함수를 써서 다른 함수로 전달하든 애플리케이션에 가장 적합한 방법을 선택할 수 있습니다.
 
 JavaScript에서의 이 두 가지 방법에 대한 예시를 빠르게 다시 보겠습니다:
 
