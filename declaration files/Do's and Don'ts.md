@@ -13,7 +13,7 @@ function reverse(s: String): String;
 `number`, `string`, `boolean`, `symbol` 타입을 사용 *하세요*.
 
 ```ts
-/* OK */
+/* 좋음 */
 function reverse(s: string): string;
 ```
 
