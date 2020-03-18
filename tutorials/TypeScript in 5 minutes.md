@@ -81,7 +81,7 @@ error TS2345: Argument of type 'number[]' is not assignable to parameter of type
 
 마찬가지로, greeter 함수 호출에서 모든 인수를 제거해보세요.
 TypeScript는 당신이 예상치 못한 개수의 매개변수로 이 함수를 호출했다는 것을 알려줄 것입니다.
-두 경우 모두, TypeScript는 코드의 구조와 타입 어노테이션에 기반해서 정적 분석을 제공합니다.
+두 경우 모두, TypeScript는 코드의 구조와 타입 표기에 기반해서 정적 분석을 제공합니다.
 
 오류가 존재하기는 하지만, `greeter.js` 파일은 생성되었습니다.
 코드에 오류가 존재하더라도 TypeScript를 사용할 수 있습니다. 그러나 이 경우, TypeScript는 코드가 예상대로 작동하지 않을 것이라는 경고를 하게 됩니다.
