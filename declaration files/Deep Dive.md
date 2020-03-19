@@ -107,7 +107,7 @@ console.log(x.count);
 ```
 
 여기서도 `Bar`를 타입과 값으로 사용했습니다.
-`Bar` 값을 `Bar` 타입으로 선언할 필요가 없었으며 -- 독립적입니다.
+`Bar` 값을 `Bar` 타입으로 선언할 필요가 없다는 점을 유의하세요 -- 저 둘은 독립적입니다.
 
 ## Advanced Combinations
 
