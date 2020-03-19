@@ -1,76 +1,76 @@
-# Definition File Theory: A Deep Dive
+# 정의 파일 이론: 심층 분석 (Definition File Theory: A Deep Dive)
 
-Structuring modules to give the exact API shape you want can be tricky.
-For example, we might want a module that can be invoked with or without `new` to produce different types,
-  has a variety of named types exposed in a hierarchy,
-  and has some properties on the module object as well.
+원하는 API 형태를 제공하는 모듈을 만드는 것은 까다로울 수 있습니다.
+예를 들어, `new`의 사용에 따라 호출할 때 다른 타입을 생성하는 모듈을 원할 수 있고,
+  계층에 노출 된 다양한 명명된 타입을 가지고 있으며,
+  모듈 객체에 대한 여러 프로퍼티도 가질 수 있습니다.
 
-By reading this guide, you'll have the tools to write complex definition files that expose a friendly API surface.
-This guide focuses on module (or UMD) libraries because the options here are more varied.
+이 가이드에서는, 익숙한 API를 노출하는 복잡한 정의 파일에 대해 작성하는 도구를 제공합니다.
+또한 옵션이 다양하기 때문에 여기서는 모듈 (또는 UMD) 라이브러리에 중점을 둡니다.
 
-## Key Concepts
+## 주요 컨셉 (Key Concepts)
 
-You can fully understand how to make any shape of definition
-  by understanding some key concepts of how TypeScript works.
+TypeScript 작동 방식에 대해 여러 주요 개념을 이해하여
+  정의의 형태를 만드는 방법을 완전히 이해할 수 있습니다.
 
-### Types
+### 타입 (Types)
 
-If you're reading this guide, you probably already roughly know what a type in TypeScript is.
-To be more explicit, though, a *type* is introduced with:
+이 가이드를 읽고 있다면, 아마도 TypeScript의 타입에 대해 이미 알고 있을 것입니다.
+보다 명확하게하기 위해, 다음과 같이 *타입*을 도입했습니다:
 
-* A type alias declaration (`type sn = number | string;`)
-* An interface declaration (`interface I { x: number[]; }`)
-* A class declaration (`class C { }`)
-* An enum declaration (`enum E { A, B, C }`)
-* An `import` declaration which refers to a type
+* 타입 별칭 선언 (`type sn = number | string;`)
+* 인터페이스 선언 (`interface I { x: number[]; }`)
+* 클래스 선언 (`class C { }`)
+* 열거형 선언 (`enum E { A, B, C }`)
+* 타입을 가리키는 `import` 선언
 
-Each of these declaration forms creates a new type name.
+이러한 각 선언 방식은 새로운 타입 이름을 만듭니다.
 
-### Values
+### 값 (Values)
 
-As with types, you probably already understand what a value is.
-Values are runtime names that we can reference in expressions.
-For example `let x = 5;` creates a value called `x`.
+타입과 마찬가지로 값이 무엇인지 이미 알고 있을 것입니다.
+값은 표현식에서 참조할 수 있는 런타임 이름입니다.
+`let x = 5;`에서 `x`라고 불리는 값을 생성합니다.
 
-Again, being explicit, the following things create values:
+다시 말하지만,  다음과 같이 값을 만듭니다.
 
-* `let`, `const`, and `var` declarations
-* A `namespace` or `module` declaration which contains a value
-* An `enum` declaration
-* A `class` declaration
-* An `import` declaration which refers to a value
-* A `function` declaration
+* `let`, `const`, 그리고 `var` 선언
+* 값을 포함하는 `네임스페이스` 또는 `모듈` 선언
+* `열거형` 선언
+* `클래스` 선언
+* 값을 참조하는 `import` 선언
+* `함수` 선언
 
-### Namespaces
+### 네임스페이스 (Namespaces)
 
-Types can exist in *namespaces*.
-For example, if we have the declaration `let x: A.B.C`,
-  we say that the type `C` comes from the `A.B` namespace.
+타입은 *네임스페이스* 안에 존재할 수 있습니다.
+예를 들어, `let x: A.B.C` 이란 선언이 있다면,
+  타입 `C`는 `A.B` 네임스페이스에서 온 것 입니다.
 
-This distinction is subtle and important -- here, `A.B` is not necessarily a type or a value.
+이 구별은 미묘하지만 중요합니다 -- 여기서 `A.B`는 타입이거나 값일 필요는 없습니다.
 
-## Simple Combinations: One name, multiple meanings
+## 간단한 조합: 하나의 이름, 여러 의미 (Simple Combinations: One name, multiple meanings)
 
-Given a name `A`, we might find up to three different meanings for `A`: a type, a value or a namespace.
-How the name is interpreted depends on the context in which it is used.
-For example, in the declaration `let m: A.A = A;`,
-  `A` is used first as a namespace, then as a type name, then as a value.
-These meanings might end up referring to entirely different declarations!
+`A`라는 이름이 있으면, `A`에 대해 타입, 값 또는 네임스페이스라는 세가지 다른 의미를 찾을 수 있습니다.
+이름을 해석하는 방법은 사용하는 컨텍스트에 따라 다릅니다.
+예를 들어 `let m: A.A = A;` 선언에서,
+  `A`는 먼저 네임스페이스로 사용 된 다음, 타입의 이름으로, 그 다음 값으로 사용됩니다.
+즉 완전히 다른 선언을 의미할 수 있습니다!
 
-This may seem confusing, but it's actually very convenient as long as we don't excessively overload things.
-Let's look at some useful aspects of this combining behavior.
+약간은 혼란스러워 보이지만, 과하게 사용하지 않는 한 실제로 매우 편리합니다.
+결합 동작의 유용한 측면을 살펴 보겠습니다.
 
-### Built-in Combinations
+### 내부 조합 (Built-in Combinations)
 
-Astute readers will notice that, for example, `class` appeared in both the *type* and *value* lists.
-The declaration `class C { }` creates two things:
-  a *type* `C` which refers to the instance shape of the class,
-  and a *value* `C` which refers to the constructor function of the class.
-Enum declarations behave similarly.
+영리한 사람이라면, *타입*과 *값* 목록에서 `클래스`가 둘 다 나온 것을 눈치챘을 것입니다.
+`class C { }` 선언은 두 가지를 만듭니다:
+  클래스 인스턴스의 형태를 나타내는 *타입* `C`와 
+  클래스 생성자를 나타내는 *값* `C` 입니다.
+열거형 선언도 비슷하게 동작합니다.
 
-### User Combinations
+### 사용자 조합 (User Combinations)
 
-Let's say we wrote a module file `foo.d.ts`:
+모듈 파일 `foo.d.ts`을 작성했습니다:
 
 ```ts
 export var SomeVar: { a: SomeType };
@@ -79,7 +79,7 @@ export interface SomeType {
 }
 ```
 
-Then consumed it:
+그 다음 사용했습니다:
 
 ```ts
 import * as foo from './foo';
@@ -87,9 +87,9 @@ let x: foo.SomeType = foo.SomeVar.a;
 console.log(x.count);
 ```
 
-This works well enough, but we might imagine that `SomeType` and `SomeVar` were very closely related
-  such that you'd like them to have the same name.
-We can use combining to present these two different objects (the value and the type) under the same name `Bar`:
+잘 작동하지만, `SomeType`과 `SomeVar`는 이름이 같도록
+  밀접하게 관련되어 있다고 상상할 수 있습니다.
+결합을 사용하여 같은 이름 `Bar`를 두 가지 다른 객체 (값과 타입)를 표시 할 수 있습니다:
 
 ```ts
 export var Bar: { a: Bar };
@@ -98,7 +98,7 @@ export interface Bar {
 }
 ```
 
-This presents a very good opportunity for destructuring in the consuming code:
+이 경우 사용하는 코드를 해체할 수 있는 아주 좋은 기회입니다:
 
 ```ts
 import { Bar } from './foo';
@@ -106,8 +106,8 @@ let x: Bar = Bar.a;
 console.log(x.count);
 ```
 
-Again, we've used `Bar` as both a type and a value here.
-Note that we didn't have to declare the `Bar` value as being of the `Bar` type -- they're independent.
+여기서도 `Bar`를 타입과 값으로 사용했습니다.
+`Bar` 값을 `Bar` 타입으로 선언할 필요가 없었으며 -- 독립적입니다.
 
 ## Advanced Combinations
 
