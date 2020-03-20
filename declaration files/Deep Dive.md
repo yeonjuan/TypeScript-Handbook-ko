@@ -109,87 +109,87 @@ console.log(x.count);
 여기서도 `Bar`를 타입과 값으로 사용했습니다.
 `Bar` 값을 `Bar` 타입으로 선언할 필요가 없다는 점을 유의하세요 -- 저 둘은 독립적입니다.
 
-## Advanced Combinations
+## 고급 결합 (Advanced Combinations)
 
-Some kinds of declarations can be combined across multiple declarations.
-For example, `class C { }` and `interface C { }` can co-exist and both contribute properties to the `C` types.
+선언은 여러 개의 선언에 걸쳐 결합될 수 있습니다.
+예를 들어, `class C { }`와 `interface C { }` 같이 결합할 수 있으며 둘 다 `C` 타입에 프로퍼티를 추가합니다.
 
-This is legal as long as it does not create a conflict.
-A general rule of thumb is that values always conflict with other values of the same name unless they are declared as `namespace`s,
-  types will conflict if they are declared with a type alias declaration (`type s = string`),
-  and namespaces never conflict.
+충돌을 일으키지 않는다면 충분히 합법적입니다.
+일반적인 경험 법칙은 값의 이름이 `네임스페이스`로 선언되지 않는 한 항상 같은 이름의 다른 값과 충돌하고,
+  타입 별칭 선언(`type s = string`)으로 선언 된 경우 타입이 충돌하며,
+  네임스페이스와는 절대로 충돌하지 않는 것입니다.
 
-Let's see how this can be used.
+어떻게 사용되는지 살펴보겠습니다.
 
-### Adding using an `interface`
+### `인터페이스`를 사용하여 추가하기 (Adding using an `interface`)
 
-We can add additional members to an `interface` with another `interface` declaration:
+`인터페이스`에 다른 `인터페이스` 선언을 사용하여 멤버를 추가할 수 있습니다.
 
 ```ts
 interface Foo {
   x: number;
 }
-// ... elsewhere ...
+// ... 다른 위치 ...
 interface Foo {
   y: number;
 }
 let a: Foo = ...;
-console.log(a.x + a.y); // OK
+console.log(a.x + a.y); // 성공
 ```
 
-This also works with classes:
+클래스와도 같이 동작합니다:
 
 ```ts
 class Foo {
   x: number;
 }
-// ... elsewhere ...
+// ... 다른 위치 ...
 interface Foo {
   y: number;
 }
 let a: Foo = ...;
-console.log(a.x + a.y); // OK
+console.log(a.x + a.y); // 성공
 ```
 
-Note that we cannot add to type aliases (`type s = string;`) using an interface.
+단, 타입 별칭 (`type s = string;`)에는 인터페이스를 사용해서 추가할 수 없습니다.
 
-### Adding using a `namespace`
+### `네임스페이스`를 사용하여 추가하기 (Adding using a `namespace`)
 
-A `namespace` declaration can be used to add new types, values, and namespaces in any way which does not create a conflict.
+`네임스페이스` 선언은 충돌을 일으키지 않는 방식으로 새로운 타입, 값 그리고 네임스페이스를 추가할 수 있습니다.
 
-For example, we can add a static member to a class:
+예를 들어, 클래스에 정적 멤버를 추가할 수 있습니다.
 
 ```ts
 class C {
 }
-// ... elsewhere ...
+// ... 다른 위치 ...
 namespace C {
   export let x: number;
 }
-let y = C.x; // OK
+let y = C.x; // 성공
 ```
 
-Note that in this example, we added a value to the *static* side of `C` (its constructor function).
-This is because we added a *value*, and the container for all values is another value
-  (types are contained by namespaces, and namespaces are contained by other namespaces).
+위 예제에서 `C`의 *정적* 측면(생성자 함수)에 값을 추가했습니다.
+*값*을 추가 했고 모든 값에 대한 컨테이너가 다르기 때문입니다.
+  (타입은 네임스페이스에 포함되고 네임스페이스는 다른 네임스페이스에 포함됩니다).
 
-We could also add a namespaced type to a class:
+네임스페이스 타입을 클래스에 추가할 수 있습니다:
 
 ```ts
 class C {
 }
-// ... elsewhere ...
+// ... 다른 위치 ...
 namespace C {
   export interface D { }
 }
-let y: C.D; // OK
+let y: C.D; // 성공
 ```
 
-In this example, there wasn't a namespace `C` until we wrote the `namespace` declaration for it.
-The meaning `C` as a namespace doesn't conflict with the value or type meanings of `C` created by the class.
+이 예제에서 `네임스페이스` 선언을 작성할 때까지 네임스페이스 `C`는 없었습니다.
+네임스페이스 `C`는 클래스에 의해 생성된 `C`의 값 또는 타입과 충돌하지 않습니다.
 
-Finally, we could perform many different merges using `namespace` declarations.
-This isn't a particularly realistic example, but shows all sorts of interesting behavior:
+마지막으로 `네임스페이스` 선언을 사용하여 다양한 병합을 할 수 있습니다.
+특히 현실적인 예는 아니지만, 흥미로운 동작을 확인할 수 있습니다:
 
 ```ts
 namespace X {
@@ -197,7 +197,7 @@ namespace X {
   export class Z { }
 }
 
-// ... elsewhere ...
+// ... 다른 위치 ...
 namespace X {
   export var Y: number;
   export namespace Z {
@@ -207,25 +207,25 @@ namespace X {
 type X = string;
 ```
 
-In this example, the first block creates the following name meanings:
+위 예제에서 첫 번째 블록은 다음 이름의 의미를 만듭니다:
 
-* A value `X` (because the `namespace` declaration contains a value, `Z`)
-* A namespace `X` (because the `namespace` declaration contains a type, `Y`)
-* A type `Y` in the `X` namespace
-* A type `Z` in the `X` namespace (the instance shape of the class)
-* A value `Z` that is a property of the `X` value (the constructor function of the class)
+* 값 `X` (`네임스페이스` 선언은 값 `Z`를 포함합니다)
+* 네임스페이스 `X` (`네임스페이스` 선언은 타입 `Y`를 포함합니다)
+* `X` 네임스페이스 안의 타입 `Y`
+* `X` 네임스페이스 안의 타입 `Z` (클래스의 인스턴스 형태)
+* `X` 값의 프로퍼티인 값 `Z` (클래스의 생성자 함수)
 
-The second  block creates the following name meanings:
+두 번째 블록은 다음 이름의 의미를 만듭니다:
 
-* A value `Y` (of type `number`) that is a property of the `X` value
-* A namespace `Z`
-* A value `Z` that is a property of the `X` value
-* A type `C` in the `X.Z` namespace
-* A value `C` that is a property of the `X.Z` value
-* A type `X`
+* `X` 값의 프로퍼티인 값 `Y` (`number` 타입)
+* 네임스페이스 `Z`
+* `X` 값의 프로퍼티인 값 `Z`
+* `X.Z` 네임스페이스 안의 타입 `C`
+* `X.Z` 값의 프로퍼티인 값 `C`
+* 타입 `X`
 
-## Using with `export =` or `import`
+## `export =` or `import` 사용하기 (Using with `export =` or `import`)
 
-An important rule is that `export` and `import` declarations export or import *all meanings* of their targets.
+중요한 규칙은 `export`와 `import` 선언이 대상의 *모든 의미* 를 내보내거나 가져온다는 것 입니다.
 
 <!-- TODO: Write more on that. -->
