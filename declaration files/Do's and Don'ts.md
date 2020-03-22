@@ -34,7 +34,7 @@ function reverse(s: string): string;
 사용하지 않는 콜백의 반환 값 타입에 `any`를 사용*하지 마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 function fn(x: () => any) {
     x();
 }
@@ -63,45 +63,45 @@ function fn(x: () => void) {
 정말 의도한 것이 아니라면 콜백에 선택적 매개변수를 사용*하지 마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 interface Fetcher {
     getObject(done: (data: any, elapsedTime?: number) => void): void;
 }
 ```
 
-This has a very specific meaning: the `done` callback might be invoked with 1 argument or might be invoked with 2 arguments.
-The author probably intended to say that the callback might not care about the `elapsedTime` parameter,
-  but there's no need to make the parameter optional to accomplish this --
-  it's always legal to provide a callback that accepts fewer arguments.
+이는 아주 구체적인 의미를 가지고 있습니다: `done` 콜백은 1개 혹은 2개의 인자로 호출될 수 있습니다.
+작성자는 아마 콜백은 `elapsedTime` 매개변수에 상관없다는 것을 말하려는 의도였을 것입니다,
+  하지만 이를 위해 매개변수를 선택적으로 만들 필요는 없습니다 --
+  콜백에 더 적은 인수를 제공하는 것은 항상 허용됩니다.
 
-*Do* write callback parameters as non-optional:
+콜백 매개변수를 비-선택적으로 작성*하세요*:
 
 ```ts
-/* OK */
+/* 좋음 */
 interface Fetcher {
     getObject(done: (data: any, elapsedTime: number) => void): void;
 }
 ```
 
-## Overloads and Callbacks
+## 오버로드와 콜백 (Overloads and Callbacks)
 
-*Don't* write separate overloads that differ only on callback arity:
+콜백의 인수만 다른 오버로드를 분리해서 작성 *하지 마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 declare function beforeAll(action: () => void, timeout?: number): void;
 declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
 ```
 
-*Do* write a single overload using the maximum arity:
+최대 인수를 사용해 하나의 오버로드를 작성 *하세요*:
 
 ```ts
 /* OK */
 declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
 ```
 
-*Why*: It's always legal for a callback to disregard a parameter, so there's no need for the shorter overload.
-Providing a shorter callback first allows incorrectly-typed functions to be passed in because they match the first overload.
+*이유*: 콜백이 매개 변수를 무시하는 것은 항상 허용되므로, 짧은 오버로드는 필요하지 않습니다.
+더 짧은 콜백을 먼저 작성하면 넘어오는 함수가 첫 번째 오버로드와 일치하기 때문에 잘못된-타입의 함수를 허용합니다.
 
 # Function Overloads
 
