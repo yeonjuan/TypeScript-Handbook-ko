@@ -66,7 +66,7 @@ window.onscroll = function(uiEvent) {
 }
 ```
 
-위 함수가 `Window.onscroll`에 할당되어 있다는 사실을 기반으로, TypeScript는 `uiEvent`가 이전 예제의 `MouseEvent`가 아닌 [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) 임을 알고 있습니다. `UIEvent` 객체는 `button` 프로퍼티가 없어서 TypeScript가 오류를 발생시킵니다.
+위 함수가 `Window.onscroll`에 할당되어 있다는 사실을 기반으로, TypeScript는 `uiEvent`가 이전 예제의 `MouseEvent`가 아닌 [UIEvent](https://developer.mozilla.org/en-US/docs/Web/API/UIEvent) 임을 알고 있습니다. `UIEvent` 객체에는 `button` 프로퍼티가 없어서 TypeScript가 오류를 발생시킵니다.
 
 만약 이 함수가 문맥적으로 타입이 추론되지 않는 위치에 있다면, 함수의 인수는 암묵적으로 `any` 타입을 가지며 별도의 오류를 보고하지 않습니다. (`--noImplicitAny` 옵션을 사용하지 않는다면)
 
