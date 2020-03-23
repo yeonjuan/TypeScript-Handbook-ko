@@ -27,7 +27,7 @@
 
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
-[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 구문입니다.
+[JSX](https://facebook.github.io/jsx/)는 내장형 XML 같은 구문입니다.
 변환의 의미는 구현에 따라 다르지만 유효한 JavaScript로 변환되어야 합니다.
 JSX는 [React](https://reactjs.org/)로 큰 인기를 얻었지만, 이후엔 다른 구현도 등장했습니다.
 TypeScript는 임베딩, 타입 검사, JSX를 JavaScript로 직접 컴파일하는 것을 지원합니다.
