@@ -34,7 +34,7 @@ TypeScript는 임베딩, 타입 검사, JSX를 JavaScript로 직접 컴파일하
 
 ## 기본 사용법 (Basic usage)
 
-<b><a href="#table-of-contents">↥ 위로</a></b>
+<b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 JSX를 사용하려면 다음의 두 작업을 해야 합니다.
 
