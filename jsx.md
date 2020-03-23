@@ -25,7 +25,7 @@
 
 # 소개 (Introduction)
 
-<b><a href="#table-of-contents">↥ 위로</a></b>
+<b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 [JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 구문입니다.
 변환의 의미는 구현에 따라 다르지만 유효한 JavaScript로 변환되어야 합니다.
