@@ -56,7 +56,7 @@ TypeScript는 `preserve`, `react` 및 `react-native`라는 세 가지의 JSX 모
 
 `--jsx` 명령줄 플래그 또는 [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) 파일의 해당 옵션을 사용하여 모드를 지정할 수 있습니다.
 
-> *참고: `--jsxFactory` 옵션으로 React의 JSX를 생성을 대상으로 지정할 때 사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
+> *참고: React JSX를 생성할 때 `--jsxFactory` 옵션으로  사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
 
 ## `as` 연산자 (The `as` operator)
 
