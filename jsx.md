@@ -1,6 +1,4 @@
-# JSX
-
-## 목차 (Table of contents)
+# 목차 (Table of contents)
 
 [소개 (Introduction)](#소개-Introduction)
 
@@ -25,31 +23,40 @@
 
 [팩토리 함수 (Factory Functions)](#팩토리-함수-Factory-Functions)
 
-## 소개 (Introduction)
+# 소개 (Introduction)
 
-[↥ 위로](#JSX)
+<b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
-[JSX](https://facebook.github.io/jsx/)는 내장형 XML과 같은 문법입니다. 구현 방법에 따라 변환된 출력물의 의미가 다를 수 있지만, JSX는 유효한 JavaScript로 변환되도록 이루어져 있습니다. JSX는 [리액트](https://reactjs.org/)에 의해 큰 인기를 얻었습니다만, 이후엔 다른 구현도 등장했습니다. TypeScript는 JavaScript로의 컴파일, 타입 검사, 임베딩을 지원합니다.
+[JSX](https://facebook.github.io/jsx/)는 내장형 XML 같은 구문입니다.
+변환의 의미는 구현에 따라 다르지만 유효한 JavaScript로 변환되어야 합니다.
+JSX는 [React](https://reactjs.org/)로 큰 인기를 얻었지만, 이후 다른 구현도 등장했습니다.
+TypeScript는 임베딩, 타입 검사, JSX를 JavaScript로 직접 컴파일하는 것을 지원합니다.
 
 ## 기본 사용법 (Basic usage)
 
-[↥ 위로](#JSX)
+<b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
-JSX를 사용하려면 다음의 두 작업을 해야 합니다.
+JSX를 사용하려면 다음 두 가지 작업을 해야 합니다.
 
 1. 파일 이름을 `.tsx` 확장자로 지정합니다.
-2. `jsx` 옵션을 활성화 합니다.
+2. `jsx` 옵션을 활성화합니다.
 
-TypeScript엔 `preserve`, `react`, `react-native`라는 세 가지의 JSX 모드가 탑재되어 있습니다. 이러한 모드는 생성(emit) 단계에서만 영향을 미치며, 타입 검사에는 영향을 주지 않습니다. `preserve` 모드는 추후에 다른 변환 단계(예: [바벨](https://babeljs.io/))에 사용할 결과물을 위해 JSX 부분을 보존해 둡니다. 이러한 결과물은 `.jsx` 확장자를 갖게 됩니다. `react` 모드는 `React.createElement`를 생성하여 별도의 JSX 변환이 필요하지 않으며, 해당 결과물은 `.js` 확장자를 갖게 됩니다. `react-native` 모드는 JSX를 보존한다는 점에서 `preserve` 모드와 동일하지만, 결과물은 `.js` 확장자를 갖게 된다는 점에서 다릅니다.
+TypeScript는 `preserve`, `react` 및 `react-native`라는 세 가지의 JSX 모드와 함께 제공됩니다.
+이 모드들은 방출 단계에서만 영향을 미치며, 타입 검사에는 영향을 받지 않습니다.
+`preserve` 모드는 다른 변환 단계(예: [Babel](https://babeljs.io/))에 사용하도록 결과물의 일부를 유지합니다.
+또한 결과물은 `.jsx` 파일 확장자를 갖습니다.
+`react` 모드는 `React.createElement`를 생성하여, 사용하기 전에 JSX 변환이 필요하지 않으며, 결과물은 `.js` 확장자를 갖게 됩니다.
+`react-native` 모드는 JSX를 유지한다는 점은 `preserve` 모드와 동일하지만, 결과물은 `.js` 확장자를 갖게 된다는 점이 다릅니다.
 
-|모드|입력|출력|출력파일 확장자|
+|모드|입력|결과|결과 파일 확장자|
 |:---|:---|:---|:---|
 |`preserve`|`<div />`|`<div />`|`.jsx`|
 |`react`|`<div />`|`React.createElement("div")`|`.js`|
 |`react-native`|`<div />`|`<div />`|`.js`|
 
-이러한 모드는 `--jsx` 플래그 혹은 [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)의 해당 옵션을 사용하여 지정할 수 있습니다.
-> *참고: `--jsxFactory` 옵션으로 리액트의 JSX를 생성할 때 사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
+`--jsx` 명령줄 플래그 또는 [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) 파일의 해당 옵션을 사용하여 모드를 지정할 수 있습니다.
+
+> *참고: React JSX를 생성할 때 `--jsxFactory` 옵션으로  사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
 
 ## `as` 연산자 (The `as` operator)
 
