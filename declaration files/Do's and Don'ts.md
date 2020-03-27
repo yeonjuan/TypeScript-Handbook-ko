@@ -100,7 +100,7 @@ declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): vo
 declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
 ```
 
-*이유*: 콜백이 매개 변수를 무시하는 것은 항상 허용되므로, 짧은 오버로드는 필요하지 않습니다.
+*이유*: 콜백이 매개변수를 무시하는 것은 항상 허용되므로, 짧은 오버로드는 필요하지 않습니다.
 더 짧은 콜백을 먼저 작성하면 넘어오는 함수가 첫 번째 오버로드와 일치하기 때문에 잘못된-타입의 함수를 허용합니다.
 
 # Function Overloads
