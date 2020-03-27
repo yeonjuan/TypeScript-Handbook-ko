@@ -9,7 +9,7 @@
 ## `for..of` 문 (`for..of` statements)
 
 `for..of`는 반복 가능한 객체를 반복하여 객체의 `Symbol.iterator`프로퍼티를 호출합니다.
-다음은 배열의 간단한 `for..of` 루프입니다.
+다음은 배열의 간단한 `for..of` 루프입니다:
 
 ```ts
 let someArray = [1, "string", false];
