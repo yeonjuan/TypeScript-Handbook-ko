@@ -96,7 +96,7 @@ declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): vo
 최대 인수를 사용해 하나의 오버로드를 작성 *하세요*:
 
 ```ts
-/* OK */
+/* 좋음 */
 declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): void;
 ```
 
