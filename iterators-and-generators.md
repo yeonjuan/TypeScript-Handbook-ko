@@ -6,7 +6,7 @@
 `Array`, `Map`, `Set`, `String`, `Int32Array`, `Uint32Array` 등과 같은 일부 내장된 타입에는 이미 `Symbol.iterator` 프로퍼티가 구현되어 있습니다.
 객체의 `Symbol.iterator` 함수는 반복할 값 목록을 반환합니다.
 
-### `for..of` 문 (`for..of` statements)
+## `for..of` 문 (`for..of` statements)
 
 `for..of`는 반복 가능한 객체를 반복하여 객체의 `Symbol.iterator`프로퍼티를 호출합니다.
 다음은 배열의 간단한 `for..of` 루프입니다.
