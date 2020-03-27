@@ -84,4 +84,4 @@ for (var _i = 0; _i < numbers.length; _i++){
 
 #### ESMAScript 2015 및 상위 버전 타케팅 (Targeting ECMAScript 2015 and higher)
 
-ECMAScipt 2015-호환 엔진을 타케팅하는 경우, 컴파일러는 엔진의 내장 반복자(ieterator) 구현을 대상으로하는 `for..of` 루프를 생성합니다.
+ECMAScipt 2015-호환 엔진을 타케팅하는 경우, 컴파일러는 엔진의 내장 반복자를 구현하는 `for..of` 루프를 생성합니다.
