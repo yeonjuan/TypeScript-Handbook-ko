@@ -107,7 +107,7 @@ declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): vo
 
 ## 순서 (Ordering)
 
-더 일반적인 오버로드를 구체적인 오버로드 이전에 두지 *마세요*:
+더 일반적인 오버로드를 더 구체적인 오버로드 이전에 두지 *마세요*:
 
 ```ts
 /* 잘못됨 */
