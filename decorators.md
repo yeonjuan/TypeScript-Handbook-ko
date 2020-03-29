@@ -254,7 +254,7 @@ function enumerable(value: boolean) {
 
 > 참고&emsp; 스크립트 대상이 'ES5'보다 낮은 경우 반환 값은 무시됩니다.
 
-다음은 `Point` 클래스의 멤버에 적용되는 접근자 데코레이터 (`@configurable`)의 예입니다.
+다음은 `Point` 클래스의 멤버에 적용되는 접근자 데코레이터 (`@configurable`)의 예입니다:
 
 ```ts
 class Point {
