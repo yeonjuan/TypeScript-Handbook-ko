@@ -6,7 +6,7 @@ TypeScript 및 ES6에 클래스가 도입됨에 따라, 클래스 및 클래스 
 
 > 참고&emsp; 데코레이터는 향후 릴리스에서 변경될 수 있는 실험적인 기능입니다.
 
-데코레이터에 대한 실험적 지원을 활성화하려면 명령줄 또는 `tsconfig.json`에서 `experimentDecorators` 컴파일러 옵션을 활성화해야합니다.
+데코레이터에 대한 실험적 지원을 활성화하려면 명령줄 또는 `tsconfig.json`에서 `experimentDecorators` 컴파일러 옵션을 활성화해야합니다:
 
 **명령줄 (Command Line)**:
 
