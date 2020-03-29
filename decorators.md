@@ -203,7 +203,7 @@ console.log(new Greeter("world"));
 
 > 참고&emsp; 스크립트 대상이 'ES5'보다 낮은 경우 반환 값은 무시됩니다.
 
-다음은 `Greeter` 클래스의 메서드에 적용된 메서드 데코레이터 (`@ enumerable`)의 예입니다.
+다음은 `Greeter` 클래스의 메서드에 적용된 메서드 데코레이터 (`@ enumerable`)의 예입니다:
 
 ```ts
 class Greeter {
