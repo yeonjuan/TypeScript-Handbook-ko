@@ -23,7 +23,6 @@
 [팩토리 함수 (Factory Functions)](#팩토리-함수-factory-functions)
 
 # 소개 (Introduction)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 [JSX](https://facebook.github.io/jsx/)는 내장형 XML 같은 구문입니다.
@@ -32,7 +31,6 @@ JSX는 [React](https://reactjs.org/)로 큰 인기를 얻었지만, 이후 다�
 TypeScript는 임베딩, 타입 검사, JSX를 JavaScript로 직접 컴파일하는 것을 지원합니다.
 
 ## 기본 사용법 (Basic usage)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 JSX를 사용하려면 다음 두 가지 작업을 해야 합니다.
@@ -58,7 +56,6 @@ TypeScript는 `preserve`, `react` 및 `react-native`라는 세 가지의 JSX 모
 > *참고: React JSX를 생성할 때 `--jsxFactory` 옵션으로  사용할 JSX 팩토리(JSX factory) 함수를 지정할 수 있습니다 (기본값은 `React.createElement`)
 
 ## `as` 연산자 (The `as` operator)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 타입 단언(type assertion)을 어떻게 작성하는지 떠올려 볼까요:
@@ -80,7 +77,6 @@ var foo = bar as foo;
 `as` 연산자는 `.ts`와 `.tsx` 파일 모두 사용할 수 있으며, 꺾쇠 괄호 형식의 단언과 동일하게 동작합니다.
 
 # 타입 검사 (Type Checking)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 JSX의 타입 검사를 이해하기 위해선, 먼저 내장 요소와 값-기반 요소의 차이점에 대해 알아야 합니다.
@@ -95,7 +91,6 @@ TypeScript는 [React와 동일한 규칙](http://facebook.github.io/react/docs/j
 내장 요소는 항상 소문자로 시작하고 값-기반 요소는 항상 대문자로 시작합니다.
 
 ## 내장 요소 (Intrinsic elements)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 내장 요소는 특수 인터페이스 `JSX.IntrinsicElements`에서 조회됩니다.
@@ -127,7 +122,6 @@ declare namespace JSX {
 ```
 
 ## 값-기반 요소 (Value-based elements)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 값-기반 요소는 해당 스코프에 있는 식별자로 간단하게 조회됩니다.
@@ -147,7 +141,6 @@ import MyComponent from "./myComponent";
 이 두 가지 유형의 값-기반 요소는 JSX 표현식에서 서로 구별할 수 없으므로, TS는 과부하 해결을 사용하여 먼저 함수형 컴포넌트 표현식으로 해석합니다. 이 과정이 성공적으로 진행되면, TS는 이 선언을 표현식으로 해석합니다. 함수형 컴포넌트로 해석되지 않는다면, TS는 클래스형 컴포넌트로 해석을 시도합니다. 이 과정도 실패할 경우, TS는 오류를 보고합니다.
 
 ### 함수형 컴포넌트 (Function Component)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 이름에서 알 수 있듯, 컴포넌트는 첫 번째 인수가 `props` 객체인 JavaScript 함수로 정의됩니다.
@@ -192,7 +185,6 @@ function MainButton(prop: SideProps): JSX.Element {
 > 참고: 함수형 컴포넌트는 이전에 무상태 함수형 컴포넌트(SFC)로 알려져 있습니다. 하지만 최근 버전의 리액트에선 더 이상 함수형 컴포넌트를 무상태로 취급하지 않으며, `SFC` 타입과 그 별칭인 `StatelessComponent`은 더 이상 사용되지 않습니다.
 
 ### 클래스형 컴포넌트 (Class Component)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 클래스형 컴포넌트의 타입을 정의하는 것은 가능합니다.
@@ -260,7 +252,6 @@ function NotAValidFactoryFunction() {
 ```
 
 ## 속성 타입 검사 (Attribute type checking)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 속성 타입 검사를 위해선 첫 번째로 *요소 속성 타입* 을 결정해야 합니다.
@@ -337,7 +328,6 @@ var badProps = {};
 ```
 
 ## 자식 타입 검사 (Children Type Checking)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 TypeScript 2.3부터, TS는 *자식* 의 타입 검사를 도입했습니다. *자식* 은 자식 *JSX 표현식* 을 속성에 삽입하는 *요소 속성 타입*의 특수한 프로퍼티입니다.
@@ -406,7 +396,6 @@ class Component extends React.Component<PropsType, {}> {
 ```
 
 # JSX 결과 타입 (The JSX result type)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 기본적으로 JSX 표현식의 결과물은 `any` 타입입니다.
@@ -415,7 +404,6 @@ class Component extends React.Component<PropsType, {}> {
 이 인터페이스는 블랙박스입니다.
 
 # 표현식 포함하기 (Embedding Expressions)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 JSX는 중괄호(`{ }`)로 표현식을 감싸 태그 사이에 표현식 사용을 허용합니다.
@@ -436,7 +424,6 @@ var a = <div>
 ```
 
 # 리액트와 통합하기 (React integration)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 리액트에서 JSX를 사용하기 위해선 [React 타이핑](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)을 사용해야 합니다.
@@ -460,7 +447,6 @@ class MyComponent extends React.Component<Props, {}> {
 ```
 
 # 팩토리 함수 (Factory Functions)
-
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
 `jsx: react` 컴파일러 옵션에서 사용하는 팩토리 함수는 설정이 가능합니다. 이는 `jsxFactory` 명령 줄 옵션을 사용하거나 인라인 `@jsx` 주석을 사용하여 파일별로 설정할 수 있습니다. 예를 들어 `jsxFactory`에 `createElement`를 설정했다면, `<div />`는 `React.createElement("div")` 대신 `createElement("div")`으로 생성될 것입니다.
