@@ -353,7 +353,7 @@ function getFormat(target: any, propertyKey: string) {
 
 메개변수 데코레이터의 반환 값은 무시됩니다.
 
-다음은 `Greeter` 클래스 멤버의 매개 변수에 적용되는 매개 변수 데코레이터 (`@required`)의 예입니다.
+다음은 `Greeter` 클래스 멤버의 매개 변수에 적용되는 매개 변수 데코레이터 (`@required`)의 예입니다:
 
 ```ts
 class Greeter {
