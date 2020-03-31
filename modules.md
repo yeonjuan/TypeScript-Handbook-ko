@@ -2,23 +2,23 @@
 
 ECMAScript 2015부터 JavaScript에는 모듈 개념이 있습니다. TypeScript는 이 개념을 공유합니다.
 
-모듈은 전역 범위가 아닌 그 자체 범위 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#내보내기-export) 중 하나를 사용하여 명시적으로 내보내지 않는 한 모듈 외부에서 보이지 않습니다.
-반대로 다른 모듈에서 내보낸 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#가져오기-import) 중 하나를 사용하여 가져와야 합니다.
+모듈은 전역 스코프가 아닌 자체 스코프 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#내보내기-export) 중 하나를 사용하여 명시적으로 export 하지 않는 한 모듈 외부에서 보이지 않습니다.
+반대로 다른 모듈에서 export 한 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#가져오기-import) 중 하나를 사용하여 import 해야 합니다.
 
 모듈은 선언형입니다; 모듈 간의 관계는 파일 수준의 imports 및 exports 관점에서 지정됩니다.
 
-모듈은 모듈 로더를 사용하여 다른 모듈을 가져옵니다.
+모듈은 모듈 로더를 사용하여 다른 모듈을 import 합니다.
 런타임 시 모듈 로더는 모듈을 실행하기 전에 모듈의 모든 의존성을 찾고 실행해야 합니다.
 JavaScript에서 사용하는 유명한 모듈 로더로는 [CommonJS](https://en.wikipedia.org/wiki/CommonJS) 모듈 용 Node.js의 로더와 웹 애플리케이션의 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) 모듈 용 [RequireJS](https://requirejs.org/) 로더가 있습니다.
 
 ECMAScript 2015와 마찬가지로 TypeScript는 최상위 수준의 `import` 혹은 `export`가 포함된 모든 파일을 모듈로 간주합니다.
-반대로 최상위 수준의  `import` 혹은 `export` 선언이 없는 파일은 전역 범위에서 사용할 수 있는 스크립트로 처리됩니다(모듈에서도 마찬가지).
+반대로 최상위 수준의 `import` 혹은 `export` 선언이 없는 파일은 전역 스코프에서 사용할 수 있는 스크립트로 처리됩니다(모듈에서도 마찬가지).
 
-# 내보내기 (Export)
+# Export
 
-## 선언 내보내기 (Exporting a declaration)
+## 선언 export 하기 (Exporting a declaration)
 
-`export` 키워드를 추가하여 모든 선언 (변수, 함수, 클래스, 타입 별칭, 인터페이스)를 내보낼 수 있습니다.
+`export` 키워드를 추가하여 모든 선언 (변수, 함수, 클래스, 타입 별칭, 인터페이스)를 export 할 수 있습니다.
 
 ##### StringValidator.ts
 
@@ -42,9 +42,9 @@ export class ZipCodeValidator implements StringValidator {
 }
 ```
 
-## 내보내기 문 (Export statements)
+## Export 문 (Export statements)
 
-내보내기 문은 사용자를 위해 내보낼 이름을 바꿔야 할 때 편리합니다. 위의 예제는 다음과 같이 작성할 수 있습니다:
+Export 문은 사용자를 위해 export 할 이름을 바꿔야 할 때 편리합니다. 위의 예제는 다음과 같이 작성할 수 있습니다:
 
 ```ts
 class ZipCodeValidator implements StringValidator {
@@ -56,10 +56,10 @@ export { ZipCodeValidator };
 export { ZipCodeValidator as mainValidator };
 ```
 
-## 다시-내보내기 (Re-exports)
+## 다시-export 하기 (Re-exports)
 
 종종 모듈은 다른 모듈을 확장하고 일부 기능을 부분적으로 노출합니다.
-다시-내보내기(re-export)는 지역적으로 가져오거나 지역 변수를 도입하지 않습니다.
+다시-export 하기는 지역적으로 가져오거나 지역 변수를 도입하지 않습니다.
 
 ##### ParseIntBasedZipCodeValidator.ts
 
@@ -70,11 +70,11 @@ export class ParseIntBasedZipCodeValidator {
     }
 }
 
-// 기존 validator의 이름을 변경 후 내보냄
+// 기존 validator의 이름을 변경 후 export
 export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 ```
 
-선택적으로, 하나의 모듈은 하나 혹은 여러 개의 모듈을 감쌀 수 있고, `export * from "module"` 구문을 사용해 내보내는 것을 모두 결합할 수 있습니다.
+선택적으로, 하나의 모듈은 하나 혹은 여러 개의 모듈을 감쌀 수 있고, `export * from "module"` 구문을 사용해 export 하는 것을 모두 결합할 수 있습니다.
 
 ##### AllValidators.ts
 
@@ -87,12 +87,12 @@ export * from "./ParseIntBasedZipCodeValidator"; // 'ParseIntBasedZipCodeValidat
                                                  // 'RegExpBasedZipCodeValidator' 라는 별칭으로 다시 내보냄
 ```
 
-# 가져오기 (Import)
+# Import
 
-가져오기는 모듈에서 내보내기 만큼 쉽습니다.
-내보낸 선언은 아래의 `import` 양식 중 하나를 사용하여 가져옵니다:
+import는 모듈에서 export 만큼 쉽습니다.
+export 한 선언은 아래의 `import` 양식 중 하나를 사용하여 import 합니다:
 
-## 모듈에서 단일 내보내기를 가져오기 (Import a single export from a module)
+## 모듈에서 단일 export를 import 하기 (Import a single export from a module)
 
 ```ts
 import { ZipCodeValidator } from "./ZipCodeValidator";
@@ -100,34 +100,34 @@ import { ZipCodeValidator } from "./ZipCodeValidator";
 let myValidator = new ZipCodeValidator();
 ```
 
-이름을 수정해서 가져올 수 있습니다.
+이름을 수정해서 import 할 수 있습니다.
 
 ```ts
 import { ZipCodeValidator as ZCV } from "./ZipCodeValidator";
 let myValidator = new ZCV();
 ```
 
-## 전체 모듈을 단일 변수로 가져와 모듈 내보내기 접근에 사용하기 (Import the entire module into a single variable, and use it to access the module exports)
+## 전체 모듈을 단일 변수로 import 해서, 모듈 exports 접근에 사용하기 (Import the entire module into a single variable, and use it to access the module exports)
 
 ```ts
 import * as validator from "./ZipCodeValidator";
 let myValidator = new validator.ZipCodeValidator();
 ```
 
-## 부수효과만을 위해 모듈 가져오기 (Import a module for side-effects only)
+## 부수효과만을 위해 모듈 import 하기 (Import a module for side-effects only)
 
 권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다.
-이러한 모듈은 어떤 내보내기도 없거나, 사용자가 내보내기에 관심이 없습니다.
-이러한 모듈을 가져오기 위해, 다음처럼 사용하세요:
+이러한 모듈은 어떤 exports도 없거나, 사용자가 exports에 관심이 없습니다.
+이러한 모듈을 import 하기 위해, 다음처럼 사용하세요:
 
 ```ts
 import "./my-module.js"
 ```
 
-## 타입 가져오기 (Importing Types)
+## 타입 import 하기 (Importing Types)
 
-TypeScript 3.8 이전에는 `import`를 사용하여 타입을 가져올 수 있었습니다.
-TypeScript 3.8에서는 `import` 문 혹은 `import type`을 사용하여 타입을 가져올 수 있습니다.
+TypeScript 3.8 이전에는 `import`를 사용하여 타입을 import 할 수 있었습니다.
+TypeScript 3.8에서는 `import` 문 혹은 `import type`을 사용하여 타입을 import 할 수 있습니다.
 
 ```ts
 // 동일한 import를 재사용하기
@@ -606,7 +606,7 @@ mathLib.isPrime(2);
 
 # 모듈 구조화에 대한 지침 (Guidance for structuring modules)
 
-## 가능한 최상위-레벨에 가깝게 export하기 (Export as close to top-level as possible)
+## 가능한 최상위-레벨에 가깝게 export 하기 (Export as close to top-level as possible)
 
 모듈의 사용자가 export 모듈을 사용할 때 가능한 마찰이 적어야 합니다.
 중첩 수준을 과도하게 추가하면 다루기 힘들어지는 경향이 있으므로, 어떻게 구조를 구성할지 신중하게 생각해야 합니다.
@@ -661,7 +661,7 @@ export function someFunc() { /* ... */ }
 
 반대로 import 할 때:
 
-### 가져온 이름을 명시적으로 나열 (Explicitly list imported names)
+### import 한 이름을 명시적으로 나열 (Explicitly list imported names)
 
 #### Consumer.ts
 
