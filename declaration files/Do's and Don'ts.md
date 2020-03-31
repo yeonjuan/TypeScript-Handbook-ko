@@ -103,14 +103,14 @@ declare function beforeAll(action: (done: DoneFn) => void, timeout?: number): vo
 *이유*: 콜백이 매개변수를 무시하는 것은 항상 허용되므로, 짧은 오버로드는 필요하지 않습니다.
 더 짧은 콜백을 먼저 작성하면 넘어오는 함수가 첫 번째 오버로드와 일치하기 때문에 잘못된-타입의 함수를 허용합니다.
 
-# Function Overloads
+# 함수 오버로드 (Function Overloads)
 
-## Ordering
+## 순서 (Ordering)
 
-*Don't* put more general overloads before more specific overloads:
+더 일반적인 오버로드를 더 구체적인 오버로드 이전에 두지 *마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 declare function fn(x: any): any;
 declare function fn(x: HTMLElement): number;
 declare function fn(x: HTMLDivElement): string;
@@ -119,10 +119,10 @@ var myElem: HTMLDivElement;
 var x = fn(myElem); // x: any, wat?
 ```
 
-*Do* sort overloads by putting the more general signatures after more specific signatures:
+구체적인 오버로드 뒤에 일반적인 오버로드가 위치하게 정렬 *하세요*:
 
 ```ts
-/* OK */
+/* 좋음 */
 declare function fn(x: HTMLDivElement): string;
 declare function fn(x: HTMLElement): number;
 declare function fn(x: any): any;
@@ -131,8 +131,8 @@ var myElem: HTMLDivElement;
 var x = fn(myElem); // x: string, :)
 ```
 
-*Why*: TypeScript chooses the *first matching overload* when resolving function calls.
-When an earlier overload is "more general" than a later one, the later one is effectively hidden and cannot be called.
+*이유*: TypeScript는 함수 호출을 처리할 때 *첫 번째로 일치하는 오버로드*를 선택합니다.
+이전의 오버로드가 뒤에 것보다 "더 구체적"이면, 뒤에 것은 사실상 가려져 호출되지 않습니다.
 
 ## Use Optional Parameters
 
