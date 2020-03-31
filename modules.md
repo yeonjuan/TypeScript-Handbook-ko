@@ -2,8 +2,8 @@
 
 ECMAScript 2015부터 JavaScript에는 모듈 개념이 있습니다. TypeScript는 이 개념을 공유합니다.
 
-모듈은 전역 스코프가 아닌 자체 스코프 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#내보내기-export) 중 하나를 사용하여 명시적으로 export 하지 않는 한 모듈 외부에서 보이지 않습니다.
-반대로 다른 모듈에서 export 한 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#가져오기-import) 중 하나를 사용하여 import 해야 합니다.
+모듈은 전역 스코프가 아닌 자체 스코프 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#export) 중 하나를 사용하여 명시적으로 export 하지 않는 한 모듈 외부에서 보이지 않습니다.
+반대로 다른 모듈에서 export 한 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#import) 중 하나를 사용하여 import 해야 합니다.
 
 모듈은 선언형입니다; 모듈 간의 관계는 파일 수준의 imports 및 exports 관점에서 지정됩니다.
 
@@ -56,10 +56,10 @@ export { ZipCodeValidator };
 export { ZipCodeValidator as mainValidator };
 ```
 
-## 다시-export 하기 (Re-exports)
+## Re-export 하기 (Re-exports)
 
 종종 모듈은 다른 모듈을 확장하고 일부 기능을 부분적으로 노출합니다.
-다시-export 하기는 지역적으로 가져오거나 지역 변수를 도입하지 않습니다.
+Re-export 하기는 지역적으로 import 하거나, 지역 변수를 도입하지 않습니다.
 
 ##### ParseIntBasedZipCodeValidator.ts
 
@@ -142,7 +142,7 @@ import type {APIResponseType} from "./api";
 
 # Default exports
 
-각 모듈은 선택적으로 `default` export를 export할 수 있습니다.
+각 모듈은 선택적으로 `default` export를 export 할 수 있습니다.
 default export는 `default` 키워드로 표시됩니다; 모듈당 하나의 `default` export만 가능합니다.
 `default` export는 다른 import 양식을 사용하여 import 합니다.
 
@@ -229,7 +229,7 @@ console.log(num); // "123"
 
 ## x로 모두 export 하기 (Export all as x)
 
-TypeScript 3.8에서는 다음 이름이 다른 모듈로 다시-export 될 때 단축어처럼 `export * as ns`를 사용할 수 있습니다:
+TypeScript 3.8에서는 다음 이름이 다른 모듈로 re-export 될 때 단축어처럼 `export * as ns`를 사용할 수 있습니다:
 
 ```ts
 export * as utilities from "./utilities";
@@ -288,7 +288,7 @@ strings.forEach(s => {
 컴파일 중에는 지정된 모듈 대상에 따라 컴파일러는 Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), 또는 [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) 모듈-로딩 시스템에 적합한 코드를 생성합니다.
 생성된 코드의 `define`, `require` 그리고 `register` 호출 기능에 대한 자세한 정보는 각 모듈 로더의 문서를 확인하세요.
 
-이 간단한 예제는 가져오기 및 내보내기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
+이 간단한 예제는 import 및 export 하기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
 
 ##### SimpleModule.ts
 
@@ -355,7 +355,7 @@ export var t = something + 1;
 
 # 간단한 예제 (Simple Example)
 
-아래에서는 각 모듈에서 단일 이름으로 export하기 위해 이전 예제에서 사용한 Validator 구현을 통합합니다.
+아래에서는 각 모듈에서 단일 이름으로 export 하기 위해 이전 예제에서 사용한 Validator 구현을 통합합니다.
 
 컴파일 하려면, 명령 줄에서 모듈 대상을 지정해야 합니다. Node.js의 경우, `--module commonjs`를 사용하세요;
 require.js의 경우 `--module amd`를 사용하세요. 예를 들면:
@@ -437,7 +437,7 @@ TypeScript에서는 아래에 있는 패턴을 사용하여 이 시나리오와 
 
 이 패턴의 핵심 아이디어는 `import id = require("...")` 문을 통해 모듈로 노출된 타입에 접근이 가능하다는 것입니다.
 아래 `if` 블록에 보이는 것처럼, 모듈 로더는 (`require`을 통해) 동적으로 호출됩니다.
-이 기능은 참조-제거 최적화를 활용하므로 필요할 때만 모듈을 로드 할 수 있습니다.
+이 기능은 참조-제거 최적화를 활용하므로 필요할 때만 모듈을 로드할 수 있습니다.
 해당 패턴이 동작하려면 `import`를 통해 정의된 심벌은 오직 타입 위치(즉, JavaScript로 방출되는 위치에서는 사용 안 함)에서만 사용되는 것이 중요합니다.
 
 타입 안전성을 유지하기 위해, `typeof` 키워드를 사용할 수 있습니다.
@@ -500,7 +500,7 @@ C/C++에 익숙하다면, `.h` 파일이라고 생각할 수 있습니다.
 
 Node.js에서는 대부분의 작업은 하나 이상의 모듈을 로드하여 수행합니다.
 최상위-레벨의 내보내기 선언으로 각 모듈을 `.d.ts` 파일로 정의할 수 있지만, 더 큰 하나의 `.d.ts` 파일로 모듈들을 작성하는 것이 더 편리합니다.
-이를 위해, ambient 네임스페이스와 유사한 구조를 사용하지만, 나중에 import할 수 있는 인용된 모듈 이름과 `module` 키워드를 사용합니다.
+이를 위해, ambient 네임스페이스와 유사한 구조를 사용하지만, 나중에 import 할 수 있는 인용된 모듈 이름과 `module` 키워드를 사용합니다.
 예를 들면:
 
 ##### node.d.ts (간단한 발췌)
@@ -551,7 +551,7 @@ x(y);
 ### 와일드카드 모듈 선언 (Wildcard module declarations)
 
 [SystemJS](https://github.com/systemjs/systemjs/blob/master/docs/overview.md#plugin-syntax)나
-[AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md)와 같은 모듈 로더는 비-JavaScirpt 내용을 import할 수 있습니다.
+[AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md)와 같은 모듈 로더는 비-JavaScirpt 내용을 import 할 수 있습니다.
 이 둘은 일반적으로 접두사 또는 접미사를 사용하여 특수한 로딩 의미를 표시합니다.
 이러한 경우를 다루기 위해 와일드카드 모듈 선언을 사용할 수 있습니다.
 
@@ -567,7 +567,7 @@ declare module "json!*" {
 }
 ```
 
-이제 `"*!text"` 나 `"json!*"`와 일치하는 것들을 import할 수 있습니다.
+이제 `"*!text"` 나 `"json!*"`와 일치하는 것들을 import 할 수 있습니다.
 
 ```ts
 import fileContent from "./xyz.txt!text";
@@ -689,15 +689,15 @@ import * as myLargeModule from "./MyLargeModule.ts";
 let x = new myLargeModule.Dog();
 ```
 
-## 확장을 위한 다시-export 하기 (Re-export to extend)
+## 상속을 위한 re-export 하기 (Re-export to extend)
 
 종종 모듈의 기능을 확장해야 할 필요가 있습니다.
-일반적인 JS 패턴은 JQuery 확장이 작동하는 방식과 유사하게 *확장(extenstions)* 으로 기존의 객체를 보강하는 것입니다.
+일반적인 JS 패턴은 JQuery 확장이 작동하는 방식과 유사하게 *확장(extensions)*으로 기존의 객체를 보강하는 것입니다.
 앞에서 언급했듯이 모듈은 전역 네임스페이스 객체와 같이 *병합(merge)* 하지 않습니다.
-여기서 추천하는 방법은 기존의 객체를 *변형하지 않고* 새로운 기능을 제공하는 개체(entity)를 내보내는 것입니다.
+여기서 추천하는 방법은 기존의 객체를 *변형하지 않고* 새로운 기능을 제공하는 개체를 export 하는 것입니다.
 
 `Calculator.ts` 모듈에 정의된 간단한 계산기 구현을 생각해보세요.
-이 모듈도 입력 문자열 목록을 전달하고 결과를 작성하여 계산기의 기능을 테스트할 수 있는 헬퍼 함수를 내보냅니다.
+이 모듈도 입력 문자열 목록을 전달하고 결과를 작성하여 계산기의 기능을 테스트할 수 있는 헬퍼 함수를 export 합니다.
 
 #### Calculator.ts
 
