@@ -148,7 +148,7 @@ declare function greet(setting: GreetingSettings): void;
 
 *문서*
 
-> 인사말이 예상되는 어느곳에나, `string`, `string`을 반환하는 함수, 또는 `Greeter` 인스턴스를 전달할 수 있습니다.
+> 인사말이 예상되는 어느 곳에나, `string`, `string`을 반환하는 함수, 또는 `Greeter` 인스턴스를 전달할 수 있습니다.
 
 *코드*
 
