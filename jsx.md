@@ -93,7 +93,7 @@ TypeScript는 [React와 동일한 규칙](http://facebook.github.io/react/docs/j
 ## 내장 요소 (Intrinsic elements)
 <b><a href="#목차-table-of-contents">↥ 위로</a></b>
 
-내장 요소는 특수 인터페이스 `JSX.IntrinsicElements`에서 조회됩니다.
+내장 요소는 특수 인터페이스 `JSX.IntrinsicElements`에서 조회됩니다.
 기본적으로 이 인터페이스가 지정되지 않으면 그대로 진행되어 내장 요소 타입은 검사되지 않습니다.
 그러나 이 인터페이스가 *있는* 경우, 내장 요소의 이름은 `JSX.IntrinsicElements` 인터페이스의 프로퍼티로 조회됩니다.
 예를 들어:
