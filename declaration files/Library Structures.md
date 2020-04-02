@@ -77,7 +77,7 @@ window.createGreeting = function(s) {
 ### 전역 라이브러리 템플릿 (Global Library Template)
 
 템플릿 파일 [`global.d.ts`](./templates/global.d.ts.md)은 예제 라이브러리 `myLib`를 정의합니다.
-["이름 충돌 방지" 각주](#preventing-name-conflicts)를 반드시 읽어야 합니다.
+["이름 충돌 방지" 각주](#preventing-name-conflicts)를 반드시 읽어보세요.
 
 ## Modular Libraries
 
