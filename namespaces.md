@@ -212,7 +212,7 @@ tsc --outFile sample.js Validation.ts LettersOnlyValidator.ts ZipCodeValidator.t
 또는 파일별 컴파일 (기본값)을 사용하여 각 입력 파일을 하나의 JavaScript 파일로 생성할 수 있습니다.
 여러 JS 파일이 생성되는 경우, 웹 페이지에서 생성된 개별 파일을 적절한 순서로 로드하기 위해 `<script>` 태그를 사용해야 합니다. 예를 들어:
 
-##### MyTestPage.html (발췌)
+##### MyTestPage.html (인용)
 
 ```html
     <script src="Validation.js" type="text/javascript" />
