@@ -124,7 +124,7 @@ for (let s of strings) {
 
 애플리케이션 규모가 커지면, 코드를 여러 파일로 분할해야 유지 보수가 용이합니다.  
 
-## 다중 파일 네임 스페이스 (Multi-file namespaces)
+## 다중 파일 네임스페이스 (Multi-file namespaces)
 
 <b><a href="#table-of-contents">↥ 위로</a></b>
 
