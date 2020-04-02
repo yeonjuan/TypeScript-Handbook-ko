@@ -134,12 +134,12 @@ var x = fn(myElem); // x: string, :)
 *이유*: TypeScript는 함수 호출을 처리할 때 *첫 번째로 일치하는 오버로드*를 선택합니다.
 이전의 오버로드가 뒤에 것보다 "더 구체적"이면, 뒤에 것은 사실상 가려져 호출되지 않습니다.
 
-## Use Optional Parameters
+## 선택적 매개변수 사용 (Use Optional Parameters)
 
-*Don't* write several overloads that differ only in trailing parameters:
+뒤따라오는 매개변수만 다른 오버로드를 작성*하지 마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 interface Example {
     diff(one: string): number;
     diff(one: string, two: string): number;
@@ -147,48 +147,48 @@ interface Example {
 }
 ```
 
-*Do* use optional parameters whenever possible:
+가능한 선택적 매개변수를 사용 *하세요*:
 
 ```ts
-/* OK */
+/* 좋음 */
 interface Example {
     diff(one: string, two?: string, three?: boolean): number;
 }
 ```
 
-Note that this collapsing should only occur when all overloads have the same return type.
+이 문제는 모든 오버로드가 같은 반환 타입을 가질 때만 발생한다는 점에 유의하세요.
 
-*Why*: This is important for two reasons.
+*이유*: 두 가지 중요한 이유가 있습니다.
 
-TypeScript resolves signature compatibility by seeing if any signature of the target can be invoked with the arguments of the source,
-  *and extraneous arguments are allowed*.
-This code, for example, exposes a bug only when the signature is correctly written using optional parameters:
+TypeScript는 소스의 인수로 대상의 서명을 호출할 수 있는지 확인하여 서명 호환성을 결정합니다.
+  *그리고 관계없는 인수가 허용됩니다*
+예를 들어, 이 코드는, 선택적 매개변수를 사용하여 올바르게 작성된 경우에만 버그를 노출합니다:
 
 ```ts
 function fn(x: (a: string, b: number, c: number) => void) { }
 var x: Example;
-// When written with overloads, OK -- used first overload
-// When written with optionals, correctly an error
+// 오버로드로 작성된 경우, OK -- 첫번째 오버로드가 사용됨
+// 선택적으로 작성된 경우, 올바르게 오류.
 fn(x.diff);
 ```
 
-The second reason is when a consumer uses the "strict null checking" feature of TypeScript.
-Because unspecified parameters appear as `undefined` in JavaScript, it's usually fine to pass an explicit `undefined` to a function with optional arguments.
-This code, for example, should be OK under strict nulls:
+두 번째 이유는 사용자가 TypeScript의 "strict null checking" 기능을 사용할 때입니다.
+JavaScript에서 지정되지 않은 매개변수는 `undefined`로 나타나기 때문에, 일반적으로 선택적 매개변수가 있는 함수에 명시적으로 `undefined`를 전달하는 것이 좋습니다.
+예를 들어, 이 코드는, strict null에서 문제없습니다.
 
 ```ts
 var x: Example;
-// When written with overloads, incorrectly an error because of passing 'undefined' to 'string'
-// When written with optionals, correctly OK
+// 오버로드로 작성된 경우, `undefined`를 `string` 에 전달했기 때문에 잘못된 에러
+// 선택적으로 작성 된경우, 올바름
 x.diff("something", true ? undefined : "hour");
 ```
 
-## Use Union Types
+## 유니언 타입 사용 (Use Union Types)
 
-*Don't* write overloads that differ by type in only one argument position:
+한 인수 위치에서 타입만 다른 오버로드를 사용*하지 마세요*:
 
 ```ts
-/* WRONG */
+/* 잘못됨 */
 interface Moment {
     utcOffset(): number;
     utcOffset(b: number): Moment;
@@ -196,26 +196,26 @@ interface Moment {
 }
 ```
 
-*Do* use union types whenever possible:
+가능한 유니언 타입을 사용 *하세요*:
 
 ```ts
-/* OK */
+/* 좋음 */
 interface Moment {
     utcOffset(): number;
     utcOffset(b: number|string): Moment;
 }
 ```
 
-Note that we didn't make `b` optional here because the return types of the signatures differ.
+반환 타입 서명이 다르기 때문에 `b`를 선택적으로 만들지 않았다는 것에 유의하세요.
 
-*Why*: This is important for people who are "passing through" a value to your function:
+*이유*: 이는 함수에 값을 "넘기는" 사람들에게 중요합니다.:
 
 ```ts
 function fn(x: string): void;
 function fn(x: number): void;
 function fn(x: number|string) {
-    // When written with separate overloads, incorrectly an error
-    // When written with union types, correctly OK
+    // 분리된 오버로드로 작성된 경우, 잘못된 에러
+    // 유니언 타입으로 작성된 경우, 올바름
     return moment().utcOffset(x);
 }
 ```
