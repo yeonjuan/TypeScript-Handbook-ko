@@ -360,7 +360,7 @@ TypeScript는 각각 값이 null과 undefined를 갖는 특수한 타입인 `nul
 
 ```ts
 let s = "foo";
-s = null; // 오류, 'null'은 'string'에 할당 할 수 없습니다
+s = null; // 오류, 'null'은 'string'에 할당할 수 없습니다
 let sn: string | null = "bar";
 sn = null; // 성공
 
