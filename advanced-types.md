@@ -1037,7 +1037,7 @@ let originalProps = unproxify(proxyProps);
 # 조건부 타입 (Conditional Types)
 
 TypeScript 2.8에서 비-균등 타입 매핑을 표현하는 기능을 추가하는 *조건부 타입*을 도입했습니다.
-조건부 타입은 타입 관계 검사로 표현된 조건에 따라 두 가지 가능한 타입 중 하나를 선택합니다.
+조건부 타입은 타입 관계 검사로 표현된 조건에 따라 두 가지 가능한 타입 중 하나를 선택합니다:
 
 ```ts
 T extends U ? X : Y
