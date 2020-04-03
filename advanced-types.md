@@ -854,7 +854,7 @@ let unknown = getProperty(taxi, 'unknown');
 만약 문자열 인덱스 시그니처인 타입이 있으면, `keyof T`는 `string | number`가 될 것입니다
 (그냥 `string`이 아닙니다, JavaScript에선 문자열 (`object['42'`])나 숫자 (`object[42]`)를 사용해서
 객체 프로퍼티에 접근할 수 있습니다).
-그리고 `T[string]`은 인덱스 시그니처의 타입입니다.
+그리고 `T[string]`은 인덱스 시그니처의 타입입니다:
 
 ```ts
 interface Dictionary<T> {
