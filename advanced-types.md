@@ -386,7 +386,7 @@ f(1, undefined);
 f(1, null); // 오류, 'null'은 'number | undefined'에 할당할 수 없습니다
 ```
 
-선택적 프로퍼티도 마찬가지입니다.
+선택적 프로퍼티도 마찬가지입니다:
 
 ```ts
 class C {
