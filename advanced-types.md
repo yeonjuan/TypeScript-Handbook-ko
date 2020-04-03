@@ -353,7 +353,7 @@ TypeScript는 각각 값이 null과 undefined를 갖는 특수한 타입인 `nul
 기본적으로, 타입 검사시 `null`과 `undefined`를 아무것에나 할당할 수 있다고 간주합니다.
 실제로 `null`과 `undefined`는 모든 타입에서 유효한 값입니다.
 즉, 방지하고 싶어도 어떤 타입에 할당되는 것을 *방지할* 없습니다.
-`null`의 개발자인 Tony Hoare는 이를 두고["십억불짜리 실수 (billion dollar mistake)"](https://en.wikipedia.org/wiki/Null_pointer#History)라고 부릅니다.
+`null`의 개발자인 Tony Hoare는 이를 두고["십억 불짜리 실수 (billion dollar mistake)"](https://en.wikipedia.org/wiki/Null_pointer#History)라고 부릅니다.
 
 이건 `--strictNullChecks` 플래그로 해결합니다: 변수를 선언할 때, 자동으로 `null`이나 `undefined`를 포함하지 않습니다.
 유니언 타입을 사용하여 명시적으로 포함할 수 있습니다.
