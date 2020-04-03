@@ -374,7 +374,7 @@ TypeScript 3.7 이후부터는 널러블 타입을 간단하게 다룰 수 있�
 
 ## 선택적 매개변수와 프로퍼티 (Optional parameters and properties)
 
-`--strictNullChecks`를 적용하면, 선택적 매개변수가 `| undefined`를 자동으로 추가합니다.
+`--strictNullChecks`를 적용하면, 선택적 매개변수가 `| undefined`를 자동으로 추가합니다:
 
 ```ts
 function f(x: number, y?: number) {
