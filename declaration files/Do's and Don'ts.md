@@ -178,7 +178,7 @@ JavaScript에서 지정되지 않은 매개변수는 `undefined`로 나타나기
 
 ```ts
 var x: Example;
-// 오버로드로 작성된 경우, `undefined`를 `string` 에 전달했기 때문에 잘못된 에러
+// 오버로드로 작성한 경우, `undefined`를 `string` 에 전달했기 때문에 잘못된 에러
 // 선택적으로 작성한 경우, 올바름
 x.diff("something", true ? undefined : "hour");
 ```
