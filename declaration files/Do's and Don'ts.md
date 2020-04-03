@@ -168,7 +168,7 @@ TypeScript는 소스의 인수로 대상의 서명을 호출할 수 있는지 �
 function fn(x: (a: string, b: number, c: number) => void) { }
 var x: Example;
 // 오버로드로 작성된 경우, OK -- 첫번째 오버로드가 사용됨
-// 선택적으로 작성된 경우, 올바르게 오류.
+// 선택적으로 작성한 경우, 올바르게 오류.
 fn(x.diff);
 ```
 
