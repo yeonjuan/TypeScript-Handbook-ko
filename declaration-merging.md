@@ -320,4 +320,4 @@ Array.prototype.toObservable = function () {
 }
 ```
 
-전역 보강 또한 모듈 보강의 동일한 제한 사항을 갖습니다.
+전역 보강 또한 모듈 보강과 동일한 제한 사항을 갖습니다.
