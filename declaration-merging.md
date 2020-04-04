@@ -210,7 +210,7 @@ namespace buildLabel {
 console.log(buildLabel("Sam Smith"));
 ```
 
-마찬가지로, 네임스페이스를 정적 멤버의 열거형을 확장할 수 있습니다.
+마찬가지로, 네임스페이스를 정적 멤버의 열거형을 확장할 수 있습니다:
 
 ```ts
 enum Color {
