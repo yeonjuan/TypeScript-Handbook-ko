@@ -296,7 +296,7 @@ o.map(x => x.toFixed());
 
 그러나, 명심해야 할 두 가지 제한 사항이 있습니다:
 
-1. 보강에 새로운 최상위 선언을 할 수는 없습니다 -- 기존 선언에 대한 패치만 가능합니다.
+1. 보강에 새로운 최상위 선언을 할 수 없습니다 -- 기존 선언에 대한 패치만 가능합니다.
 2. default export 는 보강할 수 없으며, 이름을 갖는 export 만 보강할 수 있습니다.(해당 이름으로 확장시켜야 하며, `default`는 예약어입니다 - 자세한 내용은 [#14080](https://github.com/Microsoft/TypeScript/issues/14080)을 참고하세요)
 
 ## 전역 보강 (Global augmentation)
