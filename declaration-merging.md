@@ -301,7 +301,7 @@ o.map(x => x.toFixed());
 
 ## 전역 보강 (Global augmentation)
 
-모듈 내부에서 전역 범위에 선언을 추가할 수도 있습니다.
+모듈 내부에서 전역 범위에 선언을 추가할 수도 있습니다:
 
 ```ts
 // observable.ts
