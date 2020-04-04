@@ -241,7 +241,7 @@ namespace Color {
 
 TypeScript에서 모든 병합이 허용되는 것은 아닙니다.
 현재로선, 클래스는 다른 클래스 혹은 변수와 병합할 수 없습니다.
-클래스 병합을 대체하려면, [TypeScript의 믹스인](./mixins.md) 섹션을 참고해주세요.
+클래스 병합을 대체하려면, [TypeScript의 믹스인](./mixins.md) 섹션을 참고하세요.
 
 # 모듈 보강 (Module Augmentation)
 
