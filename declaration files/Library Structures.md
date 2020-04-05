@@ -27,7 +27,7 @@ JavaScript에서 사용할 라이브러리를 제공하는 방법은 여러 가�
 $(() => { console.log('hello!'); } );
 ```
 
-HTML 스크립트 태그로 라이브러리를 사용하는 방법에 대해 라이브러리 문서에서 지침을 볼 수 있습니다:
+HTML 스크립트 태그로 라이브러리를 사용하는 방법은 라이브러리 문서에서 지침을 볼 수 있습니다:
 
 ```html
 <script src="http://a.great.cdn.for/someLib.js"></script>
