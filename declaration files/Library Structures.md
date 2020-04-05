@@ -69,7 +69,7 @@ window.createGreeting = function(s) {
 * `define(...)` 호출
 * 라이브러리를 `require` 혹은 import하는 방법에 대해 설명하는 문서
 
-### 전역 라이브러리 예졔 (Examples of Global Libraries)
+### 전역 라이브러리 예제 (Examples of Global Libraries)
 
 전역 라이브러리를 UMD 라이브러리로 바꾸는게 쉽기 때문에, 전역 스타일로 작성한 인기 라이브러리는 거의 없습니다.
 하지만, 크기가 작고 DOM이 필요한 (혹은 의존성이 *없는*) 라이브러리는 여전히 전역입니다.
