@@ -58,7 +58,7 @@ window.createGreeting = function(s) {
 
 전역 라이브러리의 코드를 보면, 보통 다음을 볼 수 있습니다:
 
-* 최상위 `var`문 이나 `function`선언
+* 최상위 레벨 `var`문 이나 `function`선언
 * 하나 이상의 `window.someName` 할당
 * DOM 인터페이스 `document` 혹은 `window`가 존재한다고 가정
 
