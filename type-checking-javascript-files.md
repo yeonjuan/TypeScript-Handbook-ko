@@ -1,17 +1,18 @@
-# JavaScript 파일 타입 검사 (Type Checking JavaScript Files)
-
-TypeScript 2.3 이상의 버전에서는 `--checkJs`를 사용하는 `.js` 파일에서 타입 검사 및 오류 보고를 지원합니다.
+TypeScript 2.3 이상의 버전에서는 `--checkJs`를 사용해 `.js` 파일에서 타입 검사 및 오류 보고를 지원합니다.
 
 `// @ts-nocheck` 주석을 달아 일부 파일에서 타입 검사를 건너뛸 수 있으며; 반대로 `// @ts-check` 주석을 달아 `--checkJs`를 사용하지 않고 일부 `.js` 파일에 대해서만 타입 검사를 하도록 선택할 수 있습니다.
-또한 특정 부분의 앞 줄에 `// @ts-ignore`를 달아 에러를 무시할 수도 있습니다. `tsconfig.json`이 있는 경우, JavaScript 검사는 `noImplicitAny`, `strictNullChecks` 등의 엄격한 플래그를 우선시한다는 점을 알아두세요.
+또한 특정 부분의 앞 줄에 `// @ts-ignore`를 달아 에러를 무시할 수도 있습니다.
+`tsconfig.json`이 있는 경우, JavaScript 검사는 `noImplicitAny`, `strictNullChecks` 등의 엄격한 플래그를 우선시한다는 점을 알아두세요.
 하지만, JavaScript 검사의 상대적인 느슨함 덕분에 엄격한 플래그와 결합하여 사용하는 것은 놀라운 결과를 보여줄 것입니다.
 
 `.ts` 파일과 `.js` 파일은 타입을 검사하는 방법에 몇 가지 주목할만한 차이점이 있습니다:
 
-## 타입 정보에 쓰일 수 있는 JSDoc 타입 (JSDoc types are used for type information)
+## 타입 정보로 사용되는 JSDoc 타입 (JSDoc types are used for type information)
 
-`.js` 파일에서는, 흔히 `.ts` 파일처럼 타입을 추론해볼 수 있습니다. 타입을 추론할 수 없는 경우, `.ts`의 타입 표시와 같은 방법으로 JSDoc을 사용해 이를 지정할 수 있습니다.
-TypeScript와 마찬가지로, `--noImplicitAny`는 컴파일러가 타입을 유추할 수 없는 부분에서 오류를 보고할 것입니다. (확장 가능한(open-ended) 객체 리터럴을 제외하고; 자세한 내용은 아래를 참고하세요.)
+`.js` 파일에서는, 흔히 `.ts` 파일처럼 타입을 추론해볼 수 있습니다.
+타입을 추론할 수 없는 경우, `.ts`의 타입 표시와 같은 방법으로 JSDoc을 사용해 이를 지정할 수 있습니다.
+TypeScript와 마찬가지로, `--noImplicitAny`는 컴파일러가 타입을 유추할 수 없는 부분에서 오류를 보고할 것입니다.
+(확장 가능한 객체 리터럴을 제외하고; 자세한 내용은 아래를 참고하세요.)
 
 선언에 JSDoc 표시를 사용하면 해당 선언의 타입을 설정할 수 있습니다. 예를 들면:
 
@@ -23,9 +24,9 @@ x = 0;      // 성공
 x = false;  // 오류: 불리언(boolean)에는 숫자를 할당할 수 없음
 ```
 
-사용 가능한 JSDoc 패턴 목록은 [이곳](#supported-jsdoc)에서 확인할 수 있습니다.
+사용 가능한 JSDoc 패턴 목록은 [이곳](#지원되는-JSDoc-supported-jsdoc)에서 확인할 수 있습니다.
 
-## 클래스 본문의 할당으로부터 추론된 프로퍼티 (Properties are inferred from assignments in class bodies)
+## 클래스 본문의 할당에서 추론된 프로퍼티 (Properties are inferred from assignments in class bodies)
 
 ES2015에는 클래스에 프로퍼티를 선언할 수 있는 수단이 없습니다. 프로퍼티는 객체 리터럴과 같이 동적으로 할당됩니다.
 
@@ -90,8 +91,8 @@ C.prototype.method = function() {
 ## CommonJS 모듈 지원 (CommonJS modules are supported)
 
 `.js` 파일에서, TypeScript는 CommonJS 모듈 포맷을 이해합니다.
-`exports`와 `module.exports` 할당은 내보내기(export) 선언으로 인식됩니다.
-마찬가지로, `require` 함수 호출은 모듈 가져오기(import)로 인식됩니다. 예를 들어:
+`exports`와 `module.exports` 할당은 export 선언으로 인식됩니다.
+마찬가지로, `require` 함수 호출은 모듈 import로 인식됩니다. 예를 들어:
 
 ```js
 // `import module "fs"`와 같음
@@ -118,7 +119,7 @@ C.D = class {
 }
 ```
 
-그리고 ES2015 이전 코드의 경우, 정적 메서드를 나타내는 데에 사용할 수도 있습니다.
+그리고 ES2015 이전 코드의 경우, 정적 메서드를 나타내는 데에 사용할 수도 있습니다:
 
 ```js
 function Outer() {
@@ -159,7 +160,7 @@ assign.extra = 1
 
 `.ts` 파일에서, 변수 선언을 초기화하는 객체 리터럴은 선언에 해당 타입을 부여합니다.
 원본 리터럴에 명시되어 있지 않은 새 멤버는 추가될 수 없습니다.
-이 규칙은 `.js` 파일에선 완화됩니다; 객체 리터럴은 원본에 정의되지 않은 새로운 프로퍼티를 조회하고 추가하는 것이 허용되는 확장 가능한 타입(인덱스 시그니처(index signature))을 갖습니다.
+이 규칙은 `.js` 파일에선 완화됩니다; 객체 리터럴은 원본에 정의되지 않은 새로운 프로퍼티를 조회하고 추가하는 것이 허용되는 확장 가능한 타입(인덱스 시그니처을 갖습니다.
 예를 들어:
 
 ```js
@@ -169,8 +170,7 @@ obj.b = 2;  // 허용됨
 
 객체 리터럴은 마치 닫힌 객체가 아니라 열린 맵(maps)으로 다뤄지도록 `[x:string]: any`와 같은 인덱스 시그니처를 가진 것처럼 동작합니다.
 
-다른 특정 JavaScript 검사 동작과 마찬가지로, 해당 동작은 변수에 JSDoc 타입을 지정하여 변경할 수 있습니다.
-예를 들어:
+다른 특정 JavaScript 검사 동작과 마찬가지로, 해당 동작은 변수에 JSDoc 타입을 지정하여 변경할 수 있습니다. 예를 들어:
 
 ```js
 /** @type {{a: number}} */
@@ -198,7 +198,7 @@ foo.l.push("end");
 
 ## 함수 매개변수는 기본적으로 선택 사항 (Function parameters are optional by default)
 
-ES2015 이전의 JavaScript는 선택적인 매개변수를 지정할 방법이 없었기 때문에, `.js` 파일에선 모든 함수의 매개변수를 선택적인 것으로 간주했습니다.
+ES2015 이전의 JavaScript는 선택적인 매개변수를 지정할 방법이 없었기 때문에, `.js` 파일에선 모든 함수의 매개변수는 선택적인 것으로 간주됩니다.
 선언된 매개변수보다 적은 인수로 호출하는 것이 허용됩니다.
 
 그러나 너무 많은 인수를 넣어 호출하면 오류를 일으킨다는 것에 유의하세요.
@@ -234,8 +234,7 @@ sayHello();
 
 ## `arguments`의 사용으로부터 추론된 var-args 매개변수의 선언 (Var-args parameter declaration inferred from use of `arguments`)
 
-`arguments`의 참조를 참조하는 본문을 가진 함수는, 암묵적으로 var-args 매개변수(예: `(...arg: any[]) => any`)를 갖는 것으로 간주합니다.
-JSDoc의 var-args 구문을 사용하여 인수의 타입을 지정할 수 있습니다.
+`arguments`의 참조를 참조하는 본문을 가진 함수는, 암묵적으로 var-args 매개변수(예: `(...arg: any[]) => any`)를 갖는 것으로 간주합니다. JSDoc의 var-args 구문을 사용하여 인수의 타입을 지정할 수 있습니다.
 
 ```js
 /** @param {...number} args */
@@ -255,8 +254,7 @@ JavaScript에는 제네릭 타입의 매개변수를 지정하는 구문이 없�
 ### 확장 절에서 (In extends clause)
 
 예를 들어, `React.Component`는 `Props`와 `State`라는 두 타입의 매개변수를 갖도록 정의되어 있습니다.
-`.js` 파일에는 이러한 것들을 확장 절에 지정할 수 있는 정당한 방법이 없습니다.
-기본적으로 해당 타입 인수는 `any`가 될 것입니다:
+`.js` 파일에는 이러한 것들을 확장 절에 지정할 수 있는 정당한 방법이 없습니다. 기본적으로 해당 타입 인수는 `any`가 될 것입니다:
 
 ```js
 import { Component } from "react";
@@ -304,9 +302,7 @@ y.push("string"); // 오류, string을 number 타입에 할당할 수 없음
 
 ### 함수 호출에서 (In function calls)
 
-제네릭 함수의 호출은 인수를 사용해 타입 매개변수를 추론합니다.
-때때로 이 과정은 추론 소스가 부족하여 어떠한 타입도 추론하지 못하는 경우가 있습니다; 이러한 경우, 매개변수 타입은 기본적으로 `any`로 설정됩니다.
-예를 들어:
+제네릭 함수의 호출은 인수를 사용해 타입 매개변수를 추론합니다. 때때로 이 과정은 추론 소스가 부족하여 어떠한 타입도 추론하지 못하는 경우가 있습니다; 이러한 경우, 매개변수 타입은 기본적으로 `any`입니다. 예를 들어:
 
 ```js
 var p = new Promise((resolve, reject) => { reject() });
@@ -316,7 +312,7 @@ p; // Promise<any>;
 
 # 지원되는 JSDoc (Supported JSDoc)
 
-아래의 구성은 JavaScript 파일에서 JSDoc 태그(tag)를 사용하여 타입 정보를 제공할 때 지원되는 목록입니다.
+아래의 구성은 JavaScript 파일에서 JSDoc 주석을 사용하여 타입 정보를 제공할 때 지원되는 목록입니다.
 
 아래에 명시되지 않은 태그(`@async` 등)는 아직 지원되지 않는다는 점에 유의하세요.
 
@@ -388,18 +384,18 @@ var nas;
 ```
 
 또한 객체 리터럴 타입을 지정할 수도 있습니다.
-예를 들어, 프로퍼티 'a'(문자열) 와 'b'(숫자)를 갖는 오브젝트라면 다음과 같은 구문을 사용할 수 있습니다.
+예를 들어, 프로퍼티 'a' (string) 와 'b' (number)를 갖는 오브젝트라면 다음과 같은 구문을 사용할 수 있습니다.
 
 ```js
 /** @type {{ a: string, b: number }} */
 var var9;
 ```
 
-표준 JSDoc 구문 또는 TypeScript 구문을 통해 문자열 혹은 숫자 인덱스 시그니처를 사용하여 맵 혹은 배열 같은 오브젝트를 지정할 수도 있습니다.
+표준 JSDoc 구문 또는 TypeScript 구문을 통해 문자열 혹은 숫자 인덱스 시그니처를 사용하여 유사-맵 혹은 유사-배열 오브젝트를 지정할 수도 있습니다.
 
 ```js
 /**
- * 임의의 `문자열` 프로퍼티를 `숫자`에 매핑하는 맵 객체.
+ * 임의의 `string` 프로퍼티를 `number`에 매핑하는 유사-맵 객체.
  *
  * @type {Object.<string, number>}
  */
@@ -409,15 +405,14 @@ var stringToNumber;
 var arrayLike;
 ```
 
-앞의 두 타입은 TypeScript의 `{ [x: string]: number }` 그리고 `{ [x: number]: any }`와 동일합니다.
-컴파일러는 두 구문을 모두 이해할 것입니다.
+앞의 두 타입은 TypeScript의 `{ [x: string]: number }` 그리고 `{ [x: number]: any }`와 동일합니다. 컴파일러는 두 구문을 모두 이해할 것입니다.
 
-함수 타입은 TypeScript 또는 클로저(Closure) 구문을 사용하여 지정할 수 있습니다.
+함수 타입은 TypeScript 또는 Closure 구문을 사용하여 지정할 수 있습니다:
 
 ```js
-/** @type {function(string, boolean): number} 클로저 구문 */
+/** @type {function(string, boolean): number} Closure 구문 */
 var sbn;
-/** @type {(s: string, b: boolean) => number} Typescript 구문 */
+/** @type {(s: string, b: boolean) => number} TypeScript 구문 */
 var sbn2;
 ```
 
@@ -430,7 +425,7 @@ var fn7;
 var fn6;
 ```
 
-클로저의 다른 타입 또한 동작합니다:
+Closure의 다른 타입 또한 동작합니다:
 
 ```js
 /**
@@ -456,9 +451,9 @@ var numberOrString = Math.random() < 0.5 ? "hello" : 100;
 var typeAssertedNumber = /** @type {number} */ (numberOrString)
 ```
 
-### 타입 가져오기 (Import types)
+### 타입 import (Import types)
 
-타입 가져오기를 사용하여 다른 파일의 선언을 가져올 수도 있습니다.
+타입 import를 사용하여 다른 파일의 선언을 가져올 수도 있습니다.
 이 구문은 TypeScript에 특화된 것이며 JSDoc 표준과는 조금 다릅니다:
 
 ```js
@@ -470,7 +465,7 @@ function walk(p) {
 }
 ```
 
-타입 가져오기는 타입 별칭 선언에서도 쓰일 수 있습니다:
+타입 import는 타입 별칭 선언에서도 쓰일 수 있습니다:
 
 ```js
 /**
@@ -484,7 +479,7 @@ var myPet;
 myPet.name;
 ```
 
-타입을 모르거나 입력하기 귀찮은 큰 타입이 있을 경우, 타입 가져오기를 사용하여 모듈에서 값의 타입을 가져올 수 있습니다:
+타입을 모르거나 입력하기 귀찮은 큰 타입이 있을 경우, 타입 import를 사용하여 모듈에서 값의 타입을 가져올 수 있습니다:
 
 ```js
 /**
@@ -496,7 +491,7 @@ var x = require("./a").x;
 ## `@param` and `@returns`
 
 `@param`은 `@type`과 같은 종류의 구문을 사용하지만, 매개변수의 이름이 추가됩니다.
-매개변수는 이름을 대괄호로 둘러싸서 선택적으로 선언할 수 있습니다.
+매개변수는 이름을 대괄호로 둘러싸서 선택적으로 선언할 수 있습니다:
 
 ```js
 // 매개변수는 다양한 형태의 구문으로 선언될 수 있음
@@ -512,7 +507,7 @@ function stringsStringStrings(p1, p2, p3, p4){
 }
 ```
 
-마찬가지로, 함수의 리턴 타입으로는:
+마찬가지로, 함수의 반환 타입으로는:
 
 ```js
 /**
@@ -607,7 +602,7 @@ const ok = s => !(s.length % 2);
 function id(x){ return x }
 ```
 
-콤마 또는 여러 태그를 사용하여 여러 매개변수 타입을 선언할 수 있습니다.
+콤마 또는 여러 태그를 사용하여 여러 매개변수 타입을 선언할 수 있습니다:
 
 ```js
 /**
@@ -655,15 +650,13 @@ var c = new C(0);
 var result = C(1); // C는 새 인스턴스로만 호출해야 함
 ```
 
-`@constructor`를 사용하면, `this`는 `C`의 생성자 함수 내부에서 검사되므로, `initailize` 메서드에 대하여 알 수 있을 것이며 숫자를 넘길 경우 오류가 발생할 것입니다.
-또한 `C`를 생성하지 않고 호출할 경우 오류를 일으킬 것입니다.
+`@constructor`를 사용하면, `this`는 `C`의 생성자 함수 내부에서 검사되므로, `initailize` 메서드에 대하여 알 수 있을 것이며 숫자를 넘길 경우 오류가 발생할 것입니다. 또한 `C`를 생성하지 않고 호출할 경우 오류를 일으킬 것입니다.
 
 불행하게도, 이는 호출 가능한 생성자 함수는 `@constructor`를 사용할 수 없다는 것을 의미합니다.
 
 ## `@this`
 
-컴파일러는 대게 작업할 컨텍스트가 있을 때 `this`의 타입을 알아낼 수 있습니다.
-그렇지 않은 경우, `@this`를 사용해 `this`의 타입을 명시할 수 있습니다:
+컴파일러는 대게 작업할 컨텍스트가 있을 때 `this`의 타입을 알아낼 수 있습니다. 그렇지 않은 경우, `@this`를 사용해 `this`의 타입을 명시할 수 있습니다:
 
 ```js
 /**
@@ -677,8 +670,7 @@ function callbackForLater(e) {
 
 ## `@extends`
 
-JavaScript 클래스엔 제네릭 기초 클래스를 확장할 때, 매개변수가 어떤 타입이 되어야 하는지 지정할 곳이 없습니다.
-`@extends` 태그는 해당 매개변수 타입에 대한 위치를 제공합니다:
+JavaScript 클래스엔 제네릭 기초 클래스를 확장할 때, 매개변수가 어떤 타입이 되어야 하는지 지정할 곳이 없습니다. `@extends` 태그는 해당 매개변수 타입에 대한 위치를 제공합니다:
 
 ```js
 /**
@@ -694,8 +686,7 @@ class SortableSet extends Set {
 
 ## `@enum`
 
-`@enum` 태그를 사용하면 해당 멤버가 모두 지정된 타입인 객체 리터럴을 생성할 수 있습니다.
-대부분의 JavaScript 객체 리터럴과는 다르게, 다른 멤버는 허용되지 않습니다.
+`@enum` 태그를 사용하면 해당 멤버가 모두 지정된 타입인 객체 리터럴을 생성할 수 있습니다. 대부분의 JavaScript 객체 리터럴과는 다르게, 다른 멤버는 허용되지 않습니다.
 
 ```js
 /** @enum {number} */
@@ -773,8 +764,7 @@ function fn9(p1) {
 
 ## 지원되지 않을 것으로 알려진 패턴들 (Patterns that are known NOT to be supported)
 
-생성자 함수처럼, 값 공간(value space)에 있는 객체를 타입으로 참조하는 것은
-객체가 타입을 생성하지 않는 한 작동하지 않습니다.
+생성자 함수처럼, 값 공간(value space)에 있는 객체를 타입으로 참조하는 것은 객체가 타입을 생성하지 않는 한 작동하지 않습니다.
 
 ```js
 function aNormalFunction() {
