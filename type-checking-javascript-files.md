@@ -407,7 +407,7 @@ var arrayLike;
 
 앞의 두 타입은 TypeScript의 `{ [x: string]: number }` 그리고 `{ [x: number]: any }`와 동일합니다. 컴파일러는 두 구문을 모두 이해할 것입니다.
 
-함수 타입은 TypeScript 또는 Closure 구문을 사용하여 지정할 수 있습니다:
+함수 타입은 TypeScript 또는 클로저 구문을 사용하여 지정할 수 있습니다:
 
 ```js
 /** @type {function(string, boolean): number} Closure 구문 */
