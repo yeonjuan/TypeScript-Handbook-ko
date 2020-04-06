@@ -163,7 +163,7 @@ console.log(moment.format());
 }(this, function (b) {
 ```
 
-만약 라이브러리의 코드, 특히 파일 상단에서 `typeof define`, `typeof window` 혹은 `typeof module`에 대한 테스트를 보았다면, 거의 대부분 UMD 라이브러리입니다.
+만약 라이브러리 코드, 특히 파일 상단에서 `typeof define`, `typeof window` 혹은 `typeof module`에 대한 테스트를 보았다면, 거의 대부분 UMD 라이브러리입니다.
 
 UMD 라이브러리 문서에서는 `require`를 보여주는 "Node.js에서 사용하기" 예제를 종종 설명하고
   "브라우저에서 사용하기" 예제에서는 `<script>` 태그를 사용해서 스크립트를 로드하는 방법을 보여줍니다.
