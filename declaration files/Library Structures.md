@@ -121,7 +121,7 @@ define(..., ['someLib'], function(someLib) {
 * `import * as a from 'b';` 혹은 `export c;` 같은 선언문
 * `exports` 혹은 `module.exports`에 대한 할당
 
-다음과 같은 것은 거의 갖지 않습니다:
+다음은 거의 갖지 않습니다:
 
 * `window` 혹은 `global` 프로퍼티 할당
 
