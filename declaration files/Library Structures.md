@@ -125,7 +125,7 @@ define(..., ['someLib'], function(someLib) {
 
 * `window` 혹은 `global` 프로퍼티에 대한 할당
 
-### 모듈형 라이브러리의 예제 (Examples of Modular Libraries)
+### 모듈형 라이브러리 예제 (Examples of Modular Libraries)
 
 많은 유명한 Node.js 라이브러리들은 [`express`](http://expressjs.com/), [`gulp`](http://gulpjs.com/), [`request`](https://github.com/request/request)와 같은 모듈군 안에 있습니다.
 
