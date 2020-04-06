@@ -175,7 +175,7 @@ UMD 라이브러리의 문서에서는 `require`를 보여주는 "Node.js에서 
 
 ### 템플릿 (Template)
 
-모듈을 위한 세 가지 템플릿을 사용할 수 있습니다,
+모듈은 세 가지 템플릿을 사용할 수 있습니다,
   [`module.d.ts`](./templates/module.d.ts.md), [`module-class.d.ts`](./templates/module-class.d.ts.md) 그리고 [`module-function.d.ts`](./templates/module-function.d.ts.md).
 
 만약 모듈을 함수처럼 *호출*할 수 있으면 [`module-function.d.ts`](./templates/module-function.d.ts.md)을 사용하세요:
