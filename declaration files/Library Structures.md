@@ -148,7 +148,7 @@ console.log(moment.format());
 
 ### UMD 라이브러리 식별하기 (Identifying a UMD library)
 
-[UMD modules](https://github.com/umdjs/umd)은 모듈 로더 환경의 유무를 검사합니다.
+[UMD modules](https://github.com/umdjs/umd)은 모듈 로더 환경 유무를 검사합니다.
 이는 다음과 같이 보이는 찾기 쉬운 패턴입니다.
 
 ```js
