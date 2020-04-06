@@ -16,7 +16,7 @@
 비-상대적 import는 다음에 다룰 것입니다.
 
 마지막으로, 컴파일러가 모듈을 해석할 수 없다면, 오류 로그가 발생합니다.
-이 경우에, 오류는 `오류 TS2307: 'moduleA' 모듈을 찾을 수 없습니다.`와 같을 것입니다.
+이 경우에, 오류는 `error TS2307: Cannot find module 'moduleA`와 같을 것입니다.
 
 ## 상대적 vs. 비-상대적 모듈 import (Relative vs. Non-relative module imports)
 
@@ -35,8 +35,8 @@
 * `import * as $ from "jquery";`
 * `import { Component } from "@angular/core";`
 
-상대적 import는 가져온 파일에 상대적으로 해석되고 ambient 모듈 선언으로 해석 *될 수* 없습니다.
-런타임에 상대적 위치를 유지하는 것을 보장하는 상대적 import을 자신의 모듈에서 사용해야 합니다.
+상대적 import는 가져온 파일에 상대적으로 해석되고 ambient 모듈 선언으로 해석 *될 수 없습니다*.
+자신의 모듈에 대해서는 런타임에 상대적 위치를 유지하는 것을 보장하는 상대적 import를 사용해야 합니다.
 
 비-상대적 import는 `baseUrl`로 해석되거나, 밑에서 다루게 될 경로 매핑으로 해석될 수 있습니다.
 [ambient 모듈 선언](./modules.md#Ambient-모듈-Ambient-modules)으로도 해석될 수 있습니다.
@@ -51,9 +51,9 @@
 ### 클래식 (Classic)
 
 TypeScript의 디폴트 해석 전략으로 사용됩니다.
-요즘에, 이 전략은 이전 버전과의 호환성을 위해 주로 제공됩니다.
+요즘에, 이 전략은 주로 이전 버전과의 호환성을 위해 제공됩니다.
 
-상대적 import는 가져온 파일의 상대적으로 해석됩니다.
+상대적 import는 import하는 파일에 상대적으로 해석됩니다.
 그래서 소스 파일 `/root/src/folder/A.ts`안에 import { b } from "./moduleB"`는 다음과 같이 조회합니다:
 
 1. `/root/src/folder/moduleB.ts`
@@ -81,9 +81,9 @@ TypeScript의 디폴트 해석 전략으로 사용됩니다.
 
 #### Node.js가 모듈을 해석하는 방법 (How Node.js resolves modules)
 
-TS 컴파일러가 어떤 스텝을 따라갈지 이해하기 위해서는, Node.js 모듈을 이해하는 것이 중요합니다.
-전통적으로, Node.js의 import는 `require`라는 함수를 호출하면서 수행합니다.
-Node.js의 행동은 `require`에 상대적 경로 혹은 비-상대적 경로가 주어지는지에 따라 달라집니다.
+TS 컴파일러가 어떤 과정을 따를지 이해하기 위해서는, Node.js 모듈을 이해하는 것이 중요합니다.
+전통적으로, Node.js의 import는 `require`라는 함수를 호출해 수행합니다.
+Node.js의 동작은 `require`에 상대적 경로 혹은 비-상대적 경로가 주어지는지에 따라 달라집니다.
 
 상대적 경로는 아주 간단합니다.
 예를 들어, `var x = require("./moduleB");`라는 import 문을 포함한 `/root/src/moduleA.js`에 위치한 파일을 생각해봅시다.
@@ -105,18 +105,18 @@ Node는 `node_modules`로 불리는 특별한 폴더에서 모듈을 찾을 것�
 Node는 디렉터리 체인을 올라가, 로드하려는 모듈을 찾을 때까지 각 `node_modules`을 찾습니다.
 
 위의 예제를 따라서, `/root/src/moduleA.js`가 대신 비-상대적 경로를 사용하고 `var x = require("moduleB");` import를 가지고 있다고 생각해봅시다.
-Node는 하나가 될 때까지 각 위치에서 `moduleB`를 해석하려고 시도합니다.
+Node는 하나가 일치할 때까지 각 위치에서 `moduleB`를 해석하려고 시도합니다.
 
 1. `/root/src/node_modules/moduleB.js`
-2. `/root/src/node_modules/moduleB/package.json` (`"main"` 프로퍼티를 지정했다면)
+2. `/root/src/node_modules/moduleB/package.json` (`"main"` 항목을 지정했다면)
 3. `/root/src/node_modules/moduleB/index.js`
    <br /><br />
 4. `/root/node_modules/moduleB.js`
-5. `/root/node_modules/moduleB/package.json` (`"main"` 프로퍼티를 지정했다면)
+5. `/root/node_modules/moduleB/package.json` (`"main"` 항목을 지정했다면)
 6. `/root/node_modules/moduleB/index.js`
    <br /><br />
 7. `/node_modules/moduleB.js`
-8. `/node_modules/moduleB/package.json` (`"main"` 프로퍼티를 지정했다면)
+8. `/node_modules/moduleB/package.json` (`"main"` 항목을 지정했다면)
 9. `/node_modules/moduleB/index.js`
 
 Node.js가 (4) 와 (7)에서 디렉터리를 점프했다는 것에 주목하세요.
@@ -134,7 +134,7 @@ TypeScript는 `"main"`의 목적 - 컴파일러가 이를 사용하여 참조할
 1. `/root/src/moduleB.ts`
 2. `/root/src/moduleB.tsx`
 3. `/root/src/moduleB.d.ts`
-4. `/root/src/moduleB/package.json` (`"types"` 프로퍼티를 지정했다면)
+4. `/root/src/moduleB/package.json` (`"types"` 항목을 지정했다면)
 5. `/root/src/moduleB/index.ts`
 6. `/root/src/moduleB/index.tsx`
 7. `/root/src/moduleB/index.d.ts`
@@ -156,7 +156,7 @@ Node.js가 `moduleB.js` 파일을 찾고 나서, 해당하는 `package.json`을 
 9. `/root/node_modules/moduleB.ts`
 10. `/root/node_modules/moduleB.tsx`
 11. `/root/node_modules/moduleB.d.ts`
-12. `/root/node_modules/moduleB/package.json` (`"types"` 프로퍼티를 지정했다면)
+12. `/root/node_modules/moduleB/package.json` (`"types"` 항목을 지정했다면)
 13. `/root/node_modules/@types/moduleB.d.ts`
 14. `/root/node_modules/moduleB/index.ts`
 15. `/root/node_modules/moduleB/index.tsx`
@@ -165,13 +165,13 @@ Node.js가 `moduleB.js` 파일을 찾고 나서, 해당하는 `package.json`을 
 17. `/node_modules/moduleB.ts`
 18. `/node_modules/moduleB.tsx`
 19. `/node_modules/moduleB.d.ts`
-20. `/node_modules/moduleB/package.json` (`"types"` 프로퍼티를 지정했다면)
+20. `/node_modules/moduleB/package.json` (`"types"` 항목을 지정했다면)
 21. `/node_modules/@types/moduleB.d.ts`
 22. `/node_modules/moduleB/index.ts`
 23. `/node_modules/moduleB/index.tsx`
 24. `/node_modules/moduleB/index.d.ts`
 
-여기서 스텝의 수 때문에 두려워하지 마세요 - TypeScript가 여전히 디렉터리를 (9)와 (17)에서 두 번 점프합니다.
+스텝 수 때문에 두려워하지 마세요 - TypeScript가 여전히 디렉터리를 (9)와 (17)에서 두 번 점프합니다.
 
 Node.js가 하는 것보다 더 복잡하지 않습니다.
 
@@ -185,9 +185,9 @@ Node.js가 하는 것보다 더 복잡하지 않습니다.
 
 TypeScript 컴파일러는 추가 플래그를 갖고 있습니다.
 The TypeScript compiler has a set of additional flags to *inform* the compiler of transformations that are expected to happen to the sources to generate the final output.
+TypeScript 컴파일러는 최종 출력을 생성하기위해 소스에 발생할 것으로 예상되는 변환을 컴파일러에게 *알리기* 위한 추가 플래그 세트가 있습니다.
 
 컴파일러가 이러한 변환도 수행하지 *않는* 다는 것에 유의하십시오;
-
 정의 파일로 모듈 import를 해석하는 과정을 안내하기 위해 이러한 정보를 사용합니다.
 
 ### 기본 URL (Base URL)
@@ -421,7 +421,7 @@ File 'node_modules/typescript/lib/typescript.d.ts' exist - use it as a module re
 
 ## `--noResolve` 사용하기 (Using `--noResolve`)
 
-일반적으로 컴파일러는 모든 모듈 import를 컴파일 과정을 시작하기 전에 해석하려고 합니다.
+일반적으로 컴파일러는 컴파일 과정을 시작하기 전에 모든 모듈 import를 해석하려고 합니다.
 파일의 `import`를 성공적으로 해석할 때마다, 파일은 나중에 컴파일러가 처리할 파일 세트에 추가됩니다.
 
 `--noResolve` 컴파일러 옵션은 명령 줄에 전달하지 않은 파일은 컴파일에 "추가" 하지 않도록 지시합니다.
@@ -433,7 +433,7 @@ File 'node_modules/typescript/lib/typescript.d.ts' exist - use it as a module re
 
 ```ts
 import * as A from "moduleA" // 성공, 'moduleA'가 명령줄로 전달됨
-import * as B from "moduleB" // 오류 TS2307: 'moduleB' 모듈을 찾을 수 없습니다.
+import * as B from "moduleB" // Error TS2307: Cannot find module 'moduleB.
 ```
 
 ```shell
