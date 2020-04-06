@@ -170,7 +170,7 @@ UMD 라이브러리의 문서에서는 `require`를 보여주는 "Node.js에서 
 
 ### UMD 라이브러리의 예제 (Examples of UMD libraries)
 
-대부분의 유명한 라이브러리들은 UMD 패키지로 사용할 수 있습니다.
+유명한 라이브러리 대부분은 UMD 패키지로 사용할 수 있습니다.
 예로는 [jQuery](https://jquery.com/), [Moment.js](http://momentjs.com/), [loadash](https://loadash.com/) 등 더 많이 있습니다.
 
 ### 템플릿 (Template)
