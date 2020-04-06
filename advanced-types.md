@@ -8,6 +8,8 @@
 * [사용자-정의 타입 가드 (User-Defined Type Guards)](#사용자-정의-타입-가드-user-defined-type-guards)
   * [타입 서술어 사용하기 (Using type predicates)](#타입-서술어-사용하기-using-type-predicates)
   * [`in` 연산자 사용하기 (Using the `in` operator)](#in-연산자-사용하기-using-the-in-operator)
+* [`typeof` 타입 가드 (`typeof` type guards)](#typeof-타입-가드-typeof-type-guards)
+* [`instanceof` 타입 가드 (`instanceof` type guards)](#instanceof-타입-가드-instanceof-type-guards)
 
 [널러블 타입 (Nullable types)](#널러블-타입-nullable-types)
 * [선택적 매개변수와 프로퍼티 (Optional parameters and properties)](#선택적-매개변수와-프로퍼티-optional-parameters-and-properties)
@@ -45,9 +47,9 @@
 예를 들어, `Person & Serializable & Loggable`은 `Person` *과* `Serializable` *그리고* `Loggable`입니다.
 즉, 이 타입의 객체는 세 가지 타입의 모든 멤버를 갖게 됩니다.
 
-기존 객체-지향 틀과는 맞지 않는 믹스인(mixin)이나 다른 컨셉들에서 교차 타입이 사용되는 것을 볼 수 있습니다.
+기존 객체-지향 틀과는 맞지 않는 믹스인이나 다른 컨셉들에서 교차 타입이 사용되는 것을 볼 수 있습니다.
 (JavaScript에는 이런 것들이 많습니다!)
-믹스인을 어떻게 만드는지 간단한 예제를 보겠습니다:
+믹스인 만드는 방법을 간단한 예제를 통해 살펴보겠습니다:
 
 ```ts
 function extend<First, Second>(first: First, second: Second): First & Second {
@@ -117,7 +119,7 @@ let indentedString = padLeft("Hello world", true); // 컴파일 타임에 통과
 
 전통적인 객체지향 코드에서, 타입의 계층을 생성하여 두 타입을 추상화할 수 있습니다.
 이는 더 명시적일 수는 있지만, 좀 과하다고 할 수도 있습니다.
-`padLeft`의 기존 버전에서 좋은 점은 그냥 원시값을 전달할 수 있다는 것입니다.
+전통적인 방법의 `padLeft`에서 좋은 점은 그냥 원시 값을 전달할 수 있다는 것입니다.
 즉 사용법이 간단하고 간결합니다.
 이 새로운 방법은 다른 곳에서 이미 존재하는 함수를 사용하려 할 때, 도움이 되지 않습니다.
 
@@ -137,9 +139,9 @@ let indentedString = padLeft("Hello world", true); // 컴파일 중에 오류
 ```
 
 유니언 타입은 값이 여러 타입 중 하나임을 설명합니다.
-세로 막대 (`|`)로 각 타입을 분리하여 사용합니다. 그래서 `number | string | boolean`은 값의 타입이 `number`, `string` 혹은 `boolean`이 될 수 있음을 나타냅니다.
+세로 막대 (`|`)로 각 타입을 구분하여 `number | string | boolean`은 값의 타입이 `number`, `string` 혹은 `boolean`이 될 수 있음을 나타냅니다.
 
-유니언 타입인 값을 가지고 있으면, 유니언에 있는 모든 타입에 공통인 멤버에만 접근할 수 있습니다.
+유니언 타입을 값으로 가지고 있으면, 유니언에 있는 모든 타입에 공통인 멤버에만 접근할 수 있습니다.
 
 ```ts
 interface Bird {
@@ -162,22 +164,22 @@ pet.swim();    // 오류
 ```
 
 유니언 타입은 여기서 약간 까다로울 수 있으나, 익숙해지는데 약간의 직관만 있으면 됩니다.
-만약 값이 `A | B` 타입을 가지고 있으면, `A` *와* `B` 둘 다 가지고 있는 멤버가 있다는 것만 *확실히* 알고 있습니다.
-이 예제에서, `Bird`는 `fly`로 부르는 멤버를 가지고 있습니다.
+만약 값이 `A | B` 타입을 가지고 있으면, *확신할* 수 있는 것은 `A` *와* `B` 둘 다 가지고 있는 멤버가 있다는 것뿐입니다.
+이 예제에서, `Bird`는 `fly`를 멤버로 가지고 있습니다.
 `Bird | Fish`로 타입이 지정된 변수가 `fly` 메서드를 가지고 있는지 확신할 수 없습니다
 만약 변수가 실제로 런타임에 `Fish`이면, `pet.fly()`를 호출하는 것은 오류입니다.
 
 # 타입 가드와 차별 타입 (Type Guards and Differentiating Types)
 
-유니언 타입은 값이 가질 수 있는 타입이 겹쳐질 수 있는 상황을 모델링하는데 유용합니다.
+유니언 타입은 값의 타입이 겹쳐질 수 있는 상황을 모델링하는데 유용합니다.
 `Fish`가 있는지 구체적으로 알고 싶을 때, 무슨일이 벌어질까요?
-JavaScript에서 가능한 두 값을 구분하는 흔한 관용구는 멤버의 존재를 검사하는 것입니다.
+JavaScript에서 가능한 두 값을 구분하는 흔한 방법은 멤버의 존재를 검사하는 것입니다.
 앞에서 말했듯이, 유니언 타입의 모든 구성 성분을 가지고 있다고 보장되는 멤버에만 접근할 수 있습니다.
 
 ```ts
 let pet = getSmallPet();
 
-// 이런 각각의 프로퍼티들에 접근하는 것은 오류를 발생시킵니다
+// 이렇게 각 프로퍼티들에 접근하는 것은 오류를 발생시킵니다
 if (pet.swim) {
     pet.swim();
 }
@@ -200,15 +202,15 @@ if ((pet as Fish).swim) {
 
 ## 사용자-정의 타입 가드 (User-Defined Type Guards)
 
-타입 단언을 여러 번 사용해야만 했던 것을 주목해야 합니다.
-만약 검사를 실시했을 때, 각 브랜치 안의 `pet`의 타입을 알 수 있었다면 훨씬 좋았을 것입니다.
+타입 단언을 여러 번 사용한 것을 주목하세요.
+만약 검사를 실시했을 때, 각 브랜치에서 `pet`의 타입을 알 수 있다면 훨씬 좋을 것입니다.
 
 마침 TypeScript에는 *타입 가드*라는 것이 있습니다.
-타입 가드는 어떤 스코프 안에서의 타입을 보장하는 런타임 검사를 시행한다는 표현입니다.
+타입 가드는 스코프 안에서의 타입을 보장하는 런타임 검사를 수행한다는 표현식입니다.
 
 ### 타입 서술어 사용하기 (Using type predicates)
 
-타입 가드를 정의하기 위해, 간단하게 반환 타입이 *타입 서술어*인 함수를 정의하면 됩니다:
+타입 가드를 정의하기 위해, 반환 타입이 *타입 서술어*인 함수를 정의만 하면 됩니다:
 
 ```ts
 function isFish(pet: Fish | Bird): pet is Fish {
@@ -217,9 +219,9 @@ function isFish(pet: Fish | Bird): pet is Fish {
 ```
 
 `pet is Fish`는 이 예제에서의 타입 서술어입니다.
-서술어는 `parameterName is Type` 형태이고, `parameterName`는 반드시 현재 함수 시그니처에서 매개변수의 이름이어야 합니다.
+서술어는 `parameterName is Type` 형태이고, `parameterName`는 반드시 현재 함수 시그니처의 매개변수 이름이어야 합니다.
 
-`isFish`가 어떤 변수와 함께 호출될 때마다, TypeScript는 기존 타입과 호환된다면 그 변수를 특정 타입으로 *제한*할 것입니다.
+`isFish`가 변수와 함께 호출될 때마다, TypeScript는 기존 타입과 호환된다면 그 변수를 특정 타입으로 *제한*할 것입니다.
 
 ```ts
 // 이제 'swim'과 'fly'에 대한 모든 호출은 허용됩니다
@@ -232,7 +234,8 @@ else {
 }
 ```
 
-TypeScript가 `pet`이 `if`문 안에서 `Fish`라는 것을 알고 있을뿐만 아니라; `else`문 안에서 `Fish`가 *없다*는 것을 알고 있으므로, `Bird`를 반드시 가지고 있어야합니다.
+TypeScript가 `pet`이 `if`문 안에서 `Fish`라는 것을 알고 있을뿐만 아니라;
+`else`문 안에서 `Fish`가 *없다*는 것을 알고 있으므로, `Bird`를 반드시 가지고 있어야합니다.
 
 ### `in` 연산자 사용하기 (Using the `in` operator)
 
@@ -249,36 +252,129 @@ function move(pet: Fish | Bird) {
 }
 ```
 
+## `typeof` 타입 가드 (`typeof` type guards)
+
+다시 돌아와서 유니언 타입을 사용하는 버전의 `padLeft` 코드를 작성해보겠습니다.
+다음과 같이 타입 서술어를 사용해서 작성할 수 있습니다:
+
+```ts
+function isNumber(x: any): x is number {
+    return typeof x === "number";
+}
+
+function isString(x: any): x is string {
+    return typeof x === "string";
+}
+
+function padLeft(value: string, padding: string | number) {
+    if (isNumber(padding)) {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (isString(padding)) {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
+
+그러나 타입이 원시 값인지 확인하는 함수를 정의하는 것은 너무나 귀찮습니다.
+운 좋게도, TypeScript는 `typeof`를 타입 가드로 인식하기 때문에 `typeof x === "number"`를 함수로 추상할 필요가 없습니다.
+즉 타입 검사를 인라인으로 작성할 수 있습니다.
+
+```ts
+function padLeft(value: string, padding: string | number) {
+    if (typeof padding === "number") {
+        return Array(padding + 1).join(" ") + value;
+    }
+    if (typeof padding === "string") {
+        return padding + value;
+    }
+    throw new Error(`Expected string or number, got '${padding}'.`);
+}
+```
+
+*`typeof` 타입 가드*는 두 가지 다른 형식인 `typeof v === "typename"` 와 `typeof v !== "typename"`이 있습니다. 여기서 `typename`은 `"number"`, `"string"`, `"boolean"` 그리고 `"symbol"`이여야 합니다.
+TypeScript에서 위에 없는 다른 문자열과 비교하는 것을 막지는 않지만, 타입 가드의 표현식으로 인지되지 않습니다.
+
+## `instanceof` 타입 가드 (`instanceof` type guards)
+
+위의 `typeof` 타입 가드를 읽었고 JavaScript의 `instanceof` 연산자에 익숙하다면 이미 알고 있을 것입니다.
+
+*`instanceof` 타입 가드* 는 생성자 함수를 사용하여 타입을 좁히는 방법입니다.
+위의 string-padder 예제를 다시 보겠습니다:
+
+```ts
+interface Padder {
+    getPaddingString(): string
+}
+
+class SpaceRepeatingPadder implements Padder {
+    constructor(private numSpaces: number) { }
+    getPaddingString() {
+        return Array(this.numSpaces + 1).join(" ");
+    }
+}
+
+class StringPadder implements Padder {
+    constructor(private value: string) { }
+    getPaddingString() {
+        return this.value;
+    }
+}
+
+function getRandomPadder() {
+    return Math.random() < 0.5 ?
+        new SpaceRepeatingPadder(4) :
+        new StringPadder("  ");
+}
+
+// 타입은 'SpaceRepeatingPadder | StringPadder' 입니다
+let padder: Padder = getRandomPadder();
+
+if (padder instanceof SpaceRepeatingPadder) {
+    padder; // 타입은 'SpaceRepeatingPadder'으로 좁혀집니다
+}
+if (padder instanceof StringPadder) {
+    padder; // 타입은 'StringPadder'으로 좁혀집니다
+}
+```
+
+`instanceof`의 오른쪽은 생성자 함수여야 하며, TypeScript는 다음과 같이 좁힙니다:
+
+1. 함수의 `prototype` 프로퍼티 타입이 `any`가 아닌 경우
+2. 타입의 생성자 시그니처에서 반환된 유니언 타입일 경우
+
+위와 같은 순서대로 진행됩니다.
+
 # 널러블 타입 (Nullable types)
 
-TypeScript는 두 가지 특별한 타입 `null`과 `undefined`가 있는데, 각각 값이 null과 undefined를 가집니다.
-
+TypeScript는 각각 값이 null과 undefined를 갖는 특수한 타입인 `null`과 `undefined`가 있습니다.
 [기본 타입](./basic-types.md)에서 짧게 언급한 바 있습니다.
-기본적으로, 타입 체커는 `null`과 `undefined`를 아무것에나 할당할 수 있다고 간주합니다.
-실제로 `null`과 `undefined`는 모든 타입의 유효한 값입니다.
-즉, 막고 싶어도 모든 타입에 할당되는 것을 *막을 수* 없습니다.
-`null`의 개발자, Tony Hoare는 이를 두고["백만 불짜리 실수 (billion dollar mistake)"](https://en.wikipedia.org/wiki/Null_pointer#History)라고 부릅니다.
+기본적으로, 타입 검사 시 `null`과 `undefined`를 아무것에나 할당할 수 있다고 간주합니다.
+실제로 `null`과 `undefined`는 모든 타입에서 유효한 값입니다.
+즉, 방지하고 싶어도 어떤 타입에 할당되는 것을 *방지할* 없습니다.
+`null`의 개발자인 Tony Hoare는 이를 두고["십억 불짜리 실수 (billion dollar mistake)"](https://en.wikipedia.org/wiki/Null_pointer#History)라고 부릅니다.
 
-`--strictNullChecks` 플래그는 이를 해결합니다: 변수를 선언할 때, 자동으로 `null`이나 `undefined`를 포함하지 않습니다.
+이건 `--strictNullChecks` 플래그로 해결합니다: 변수를 선언할 때, 자동으로 `null`이나 `undefined`를 포함하지 않습니다.
 유니언 타입을 사용하여 명시적으로 포함할 수 있습니다.
 
 ```ts
 let s = "foo";
-s = null; // error, 'null' is not assignable to 'string'
+s = null; // 오류, 'null'은 'string'에 할당할 수 없습니다
 let sn: string | null = "bar";
 sn = null; // 성공
 
-sn = undefined; // error, 'undefined' is not assignable to 'string | null'
+sn = undefined; // 오류, 'undefined'는 'string | null'에 할당할 수 없습니다.
 ```
 
-TypeScript는 JavaScript에서의 의미와 맞추기 위해 `null`과 `undefined`를 다르게 처리합니다.
+TypeScript는 JavaScript와 맞추기 위해 `null`과 `undefined`를 다르게 처리합니다.
 `string | null`은 `string | undefined`와 `string | undefined | null`과는 다른 타입입니다.
 
 TypeScript 3.7 이후부터는 널러블 타입을 간단하게 다룰 수 있게 [optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)를 사용할 수 있습니다.
 
 ## 선택적 매개변수와 프로퍼티 (Optional parameters and properties)
 
-`--strictNullChecks`를 적용하면, 자동으로 선택적 매개변수 `| undefined`가 추가됩니다.
+`--strictNullChecks`를 적용하면, 선택적 매개변수가 `| undefined`를 자동으로 추가합니다:
 
 ```ts
 function f(x: number, y?: number) {
@@ -287,10 +383,10 @@ function f(x: number, y?: number) {
 f(1, 2);
 f(1);
 f(1, undefined);
-f(1, null); // error, 'null' is not assignable to 'number | undefined'
+f(1, null); // 오류, 'null'은 'number | undefined'에 할당할 수 없습니다
 ```
 
-선택적 프로퍼티도 마찬가지입니다.
+선택적 프로퍼티도 마찬가지입니다:
 
 ```ts
 class C {
@@ -299,10 +395,10 @@ class C {
 }
 let c = new C();
 c.a = 12;
-c.a = undefined; // error, 'undefined' is not assignable to 'number'
+c.a = undefined; // 오류, 'undefined'는 'number'에 할당할 수 없습니다
 c.b = 13;
 c.b = undefined; // 성공
-c.b = null; // error, 'null' is not assignable to 'number | undefined'
+c.b = null; // 오류, 'null'은 'number | undefined'에 할당할 수 없습니다.
 ```
 
 ## 타입 가드와 타입 단언 (Type guards and type assertions)
@@ -321,7 +417,7 @@ function f(sn: string | null): string {
 }
 ```
 
-여기서 `null`의 제거는 명백해 보이지만, 간단한 연산자를 사용할 수도 있습니다.
+여기서 `null`은 확실하게 제거되어 보이지만, 간단한 연산자를 사용할 수도 있습니다:
 
 ```ts
 function f(sn: string | null): string {
@@ -329,13 +425,13 @@ function f(sn: string | null): string {
 }
 ```
 
-컴파일러가 `null`이나 `undefined`를 제거할 수 없는 상황에서, 타입 단언 연산자를 사용하여 수동으로 제거할 수 있습니다.
+컴파일러가 `null`이나 `undefined`를 제거할 수 없는 경우, 타입 단언 연산자를 사용하여 수동으로 제거할 수 있습니다.
 구문은 `!`를 후위 표기하는 방법입니다: `identifier!`는 `null`과 `undefined`를 `identifier`의 타입에서 제거합니다.
 
 ```ts
 function broken(name: string | null): string {
   function postfix(epithet: string) {
-    return name.charAt(0) + '.  the ' + epithet; // error, 'name' is possibly null
+    return name.charAt(0) + '.  the ' + epithet; // 오류, 'name'은 아마도 null 입니다
   }
   name = name || "Bob";
   return postfix("great");
@@ -343,7 +439,7 @@ function broken(name: string | null): string {
 
 function fixed(name: string | null): string {
   function postfix(epithet: string) {
-    return name!.charAt(0) + '.  the ' + epithet; // ok
+    return name!.charAt(0) + '.  the ' + epithet; // 성공
   }
   name = name || "Bob";
   return postfix("great");
@@ -351,8 +447,8 @@ function fixed(name: string | null): string {
 ```
 
 예제는 중첩 함수를 사용합니다. 왜냐하면 컴파일러가 중첩 함수안에서는 null을 제거할 수 없기 때문입니다 (즉시-호출된 함수 표현은 예외).
-특히 외부 함수에서 반환할 경우, 중첩 함수에 대한 모든 호출을 추적할 수 없기 때문입니다.
-함수가 어디에서 호출되었는지 알 수 없으면, body가 실행될 때 `name`의 타입을 알 수 없습니다.
+특히 외부 함수에서 호출될 경우, 중첩 함수에 대한 모든 호출을 추적할 수 없기 때문입니다.
+함수가 어디에서 호출되었는지 알 수 없으면, 본문이 실행될 때 `name`의 타입을 알 수 없습니다.
 
 # 타입 별칭 (Type Aliases)
 
@@ -374,7 +470,7 @@ function getName(n: NameOrResolver): Name {
 ```
 
 별칭은 실제로 새로운 타입을 만드는 것은 아닙니다 - 그 타입을 나타내는 새로운 *이름* 을 만드는 것입니다.
-원시 값의 별칭을 짓는 것은 문서화의 형태로 사용할 수 있지만, 아주 유용하지 않습니다.
+원시 값의 별칭을 짓는 것은 문서화의 형태로 사용할 수 있지만, 별로 유용하지 않습니다.
 
 인터페이스처럼, 타입 별칭은 제네릭이 될 수 있습니다 - 타입 매개변수를 추가하고 별칭 선언의 오른쪽에 사용하면 됩니다:
 
@@ -416,11 +512,11 @@ type Yikes = Array<Yikes>; // 오류
 
 ## 인터페이스 vs. 타입 별칭 (Interfaces vs. Type Aliases)
 
-위에서 언급했듯이, 타입 별칭은 인터페이스와 같은 역할을 할 수 있습니다, 하지만, 약간의 미묘한 차이가 있습니다
+위에서 언급했듯이, 타입 별칭은 인터페이스와 같은 역할을 할 수 있습니다; 하지만, 약간의 미묘한 차이가 있습니다
 
 한 가지 차이점은 인터페이스는 어디에서나 사용할 수 있는 새로운 이름을 만들 수 있습니다.
 타입 별칭은 새로운 이름을 만들지 못합니다 &mdash; 예를 들어, 오류 메시지는 별칭 이름을 사용하지 않습니다.
-아래의 코드에서, 에디터 안에서 `interfaced`에 마우스를 올리면  `Interface`를 반환한다고 보여줍니다, 하지만 `aliased`는 객체 리터럴 타입을 반환한다고 보여줍니다.
+아래의 코드에서, 에디터에서 `interfaced`에 마우스를 올리면  `Interface`를 반환한다고 보여주지만 `aliased`는 객체 리터럴 타입을 반환한다고 보여줍니다.
 
 ```ts
 type Alias = { num: number }
@@ -431,16 +527,15 @@ declare function aliased(arg: Alias): Alias;
 declare function interfaced(arg: Interface): Interface;
 ```
 
-TypeScript의 이전 버전에서, 타입 별칭은 extend 하거나 implement 할 수 없었습니다 (다른 타입을 extend/implement 할 수도 없습니다).
-2.7 버전부터, 타입 별칭은 교차 타입을 생성함으로써 extend 할 수 있습니다. 예를 들어, `type Cat = Animal & { purrs: true }`.
+TypeScript의 이전 버전에서, 타입 별칭은 extend 하거나 implement 할 수 없었습니다 (다른 타입을 extend/implement 할 수도 없습니다). 2.7 버전부터, 타입 별칭은 교차 타입을 생성함으로써 extend 할 수 있습니다. 예를 들어, `type Cat = Animal & { purrs: true }`.
 
-[소프트웨어의 이상적인 특징은 확장에 개방되어 있기 때문에](https://en.wikipedia.org/wiki/Open/closed_principle), 가능하면 항상 타입 별칭보다 인터페이스를 사용해야 하기 때문입니다.
+[소프트웨어의 이상적인 특징은 확장에 개방되어 있기 때문에](https://en.wikipedia.org/wiki/Open/closed_principle), 가능하면 항상 타입 별칭보다 인터페이스를 사용해야 합니다.
 
 반면에, 만약 인터페이스로 어떤 형태를 표현할 수 없고 유니언이나 튜플 타입을 사용해야 한다면, 일반적으로 타입 별칭을 사용합니다.
 
 # 문자열 리터럴 타입 (String Literal Types)
 
-문자열 리터럴 타입은 문자열이 가져야 하는 정확한 값을 지정할 수 있게 해줍니다.
+문자열 리터럴 타입은 문자열에 값을 정확하게 지정할 수 있게 해줍니다.
 예제에서 문자열 리터럴 타입은 유니언 타입, 타입 가드, 그리고 타입 별칭과 잘 결합됩니다.
 이 기능을 열거형-같은 행동을 문자열과 함께 사용할 수 있습니다.
 
@@ -493,7 +588,7 @@ function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {
 }
 ```
 
-좀처럼 명시적으로 작성하지 않지만, 이슈를 좁히고 버그를 잡는데 유용할 수 있습니다.
+명시적으로 작성되는 경우는 거의 없지만, 이슈를 좁히고 버그를 잡는데 유용할 수 있습니다.
 
 ```ts
 function foo(x: number) {
@@ -504,23 +599,23 @@ function foo(x: number) {
 }
 ```
 
-다른 말로, `x`는 `2`와 비교될 때, 반드시 `1`이어야 합니다, 위의 검사에서 유효하지 않은 비교를 만드는 것을 의미합니다.
+다시 말하면, `x`는 `2`와 비교될 때, 반드시 `1`이어야 하는데 위의 검사가 유효하지 않은 비교를 의미합니다.
 
 # 열거형 멤버 타입 (Enum Member Types)
 
 [열거형 섹션](./enums.md#유니언-열거형과-열거형-멤버-타입-union-enums-and-enum-member-types)에서 언급했듯이, 열거형 멤버는 모든 멤버가 리터럴로-초기화될 때 타입을 가집니다.
 
-"싱글톤 타입"에 대해 이야기하는 대부분의 시간에, 비록 많은 유저가 "싱글톤 타입"과 "리터럴 타입"을 서로 교환 가능하게 사용할 것이지만, 열거형 멤버 타입과 숫자/문자열 리터럴 타입 모두 참조합니다.
+싱글톤 타입을 이야기 할때 여기서는 열거형 멤버 타입과 숫자/문자열 리터럴 타입을 얘기하지만, 대부분 많은 유저들은 "싱글톤 타입"과 "리터럴 타입"을 상호 교환적으로 사용합니다. 
 
 # 판별 유니언 (Discriminated Unions)
 
 *태그 된 유니언* 또는 *대수적 데이터 타입*이라고도 하는 *판별 유니언* 고급 패턴을 만들기 위해서 싱글톤 타입, 유니언 타입, 타입 가드, 타입 별칭을 합칠 수 있습니다.
 판별 유니언은 함수형 프로그래밍에서 유용합니다.
-어떤 언어에서는 자동으로 판별 유니언을 제공합니다; TypeScript는 대신에 오늘날 존재하는 JavaScript 패턴 위에서 빌드 합니다.
+어떤 언어에서는 자동으로 판별 유니언을 제공합니다; TypeScript는 대신에 현재 JavaScript 패턴을 기반으로 합니다.
 세 가지 요소가 있습니다:
 
-1. 공통이고 싱글톤 타입 프로퍼티를 갖는 타입 &mdash; *판별식*.
-2. 이런 타입들의 유니언을 갖는 타입 별칭 &mdash; *유니언*.
+1. 공통 싱글톤 타입 프로퍼티를 갖는 타입 &mdash; *판별식*.
+2. 해당 타입들의 유니언을 갖는 타입 별칭 &mdash; *유니언*.
 3. 공통 프로퍼티의 타입 가드
 
 ```ts
@@ -539,11 +634,11 @@ interface Circle {
 }
 ```
 
+먼저 통합할 인터페이스를 선언합니다.
 각 인터페이스는 다른 문자열 리터럴 타입의 `kind` 프로퍼티를 가집니다.
-첫 번째로 유니언 할 인터페이스들을 선언 합니다.
 `kind` 프로퍼티는 *판별식* 혹은 *태그*라고 부릅니다.
-다른 프로퍼티들은 각 인터페이스에 고유합니다.
-인터페이스들은 현재는 관련이 없다는 것에 주목하세요.
+다른 프로퍼티는 각 인터페이스에 따라 다릅니다.
+현재 인터페이스는 관련이 없다는 것에 유의하세요.
 이제 유니언으로 집어넣어 봅시다:
 
 ```ts
@@ -564,8 +659,8 @@ function area(s: Shape) {
 
 ## 엄격한 검사 (Exhaustiveness checking)
 
-판별 유니언의 모든 변형을 커버할 수 없을 때, 컴파일러가 말해주었으면 합니다.
-예를 들어, 만약 `Triangle`을 `Shape`에 추가하면, `area`를 업데이트할 필요가 있습니다.
+판별 유니언의 모든 변형을 커버할 수 없을 때, 컴파일러가 알려주길 원합니다.
+예를 들어, 만약 `Triangle`을 `Shape`에 추가하면, `area`도 업데이트해야 합니다.
 
 ```ts
 type Shape = Square | Rectangle | Circle | Triangle;
@@ -592,9 +687,9 @@ function area(s: Shape): number { // 오류: number | undefined를 반환합니�
 }
 ```
 
-`switch`가 더 이상 완전하지 않기 때문에, TypeScript는 함수가 `undefined`를 반환할 수 있다는 것을 알고 있습니다.
+`switch`가 더 이상 철저하지 않아서 TypeScript는 함수가 `undefined`를 반환할 수 있다는 것을 알고 있습니다.
 만약 명시적인 반환 타입 `number`를 가지고 있으면, 반환 타입이 실제로 `number | undefined`라는 오류를 얻게 됩니다.
-하지만, 이 방법은 꽤 미묘하고, 게다가 `--strictNullChecks`가 예전 코드에서 항상 작동하는 것은 아닙니다.
+하지만 이 방법은 꽤 애매하고 `--strictNullChecks`가 예전 코드에서 항상 작동하는 것은 아닙니다.
 
 두 번째 방법은 컴파일러가 완전함을 검사하기 위해 사용하는 `never` 타입을 사용하는 것입니다.
 
@@ -618,9 +713,8 @@ function area(s: Shape) {
 
 # 다형성 `this` 타입 (Polymorphic `this` types)
 
-다형성 `this` 타입은 포함하는 클래스나 인터페이스의 *하위 타입*인 타입을 나타냅니다.
-
-*F*-바운드 다형성이라고 부릅니다.
+다형성 `this` 타입은 포함하는 클래스나 인터페이스의 *하위 타입*을 나타냅니다.
+*F*-bounded polymorphism이라고 부릅니다.
 예를 들어, 계층적으로 유연한 인터페이스를 표현하기 더 쉽게 만듭니다.
 각 연산 후에 `this`를 반환하는 간단한 계산기를 보겠습니다:
 
@@ -674,7 +768,7 @@ let v = new ScientificCalculator(2)
 
 # 인덱스 타입 (Index types)
 
-인덱스 타입을 사용하면, 동적인 프로퍼티 이름을 사용하는 코드를 컴파일러가 검사할 수 있도록 합니다.
+인덱스 타입을 사용하면, 동적인 프로퍼티 이름을 사용하는 코드를 컴파일러가 검사할 수 있습니다.
 예를 들어, 일반적인 JavaScript 패턴은 객체에서 프로퍼티의 부분집합을 뽑아내는 것입니다:
 
 ```js
@@ -701,7 +795,7 @@ let taxi: Car = {
     year: 2014
 };
 
-// Manufacturer and model은 둘 다 문자열 타입입니다,
+// Manufacturer과 model은 둘 다 문자열 타입입니다,
 // 그래서 둘 다 타이핑된 문자열 배열로 끌어낼 수 있습니다.
 let makeAndModel: string[] = pluck(taxi, ['manufacturer', 'model']);
 
@@ -712,7 +806,7 @@ let modelYear = pluck(taxi, ['model', 'year'])
 
 컴파일러는 `manufacturer` 와 `model`이 실제 `Car`의 프로퍼티인지 검사합니다.
 예제는 몇 가지 새로운 타입 연산자를 소개합니다.
-첫 번째는 `keyof T`, **인덱스 타입 쿼리 연산자**입니다.
+첫 번째, `keyof T`는 **인덱스 타입 쿼리 연산자**입니다.
 any 타입인 `T`, `keyof T`는 `T`의 알려지고 공개된 프로퍼티 이름들의 유니언입니다.
 예를 들어:
 
@@ -720,10 +814,10 @@ any 타입인 `T`, `keyof T`는 `T`의 알려지고 공개된 프로퍼티 이�
 let carProps: keyof Car; // ('manufacturer' | 'model' | 'year')의 유니언
 ```
 
-`keyof Car`는 완전히 `'manufacturer' | 'model' | 'year'`와 상호 교환적입니다.
+`keyof Car`는 `'manufacturer' | 'model' | 'year'`와 완전히 호환됩니다.
 차이점은 `Car`에 `ownersAddress: string`라는 또 다른 프로퍼티를 추가한다면, `keyof Car`는 자동으로 `'manufacturer' | 'model' | 'year' | 'ownersAddress'`로 업데이트합니다.
 그리고 미리 프로퍼티 이름을 알 수 없을 때, `pluck`처럼 제네릭 컨텍스트에서 `keyof`를 사용할 수 있습니다.
-즉 컴파일러가 올바른 프로퍼티 이름들의 집합을 `pluck`에 전달하는지 검사합니다.
+즉 컴파일러가 올바른 프로퍼티 이름들의 집합을 `pluck`에 전달하는지 검사합니다:
 
 ```ts
 // 오류, 'manufacturer' | 'model' | 'year'에 'unknown'이 없습니다.
@@ -750,15 +844,17 @@ function getProperty<T, K extends keyof T>(o: T, propertyName: K): T[K] {
 let name: string = getProperty(taxi, 'manufacturer');
 let year: number = getProperty(taxi, 'year');
 
-// error, 'unknown' is not in 'manufacturer' | 'model' | 'year'
+// 오류, 'unknown'은 'manufacturer' | 'model' | 'year'에 없습니다
 let unknown = getProperty(taxi, 'unknown');
 ```
 
 ## 인덱스 타입과 인덱스 시그니처 (Index types and index signatures)
 
 `keyof`와 `T[K]`가 인덱스 시그니처와 상호 작용합니다. 인덱스 시그니처 매개변수 타입은 'string' 혹은 'number'이어야 합니다.
-만약 문자열 인덱스 시그니처인 타입이 있으면, `keyof T`는 `string | number`가 될 것입니다 (그냥 `string`이 아닙니다, JavaScript에선 문자열 (`object['42'`])나 숫자 (`object[42]`)를 사용해서 객체 프로퍼티에 접근할 수 있습니다).
-그리고 `T[string]`은 인덱스 시그니처의 타입입니다.
+만약 문자열 인덱스 시그니처인 타입이 있으면, `keyof T`는 `string | number`가 될 것입니다
+(그냥 `string`이 아닙니다, JavaScript에선 문자열 (`object['42'`])나 숫자 (`object[42]`)를 사용해서
+객체 프로퍼티에 접근할 수 있습니다).
+그리고 `T[string]`은 인덱스 시그니처의 타입입니다:
 
 ```ts
 interface Dictionary<T> {
@@ -768,14 +864,14 @@ let keys: keyof Dictionary<number>; // string | number
 let value: Dictionary<number>['foo']; // number
 ```
 
-숫자 인덱스 시그니처인 타입이 있으면, `keyof T`는 그냥 `number`일 것입니다.
+숫자 인덱스 시그니처인 타입이 있으면, `keyof T`는 `number`일 것입니다.
 
 ```ts
 interface Dictionary<T> {
     [key: number]: T;
 }
 let keys: keyof Dictionary<number>; // 숫자
-let value: Dictionary<number>['foo']; // Error, Property 'foo' does not exist on type 'Dictionary<number>'.
+let value: Dictionary<number>['foo']; // 오류, 프로퍼티 'foo'는 타입 'Dictionary<number>'에 존재하지 않습니다.
 let value: Dictionary<number>[42]; // 숫자
 ```
 
@@ -844,14 +940,14 @@ type Keys = 'option1' | 'option2';
 type Flags = { [K in Keys]: boolean };
 ```
 
-구문은 `for .. in`이 들어간 인덱스 시그니처의 구문과 유사합니다.
+구문은 `for .. in`이 들어간 인덱스 시그니처 구문과 유사합니다.
 세 부분으로 나뉩니다:
 
-1. 각 프로퍼티에 차례로 묶인, 타입 변수 `K`,
-2. 반복할 프로퍼티의 이름을 포함하는 문자열 리터럴 유니언 `Keys`.
+1. 각 프로퍼티에 순서대로 바인딩되는 타입 변수 `K`.
+2. 반복할 프로퍼티 이름이 포함된 문자열 리터럴 유니언 `Keys`.
 3. 프로퍼티의 결과 타입
 
-이 간단한 예제에서, `Keys`는 하드코딩된 프로퍼티 이름의 리스트이고 프로퍼티의 타입은 항상 `boolean`입니다, 그래서 이 매핑 타입은 아래 쓰인 것과 동일합니다:
+이 간단한 예제에서, `Keys`는 하드-코딩된 프로퍼티 이름 목록이고 프로퍼티 타입은 항상 `boolean`입니다, 그래서 이 매핑 타입은 아래 쓰인 것과 동일합니다:
 
 ```ts
 type Flags = {
@@ -861,8 +957,8 @@ type Flags = {
 ```
 
 하지만 실제 애플리케이션은, 위에서 `readonly`나 `Partial`처럼 보입니다.
-존재하는 타입을 기반으로 하고, 어떤 방법으로 프로퍼티를 변형시킵니다.
-이때가 `keyof`와 인덱스 접근 타입이 등장할 때입니다:
+존재하는 타입을 기반으로 하고, 특정 방법으로 프로퍼티를 변형시킵니다.
+이때 `keyof`와 인덱스 접근 타입이 등장합니다:
 
 ```ts
 type NullablePerson = { [P in keyof Person]: Person[P] | null }
@@ -876,10 +972,10 @@ type Nullable<T> = { [P in keyof T]: T[P] | null }
 type Partial<T> = { [P in keyof T]?: T[P] }
 ```
 
-이 예제들에서, 프로퍼티 리스트는 `keyof T`이고 결과 타입은 `T[P]`의 변형입니다.
-이는 매핑 타입의 일반적인 사용에 관해 좋은 템플릿입니다.
+이 예제들에서, 프로퍼티 목록은 `keyof T`이고 결과 타입은 `T[P]`의 변형입니다.
+이는 매핑 타입의 일반적인 사용에 있어 좋은 템플릿입니다.
 왜냐하면 이런 종류의 변형이 [동형 (homomorphic)](https://en.wikipedia.org/wiki/Homomorphism) 이기 때문에, 매핑이 `T`의 프로퍼티에만 적용되고 다른 것에는 적용되지 않습니다.
-컴파일러는 새로운 것을 추가하기 전에 존재하는 모든 프로퍼티 제어자를 복사할 수 있다는 것을 알고 있습니다.
+컴파일러는 새로운 것을 추가하기 전에 존재하는 모든 프로퍼티 지정자를 복사할 수 있다는 것을 알고 있습니다.
 예를 들어, 만약 `Person.name`이 읽기 전용이었다면, `Partial<Person>.name`은 읽기 전용이고 선택적일 것입니다.
 
 `Proxy<T>` 클래스 안에 래핑 된 `T[P]`에 대한 예제가 하나 더 있습니다.
@@ -893,7 +989,7 @@ type Proxify<T> = {
     [P in keyof T]: Proxy<T[P]>;
 }
 function proxify<T>(o: T): Proxify<T> {
-   // ... wrap proxies ...
+   // ... 프록시 래핑 ...
 }
 let proxyProps = proxify(props);
 ```
@@ -909,18 +1005,18 @@ type Record<K extends keyof any, T> = {
 }
 ```
 
-`Readonly`, `Partial` 그리고 `Pick`은 동형 (homomorphic)이지만 `Record`는 아닙니다.
-`Record`가 동형이 아니라는 하나의 증거는 프로퍼티를 복사하는 입력 타입을 받지 않는 것입니다:
+`Readonly`, `Partial` 그리고 `Pick`은 동형이지만 `Record`는 아닙니다.
+`Record`가 동형이 아니라는 단서 중 하나는 프로퍼티를 복사하는 입력 타입을 받지 않는 것입니다:
 
 ```ts
 type ThreeStringProps = Record<'prop1' | 'prop2' | 'prop3', string>
 ```
 
-비-동형 타입은 본질적으로 새로운 프로퍼티를 만듭니다, 그래서 어디서든지 프로퍼티 제어자를 복사할 수 없습니다.
+비-동형 타입은 본질적으로 새로운 프로퍼티를 만듭니다, 그래서 어디서든지 프로퍼티 지정자를 복사할 수 없습니다.
 
 ## 매핑 타입의 추론 (Inference from mapped types)
 
-타입의 프로퍼티를 어떻게 래핑 하는지 알게 되었으니, 다음에 하고 싶은 것은 어떻게 언래핑 (unwrap) 할지입니다.
+타입의 프로퍼티를 어떻게 래핑 하는지 알게 되었으니, 다음에 하고 싶은 것은 어떻게 언래핑(unwrap) 할지입니다.
 다행히, 꽤 쉽습니다:
 
 ```ts
@@ -935,13 +1031,13 @@ function unproxify<T>(t: Proxify<T>): T {
 let originalProps = unproxify(proxyProps);
 ```
 
-이 언래핑 추론은 동형 매핑 타입에만 동작합니다.
+이 언래핑 추론은 동형 매핑된 타입에만 동작합니다.
 만약 매핑 타입이 동형이 아니면 언래핑 함수에 명시적인 타입 매개변수를 주어야 할 것입니다.
 
 # 조건부 타입 (Conditional Types)
 
 TypeScript 2.8에서 비-균등 타입 매핑을 표현하는 기능을 추가하는 *조건부 타입*을 도입했습니다.
-조건부 타입은 타입 관계 테스트로 표현된 조건에 따라 두 가지 가능한 타입 중 하나를 선택합니다.
+조건부 타입은 타입 관계 검사로 표현된 조건에 따라 두 가지 가능한 타입 중 하나를 선택합니다:
 
 ```ts
 T extends U ? X : Y
@@ -949,15 +1045,15 @@ T extends U ? X : Y
 
 위의 타입은 `T`가 `U`에 할당될 수 있으면 타입은 `X`가 되고 그렇지 않다면 타입이 `Y`가 된다는 것을 뜻합니다.
 
-조건부 타입 `T extends U ? X : Y`는 `X` 나 `Y`로 *결정*되거나, *연기*됩니다, 왜냐하면 조건이 하나 혹은 그 이상의 타입 변수에 의존하기 때문입니다.
-`T`나 `U`가 타입 변수를 포함할 때, `X` 또는 `Y`로 결정되거나 연기할지, 타입 시스템이 `T`가 항상 `U`에 할당할 수 있는지에 대해 충분한 정보를 가지고 있는지 여부로 결정됩니다.
+조건부 타입 `T extends U ? X : Y`는 `X` 나 `Y`로 *결정*되거나, *지연*됩니다, 왜냐하면 조건이 하나 혹은 그 이상의 타입 변수에 의존하기 때문입니다.
+`T`나 `U`가 타입 변수를 포함할 때, `X` 또는 `Y`로 결정되거나 지연될지, 타입 시스템이 `T`가 항상 `U`에 할당할 수 있는지에 대해 충분한 정보를 가지고 있는지 여부로 결정됩니다.
 
 즉시 결정되는 일부 타입의 예제로, 다음 예제를 살펴보겠습니다:
 
 ```ts
 declare function f<T extends boolean>(x: T): T extends true ? string : number;
 
-// Type is 'string | number'
+// 타입은 'string | number'
 let x = f(Math.random() < 0.5)
 
 ```
@@ -980,7 +1076,7 @@ type T3 = TypeName<() => void>;  // "function"
 type T4 = TypeName<string[]>;  // "object"
 ```
 
-하지만 조건부 타입이 연기되는 지점 - 분기를 선택하기보단 고정되는 - 의 예를 들면 다음과 같습니다:
+하지만 조건부 타입이 지연되는 지점 - 분기를 선택하기보단 고정되는 - 의 예를 들면 다음과 같습니다:
 
 ```ts
 interface Foo {
@@ -991,10 +1087,10 @@ interface Foo {
 declare function f<T>(x: T): T extends Foo ? string : number;
 
 function foo<U>(x: U) {
-    // Has type 'U extends Foo ? string : number'
+    // 'U extends Foo ? string : number' 타입을 가지고 있습니다
     let a = f(x);
 
-    // This assignment is allowed though!
+    // 이 할당은 허용됩니다!
     let b: string | number = a;
 }
 ```
@@ -1035,7 +1131,7 @@ type T21 = Boxed<number[]>;  // BoxedArray<number>;
 type T22 = Boxed<string | number[]>;  // BoxedValue<string> | BoxedArray<number>;
 ```
 
-`T`가 실제 `Boxed<t>`의 분기 안에서 추가 제약조건 `any[]`을 가지고 있고 `T[number]`로 배열의 요소 타입을 참조할 수 있습니다. 또한, 지난 예제에서 조건부 타입이 어떻게 유니언 타입으로 분산되었는지 확인하십시오.
+`T`가 실제 `Boxed<T>`의 분기 안에서 추가 제약조건 `any[]`을 가지고 있고 `T[number]`로 배열의 요소 타입을 참조할 수 있음을 유의하세요. 또한 지난 예제에서 조건부 타입이 어떻게 유니언 타입으로 분산되었는지 확인하세요.
 
 조건부 타입의 분산 프로퍼티는 유니언 타입을 *필터링*하는데 편하게 사용할 수 있습니다:
 
@@ -1066,7 +1162,7 @@ function f2<T extends string | undefined>(x: T, y: NonNullable<T>) {
 }
 ```
 
-조건부 타입은 매핑 타입과 결합할 때, 특히나 유용합니다.
+조건부 타입은 특히 매핑 타입과 결합할 때 유용합니다.
 
 ```ts
 type FunctionPropertyNames<T> = { [K in keyof T]: T[K] extends Function ? K : never }[keyof T];
@@ -1099,7 +1195,7 @@ type ElementType<T> = T extends any[] ? ElementType<T[number]> : T;  // 오류
 
 ## 조건부 타입의 타입 추론 (Type inference in conditional types)
 
-조건부 타입의 `extends` 절 안에서, 이제 추론 될 타입 변수를 소개하는 `infer` 선언을 가지는 것이 가능합니다.
+조건부 타입의 `extends` 절 안에서, 이제 추론 될 타입 변수를 도입하는 `infer` 선언을 가지는 것이 가능합니다.
 이렇게 추론된 타입 변수는 조건부 타입의 실제 분기에서 참조될 수 있습니다.
 같은 타입 변수에 대한 여러 개의 `infer` 위치를 가질 수 있습니다.
 
@@ -1143,7 +1239,6 @@ type T21 = Bar<{ a: (x: string) => void, b: (x: number) => void }>;  // string &
 ```
 
 여러 호출 시그니처가 있는 타입에서 추론할 때 (오버로딩된 함수의 타입과 같은), 추론은 *마지막* 시그니처에서 만들어집니다 (이는 아마도 가장 관대한 케이스 일 것입니다).
-
 인수 타입의 리스트를 기반으로 오버로드 해결을 수행할 수는 없습니다.
 
 ```ts
@@ -1204,13 +1299,13 @@ type T13 = ReturnType<(<T extends U, U extends number[]>() => T)>;  // number[]
 type T14 = ReturnType<typeof f1>;  // { a: number, b: string }
 type T15 = ReturnType<any>;  // any
 type T16 = ReturnType<never>;  // never
-type T17 = ReturnType<string>;  // Error
-type T18 = ReturnType<Function>;  // Error
+type T17 = ReturnType<string>;  // 오류
+type T18 = ReturnType<Function>;  // 오류
 
 type T20 = InstanceType<typeof C>;  // C
 type T21 = InstanceType<any>;  // any
 type T22 = InstanceType<never>;  // never
-type T23 = InstanceType<string>;  // Error
-type T24 = InstanceType<Function>;  // Error
+type T23 = InstanceType<string>;  // 오류
+type T24 = InstanceType<Function>;  // 오류
 ```
 > Note: `Exclude` 타입은 [여기](https://github.com/Microsoft/TypeScript/issues/12215#issuecomment-307871458)에서 제안된 `Diff` 타입의 적절한 구현입니다. `Diff`를 정의한 코드와의 충돌을 피하기 위해 `Exclude`를 사용했고, 또 이 이름이 타입의 의미를 더 잘 전달한다고 느꼈습니다.

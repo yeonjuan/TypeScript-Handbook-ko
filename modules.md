@@ -2,23 +2,23 @@
 
 ECMAScript 2015부터 JavaScript에는 모듈 개념이 있습니다. TypeScript는 이 개념을 공유합니다.
 
-모듈은 전역 범위가 아닌 그 자체 범위 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#내보내기-export) 중 하나를 사용하여 명시적으로 내보내지 않는 한 모듈 외부에서 보이지 않습니다.
-반대로 다른 모듈에서 내보낸 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#가져오기-import) 중 하나를 사용하여 가져와야 합니다.
+모듈은 전역 스코프가 아닌 자체 스코프 내에서 실행됩니다; 즉 모듈 내에서 선언된 변수, 함수, 클래스 등은 [`export` 양식](#export) 중 하나를 사용하여 명시적으로 export 하지 않는 한 모듈 외부에서 보이지 않습니다.
+반대로 다른 모듈에서 export 한 변수, 함수, 클래스, 인터페이스 등을 사용하기 위해서는 [`import` 양식](#import) 중 하나를 사용하여 import 해야 합니다.
 
 모듈은 선언형입니다; 모듈 간의 관계는 파일 수준의 imports 및 exports 관점에서 지정됩니다.
 
-모듈은 모듈 로더를 사용하여 다른 모듈을 가져옵니다.
+모듈은 모듈 로더를 사용하여 다른 모듈을 import 합니다.
 런타임 시 모듈 로더는 모듈을 실행하기 전에 모듈의 모든 의존성을 찾고 실행해야 합니다.
 JavaScript에서 사용하는 유명한 모듈 로더로는 [CommonJS](https://en.wikipedia.org/wiki/CommonJS) 모듈 용 Node.js의 로더와 웹 애플리케이션의 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) 모듈 용 [RequireJS](https://requirejs.org/) 로더가 있습니다.
 
 ECMAScript 2015와 마찬가지로 TypeScript는 최상위 수준의 `import` 혹은 `export`가 포함된 모든 파일을 모듈로 간주합니다.
-반대로 최상위 수준의  `import` 혹은 `export` 선언이 없는 파일은 전역 범위에서 사용할 수 있는 스크립트로 처리됩니다(모듈에서도 마찬가지).
+반대로 최상위 수준의 `import` 혹은 `export` 선언이 없는 파일은 전역 스코프에서 사용할 수 있는 스크립트로 처리됩니다(모듈에서도 마찬가지).
 
-# 내보내기 (Export)
+# Export
 
-## 선언 내보내기 (Exporting a declaration)
+## 선언 export 하기 (Exporting a declaration)
 
-`export` 키워드를 추가하여 모든 선언 (변수, 함수, 클래스, 타입 별칭, 인터페이스)를 내보낼 수 있습니다.
+`export` 키워드를 추가하여 모든 선언 (변수, 함수, 클래스, 타입 별칭, 인터페이스)를 export 할 수 있습니다.
 
 ##### StringValidator.ts
 
@@ -42,9 +42,9 @@ export class ZipCodeValidator implements StringValidator {
 }
 ```
 
-## 내보내기 문 (Export statements)
+## Export 문 (Export statements)
 
-내보내기 문은 사용자를 위해 내보낼 이름을 바꿔야 할 때 편리합니다. 위의 예제는 다음과 같이 작성할 수 있습니다:
+Export 문은 사용자를 위해 export 할 이름을 바꿔야 할 때 편리합니다. 위의 예제는 다음과 같이 작성할 수 있습니다:
 
 ```ts
 class ZipCodeValidator implements StringValidator {
@@ -56,10 +56,10 @@ export { ZipCodeValidator };
 export { ZipCodeValidator as mainValidator };
 ```
 
-## 다시-내보내기 (Re-exports)
+## Re-export 하기 (Re-exports)
 
 종종 모듈은 다른 모듈을 확장하고 일부 기능을 부분적으로 노출합니다.
-다시-내보내기(re-export)는 지역적으로 가져오거나 지역 변수를 도입하지 않습니다.
+Re-export 하기는 지역적으로 import 하거나, 지역 변수를 도입하지 않습니다.
 
 ##### ParseIntBasedZipCodeValidator.ts
 
@@ -70,11 +70,11 @@ export class ParseIntBasedZipCodeValidator {
     }
 }
 
-// 기존 validator의 이름을 변경 후 내보냄
+// 기존 validator의 이름을 변경 후 export
 export {ZipCodeValidator as RegExpBasedZipCodeValidator} from "./ZipCodeValidator";
 ```
 
-선택적으로, 하나의 모듈은 하나 혹은 여러 개의 모듈을 감쌀 수 있고, `export * from "module"` 구문을 사용해 내보내는 것을 모두 결합할 수 있습니다.
+선택적으로, 하나의 모듈은 하나 혹은 여러 개의 모듈을 감쌀 수 있고, `export * from "module"` 구문을 사용해 export 하는 것을 모두 결합할 수 있습니다.
 
 ##### AllValidators.ts
 
@@ -87,12 +87,12 @@ export * from "./ParseIntBasedZipCodeValidator"; // 'ParseIntBasedZipCodeValidat
                                                  // 'RegExpBasedZipCodeValidator' 라는 별칭으로 다시 내보냄
 ```
 
-# 가져오기 (Import)
+# Import
 
-가져오기는 모듈에서 내보내기 만큼 쉽습니다.
-내보낸 선언은 아래의 `import` 양식 중 하나를 사용하여 가져옵니다:
+import는 모듈에서 export 만큼 쉽습니다.
+export 한 선언은 아래의 `import` 양식 중 하나를 사용하여 import 합니다:
 
-## 모듈에서 단일 내보내기를 가져오기 (Import a single export from a module)
+## 모듈에서 단일 export를 import 하기 (Import a single export from a module)
 
 ```ts
 import { ZipCodeValidator } from "./ZipCodeValidator";
@@ -100,34 +100,34 @@ import { ZipCodeValidator } from "./ZipCodeValidator";
 let myValidator = new ZipCodeValidator();
 ```
 
-이름을 수정해서 가져올 수 있습니다.
+이름을 수정해서 import 할 수 있습니다.
 
 ```ts
 import { ZipCodeValidator as ZCV } from "./ZipCodeValidator";
 let myValidator = new ZCV();
 ```
 
-## 전체 모듈을 단일 변수로 가져와 모듈 내보내기 접근에 사용하기 (Import the entire module into a single variable, and use it to access the module exports)
+## 전체 모듈을 단일 변수로 import 해서, 모듈 exports 접근에 사용하기 (Import the entire module into a single variable, and use it to access the module exports)
 
 ```ts
 import * as validator from "./ZipCodeValidator";
 let myValidator = new validator.ZipCodeValidator();
 ```
 
-## 부수효과만을 위해 모듈 가져오기 (Import a module for side-effects only)
+## 부수효과만을 위해 모듈 import 하기 (Import a module for side-effects only)
 
 권장되지는 않지만, 일부 모듈은 다른 모듈에서 사용할 수 있도록 일부 전역 상태로 설정합니다.
-이러한 모듈은 어떤 내보내기도 없거나, 사용자가 내보내기에 관심이 없습니다.
-이러한 모듈을 가져오기 위해, 다음처럼 사용하세요:
+이러한 모듈은 어떤 exports도 없거나, 사용자가 exports에 관심이 없습니다.
+이러한 모듈을 import 하기 위해, 다음처럼 사용하세요:
 
 ```ts
 import "./my-module.js"
 ```
 
-## 타입 가져오기 (Importing Types)
+## 타입 import 하기 (Importing Types)
 
-TypeScript 3.8 이전에는 `import`를 사용하여 타입을 가져올 수 있었습니다.
-TypeScript 3.8에서는 `import` 문 혹은 `import type`을 사용하여 타입을 가져올 수 있습니다.
+TypeScript 3.8 이전에는 `import`를 사용하여 타입을 import 할 수 있었습니다.
+TypeScript 3.8에서는 `import` 문 혹은 `import type`을 사용하여 타입을 import 할 수 있습니다.
 
 ```ts
 // 동일한 import를 재사용하기
@@ -140,11 +140,14 @@ import type {APIResponseType} from "./api";
 `import type`은 항상 JavaScript에서 제거되며, 바벨 같은 도구는 `isolatedModules` 컴파일러 플래그를 통해 코드에 대해 더 나은 가정을 할 수 있습니다.
 [3.8 릴리즈 정보](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8-beta/#type-only-imports-exports)에서 더 많은 정보를 읽을 수 있습니다.
 
-# 기본 내보내기 (Default exports)
+# Default exports
 
-각 모듈은 선택적으로 `default` 내보내기(default export)를 내보낼 수 있습니다. 기본 내보내기는 `default` 키워드로 표시됩니다; 모듈당 하나의 `default` 내보내기만 가능합니다. `default` 내보내기는 다른 가져오기 양식을 사용하여 가져옵니다.
+각 모듈은 선택적으로 `default` export를 export 할 수 있습니다.
+default export는 `default` 키워드로 표시됩니다; 모듈당 하나의 `default` export만 가능합니다.
+`default` export는 다른 import 양식을 사용하여 import 합니다.
 
-`default` 내보내기는 정말 편리합니다. 예를 들어 jQuery와 같은 라이브러리는 `jQuery` 혹은 `$`와 같은 기본 내보내기를 가질 수 있으며, `$`나 `jQuery`와 같은 이름으로 가져올 수 있습니다.
+`default` exports는 정말 편리합니다.
+예를 들어 jQuery와 같은 라이브러리는 `jQuery` 혹은 `$`와 같은 default export를 가질 수 있으며, `$`나 `jQuery`와 같은 이름으로 import할 수 있습니다.
 
 ##### [JQuery.d.ts](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/jquery/JQuery.d.ts)
 
@@ -161,8 +164,8 @@ import $ from "jquery";
 $("button.continue").html( "Next Step..." );
 ```
 
-클래스 및 함수 선언은 기본 내보내기로 직접 작성될 수 있습니다.
-기본 내보내기 클래스 및 함수 선언 이름은 선택사항 입니다.
+클래스 및 함수 선언은 default exports로 직접 작성될 수 있습니다.
+default export 클래스 및 함수 선언 이름은 선택사항 입니다.
 
 ##### ZipCodeValidator.ts
 
@@ -208,7 +211,7 @@ strings.forEach(s => {
 });
 ```
 
-`default` 내보내기는 값도 가능합니다.
+`default` exports는 값도 가능합니다:
 
 ##### OneTwoThree.ts
 
@@ -224,15 +227,15 @@ import num from "./OneTwoThree";
 console.log(num); // "123"
 ```
 
-## x로 모두 내보내기 (Export all as x)
+## x로 모두 export 하기 (Export all as x)
 
-TypeScript 3.8에서는 다음 이름이 다른 모듈로 다시-내보내기 될 때 단축어처럼 `export * as ns`를 사용할 수 있습니다.
+TypeScript 3.8에서는 다음 이름이 다른 모듈로 re-export 될 때 단축어처럼 `export * as ns`를 사용할 수 있습니다:
 
 ```ts
 export * as utilities from "./utilities";
 ```
 
-모듈에서 모든 의존성을 가져와 내보낸 필드로 만들면, 다음과 같이 가져올 수 있습니다:
+모듈에서 모든 의존성을 가져와 export한 필드로 만들면, 다음과 같이 import할 수 있습니다:
 
 ```ts
 import { utilities } from "./index";
@@ -240,15 +243,16 @@ import { utilities } from "./index";
 
 # `export =`와 `import = require()` (`export =` and `import = require()`)
 
-CommonJS와 AMD 둘 다 일반적으로 모듈의 모든 내보내기를 포함하는 `exports` 객체의 개념을 가지고 있습니다.
+CommonJS와 AMD 둘 다 일반적으로 모듈의 모든 exports를 포함하는 `exports` 객체의 개념을 가지고 있습니다.
 
 또한 `exports` 객체를 사용자 정의 단일 객체로 대체하는 기능도 지원합니다.
-기본 내보내기는 이 동작에서 대체 역할을 합니다; 하지만 둘은 호환되지는 않습니다.
+default exports는 이 동작에서 대체 역할을 합니다; 하지만 둘은 호환되지는 않습니다.
 TypeScript는 기존의 CommonJS와 AMD 워크플로우를 모델링 하기 위해 `export =`를 지원합니다.
 
-`export =` 구문은 모듈에서 내보내지는 단일 객체를 지정합니다. 클래스, 인터페이스, 네임스페이스, 함수 혹은 열거형이 될 수 있습니다.
+`export =` 구문은 모듈에서 export되는 단일 객체를 지정합니다.
+클래스, 인터페이스, 네임스페이스, 함수 혹은 열거형이 될 수 있습니다.
 
-`export = `를 사용하여 모듈을 내보낼 때, TypeScript에 특정한 `import module = require("module")`를 사용하여 모듈을 가져와야 합니다.
+`export = `를 사용하여 모듈을 export할 때, TypeScript에 특정한 `import module = require("module")`를 사용하여 모듈을 가져와야 합니다.
 
 ##### ZipCodeValidator.ts
 
@@ -284,7 +288,7 @@ strings.forEach(s => {
 컴파일 중에는 지정된 모듈 대상에 따라 컴파일러는 Node.js ([CommonJS](http://wiki.commonjs.org/wiki/CommonJS)), require.js ([AMD](https://github.com/amdjs/amdjs-api/wiki/AMD)), [UMD](https://github.com/umdjs/umd), [SystemJS](https://github.com/systemjs/systemjs), 또는 [ECMAScript 2015 native modules](http://www.ecma-international.org/ecma-262/6.0/#sec-modules) (ES6) 모듈-로딩 시스템에 적합한 코드를 생성합니다.
 생성된 코드의 `define`, `require` 그리고 `register` 호출 기능에 대한 자세한 정보는 각 모듈 로더의 문서를 확인하세요.
 
-이 간단한 예제는 가져오기 및 내보내기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
+이 간단한 예제는 import 및 export 하기 중에 사용된 이름이 모듈 로딩 코드로 변환되는 방법을 보여줍니다.
 
 ##### SimpleModule.ts
 
@@ -351,15 +355,17 @@ export var t = something + 1;
 
 # 간단한 예제 (Simple Example)
 
-아래에서는 각 모듈에서 단일 이름으로 내보내기 위해 이전 예제에서 사용한 Validator 구현을 통합합니다.
+아래에서는 각 모듈에서 단일 이름으로 export 하기 위해 이전 예제에서 사용한 Validator 구현을 통합합니다.
 
-컴파일 하려면, 명령 줄에서 모듈 대상을 지정해야 합니다. Node.js의 경우, `--module commonjs`를 사용하세요; require.js의 경우 `--module amd`를 사용하세요. 예를 들면:
+컴파일 하려면, 명령 줄에서 모듈 대상을 지정해야 합니다. Node.js의 경우, `--module commonjs`를 사용하세요;
+require.js의 경우 `--module amd`를 사용하세요. 예를 들면:
 
 ```Shell
 tsc --module commonjs Test.ts
 ```
 
-컴파일이 되면, 각 모듈은 별도의 `.js`파일이 됩니다. 참조 태그와 마찬가지로, 컴파일러는 `import`문을 따라 의존적인 파일들을 컴파일 합니다.
+컴파일이 되면, 각 모듈은 별도의 `.js`파일이 됩니다.
+참조 태그와 마찬가지로, 컴파일러는 `import`문을 따라 의존적인 파일들을 컴파일 합니다.
 
 ##### Validation.ts
 
@@ -373,7 +379,9 @@ export interface StringValidator {
 
 ```ts
 import { StringValidator } from "./Validation";
+
 const lettersRegexp = /^[A-Za-z]+$/;
+
 export class LettersOnlyValidator implements StringValidator {
     isAcceptable(s: string) {
         return lettersRegexp.test(s);
@@ -385,7 +393,9 @@ export class LettersOnlyValidator implements StringValidator {
 
 ```ts
 import { StringValidator } from "./Validation";
+
 const numberRegexp = /^[0-9]+$/;
+
 export class ZipCodeValidator implements StringValidator {
     isAcceptable(s: string) {
         return s.length === 5 && numberRegexp.test(s);
@@ -399,17 +409,19 @@ export class ZipCodeValidator implements StringValidator {
 import { StringValidator } from "./Validation";
 import { ZipCodeValidator } from "./ZipCodeValidator";
 import { LettersOnlyValidator } from "./LettersOnlyValidator";
+
 // 시험용 샘플
 let strings = ["Hello", "98052", "101"];
+
 // 사용할 validator
 let validators: { [s: string]: StringValidator; } = {};
 validators["ZIP code"] = new ZipCodeValidator();
 validators["Letters only"] = new LettersOnlyValidator();
+
 // 각 문자열이 validator를 통과하는지 보여줌
 strings.forEach(s => {
     for (let name in validators) {
-        console.log(`"${ s }" - ${ validators[name].isAcceptable(s) ? "matches" :
-        "does not match" } ${ name }`);
+        console.log(`"${ s }" - ${ validators[name].isAcceptable(s) ? "matches" : "does not match" } ${ name }`);
     }
 });
 ```
@@ -425,8 +437,8 @@ TypeScript에서는 아래에 있는 패턴을 사용하여 이 시나리오와 
 
 이 패턴의 핵심 아이디어는 `import id = require("...")` 문을 통해 모듈로 노출된 타입에 접근이 가능하다는 것입니다.
 아래 `if` 블록에 보이는 것처럼, 모듈 로더는 (`require`을 통해) 동적으로 호출됩니다.
-이 기능은 참조-제거 최적화를 활용하므로 필요할 때만 모듈을 로드 할 수 있습니다.
-해당 패턴이 동작하려면 `import`를 통해 정의된 심볼은 오직 타입 위치(즉, JavaScript로 방출되는 위치에서는 사용 안 함)에서만 사용되는 것이 중요합니다.
+이 기능은 참조-제거 최적화를 활용하므로 필요할 때만 모듈을 로드할 수 있습니다.
+해당 패턴이 동작하려면 `import`를 통해 정의된 심벌은 오직 타입 위치(즉, JavaScript로 방출되는 위치에서는 사용 안 함)에서만 사용되는 것이 중요합니다.
 
 타입 안전성을 유지하기 위해, `typeof` 키워드를 사용할 수 있습니다.
 `typeof` 키워드는 타입 위치에서 사용될 때는 값의 타입, 이 경우에는 모듈의 타입을 생성합니다.
@@ -487,8 +499,8 @@ C/C++에 익숙하다면, `.h` 파일이라고 생각할 수 있습니다.
 ## Ambient 모듈 (Ambient Modules)
 
 Node.js에서는 대부분의 작업은 하나 이상의 모듈을 로드하여 수행합니다.
-최상위-레벨의 내보내기 선언으로 각 모듈을 `.d.ts` 파일로 정의할 수 있지만, 더 큰 `.d.ts` 파일로 모듈들을  작성하는 것이 더 편리합니다.
-이를 위해, ambient 네임스페이스와 유사한 구조를 사용하지만, 나중에 가져올 수 있는 인용된 모듈 이름과 `module` 키워드를 사용합니다.
+최상위-레벨의 내보내기 선언으로 각 모듈을 `.d.ts` 파일로 정의할 수 있지만, 더 큰 하나의 `.d.ts` 파일로 모듈들을 작성하는 것이 더 편리합니다.
+이를 위해, ambient 네임스페이스와 유사한 구조를 사용하지만, 나중에 import 할 수 있는 인용된 모듈 이름과 `module` 키워드를 사용합니다.
 예를 들면:
 
 ##### node.d.ts (간단한 발췌)
@@ -521,7 +533,7 @@ let myUrl = URL.parse("http://www.typescriptlang.org");
 
 ### 속기 ambient 모듈 (Shorthand ambient modules)
 
-새로운 모듈을 사용하기 전에 선언을 작성하지 않으려는 경우, 속기 선언(shorthand declaration)을 사용하여 빠르게 시작할 수 있습니다.
+새로운 모듈을 사용하기 전에 선언을 작성하지 않는 경우, 속기 선언(shorthand declaration)을 사용하여 빠르게 시작할 수 있습니다.
 
 ##### declarations.d.ts
 
@@ -529,7 +541,7 @@ let myUrl = URL.parse("http://www.typescriptlang.org");
 declare module "hot-new-module";
 ```
 
-속기 모듈로부터 모든 가져오기는 `any` 타입을 가집니다.
+속기 모듈로부터 모든 imports는 `any` 타입을 가집니다.
 
 ```ts
 import x, {y} from "hot-new-module";
@@ -538,7 +550,8 @@ x(y);
 
 ### 와일드카드 모듈 선언 (Wildcard module declarations)
 
-[SystemJS](https://github.com/systemjs/systemjs/blob/master/docs/overview.md#plugin-syntax)나 [AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md)와 같은 모듈 로더는 비-JavaScirpt 내용을 가져올 수 있습니다.
+[SystemJS](https://github.com/systemjs/systemjs/blob/master/docs/overview.md#plugin-syntax)나
+[AMD](https://github.com/amdjs/amdjs-api/blob/master/LoaderPlugins.md)와 같은 모듈 로더는 비-JavaScirpt 내용을 import 할 수 있습니다.
 이 둘은 일반적으로 접두사 또는 접미사를 사용하여 특수한 로딩 의미를 표시합니다.
 이러한 경우를 다루기 위해 와일드카드 모듈 선언을 사용할 수 있습니다.
 
@@ -554,7 +567,7 @@ declare module "json!*" {
 }
 ```
 
-이제 `"*!text"` 나 `"json!*"`와 일치하는 것들을 가져올 수 있습니다.
+이제 `"*!text"` 나 `"json!*"`와 일치하는 것들을 import 할 수 있습니다.
 
 ```ts
 import fileContent from "./xyz.txt!text";
@@ -566,7 +579,7 @@ console.log(data, fileContent);
 
 일부 라이브러리는 많은 모듈 로더에서 사용되거나, 모듈 로딩 (전역 변수) 없이 사용되도록 설계되었습니다.
 이를 [UMD](https://github.com/umdjs/umd) 모듈이라고 합니다.
-이러한 라이브러리는 가져오기나 전역 변수를 통해 접근할 수 있습니다.
+이러한 라이브러리는 import나 전역 변수를 통해 접근할 수 있습니다.
 예를 들면:
 
 ##### math-lib.d.ts
@@ -576,7 +589,7 @@ export function isPrime(x: number): boolean;
 export as namespace mathLib;
 ```
 
-라이브러리는 모듈 내에서 가져오기로 사용할 수 있습니다.
+라이브러리는 모듈 내에서 import로 사용할 수 있습니다:
 
 ```ts
 import { isPrime } from "math-lib";
@@ -585,7 +598,7 @@ mathLib.isPrime(2); // 오류: 모듈 내부에서 전역 정의를 사용할 �
 ```
 
 전역 변수로도 사용할 수 있지만, 스크립트 내에서만 사용할 수 있습니다.
-(스크립트는 가져오기나 내보내기가 없는 파일입니다.)
+(스크립트는 imports나 exports가 없는 파일입니다.)
 
 ```ts
 mathLib.isPrime(2);
@@ -593,23 +606,23 @@ mathLib.isPrime(2);
 
 # 모듈 구조화에 대한 지침 (Guidance for structuring modules)
 
-## 가능한 최상위-레벨에 가깝게 내보내기 (Export as close to top-level as possible)
+## 가능한 최상위-레벨에 가깝게 export 하기 (Export as close to top-level as possible)
 
-모듈의 사용자는 내보내기 모듈을 사용할 때 가능한 마찰이 적어야 합니다.
-너무 많은 중첩 수준을 추가하면 성가신 경향이 있으므로, 어떻게 구조를 구성할지 신중하게 생각해야 합니다.
+모듈의 사용자가 export 모듈을 사용할 때 가능한 마찰이 적어야 합니다.
+중첩 수준을 과도하게 추가하면 다루기 힘들어지는 경향이 있으므로, 어떻게 구조를 구성할지 신중하게 생각해야 합니다.
 
-모듈에서 네임스페이스를 내보내는 것은 너무 많은 중첩 레이어를 추가하는 예입니다.
+모듈에서 네임스페이스를 export 하는 것은 너무 많은 중첩 레이어를 추가하는 예입니다.
 네임스페이스는 때때로 용도가 있지만, 모듈을 사용할 때 추가적인 레벨의 간접 참조를 추가합니다.
-이것은 사용자에게 빠르게 고통이 될 수 있으며, 일반적으로 불필요합니다.
+이것은 사용자에게 금방 고통스러운 지점이 될 수 있고, 일반적으로 불필요합니다.
 
-내보낸 클래스의 정적 메서드에도 비슷한 문제가 있습니다 - 클래스 자체에 중첩 레이어가 추가됩니다.
-표현이나 의도를 명확하게 유용한 방식으로 높이지 않는 한 간단하게 헬퍼 함수를 내보내는 것을 고려하세요.
+export 한 클래스의 정적 메서드에도 비슷한 문제가 있습니다 - 클래스 자체에 중첩 레이어가 추가됩니다.
+표현이나 의도를 명확하게 유용한 방식으로 높이지 않는 한 간단하게 헬퍼 함수를 export 하는 것을 고려하세요.
 
-### 단일 `class`나 `function`을  내보낼 경우, `export default`를 사용하세요 (If you're only exporting a single `class` or `function`, use `export default`)
+### 단일 `class`나 `function`을  export 할 경우, `export default`를 사용하세요 (If you're only exporting a single `class` or `function`, use `export default`)
 
-"최상위-레벨에 가까운 내보내기"가 모듈 사용자의 마찰을 줄여주는 것처럼, 기본 내보내기(default export)를 도입하는 것도 마찬가지입니다.
-모듈의 주요 목적이 한 개의 특정 내보내기를 저장하는 것이라면, 기본 내보내기로 내보내는 것을 고려해야 합니다.
-이렇게 하면 가져오기와 실제로 가져오기를 사용하는 것을 더 쉽게 만듭니다.
+"최상위-레벨에 가까운 export"가 모듈 사용자의 마찰을 줄여주는 것처럼, default export를 도입하는 것도 마찬가지입니다.
+모듈의 주요 목적이 한 개의 특정 export를 저장하는 것이라면, default export로 export 하는 것을 고려하세요.
+이렇게 하면 import 하기와 실제로 import를 사용하기가 더 쉬워집니다.
 예를 들면:
 
 #### MyClass.ts
@@ -637,7 +650,7 @@ console.log(f());
 
 이것은 사용자에게 최적입니다. 타입에 원하는 이름(이 경우에는 `t`)을 지정할 수 있고 객체를 찾기 위해 과도한 점을 찍지 않아도 됩니다.
 
-### 여러 객체를 내보내는 경우, 최상위-레벨에 두세요 (If you're exporting multiple objects, put them all at top-level)
+### 여러 객체를 export 하는 경우, 최상위-레벨에 두세요 (If you're exporting multiple objects, put them all at top-level)
 
 #### MyThings.ts
 
@@ -646,9 +659,9 @@ export class SomeType { /* ... */ }
 export function someFunc() { /* ... */ }
 ```
 
-반대로 가져올 때:
+반대로 import 할 때:
 
-### 가져온 이름을 명시적으로 나열 (Explicitly list imported names)
+### import 한 이름을 명시적으로 나열 (Explicitly list imported names)
 
 #### Consumer.ts
 
@@ -658,7 +671,7 @@ let x = new SomeType();
 let y = someFunc();
 ```
 
-### 많은 것을 가져오는 경우, 네임스페이스 가져오기 패턴을 사용하세요 (Use the namespace import pattern if you're importing a large number of things)
+### 많은 것을 import 하는 경우, 네임스페이스 import 패턴을 사용하세요 (Use the namespace import pattern if you're importing a large number of things)
 
 #### MyLargeModule.ts
 
@@ -676,15 +689,15 @@ import * as myLargeModule from "./MyLargeModule.ts";
 let x = new myLargeModule.Dog();
 ```
 
-## 확장을 위한 다시-내보내기 (Re-export to extend)
+## 상속을 위한 re-export 하기 (Re-export to extend)
 
 종종 모듈의 기능을 확장해야 할 필요가 있습니다.
-일반적인 JS 패턴은 JQuery 확장이 작동하는 방식과 유사하게 *확장(extenstions)* 으로 기존의 객체를 보강하는 것입니다.
+일반적인 JS 패턴은 JQuery 확장이 작동하는 방식과 유사하게 *확장(extensions)*으로 기존의 객체를 보강하는 것입니다.
 앞에서 언급했듯이 모듈은 전역 네임스페이스 객체와 같이 *병합(merge)* 하지 않습니다.
-여기서 추천하는 방법은 기존의 객체를 *변형하지 않고* 새로운 기능을 제공하는 개체(entity)를 내보내는 것입니다.
+여기서 추천하는 방법은 기존의 객체를 *변형하지 않고* 새로운 기능을 제공하는 개체를 export 하는 것입니다.
 
 `Calculator.ts` 모듈에 정의된 간단한 계산기 구현을 생각해보세요.
-이 모듈도 입력 문자열 목록을 전달하고 결과를 작성하여 계산기의 기능을 테스트할 수 있는 헬퍼 함수를 내보냅니다.
+이 모듈도 입력 문자열 목록을 전달하고 결과를 작성하여 계산기의 기능을 테스트할 수 있는 헬퍼 함수를 export 합니다.
 
 #### Calculator.ts
 
@@ -774,7 +787,9 @@ let c = new Calculator();
 test(c, "1+2*33/11="); // 9 출력
 ```
 
-10이 아닌 숫자를 입력 받을 수 있도록 이것을 확장하여 `ProgrammerCalculator.ts`을 만들어보겠습니다.
+10이 아닌 숫자를 입력받을 수 있도록 이것을 상속하여 `ProgrammerCalculator.ts`을 만들어보겠습니다.
+
+#### ProgrammerCalculator.ts
 
 ```ts
 import { Calculator } from "./Calculator";
@@ -797,14 +812,14 @@ class ProgrammerCalculator extends Calculator {
     }
 }
 
-// 새로 확장된  calculator를 Calculator로 내보내기
+// 새로 상속된 calculator를 Calculator로 export 하기
 export { ProgrammerCalculator as Calculator };
 
-// 또한 헬퍼 함수도 내보내기
+// 또한 헬퍼 함수도 export 하기
 export { test } from "./Calculator";
 ```
 
-새로운 `ProgrammerCalculator` 모듈은 `Calculator` 모듈과 유사한 API 형태를 내보내지만, 원래 모듈의 객체를 보강하지는 않습니다.
+새로운 `ProgrammerCalculator` 모듈은 `Calculator` 모듈과 유사한 API 형태를 export 하지만, 원래 모듈의 객체를 보강하지는 않습니다.
 다음은 ProgrammerCalculator 클래스에 대한 테스트입니다:
 
 #### TestProgrammerCalculator.ts
@@ -818,28 +833,28 @@ test(c, "001+010="); // 3 출력
 
 ## 모듈에서 네임스페이스를 사용하지 마세요 (Do not use namespaces in modules)
 
-모듈 기반 구성으로 처음 이동할 때, 추가적인 네임스페이스 계층에서 내보내기를 래핑하는 일반적인 경향이 있습니다.
-모듈에는 자체 스코프가 있으며, 내보낸 선언만 모듈 외부에서 볼 수 있습니다.
-이를 염두해 두고 네임스페이스는 모듈을 다룰 때 거의 값을 변경하지 않습니다.
+모듈 기반 구성을 처음 적용할 때, 일반적으로 추가적인 네임스페이스 계층에서 exports를 래핑 하는 경향이 있습니다.
+모듈에는 자체 스코프가 있으며, export된 선언만 모듈 외부에서 볼 수 있습니다.
+이를 염두에 두고 네임스페이스는 모듈을 다룰 때 거의 값을 변경하지 않습니다.
 
 구성 전면에서 네임스페이스는 논리적으로 관련된 개체와 타입을 전역 스코프로 그룹화하는데 편리합니다.
-예를 들어 C#에서는 System.Collections에서 모든 컬렉션 타입을 찾습니다.
+예를 들어, C#의 경우, System.Collections에서 모든 컬렉션 타입을 찾을 수 있습니다.
 타입을 계층적 네임스페이스로 구성하여 해당 타입의 사용자에게 "발견"할 수 있는 좋은 경험을 제공합니다.
-반면에 모듈은 이미 파일 시스템에 반드시 존재합니다.
-경로와 파일 이름으로 해결해야 하므로, 사용할 수 있는 논리적 구성 체계가 있습니다.
-리스트 모듈이 있는 /collections/generic/ 폴더를 가질 수 있습니다.
+반면, 모듈은 이미 파일 시스템에 반드시 존재합니다.
+경로와 파일 이름으로 해석하기 위해서, 논리적 구성 체계를 사용할 수 있습니다.
+리스트 모듈이 있는 /collections/generic/ 폴더를 사용할 수 있습니다.
 
 네임스페이스는 전역 스코프에서 네이밍 충돌을 피하기 위해 중요합니다.
 예를 들어, `My.Application.Customer.AddForm`과 `My.Application.Order.AddForm` -- 두 타입의 이름은 같지만 다른 네임스페이스를 가지고 있습니다.
-그러나 이것은 모듈의 문제가 아닙니다.
+그러나 이것은 모듈에서 문제가 되지 않습니다.
 모듈 내에서 두 개의 객체가 같은 이름을 가질만한 이유는 없습니다.
 사용 측면에서 특정 모듈의 사용자는 모듈을 참조하는데 사용할 이름을 선택하므로 우연한 이름 충돌은 불가능합니다.
 
-> 모듈과 네임스페이스에 대한 자세한 내용은 [Namespaces and Modules]()를 참고하세요
+> 모듈과 네임스페이스에 대한 자세한 내용은 [Namespaces and Modules](./Namespaces%20and%20Modules.md)를 참고하세요
 
 ## 위험 신호 (Red Flags)
 
-다음은 모두 모듈 구조화를 위한 위험 신호입니다. 다음 중 하나라도 파일에 적용되는 경우 외부 모듈의 네임스페이스를 만들려고 하지 않는지 다시 확인하세요:
+다음은 모두 모듈 구조화에 대한 위험 신호입니다. 다음 중 하나라도 파일에 적용되는 경우 외부 모듈의 네임스페이스를 만들려고 하지 않았는지 다시 확인하세요:
 
 * 오직 최상위-레벨 선언만 `export namespace Foo { ... }`인 파일 (`Foo`를 제거하고 모든 것을 '상위' 레벨로 이동하세요)
-* 최상위-레벨 위치에 동일한 `export namespace Foo {`를 가진 여러 파일 (하나의 `Foo`로 결합 될 거라 생각하지 마세요!)
+* 최상위-레벨 위치에 동일한 `export namespace Foo {`를 가진 여러 파일 (하나의 `Foo`로 결합될 거라 생각하지 마세요!)

@@ -14,7 +14,7 @@
     "no-multiple-blanks": false,
     "no-missing-space-atx": true,
     "no-multiple-space-atx": true,
-    "blanks-around-headings": true,
+    "blanks-around-headings": false,
     "heading-start-left": true,
     "no-trailing-punctuation": {
         "punctuation": ".,;:!"

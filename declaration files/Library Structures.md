@@ -1,46 +1,46 @@
-# Overview
+# 개요 (Overview)
 
-Broadly speaking, the way you *structure* your declaration file depends on how the library is consumed.
-There are many ways of offering a library for consumption in JavaScript, and you'll need to write your declaration file to match it.
-This guide covers how to identify common library patterns, and how to write declaration files which correspond to that pattern.
+일반적으로, 선언 파일을 *구조화*하는 방법은 라이브러리를 사용하는 방법에 따라 다릅니다.
+JavaScript에서 사용할 라이브러리를 제공하는 방법은 여러 가지가 있고, 이에 맞추어 선언 파일을 작성해야 합니다.
+이 가이드는 일반적인 라이브러리 패턴을 식별하는 방법과, 그 패턴에 상응하는 선언 파일을 작성하는 방법에 대해 다룹니다.
 
-Each type of major library structuring pattern has a corresponding file in the [Templates](./Templates.md) section.
-You can start with these templates to help you get going faster.
+주요 라이브러리 각각의 구조화 패턴 유형은 [템플릿](./Templates.md) 섹션에 있습니다.
+이 템플릿으로 시작하면 더 빠르게 진행할 수 있습니다.
 
-# Identifying Kinds of Libraries
+# 라이브러리 종류 식별하기 (Identifying Kinds of Libraries)
 
-First, we'll review the kinds of libraries TypeScript declaration files can represent.
-We'll briefly show how each kind of library is *used*, how it is *written*, and list some example libraries from the real world.
+첫 번째로, TypeScript 선언 파일이 나타낼 수 있는 라이브러리 종류를 다뤄보겠습니다.
+각 종류의 라이브러리를 *사용하는* 방법과, *작성하는* 방법, 그리고 실제 라이브러리들의 예제를 볼 것입니다.
 
-Identifying the structure of a library is the first step in writing its declaration file.
-We'll give hints on how to identify structure both based on its *usage* and its *code*.
-Depending on the library's documentation and organization, one might be easier than the other.
-We recommend using whichever is more comfortable to you.
+라이브러리의 구조를 식별하는 것은 선언 파일을 작성하는 첫 단계입니다.
+*사용법*과 *코드*를 기반으로 구조를 식별하는 방법에 대한 힌트를 제공합니다.
+라이브러리의 문서와 구성에 따라서, 어떤 건 다른 것보다 훨씬 쉬울 수 있습니다.
+본인에게 더 편한 것을 사용할 것을 추천합니다.
 
-## Global Libraries
+## 전역 라이브러리 (Global Libraries)
 
-A *global* library is one that can be accessed from the global scope (i.e. without using any form of `import`).
-Many libraries simply expose one or more global variables for use.
-For example, if you were using [jQuery](https://jquery.com/), the `$` variable can be used by simply referring to it:
+*전역* 라이브러리는 전역 스코프 (즉, `import` 형식을 사용하지 않음)에서 접근 가능한 라이브러리입니다.
+많은 라이브러리는 사용을 위해 간단히 하나 이상의 전역 변수를 노출합니다.
+예를 들어, [jQuery](https://jquery.com/)를 사용한다면, `$` 변수를 참조해서 사용할 수 있습니다:
 
 ```ts
 $(() => { console.log('hello!'); } );
 ```
 
-You'll usually see guidance in the documentation of a global library of how to use the library in an HTML script tag:
+HTML 스크립트 태그로 라이브러리를 사용하는 방법은 라이브러리 문서에서 지침을 볼 수 있습니다:
 
 ```html
 <script src="http://a.great.cdn.for/someLib.js"></script>
 ```
 
-Today, most popular globally-accessible libraries are actually written as UMD libraries (see below).
-UMD library documentation is hard to distinguish from global library documentation.
-Before writing a global declaration file, make sure the library isn't actually UMD.
+오늘날, 대부분의 전역에서 접근 가능한 유명 라이브러리들은 실제로 UMD 라이브러리로 작성되어 있습니다 (아래를 참조).
+UMD 라이브러리 문서는 전역 라이브러리 문서와 구별하기 어렵습니다.
+전역 선언 파일을 작성하기 전에, 실제로는 UMD가 아닌지 확인하십시오.
 
-### Identifying a Global Library from Code
+### 코드에서 전역 라이브러리 식별하기 (Identifying a Global Library from Code)
 
-Global library code is usually extremely simple.
-A global "Hello, world" library might look like this:
+전역 라이브러리 코드는 대게 엄청 간단합니다.
+전역 "Hello, world" 라이브러리는 다음과 같습니다:
 
 ```js
 function createGreeting(s) {
@@ -48,7 +48,7 @@ function createGreeting(s) {
 }
 ```
 
-or like this:
+혹은 다음과 같습니다:
 
 ```js
 window.createGreeting = function(s) {
@@ -56,28 +56,28 @@ window.createGreeting = function(s) {
 }
 ```
 
-When looking at the code of a global library, you'll usually see:
+전역 라이브러리의 코드를 보면, 보통 다음을 볼 수 있습니다:
 
-* Top-level `var` statements or `function` declarations
-* One or more assignments to `window.someName`
-* Assumptions that DOM primitives like `document` or `window` exist
+* 최상위 레벨 `var`문 이나 `function`선언
+* 하나 이상의 `window.someName` 할당
+* DOM 인터페이스 `document` 혹은 `window`가 존재한다고 가정
 
-You *won't* see:
+다음은 볼 수 *없습니다*:
 
-* Checks for, or usage of, module loaders like `require` or `define`
-* CommonJS/Node.js-style imports of the form `var fs = require("fs");`
-* Calls to `define(...)`
-* Documentation describing how to `require` or import the library
+* `require` 이나 `define` 같은 모듈 로더 검사 혹은 사용
+* `var fs = require("fs");` 형태의 CommonJS/Node.js-스타일 import
+* `define(...)` 호출
+* 라이브러리를 `require` 혹은 import하는 방법에 대해 설명하는 문서
 
-### Examples of Global Libraries
+### 전역 라이브러리 예제 (Examples of Global Libraries)
 
-Because it's usually easy to turn a global library into a UMD library, very few popular libraries are still written in the global style.
-However, libraries that are small and require the DOM (or have *no* dependencies) may still be global.
+전역 라이브러리를 UMD 라이브러리로 바꾸는게 쉽기 때문에, 전역 스타일로 작성한 인기 라이브러리는 거의 없습니다.
+하지만, 크기가 작고 DOM이 필요한 (혹은 의존성이 *없는*) 라이브러리는 여전히 전역입니다.
 
-### Global Library Template
+### 전역 라이브러리 템플릿 (Global Library Template)
 
-The template file [`global.d.ts`](./templates/global.d.ts.md) defines an example library `myLib`.
-Be sure to read the ["Preventing Name Conflicts" footnote](#preventing-name-conflicts).
+템플릿 파일 [`global.d.ts`](./templates/global.d.ts.md)은 예제 라이브러리 `myLib`를 정의합니다.
+["이름 충돌 방지" 각주](#preventing-name-conflicts)를 반드시 읽어보세요.
 
 ## Modular Libraries
 
