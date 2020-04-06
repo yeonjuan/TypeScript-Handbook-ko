@@ -168,7 +168,7 @@ console.log(moment.format());
 UMD 라이브러리의 문서에서는 `require`를 보여주는 "Node.js에서 사용하기" 예제를 종종 설명하고
   "브라우저에서 사용하기" 예제에서는 `<script>` 태그를 사용해서 스크립트를 로드하는 방법을 보여줍니다.
 
-### UMD 라이브러리의 예제 (Examples of UMD libraries)
+### UMD 라이브러리 예제 (Examples of UMD libraries)
 
 유명한 라이브러리 대부분은 UMD 패키지로 사용할 수 있습니다.
 예로는 [jQuery](https://jquery.com/), [Moment.js](http://momentjs.com/), [loadash](https://loadash.com/) 등 더 많이 있습니다.
