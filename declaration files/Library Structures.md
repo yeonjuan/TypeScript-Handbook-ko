@@ -123,7 +123,7 @@ define(..., ['someLib'], function(someLib) {
 
 다음과 같은 것은 거의 갖지 않습니다:
 
-* `window` 혹은 `global` 프로퍼티에 대한 할당
+* `window` 혹은 `global` 프로퍼티 할당
 
 ### 모듈형 라이브러리 예제 (Examples of Modular Libraries)
 
