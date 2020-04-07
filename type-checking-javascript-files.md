@@ -234,7 +234,7 @@ sayHello();
 
 ## `arguments` 사용으로부터 추론된 var-args 매개변수 선언 (Var-args parameter declaration inferred from use of `arguments`)
 
-`arguments`의 참조를 참조하는 본문을 가진 함수는, 암묵적으로 var-args 매개변수(예: `(...arg: any[]) => any`)를 갖는 것으로 간주합니다. JSDoc의 var-args 구문을 사용하여 인수의 타입을 지정할 수 있습니다.
+`arguments` 참조를 참조하는 본문을 가진 함수는, 암묵적으로 var-args 매개변수(예: `(...arg: any[]) => any`)를 갖는 것으로 간주합니다. JSDoc의 var-args 구문을 사용하여 인수의 타입을 지정할 수 있습니다.
 
 ```js
 /** @param {...number} args */
