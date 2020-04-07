@@ -16,7 +16,7 @@
 비-상대적 import는 다음에 다룰 것입니다.
 
 마지막으로, 컴파일러가 모듈을 해석할 수 없다면, 오류 로그가 발생합니다.
-이 경우에, 오류는 `error TS2307: Cannot find module 'moduleA`와 같을 것입니다.
+이 경우에, 오류는 `error TS2307: Cannot find module 'moduleA`와 같습니다.
 
 ## 상대적 vs. 비-상대적 모듈 import (Relative vs. Non-relative module imports)
 
