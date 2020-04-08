@@ -82,7 +82,7 @@ TypeScript의 디폴트 해석 전략으로 사용됩니다.
 #### Node.js가 모듈을 해석하는 방법 (How Node.js resolves modules)
 
 TS 컴파일러가 어떤 과정을 따를지 이해하기 위해서는, Node.js 모듈을 이해하는 것이 중요합니다.
-전통적으로, Node.js의 import는 `require`라는 함수를 호출해 수행합니다.
+전통적으로, Node.js의 import는 `require` 함수를 호출해 수행합니다.
 Node.js의 동작은 `require`에 상대적 경로 혹은 비-상대적 경로가 주어지는지에 따라 달라집니다.
 
 상대적 경로는 아주 간단합니다.
