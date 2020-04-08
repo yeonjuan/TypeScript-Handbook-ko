@@ -1,7 +1,7 @@
 # Typescript-Handbook-ko
 
 [![Build Status](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko.svg?branch=master)](https://travis-ci.com/yeonjuan/Typescript-Handbook-ko) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 타입스크립트 핸드북 번역
@@ -64,6 +64,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/dvlprsh"><img src="https://avatars1.githubusercontent.com/u/48552752?v=4" width="100px;" alt=""/><br /><sub><b>seoheePark</b></sub></a><br /><a href="#translation-dvlprsh" title="Translation">🌍</a></td>
     <td align="center"><a href="https://heeveloper.github.io/"><img src="https://avatars3.githubusercontent.com/u/17620671?v=4" width="100px;" alt=""/><br /><sub><b>Heeveloper</b></sub></a><br /><a href="#translation-heeveloper" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/bobfull"><img src="https://avatars1.githubusercontent.com/u/48228621?v=4" width="100px;" alt=""/><br /><sub><b>bobfull</b></sub></a><br /><a href="#translation-bobfull" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/lcm6528"><img src="https://avatars2.githubusercontent.com/u/6929166?v=4" width="100px;" alt=""/><br /><sub><b>changmin Lee</b></sub></a><br /><a href="https://github.com/yeonjuan/Typescript-Handbook-ko/commits?author=lcm6528" title="Code">💻</a></td>
   </tr>
 </table>
 
