@@ -6,7 +6,7 @@
 
 ## `for..of` 문
 
-`for..of`는 이터러블 객체를 반복하여, 객체의 `Symbol.iterator` 프로퍼티를 호출합니다.
+`for..of`는 객체의 `Symbol.iterator` 프로퍼티를 호출하여, 이터러블 객체를 반복합니다.
 다음은 배열의 간단한 `for..of` 루프입니다:
 
 ```ts
