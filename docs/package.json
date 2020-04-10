@@ -1,0 +1,39 @@
+{
+  "name": "typescript-handbook-ko",
+  "version": "1.0.0",
+  "description": "TypeScript Handbook in Korean",
+  "main": "none",
+  "scripts": {
+    "test": "npx markdownlint .",
+    "lint-fix": "npx markdownlint . --fix",
+    "lint-beta": "npm run build && node ./bin/lint '**/*.md'",
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeonjuan/Typescript-Handbook-ko.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yeonjuan/Typescript-Handbook-ko/issues"
+  },
+  "homepage": "https://github.com/yeonjuan/Typescript-Handbook-ko#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "pre-push": "npm run test"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "markdownlint-cli": "^0.22.0",
+    "typescript": "^3.8.3",
+    "@types/glob": "^7.1.1",
+    "@types/requireindex": "^1.2.0",
+    "glob": "^7.1.6"
+  },
+  "dependencies": {
+    "gitbook-cli": "^2.3.2"
+  }
+}
