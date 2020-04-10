@@ -1,0 +1,939 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ASP.NET Core (en) · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-toggle-chapters/toggle.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="gulp.html" />
+    
+    
+    <link rel="prev" href="typescript-in-5-minutes.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    목차
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    핸드북
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../basic-types.html">
+            
+                <a href="../basic-types.html">
+            
+                    
+                    Basic Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../variable-declarations.html">
+            
+                <a href="../variable-declarations.html">
+            
+                    
+                    Variable Declarations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../interfaces.html">
+            
+                <a href="../interfaces.html">
+            
+                    
+                    Interfaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../classes.html">
+            
+                <a href="../classes.html">
+            
+                    
+                    Classes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../functions.html">
+            
+                <a href="../functions.html">
+            
+                    
+                    Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../generics.html">
+            
+                <a href="../generics.html">
+            
+                    
+                    Generics
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../enums.html">
+            
+                <a href="../enums.html">
+            
+                    
+                    Enums
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../type-compatibility.html">
+            
+                <a href="../type-compatibility.html">
+            
+                    
+                    Type Compatibility
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../type-inference.html">
+            
+                <a href="../type-inference.html">
+            
+                    
+                    Type Inference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../advanced-types.html">
+            
+                <a href="../advanced-types.html">
+            
+                    
+                    Advanced Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../symbols.html">
+            
+                <a href="../symbols.html">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../iterators-and-generators.html">
+            
+                <a href="../iterators-and-generators.html">
+            
+                    
+                    Iterators and Generators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="../modules.html">
+            
+                <a href="../modules.html">
+            
+                    
+                    Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="../namespaces.html">
+            
+                <a href="../namespaces.html">
+            
+                    
+                    Namespaces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="../namespaces-and-modules.html">
+            
+                <a href="../namespaces-and-modules.html">
+            
+                    
+                    Namespaces and Modules
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="../module-resolution.html">
+            
+                <a href="../module-resolution.html">
+            
+                    
+                    Module Resolution
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="../declaration-merging.html">
+            
+                <a href="../declaration-merging.html">
+            
+                    
+                    Declaraion Merging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="../jsx.html">
+            
+                <a href="../jsx.html">
+            
+                    
+                    JSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.19" data-path="../decorators.html">
+            
+                <a href="../decorators.html">
+            
+                    
+                    Decorators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="../triple-slash-directives.html">
+            
+                <a href="../triple-slash-directives.html">
+            
+                    
+                    Triple-Slash Directives
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.21" data-path="../type-checking-javascript-files.html">
+            
+                <a href="../type-checking-javascript-files.html">
+            
+                    
+                    Type Checking JavaScript Files
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="../utility-types.html">
+            
+                <a href="../utility-types.html">
+            
+                    
+                    Utility Types
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../declaration-files/">
+            
+                <a href="../declaration-files/">
+            
+                    
+                    Declaration Files
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../declaration-files/introduction.html">
+            
+                <a href="../declaration-files/introduction.html">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../declaration-files/library-structures.html">
+            
+                <a href="../declaration-files/library-structures.html">
+            
+                    
+                    Library Structures
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../declaration-files/by-example.html">
+            
+                <a href="../declaration-files/by-example.html">
+            
+                    
+                    By Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../declaration-files/dos-and-don-ts.html">
+            
+                <a href="../declaration-files/dos-and-don-ts.html">
+            
+                    
+                    Do's and Don'ts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../declaration-files/deep-dive.html">
+            
+                <a href="../declaration-files/deep-dive.html">
+            
+                    
+                    Deep Dive
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../declaration-files/templates.html">
+            
+                <a href="../declaration-files/templates.html">
+            
+                    
+                    Templates (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../declaration-files/publishing.html">
+            
+                <a href="../declaration-files/publishing.html">
+            
+                    
+                    Publishing (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../declaration-files/consumption.html">
+            
+                <a href="../declaration-files/consumption.html">
+            
+                    
+                    Consumption (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    튜토리얼
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="typescript-in-5-minutes.html">
+            
+                <a href="typescript-in-5-minutes.html">
+            
+                    
+                    TypeScript in 5 minutes (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.2" data-path="ASP.NET-core.html">
+            
+                <a href="ASP.NET-core.html">
+            
+                    
+                    ASP.NET Core (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="gulp.html">
+            
+                <a href="gulp.html">
+            
+                    
+                    Gulp (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="migrating-from-javascript.html">
+            
+                <a href="migrating-from-javascript.html">
+            
+                    
+                    Migrating from JavaScript (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="react-&-webpack.html">
+            
+                <a href="react-&-webpack.html">
+            
+                    
+                    React & Webpack (en)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../release-notes/">
+            
+                <a href="../release-notes/">
+            
+                    
+                    릴리즈 노트
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../release-notes/typescript-3.8.html">
+            
+                <a href="../release-notes/typescript-3.8.html">
+            
+                    
+                    TypeScript 3.8
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >ASP.NET Core (en)</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="aspnet-core--typescript">ASP.NET Core + TypeScript</h1>
+<h2 id="setup">Setup</h2>
+<h3 id="install-aspnet-core-and-typescript">Install ASP.NET Core and TypeScript</h3>
+<p>First, install <a href="https://dotnet.microsoft.com/apps/aspnet" target="_blank">ASP.NET Core</a> if you need it. This quick-start guide requires Visual Studio 2015 or 2017.</p>
+<p>Next, if your version of Visual Studio does not already have the latest TypeScript, you can <a href="https://www.typescriptlang.org/index.html#download-links" target="_blank">install it</a>.</p>
+<h3 id="create-a-new-project">Create a new project</h3>
+<!-- markdownlint-disable MD029-->
+<ol>
+<li>Choose <strong>File</strong></li>
+<li>Choose <strong>New Project</strong> (Ctrl + Shift + N)</li>
+<li>Search for <strong>.NET Core</strong> in the project search bar</li>
+<li>Select <strong>ASP.NET Core Web Application</strong> and press the <em>Next</em> button</li>
+</ol>
+<p><img src="../../assets/images/tutorials/aspnet/createwebapp.png" alt=""></p>
+<ol>
+<li>Name your project and solution. After select the <em>Create</em> button</li>
+</ol>
+<p><img src="../../assets/images/tutorials/aspnet/namewebapp.png" alt=""></p>
+<ol>
+<li>In the last window, select the <strong>Empty</strong> template and press the <em>Create</em> button</li>
+</ol>
+<p><img src="../../assets/images/tutorials/aspnet/emptytemplate.png" alt=""></p>
+<p>Run the application and make sure that it works.</p>
+<p><img src="../../assets/images/tutorials/aspnet/workingsite.png" alt=""></p>
+<h3 id="set-up-the-server">Set up the server</h3>
+<p>Open <strong>Dependencies &gt; Manage NuGet Packages &gt; Browse.</strong> Search and install <code>Microsoft.AspNetCore.StaticFiles</code> and <code>Microsoft.TypeScript.MSBuild</code>:</p>
+<p><img src="../../assets/images/tutorials/aspnet/downloaddependency.png" alt=""></p>
+<p>Open up your <code>Startup.cs</code> file and edit your <code>Configure</code> function to look like this:</p>
+<pre><code class="lang-cs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env</span>)
+</span>{
+    <span class="hljs-keyword">if</span> (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+}
+</code></pre>
+<p>You may need to restart VS for the red squiggly lines below <code>UseDefaultFiles</code> and <code>UseStaticFiles</code> to disappear.</p>
+<h2 id="add-typescript">Add TypeScript</h2>
+<p>Next we will add a new folder and call it <code>scripts</code>.</p>
+<p><img src="../../assets/images/tutorials/aspnet/newfolder.png" alt=""></p>
+<p><img src="../../assets/images/tutorials/aspnet/scripts.png" alt=""></p>
+<h3 id="add-typescript-code">Add TypeScript code</h3>
+<p>Right click on <code>scripts</code> and click <strong>New Item</strong>. Then choose <strong>TypeScript File</strong> and name the file <code>app.ts</code></p>
+<p><img src="../../assets/images/tutorials/aspnet/tsfile.png" alt=""></p>
+<h3 id="add-example-code">Add example code</h3>
+<p>Add the following code to the <code>app.ts</code> file.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHello</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> compiler = (<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;compiler&quot;</span>) as HTMLInputElement).value;
+    <span class="hljs-keyword">const</span> framework = (<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;framework&quot;</span>) as HTMLInputElement).value;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello from <span class="hljs-subst">${compiler}</span> and <span class="hljs-subst">${framework}</span>!`</span>;
+}
+</code></pre>
+<h3 id="set-up-the-build">Set up the build</h3>
+<p><em>Configure the TypeScript compiler</em></p>
+<p>First we need to tell TypeScript how to build. Right click on <code>scripts</code> and click <strong>New Item</strong>. Then choose <strong>TypeScript Configuration File</strong> and use the default name of <code>tsconfig.json</code></p>
+<p><img src="../../assets/images/tutorials/aspnet/tsconfig.png" alt=""></p>
+<p>Replace the contents of the <code>tsconfig.json</code> file with:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-string">&quot;noEmitOnError&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;noImplicitAny&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;sourceMap&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es6&quot;</span>
+  },
+  <span class="hljs-string">&quot;files&quot;</span>: [
+    <span class="hljs-string">&quot;./app.ts&quot;</span>
+  ],
+  <span class="hljs-string">&quot;compileOnSave&quot;</span>: <span class="hljs-literal">true</span>
+}
+</code></pre>
+<ul>
+<li><code>onEmitOnError</code> : Do not emit outputs if any errors were reported.</li>
+<li><code>noImplicitAny</code> : Raise error on expressions and declarations with an implied <code>any</code> type.</li>
+<li><code>sourceMap</code> : Generates corresponding <code>.map</code> file.</li>
+<li><code>target</code> : Specify ECMAScript target version.</li>
+</ul>
+<p>Note: <code>&quot;ESNext&quot;</code> targets latest supported</p>
+<p><code>&quot;noImplicitAny&quot;</code> is good idea whenever you&#x2019;re writing new code &#x2014; you can make sure that you don&#x2019;t write any untyped code by mistake. <code>&quot;compileOnSave&quot;</code> makes it easy to update your code in a running web app.</p>
+<p><em>Set up NPM</em> #</p>
+<p>We need to setup NPM so that JavaScript packages can be downloaded. Right click on the project and select <strong>New Item</strong>. Then choose <strong>NPM Configuration File</strong> and use the default name of <code>package.json</code>.</p>
+<p><img src="../../assets/images/tutorials/aspnet/packagejson.png" alt=""></p>
+<p>Inside the <code>&quot;devDependencies&quot;</code> section of the <code>package.json</code> file, add <em>gulp</em> and <em>del</em></p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;devDependencies&quot;</span>: {
+    <span class="hljs-string">&quot;gulp&quot;</span>: <span class="hljs-string">&quot;4.0.2&quot;</span>,
+    <span class="hljs-string">&quot;del&quot;</span>: <span class="hljs-string">&quot;5.1.0&quot;</span>
+}
+</code></pre>
+<p>Visual Studio should start installing gulp and del as soon as you save the file. If not, right-click package.json and then Restore Packages.</p>
+<p>After you should see an <code>npm</code> folder in your solution explorer</p>
+<p><img src="../../assets/images/tutorials/aspnet/npm.png" alt=""></p>
+<p><em>Set up gulp</em> #</p>
+<p>Right click on the project and click <strong>New Item</strong>. Then choose <strong>JavaScript File</strong> and use the name of <code>gulpfile.js</code></p>
+<pre><code class="lang-js"><span class="hljs-comment">/// &lt;binding AfterBuild=&apos;default&apos; Clean=&apos;clean&apos; /&gt;</span>
+<span class="hljs-comment">/*
+This file is the main entry point for defining Gulp tasks and using Gulp plugins.
+Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
+*/</span>
+
+<span class="hljs-keyword">var</span> gulp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;gulp&apos;</span>);
+<span class="hljs-keyword">var</span> del = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;del&apos;</span>);
+
+<span class="hljs-keyword">var</span> paths = {
+    scripts: [<span class="hljs-string">&apos;scripts/**/*.js&apos;</span>, <span class="hljs-string">&apos;scripts/**/*.ts&apos;</span>, <span class="hljs-string">&apos;scripts/**/*.map&apos;</span>],
+};
+
+gulp.task(<span class="hljs-string">&apos;clean&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> del([<span class="hljs-string">&apos;wwwroot/scripts/**/*&apos;</span>]);
+});
+
+gulp.task(<span class="hljs-string">&apos;default&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    gulp.src(paths.scripts).pipe(gulp.dest(<span class="hljs-string">&apos;wwwroot/scripts&apos;</span>))
+});
+</code></pre>
+<p>The first line tells Visual Studio to run the task &#x2018;default&#x2019; after the build finishes. It will also run the &#x2018;clean&#x2019; task when you ask Visual Studio to clean the build.</p>
+<p>Now right-click on <code>gulpfile.js</code> and click Task Runner Explorer.</p>
+<p><img src="../../assets/images/tutorials/aspnet/taskrunner.png" alt=""></p>
+<p>If &#x2018;default&#x2019; and &#x2018;clean&#x2019; tasks don&#x2019;t show up, refresh the explorer:</p>
+<p><img src="../../assets/images/tutorials/aspnet/taskrunnerrefresh.png" alt=""></p>
+<h3 id="write-a-html-page">Write a HTML page</h3>
+<p>Right click on the <code>wwwroot</code> folder (if you don&apos;t see the folder try building the project) and add a New Item named <code>index.html</code> inside. Use the following code for <code>index.html</code></p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;scripts/app.js&quot;</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;message&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        Compiler: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;compiler&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;TypeScript&quot;</span> <span class="hljs-attr">onkeyup</span>=<span class="hljs-string">&quot;document.getElementById(&apos;message&apos;).innerText = sayHello()&quot;</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+        Framework: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;framework&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;ASP.NET&quot;</span> <span class="hljs-attr">onkeyup</span>=<span class="hljs-string">&quot;document.getElementById(&apos;message&apos;).innerText = sayHello()&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h3 id="test">Test</h3>
+<ol>
+<li>Run the project</li>
+<li>As you type on the boxes you should see the message appear/change!</li>
+</ol>
+<p><img src="https://media.giphy.com/media/U3mTibRAx34DG3zhAN/giphy.gif" alt=""></p>
+<h3 id="debug">Debug</h3>
+<ol>
+<li>In Edge, press F12 and click the Debugger tab.</li>
+<li>Look in the first localhost folder, then scripts/app.ts</li>
+<li>Put a breakpoint on the line with return.</li>
+<li>Type in the boxes and confirm that the breakpoint hits in TypeScript code and that inspection works correctly.</li>
+</ol>
+<p><img src="../../assets/images/tutorials/aspnet/debugger.png" alt=""></p>
+<p>Congrats you&apos;ve built your own .NET Core project with a TypeScript frontend.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="typescript-in-5-minutes.html" class="navigation navigation-prev " aria-label="Previous page: TypeScript in 5 minutes (en)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="gulp.html" class="navigation navigation-next " aria-label="Next page: Gulp (en)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ASP.NET Core (en)","level":"1.4.2","depth":2,"next":{"title":"Gulp (en)","level":"1.4.3","depth":2,"path":"pages/tutorials/gulp.md","ref":"./pages/tutorials/gulp.md","articles":[]},"previous":{"title":"TypeScript in 5 minutes (en)","level":"1.4.1","depth":2,"path":"pages/tutorials/typescript-in-5-minutes.md","ref":"./pages/tutorials/typescript-in-5-minutes.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["toggle-chapters","github"],"pluginsConfig":{"github":{"url":"https://github.com/yeonjuan/Typescript-Handbook-ko"},"toggle-chapters":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"pages/tutorials/ASP.NET-core.md","mtime":"2020-04-10T10:40:08.777Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-10T12:00:05.723Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-toggle-chapters/toggle.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

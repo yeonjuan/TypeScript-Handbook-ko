@@ -32,5 +32,10 @@
     "@types/glob": "^7.1.1",
     "@types/requireindex": "^1.2.0",
     "glob": "^7.1.6"
+  },
+  "dependencies": {
+    "gitbook-cli": "^2.3.2",
+    "gitbook-plugin-github": "2.0.0",
+    "gitbook-plugin-toggle-chapters": "0.0.3"
   }
 }

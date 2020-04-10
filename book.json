@@ -1,0 +1,8 @@
+{
+  "plugins": ["toggle-chapters", "github"],
+  "pluginsConfig": {
+    "github": {
+        "url": "https://github.com/yeonjuan/Typescript-Handbook-ko"
+    }
+}
+}

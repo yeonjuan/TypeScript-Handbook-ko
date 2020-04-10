@@ -4,38 +4,53 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-타입스크립트 핸드북 번역
+## 타입스크립트 핸드북
 
-- [Basic Types](./basic-types.md)
-- [Variable Declarations](./variable-declarations.md)
-- [Interfaces](./interfaces.md)
-- [Classes](./classes.md)
-- [Functions](./functions.md)
-- [Generics](./generics.md)
-- [Enums](./enums.md)
-- [Type Compatibility](./type-compatibility.md)
-- [Type Inference](./type-inference.md)
-- [Advanced Types](./advanced-types.md)
-- [Symbols](./symbols.md)
-- [Iterators and Generators](./iterators-and-generators.md)
-- [Modules](./modules.md)
-- [Namespaces](./namespaces.md)
-- [Namespaces and Modules](./namespaces-and-modules.md)
-- [Module Resolution](./module-resolution.md)
-- [Declaraion Merging](./declaration-merging.md)
-- [JSX](./jsx.md)
-- [Decorators](./decorators.md)
-- [Triple-Slash Directives](./triple-slash-directives.md)
-- [Type Checking JavaScript Files](./type-checking-javascript-files.md)
-- [Utility Types](./utility-types.md)
+- [Basic Types](./pages/basic-types.md)
+- [Variable Declarations](./pages/variable-declarations.md)
+- [Interfaces](./pages/interfaces.md)
+- [Classes](./pages/classes.md)
+- [Functions](./pages/functions.md)
+- [Generics](./pages/generics.md)
+- [Enums](./pages/enums.md)
+- [Type Compatibility](./pages/type-compatibility.md)
+- [Type Inference](./pages/type-inference.md)
+- [Advanced Types](./pages/advanced-types.md)
+- [Symbols](./pages/symbols.md)
+- [Iterators and Generators](./pages/iterators-and-generators.md)
+- [Modules](./pages/modules.md)
+- [Namespaces](./pages/namespaces.md)
+- [Namespaces and Modules](./pages/namespaces-and-modules.md)
+- [Module Resolution](./pages/module-resolution.md)
+- [Declaraion Merging](./pages/declaration-merging.md)
+- [JSX](./pages/jsx.md)
+- [Decorators](./pages/decorators.md)
+- [Triple-Slash Directives](./pages/triple-slash-directives.md)
+- [Type Checking JavaScript Files](./pages/type-checking-javascript-files.md)
+- [Utility Types](./pages/utility-types.md)
 
-<details>
-    <summary>릴리즈 노트</summary>
+## Declaration Files
 
-<!-- summary 아래 한칸 공백 두고 내용 삽입 -->
- * [TypeScript 3.8](./release-notes/typescript-3.8.md)
+- [Introduction](./pages/declaration-files/introduction.md)
+- [Library Structures](./pages/declaration-files/library-structures.md)
+- [By Example](./pages/declaration-files/by-example.md)
+- [Do's and Don'ts](./pages/declaration-files/dos-and-don-ts.md)
+- [Deep Dive](./pages/declaration-files/deep-dive.md)
+- [Templates (en)](./pages/declaration-files/templates.md)
+- [Publishing (en)](./pages/declaration-files/publishing.md)
+- [Consumption (en)](./pages/declaration-files/consumption.md)
 
-</details>
+## 튜토리얼
+
+- [TypeScript in 5 minutes (en)](./pages/tutorials/typescript-in-5-minutes.md)
+- [ASP.NET Core (en)](./pages/tutorials/ASP.NET-core.md)
+- [Gulp (en)](./pages/tutorials/gulp.md)
+- [Migrating from JavaScript (en)](./pages/tutorials/migrating-from-javascript.md)
+- [React & Webpack (en)](./pages/tutorials/react-&-webpack.md)
+
+## 릴리즈 노트
+
+- [TypeScript 3.8](./pages/release-notes/typescript-3.8.md)
 
 ## 참여하기
 
