@@ -79,31 +79,31 @@ window.createGreeting = function(s) {
 템플릿 파일 [`global.d.ts`](./templates/global.d.ts.md)은 예제 라이브러리 `myLib`를 정의합니다.
 ["이름 충돌 방지" 각주](#preventing-name-conflicts)를 반드시 읽어보세요.
 
-## Modular Libraries
+## 모듈형 라이브러리 (Modular Libraries)
 
-Some libraries only work in a module loader environment.
-For example, `express` only works in Node.js and must be loaded using the CommonJS `require` function.
+어떤 라이브러리는 모듈 로더 환경에서만 동작합니다.
+예를 들어, `express`는 Node.js에서만 동작하고 반드시 CommonJS의 `require` 함수로 로드되어야 합니다.
 
-ECMAScript 2015 (also known as ES2015, ECMAScript 6, and ES6), CommonJS, and RequireJS have similar notions of *importing* a *module*.
-In JavaScript CommonJS (Node.js), for example, you would write
+ECMAScript 2015 (ES2015, ECMAScript 6, ES6로도 잘 알려진), CommonJS와 RequireJS는 *모듈*을 *importing*하는 비슷한 개념을 가지고 있습니다.
+JavaScript의 CommonJS (Node.js)를 예를 들면, 다음과 같이 작성합니다
 
 ```js
 var fs = require("fs");
 ```
 
-In TypeScript or ES6, the `import` keyword serves the same purpose:
+TypeScript나 ES6에서는, `import` 키워드가 같은 목적을 제공합니다:
 
 ```ts
 import fs = require("fs");
 ```
 
-You'll typically see modular libraries include one of these lines in their documentation:
+일반적으로 모듈형 라이브러리의 문서에서 다음 코드들 중 하나를 볼 수 있습니다:
 
 ```js
 var someLib = require('someLib');
 ```
 
-or
+혹은
 
 ```js
 define(..., ['someLib'], function(someLib) {
@@ -111,45 +111,45 @@ define(..., ['someLib'], function(someLib) {
 });
 ```
 
-As with global modules, you might see these examples in the documentation of a UMD module, so be sure to check the code or documentation.
+전역 모듈과 마찬가지로 UMD 모듈의 문서에서도 이 예제들을 볼 수 있으므로, 코드나 문서를 반드시 확인하세요.
 
-### Identifying a Module Library from Code
+### 코드에서 모듈 라이브러리 식별하기 (Identifying a Module Library from Code)
 
-Modular libraries will typically have at least some of the following:
+모듈형 라이브러리는 일반적으로 다음 중 몇 가지를 반드시 가지고 있습니다:
 
-* Unconditional calls to `require` or `define`
-* Declarations like `import * as a from 'b';` or `export c;`
-* Assignments to `exports` or `module.exports`
+* `require` 혹은 `define`에 대한 무조건적인 호출
+* `import * as a from 'b';` 혹은 `export c;` 같은 선언문
+* `exports` 혹은 `module.exports`에 대한 할당
 
-They will rarely have:
+다음은 거의 갖지 않습니다:
 
-* Assignments to properties of `window` or `global`
+* `window` 혹은 `global` 프로퍼티 할당
 
-### Examples of Modular Libraries
+### 모듈형 라이브러리 예제 (Examples of Modular Libraries)
 
-Many popular Node.js libraries are in the module family, such as [`express`](http://expressjs.com/), [`gulp`](http://gulpjs.com/), and [`request`](https://github.com/request/request).
+많은 유명한 Node.js 라이브러리들은 [`express`](http://expressjs.com/), [`gulp`](http://gulpjs.com/), [`request`](https://github.com/request/request)와 같은 모듈군 안에 있습니다.
 
 ## *UMD*
 
-A *UMD* module is one that can *either* be used as module (through an import), or as a global (when run in an environment without a module loader).
-Many popular libraries, such as [Moment.js](http://momentjs.com/), are written this way.
-For example, in Node.js or using RequireJS, you would write:
+*UMD* 모듈은 모듈로 (import를 통해) 사용할 수 있고 혹은 전역으로도 (모듈 로더 없는 환경에서 실행될 때) 사용할 수 있습니다.
+[Moment.js](http://momentjs.com/) 같은 많은 유명한 라이브러리들은 이 방법으로 작성되었습니다.
+예를 들어, Node.js나 RequireJS를 사용하면, 다음과 같이 작성합니다:
 
 ```ts
 import moment = require("moment");
 console.log(moment.format());
 ```
 
-whereas in a vanilla browser environment you would write:
+반면 바닐라 브라우저 환경에서는 다음과 같이 쓸 수 있습니다:
 
 ```js
 console.log(moment.format());
 ```
 
-### Identifying a UMD library
+### UMD 라이브러리 식별하기 (Identifying a UMD library)
 
-[UMD modules](https://github.com/umdjs/umd) check for the existence of a module loader environment.
-This is an easy-to-spot pattern that looks something like this:
+[UMD modules](https://github.com/umdjs/umd)은 모듈 로더 환경 유무를 검사합니다.
+이는 다음과 같이 보이는 찾기 쉬운 패턴입니다:
 
 ```js
 (function (root, factory) {
@@ -163,53 +163,53 @@ This is an easy-to-spot pattern that looks something like this:
 }(this, function (b) {
 ```
 
-If you see tests for `typeof define`, `typeof window`, or `typeof module` in the code of a library, especially at the top of the file, it's almost always a UMD library.
+만약 라이브러리 코드, 특히 파일 상단에서 `typeof define`, `typeof window` 혹은 `typeof module`에 대한 테스트를 보았다면, 거의 대부분 UMD 라이브러리입니다.
 
-Documentation for UMD libraries will also often demonstrate a "Using in Node.js" example showing `require`,
-  and a "Using in the browser" example showing using a `<script>` tag to load the script.
+UMD 라이브러리 문서에서는 `require`를 보여주는 "Node.js에서 사용하기" 예제를 종종 설명하고
+  "브라우저에서 사용하기" 예제에서는 `<script>` 태그를 사용해서 스크립트를 로드하는 방법을 보여줍니다.
 
-### Examples of UMD libraries
+### UMD 라이브러리 예제 (Examples of UMD libraries)
 
-Most popular libraries are now available as UMD packages.
-Examples include [jQuery](https://jquery.com/), [Moment.js](http://momentjs.com/), [lodash](https://lodash.com/), and many more.
+유명한 라이브러리 대부분은 UMD 패키지로 사용할 수 있습니다.
+예로는 [jQuery](https://jquery.com/), [Moment.js](http://momentjs.com/), [loadash](https://loadash.com/) 등 더 많이 있습니다.
 
-### Template
+### 템플릿 (Template)
 
-There are three templates available for modules,
-  [`module.d.ts`](./templates/module.d.ts.md), [`module-class.d.ts`](./templates/module-class.d.ts.md) and [`module-function.d.ts`](./templates/module-function.d.ts.md).
+모듈은 세 가지 템플릿을 사용할 수 있습니다,
+  [`module.d.ts`](./templates/module.d.ts.md), [`module-class.d.ts`](./templates/module-class.d.ts.md) 그리고 [`module-function.d.ts`](./templates/module-function.d.ts.md).
 
-Use [`module-function.d.ts`](./templates/module-function.d.ts.md) if your module can be *called* like a function:
+만약 모듈을 함수처럼 *호출*할 수 있으면 [`module-function.d.ts`](./templates/module-function.d.ts.md)을 사용하세요:
 
 ```js
 var x = require("foo");
-// Note: calling 'x' as a function
+// 참고: 함수로 'x'를 호출
 var y = x(42);
 ```
 
-Be sure to read the [footnote "The Impact of ES6 on Module Call Signatures"](#the-impact-of-es6-on-module-plugins)
+[각주 "ES6가 모듈 호출 시그니처에 미치는 영향"](#the-impact-of-es6-on-module-plugins)를 반드시 읽어보세요
 
-Use [`module-class.d.ts`](./templates/module-class.d.ts.md) if your module can be *constructed* using `new`:
+만약 모듈이 `new`를 사용하여 *생성*할 수 있다면 [`module-class.d.ts`](./templates/module-class.d.ts.md)를 사용하세요:
 
 ```js
 var x = require("bar");
-// Note: using 'new' operator on the imported variable
+// 참고: 'new' 연산자를 import된 변수에 사용
 var y = new x("hello");
 ```
 
-The same [footnote](#the-impact-of-es6-on-module-plugins) applies to these modules.
+이런 모듈에도 같은 [각주](#the-impact-of-es6-on-module-plugins)가 적용됩니다.
 
-If your module is not callable or constructable, use the [`module.d.ts`](./templates/module.d.ts.md) file.
+만약 모듈이 위 사항에 해당되지 않다면, [`module.d.ts`](./templates/module.d.ts.md) 파일을 사용하세요.
 
-## *Module Plugin* or *UMD Plugin*
+## *모듈 플러그인* 혹은 *UMD 플러그인* (*Module Plugin* or *UMD Plugin*)
 
-A *module plugin* changes the shape of another module (either UMD or module).
-For example, in Moment.js, `moment-range` adds a new `range` method to the `moment` object.
+*모듈 플러그인*은 다른 모듈 (UMD나 모듈)의 형태를 변경합니다.
+예를 들어, Moment.js에서, `moment-range`는 `moment` 객체에 새로운 `range` 메서드를 추가합니다.
 
-For the purposes of writing a declaration file, you'll write the same code whether the module being changed is a plain module or UMD module.
+선언 파일 작성을 위해, 모듈이 일반 모듈로 변경되든 UMD 모듈로 변경되든 같은 코드를 작성합니다.
 
-### Template
+### 템플릿 (Template)
 
-Use the [`module-plugin.d.ts`](./templates/module-plugin.d.ts.md) template.
+[`module-plugin.d.ts`](./templates/module-plugin.d.ts.md) 템플릿을 사용하세요.
 
 ## *Global Plugin*
 
