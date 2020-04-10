@@ -140,7 +140,7 @@ import moment = require("moment");
 console.log(moment.format());
 ```
 
-반면에 바닐라 브라우저 환경에서는 다음과 같이 쓸 수 있습니다:
+반면 바닐라 브라우저 환경에서는 다음과 같이 쓸 수 있습니다:
 
 ```js
 console.log(moment.format());
