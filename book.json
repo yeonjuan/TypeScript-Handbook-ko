@@ -1,8 +1,17 @@
 {
-  "plugins": ["toggle-chapters", "github"],
+  "plugins": ["toggle-chapters", "github", "head-append"],
   "pluginsConfig": {
     "github": {
-        "url": "https://github.com/yeonjuan/Typescript-Handbook-ko"
+        "url": "https://github.com/yeonjuan/TypeScript-Handbook-ko"
+    },
+    "head-append": {
+      "code": [
+        "<meta name=\"google-site-verification\" content=\"e6e6ziLZXdB5HengoGGcmy0tnBtyCptYLngEAyCySoI\" />",
+        "<meta property=\"og:image\" content=\"http://typescript-handbook-ko.org/thumbnail.jpg\" />",
+        "<meta property=\"og:type\" content=\"article\" />",
+        "<meta property=\"og:title\" content=\"타입스크립트 핸드북\" />",
+        "<meta property=\"og:description\" content=\"타입스크립트 핸드북 번역본\" />"
+      ]
     }
-}
+  }
 }

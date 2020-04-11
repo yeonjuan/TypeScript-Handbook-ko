@@ -25,6 +25,7 @@
 - [Declaraion Merging](./pages/declaration-merging.md)
 - [JSX](./pages/jsx.md)
 - [Decorators](./pages/decorators.md)
+- [Mixins](./pages/mixins.md)
 - [Triple-Slash Directives](./pages/triple-slash-directives.md)
 - [Type Checking JavaScript Files](./pages/type-checking-javascript-files.md)
 - [Utility Types](./pages/utility-types.md)

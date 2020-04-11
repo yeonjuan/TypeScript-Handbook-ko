@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yeonjuan/Typescript-Handbook-ko.git"
+    "url": "git+https://github.com/yeonjuan/TypeScript-Handbook-ko.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yeonjuan/Typescript-Handbook-ko/issues"
+    "url": "https://github.com/yeonjuan/TypeScript-Handbook-ko/issues"
   },
-  "homepage": "https://github.com/yeonjuan/Typescript-Handbook-ko#readme",
+  "homepage": "https://github.com/yeonjuan/TypeScript-Handbook-ko#readme",
   "husky": {
     "hooks": {
       "pre-commit": "npm run test",
