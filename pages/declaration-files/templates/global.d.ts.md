@@ -36,7 +36,7 @@ declare namespace myLib {
     const version: string;
 
     //~ 'let c = new myLib.Cat(42)' 또는  참조 (예. 'function f(c: myLib.Cat) { ... }) 를 통해
-    //~ 클래스나 참조를 사용할 수 있습니다.
+    //~ 클래스를 만들 수 있습니다
     class Cat {
         constructor(n: number);
 
