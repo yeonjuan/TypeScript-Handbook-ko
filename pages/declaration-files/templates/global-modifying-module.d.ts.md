@@ -30,6 +30,6 @@ export interface StringFormatOptions {
 /*~ 예를 들어, 모듈에 메서드를 선언하는 경우 (전역 side effect 이외에) */
 export function doSomething(): void;
 
-/*~ 모듈이 아무것도 export하지 않으면, 이 라인이 필요합니다. 이게 아니라면 지우세요 */
+/*~ 모듈이 아무것도 export하지 않으면, 이 라인이 필요합니다. 그렇지 않다면 지우세요 */
 export { };
 ```
