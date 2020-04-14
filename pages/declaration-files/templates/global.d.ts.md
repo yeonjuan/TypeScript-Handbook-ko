@@ -35,7 +35,7 @@ declare namespace myLib {
     //~ 'myLib.version'에 접근할 수 있지만, 수정할 순 없습니다.
     const version: string;
 
-    //~ 'let c = new myLib.Cat(42)' 또는  참조 (예. 'function f(c: myLib.Cat) { ... }) 를 통해
+    //~ 'let c = new myLib.Cat(42)' 또는 참조 (예. 'function f(c: myLib.Cat) { ... }) 를 통해
     //~ 클래스를 만들 수 있습니다
     class Cat {
         constructor(n: number);
