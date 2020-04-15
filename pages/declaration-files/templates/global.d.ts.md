@@ -10,7 +10,6 @@
 declare function myLib(a: string): string;
 declare function myLib(a: number): number;
 
-/*~ If you want the name of this library to be a valid type name,
 /*~ 라이브러리의 이름이 유효한 타입 이름으로 사용하고 싶으면,
  *~ 여기서 할 수 있습니다.
  *~
