@@ -54,7 +54,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 ```
 
 여기에서, 패키지는 `browserify`와 `typescript` 패키지에 의존성이 있습니다.
-`browserify`는 선언 파일이 npm 패키지에 함께 번들링되지 않기 때문에, `@types/browserify` 선언을 의존성에 추가해야합니다.
+`browserify`는 선언 파일이 npm 패키지에 함께 번들링 되지 않기 때문에, `@types/browserify` 선언을 의존성에 추가해야 합니다.
 반면에 `typescript`는 선언 파일이 패키징되기 때문에, 별도의 의존성을 추가할 필요가 없습니다.
 
 이 패키지는 `browserify`와 `typescript` 패키지의 각 선언을 노출하기 때문에, `browserify-typescript-extension` 패키지는 이 의존성들을 가져야합니다.
