@@ -57,7 +57,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 `browserify`는 선언 파일이 npm 패키지에 함께 번들링 되지 않기 때문에, `@types/browserify` 선언을 의존성에 추가해야 합니다.
 반면에 `typescript`는 선언 파일이 패키징되기 때문에, 별도의 의존성을 추가할 필요가 없습니다.
 
-이 패키지는 `browserify`와 `typescript` 패키지의 각 선언을 노출하기 때문에, `browserify-typescript-extension` 패키지는 이 의존성들을 가져야합니다.
+이 패키지는 `browserify`와 `typescript` 패키지의 각 선언을 노출하기 때문에, `browserify-typescript-extension` 패키지는 이 의존성들을 가져야 합니다.
 이 이유로, `"devDependencies"`가 아니라 `"dependencies"`를 사용합니다. 왜냐하면 `"devDependencies"`를 사용하면 사용자가 직접 이 패키지들을 설치해야하기 때문입니다.
 만약에 단지 명령줄 애플리케이션을 작성했고 패키지를 라이브러리로 사용하길 기대하지 않는다면, `devDependencies`를 사용해도 됩니다.
 
