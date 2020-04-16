@@ -35,7 +35,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 ## 의존성 (Dependencies)
 
 모든 의존성은 npm으로 관리됩니다.
-의존성이 있는 모든 선언 패키지가 `package.json`에 `"dependencies"` 섹션안에 알맞게 작성되어있는지 확인하세요.
+의존성이 있는 모든 선언 패키지가 `package.json`에 `"dependencies"` 섹션 안에 알맞게 작성되어 있는지 확인하세요.
 예를 들어, Browserify와 TypeScript로 작성된 패키지를 생각해봅시다.
 
 ```json
