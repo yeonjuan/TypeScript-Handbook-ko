@@ -12,7 +12,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 
 # npm 패키지에 선언 포함하기 (Including declarations in your npm package)
 
-만약 패키지가 메인 `.js` 파일을 가지고있다면, 메인 선언 파일을 `package.json`에도 표시해야합니다.
+만약 패키지가 메인 `.js` 파일을 가지고 있다면, 메인 선언 파일을 `package.json`에도 표시해야 합니다.
 번들링된 선언 파일을 `types` 프로퍼티로 가리키도록 하세요.
 예를 들어:
 
