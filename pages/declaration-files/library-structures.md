@@ -273,7 +273,7 @@ console.log(y.reverseAndSort());
 
 # 의존성 사용하기 (Consuming Dependencies)
 
-라이브러리가 몇 종류의 의존성을 가지고 있을 수 있습니다.
+라이브러리가 몇 가지 의존성을 가지고 있을 수 있습니다.
 이번 섹션에서는 선언 파일 안에 의존성을 import 하는 방법을 설명합니다.
 
 ## 전역 라이브러리 의존성 (Dependencies on Global Libraries)
