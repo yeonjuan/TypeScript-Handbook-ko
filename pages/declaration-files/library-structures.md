@@ -211,74 +211,74 @@ var y = new x("hello");
 
 [`module-plugin.d.ts`](./templates/module-plugin.d.ts.md) 템플릿을 사용하세요.
 
-## *Global Plugin*
+## *전역 플러그인* (*Global Plugin*)
 
-A *global plugin* is global code that changes the shape of some global.
-As with *global-modifying modules*, these raise the possibility of runtime conflict.
+*전역 플러그인*은 전역의 형태를 변경하는 전역 코드입니다.
+*전역-수정 모듈*과 마찬가지로 런타임에 충돌 가능성을 높입니다.
 
-For example, some libraries add new functions to `Array.prototype` or `String.prototype`.
+예를 들어, 몇몇 라이브러리는 `Array.prototype`이나 `String.prototype`에 새로운 함수를 추가합니다.
 
-### Identifying global plugins
+### 전역 플러그인 식별하기 (Identifying global plugins)
 
-Global plugins are generally easy to identify from their documentation.
+전역 플러그인은 일반적으로 문서를 보고 쉽게 식별할 수 있습니다.
 
-You'll see examples that look like this:
+다음과 같은 예제를 볼 수 있습니다:
 
 ```js
 var x = "hello, world";
-// Creates new methods on built-in types
+// 내장 타입에 새로운 메서드 생성
 console.log(x.startsWithHello());
 
 var y = [1, 2, 3];
-// Creates new methods on built-in types
+// 내장 타입에 새로운 메서드 생성
 console.log(y.reverseAndSort());
 ```
 
-### Template
+### 템플릿 (Template)
 
-Use the [`global-plugin.d.ts`](./templates/global-plugin.d.ts.md) template.
+[`global-plugin.d.ts`](./templates/global-plugin.d.ts.md) 템플릿을 사용하세요.
 
-## *Global-modifying Modules*
+## *전역-수정 모듈* (*Global-modifying Modules*)
 
-A *global-modifying module* alters existing values in the global scope when they are imported.
-For example, there might exist a library which adds new members to `String.prototype` when imported.
-This pattern is somewhat dangerous due to the possibility of runtime conflicts,
-  but we can still write a declaration file for it.
+*전역-수정 모듈*은 import 될 때, 전역 스코프에 존재하는 값을 변경합니다.
+예를 들어, import 될 때 `String.prototype`에 새로운 멤버를 추가하는 라이브러리가 있을 수 있습니다.
+이 패턴은 런타임 충돌의 가능성 때문에 위험하지만,
+  여전히 선언 파일을 작성할 수 있습니다.
 
-### Identifying global-modifying modules
+### 전역-수정 모듈 식별하기 (Identifying global-modifying modules)
 
-Global-modifying modules are generally easy to identify from their documentation.
-In general, they're similar to global plugins, but need a `require` call to activate their effects.
+전역-수정 모듈은 일반적으로 문서를 보고 쉽게 식별할 수 있습니다.
+일반적으로, 전역 플러그인과 비슷하지만, 효과를 활성화하기 위해 `require` 호출이 필요합니다.
 
-You might see documentation like this:
+다음과 같은 문서를 볼 수 있습니다:
 
 ```js
-// 'require' call that doesn't use its return value
+// 반환값을 사용하지 않는 'require' 호출
 var unused = require("magic-string-time");
-/* or */
+/* 혹은 */
 require("magic-string-time");
 
 var x = "hello, world";
-// Creates new methods on built-in types
+// 내장 타입에 새로운 메서드 생성
 console.log(x.startsWithHello());
 
 var y = [1, 2, 3];
-// Creates new methods on built-in types
+// 내장 타입에 새로운 메서드 생성
 console.log(y.reverseAndSort());
 ```
 
-### Template
+### 템플릿 (Template)
 
-Use the [`global-modifying-module.d.ts`](./templates/global-modifying-module.d.ts.md) template.
+[`global-modifying-module.d.ts`](./templates/global-modifying-module.d.ts.md) 템플릿을 사용하세요.
 
-# Consuming Dependencies
+# 의존성 사용하기 (Consuming Dependencies)
 
-There are several kinds of dependencies your library might have.
-This section shows how to import them into the declaration file.
+라이브러리가 몇 가지 의존성을 가지고 있을 수 있습니다.
+이번 섹션에서는 선언 파일 안에 의존성을 import 하는 방법을 설명합니다.
 
-## Dependencies on Global Libraries
+## 전역 라이브러리 의존성 (Dependencies on Global Libraries)
 
-If your library depends on a global library, use a `/// <reference types="..." />` directive:
+만약 라이브러리가 전역 라이브러리에 의존성이 있다면, `/// <reference types="..." />` 디렉티브를 사용하세요:
 
 ```ts
 /// <reference types="someLib" />
@@ -286,9 +286,9 @@ If your library depends on a global library, use a `/// <reference types="..." /
 function getThing(): someLib.thing;
 ```
 
-## Dependencies on Modules
+## 모듈 의존성 (Dependencies on Modules)
 
-If your library depends on a module, use an `import` statement:
+만약 라이브러리가 모듈에 의존성이 있다면, `import`문을 사용하세요:
 
 ```ts
 import * as moment from "moment";
@@ -296,11 +296,11 @@ import * as moment from "moment";
 function getThing(): moment;
 ```
 
-## Dependencies on UMD libraries
+## UMD 라이브러리 의존성 (Dependencies on UMD libraries)
 
-### From a Global Library
+### 전역 라이브러리에서 (From a Global Library)
 
-If your global library depends on a UMD module, use a `/// <reference types` directive:
+만약 전역 라이브러리가 UMD 모듈에 의존성이 있다면, `/// <reference types` 디렉티브를 사용하세요:
 
 ```ts
 /// <reference types="moment" />
@@ -308,15 +308,15 @@ If your global library depends on a UMD module, use a `/// <reference types` dir
 function getThing(): moment;
 ```
 
-### From a Module or UMD Library
+### 모듈이나 UMD 라이브러리에서 (From a Module or UMD Library)
 
-If your module or UMD library depends on a UMD library, use an `import` statement:
+만약 모듈이나 UMD 라이브러리가 UMD 라이브러리에 의존성이 있다면, `import`문을 사용하세요:
 
 ```ts
 import * as someLib from 'someLib';
 ```
 
-Do *not* use a `/// <reference` directive to declare a dependency to a UMD library!
+UMD 라이브러리에 대한 의존성 선언에 `/// <reference` 디렉티브를 사용하지 *마세요*!
 
 # Footnotes
 
