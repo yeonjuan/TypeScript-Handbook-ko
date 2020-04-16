@@ -4,7 +4,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 1. npm 패키지로 번들링하거나
 2. npm의 [@types organization](https://www.npmjs.com/~types)에 배포하기
 
-만약 패키지가 TypeScript로 작성되었다면 첫번째 방법을 선호합니다.
+만약 패키지가 TypeScript로 작성되었다면 첫 번째 방법을 사용하는 것이 좋습니다.
 `--declaration` 플래그를 선언 파일을 생성할 때 사용하세요.
 이 방법을 사용하면, 선언과 JavaScript가 항상 일치하게됩니다.
 
