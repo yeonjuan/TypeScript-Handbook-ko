@@ -1,5 +1,5 @@
 {
-  "plugins": ["toggle-chapters", "github", "head-append"],
+  "plugins": ["toggle-chapters", "github", "head-append", "sitemap"],
   "pluginsConfig": {
     "github": {
         "url": "https://github.com/yeonjuan/TypeScript-Handbook-ko"
@@ -12,6 +12,9 @@
         "<meta property=\"og:title\" content=\"타입스크립트 핸드북\" />",
         "<meta property=\"og:description\" content=\"타입스크립트 핸드북 번역본\" />"
       ]
+    },
+    "sitemap": {
+      "hostname": "http://typescript-handbook-ko.org/"
     }
   }
 }
