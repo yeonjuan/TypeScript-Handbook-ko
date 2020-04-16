@@ -1,5 +1,5 @@
 이 가이드를 따라 선언 파일을 작성했으므로, 이제 npm에 배포할 시간입니다.
-npm에 선언 파일을 배포하는 방법은 크게 두가지 입니다:
+npm에 선언 파일을 배포하는 방법은 크게 두 가지입니다:
 
 1. npm 패키지로 번들링하거나
 2. npm의 [@types organization](https://www.npmjs.com/~types)에 배포하기
