@@ -34,7 +34,7 @@ export const myField: number;
  *~ 'namespace' 안에 선언하세요.
  */
 export namespace subProp {
-    /*~ 예를 들어, 이 정의가 있을 때, 누군가 다음과 같이 사용할 수 있습니다:
+    /*~ 예를 들어 이런 정의가 있을 때, 다음과 같이 사용할 수 있습니다:
      *~   import { subProp } from 'yourModule';
      *~   subProp.foo();
      *~ 또는
