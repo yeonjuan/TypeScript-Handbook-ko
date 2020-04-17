@@ -9,7 +9,7 @@
  *~ 이 파일은 'super-greeter/index.d.ts'가 되어야 합니다.
  */
 
-/*~ 이 줄에서, 모듀렝 추가한 모듈을 import 하세요 */
+/*~ 이 줄에서, 모듈에 추가한 모듈을 import 하세요 */
 import * as m from 'someModule';
 
 /*~ 필요한 경우, 다른 모듈을 가져올 수 있습니다 */
