@@ -49,6 +49,15 @@
 - [Migrating from JavaScript (en)](./pages/tutorials/migrating-from-javascript.md)
 - [React & Webpack (en)](./pages/tutorials/react-&-webpack.md)
 
+## Project Configuration
+
+- [tsconfig.json (en)](./pages/tutorials/tsconfig.json.md)
+- [Compiler Options (en)](./pages/compiler-options.md)
+- [Project References (en)](./pages/project-references.md)
+- [Compiler Options in MSBuild (en)](./pages/compiler-options-in-msbuild.md)
+- [Integrating with Build Tools (en)](./pages/integrating-with-build-tools.md)
+- [Nightly Builds (en)](./pages/nightly-builds.md)
+
 ## 릴리즈 노트
 
 - [TypeScript 3.8](./pages/release-notes/typescript-3.8.md)
