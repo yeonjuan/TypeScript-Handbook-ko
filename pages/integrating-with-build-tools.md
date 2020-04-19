@@ -25,7 +25,9 @@ npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
   "presets": ["@babel/preset-typescript"]
 }
 ```
+
 ### Using Command Line Interface
+
 ```sh
 ./node_modules/.bin/babel --out-file bundle.js src/index.ts
 ```
@@ -42,6 +44,7 @@ npm install @babel/cli @babel/core @babel/preset-typescript --save-dev
 ```
 
 ### Execute Babel from the command line
+
 ```sh
 npm run build
 ```

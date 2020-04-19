@@ -5,7 +5,7 @@ files by passing in a glob of files you want.
 
 ```sh
 # Run a compile based on a backwards look through the fs for a tsconfig.json
-tsc 
+tsc
 
 # Transpile just the index.ts with the compiler defaults
 tsc index.ts
