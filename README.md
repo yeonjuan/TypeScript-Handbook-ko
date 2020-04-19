@@ -37,7 +37,7 @@
 - [By Example](./pages/declaration-files/by-example.md)
 - [Do's and Don'ts](./pages/declaration-files/dos-and-don-ts.md)
 - [Deep Dive](./pages/declaration-files/deep-dive.md)
-- [Templates (en)](./pages/declaration-files/templates.md)
+- [Templates](./pages/declaration-files/templates.md)
 - [Publishing (en)](./pages/declaration-files/publishing.md)
 - [Consumption (en)](./pages/declaration-files/consumption.md)
 
