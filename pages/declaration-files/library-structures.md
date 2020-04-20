@@ -341,7 +341,7 @@ declare namespace cats {
 interface CatsKittySettings { }
 ```
 
-이 가이드는 선언 파일 사용자가 중단되지 않고 라이브러리를 UMD로 전환할 수 있도록 합니다.
+이 가이드는 선언 파일 사용자가 중단하지 않고 라이브러리를 UMD로 전환할 수 있도록 합니다.
 
 ## ES6가 모듈 플러그인에 미치는 영향 (The Impact of ES6 on Module Plugins)
 
