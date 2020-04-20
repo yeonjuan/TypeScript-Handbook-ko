@@ -14,7 +14,7 @@
 //   import x = require('[~THE MODULE~]');
 //
 // 또한, --allowSyntheticDefaultImports 나
-// --esModuleInterop 옵션을 활성화 한다면,
+// --esModuleInterop 옵션을 활성화한다면,
 // default import로 import할 수 있습니다:
 //   import x from '[~THE MODULE~]';
 //
