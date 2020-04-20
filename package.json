@@ -38,6 +38,7 @@
     "gitbook-cli": "^2.3.2",
     "gitbook-plugin-github": "2.0.0",
     "gitbook-plugin-head-append": "^1.1.1",
+    "gitbook-plugin-sitemap": "^1.2.0",
     "gitbook-plugin-toggle-chapters": "0.0.3"
   }
 }
