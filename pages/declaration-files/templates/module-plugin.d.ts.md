@@ -28,7 +28,7 @@ declare module 'someModule' {
     }
 
     /*~ 새로운 타입도 선언할 수 있으며,
-     *~ 마치 원래 모듈에 있는 것 처럼 보입니다 */
+     *~ 마치 원래 모듈에 있는 것처럼 보입니다 */
     export interface MyModulePluginOptions {
         size: number;
     }
