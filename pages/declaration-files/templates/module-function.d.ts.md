@@ -9,7 +9,7 @@
  *~ 이 파일은 'super-greeter/index.d.ts'가 되어야 합니다.
  */
 
-// ES6 모듈은 직접 클래스 객체를 export할 수 없습니다.
+// ES6 모듈은 클래스 객체를 직접 export할 수 없습니다.
 // 이 파일은 CommonJS-style을 사용해서 import 해야 합니다.
 //   import x = require('[~THE MODULE~]');
 //
