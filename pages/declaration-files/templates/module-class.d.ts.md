@@ -47,7 +47,7 @@ declare class MyClass {
  *~
  *~ 네임스페이스를 포함하기로 결정한다면,
  *~ --esModuleInterop 이 설정되어 있지 않으면,
- *~ 모듈을 네임 스페이스 객체로 잘못 import 할 수 있습니다.
+ *~ 모듈을 네임 스페이스 객체로 잘못 import 할 수 있습니다:
  *~   import * as x from '[~THE MODULE~]'; // 오류! 이렇게 하지 마세요!
  */
 declare namespace MyClass {
