@@ -27,7 +27,7 @@ export interface someType {
     extras?: string[];
 }
 
-/*~ const, let, var를 선언하여 모듈의 프로퍼티를 선언할 수 있습니다 */
+/*~ const, let, var를 사용하여 모듈의 프로퍼티를 선언할 수 있습니다 */
 export const myField: number;
 
 /*~ 모듈의 점으로 구분된 이름 안에 타입, 프로퍼티, 메서드가 있는 경우
