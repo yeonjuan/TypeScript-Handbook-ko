@@ -46,7 +46,7 @@ declare class MyClass {
  *~ 이 블록 안에 위치시키세요.
  *~
  *~ 네임스페이스를 포함하기로 결정한다면,
- *~ 모듈을 네임스페이스 객체로 잘못 import 할 수 있습니다.
+ *~ --esModuleInterop 이 설정되어 있지 않으면,
  *~ --esModuleInterop 옵션을 활성화하세요:
  *~   import * as x from '[~THE MODULE~]'; // 오류! 이렇게 하지 마세요!
  */
