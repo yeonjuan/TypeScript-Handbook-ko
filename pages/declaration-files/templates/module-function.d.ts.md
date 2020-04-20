@@ -42,7 +42,7 @@ declare function MyFunction(length: number): MyFunction.LengthReturnType;
  *~ 기술하고 싶을 수 있습니다; 그 타입은
  *~ 이 예제처럼 여기에 선언하세요.
  *~
- *~ 네임스페이스를 포함하기로 결정한다면,
+ *~ 네임스페이스를 포함할 경우,
  *~ 모듈을 네임스페이스 객체로 잘못 import 할 수 있습니다.
  *~ --esModuleInterop 옵션을 활성화하세요:
  *~   import * as x from '[~THE MODULE~]'; // 오류! 이렇게 하지 마세요!
