@@ -345,7 +345,7 @@ interface CatsKittySettings { }
 
 ## ES6가 모듈 플러그인에 미치는 영향 (The Impact of ES6 on Module Plugins)
 
-어떤 플러그인은 존재하는 모듈에 최상위 export를 추가하거나 수정합니다.
+어떤 플러그인은 기존 모듈에 최상위 export를 추가하거나 수정합니다.
 CommonJS와 다른 로더에서는 허용되지만, ES6 모듈은 불변하다고 간주되기에 이 패턴은 불가능합니다.
 왜냐하면 TypeScript는 로더에 구애받지 않기에, 이 정책이 컴파일-시간에 적용되지 않지만, ES6 모듈 로더로 전환하려는 개발자는 알고 있어야 합니다.
 
