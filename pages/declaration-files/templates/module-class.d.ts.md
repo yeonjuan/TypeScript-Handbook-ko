@@ -42,7 +42,7 @@ declare class MyClass {
     myMethod(opts: MyClass.MyClassMethodOptions): number;
 }
 
-/*~ 모듈에서 타입을 노출할려면
+/*~ 모듈에서 타입을 노출하려면
  *~ 이 블록 안에 위치시키세요.
  *~
  *~ 네임스페이스를 포함하기로 결정한다면,
