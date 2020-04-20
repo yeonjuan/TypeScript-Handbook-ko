@@ -10,7 +10,7 @@
  */
 
 // ES6 모듈은 클래스 객체를 직접 export할 수 없습니다.
-// 이 파일은 CommonJS-style을 사용해서 import 해야 합니다.
+// 이 파일은 CommonJS-스타일을 사용해서 import 해야 합니다.
 //   import x = require('[~THE MODULE~]');
 //
 // 또한, --allowSyntheticDefaultImports 나
