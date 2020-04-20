@@ -18,7 +18,7 @@
 // default import로 import할 수 있습니다:
 //   import x from '[~THE MODULE~]';
 //
-// ES6 모듈의 제한에 대한 일반적인 해결방법을 이해하려면
+// ES6 모듈의 제한에 대한 일반적인 해결 방법을 이해하려면
 // https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require
 // 에서 TypeScript 문서를 참고하세요.
 
