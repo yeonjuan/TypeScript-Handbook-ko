@@ -59,7 +59,7 @@ npm에 선언 파일을 배포하는 방법은 크게 두 가지가 있습니다
 
 이 패키지는 `browserify`와 `typescript` 패키지의 각 선언을 노출하기 때문에, `browserify-typescript-extension` 패키지는 이 의존성들을 가져야 합니다.
 이 이유로, `"devDependencies"`가 아니라 `"dependencies"`를 사용합니다. 왜냐하면 `"devDependencies"`를 사용하면 사용자가 직접 이 패키지들을 설치해야 하기 때문입니다.
-만약에 단지 명령줄 애플리케이션을 작성했고 패키지를 라이브러리로 사용하길 기대하지 않는다면, `devDependencies`를 사용해도 됩니다.
+만약에 단지 명령줄 애플리케이션을 작성했고 패키지를 라이브러리로 사용하길 기대하지 않는다면, `devDependencies`를 사용해도 됩니다.
 
 ## 경고 플래그 (Red flags)
 
