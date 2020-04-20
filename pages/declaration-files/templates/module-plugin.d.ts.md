@@ -12,7 +12,7 @@
 /*~ 이 줄에서, 모듈에 추가한 모듈을 import 하세요 */
 import * as m from 'someModule';
 
-/*~ 필요한 경우, 다른 모듈을 가져올 수 있습니다 */
+/*~ 필요한 경우, 다른 모듈을 import 할 수 있습니다 */
 import * as other from 'anotherModule';
 
 /*~ 여기는 위에서 import 한 모듈을 선언합니다 */
