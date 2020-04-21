@@ -36,5 +36,5 @@ _.padStart("Hello TypeScript!", 20, " ");
 대부분의 경우, 타입 선언 패키지 이름은 항상 `npm` 상의 패키지 이름과 같아야 하지만, `@types/` 가 앞에 붙어야 합니다.
   하지만 필요시 [https://aka.ms/types](https://aka.ms/types) 를 방문해 선호하는 라이브러리의 패키지를 찾으세요.
 
-> 참고: 만약 찾는 선언 파일이 없는 경우, 언제든지 기여하고, 다음 개발자가 이를 찾는 데 도움을 줄 수 있습니다.
+> 참고: 만약 찾고자 하는 선언 파일이 없는 경우, 언제든지 기여하고, 다음 개발자가 이를 찾는 데 도움을 줄 수 있습니다.
 > 자세한 내용은 DefinitelyTyped의 [기여 지침 페이지](http://definitelytyped.org/guides/contributing.html)를 참고하세요.
