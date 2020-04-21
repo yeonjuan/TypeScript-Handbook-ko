@@ -39,7 +39,7 @@
 - [Deep Dive](./pages/declaration-files/deep-dive.md)
 - [Templates](./pages/declaration-files/templates.md)
 - [Publishing (en)](./pages/declaration-files/publishing.md)
-- [Consumption (en)](./pages/declaration-files/consumption.md)
+- [Consumption](./pages/declaration-files/consumption.md)
 
 ## 튜토리얼
 
