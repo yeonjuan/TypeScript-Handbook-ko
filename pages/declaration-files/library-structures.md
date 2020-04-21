@@ -318,15 +318,15 @@ import * as someLib from 'someLib';
 
 UMD 라이브러리에 대한 의존성 선언에 `/// <reference` 디렉티브를 사용하지 *마세요*!
 
-# Footnotes
+# 각주 (Footnotes)
 
-## Preventing Name Conflicts
+## 이름 충돌 방지하기 (Preventing Name Conflicts)
 
-Note that it's possible to define many types in the global scope when writing a global declaration file.
-We strongly discourage this as it leads to possible unresolvable name conflicts when many declaration files are in a project.
+전역 선언 파일을 작성할 때, 전역 스코프에 많은 타입을 정의할 수 있다는 점을 유의하세요.
+많은 선언 파일이 프로젝트 내에 있을 때, 해결할 수 없는 이름 충돌이 발생할 수 있으므로 이를 사용하지 않는 것이 좋습니다.
 
-A simple rule to follow is to only declare types *namespaced* by whatever global variable the library defines.
-For example, if the library defines the global value 'cats', you should write
+따라야 하는 간단한 규칙은 라이브러리가 정의한 전역 변수가 무엇이든 타입을 *네임스페이스*로 정의하는 것입니다.
+예를 들어, 만약 라이브러리가 전역 값 'cats'를 정의하면, 다음과 같이 작성하고
 
 ```ts
 declare namespace cats {
@@ -334,41 +334,41 @@ declare namespace cats {
 }
 ```
 
-But *not*
+이렇게 하지는 *마세요*
 
 ```ts
-// at top-level
+// 최상위-레벨에서
 interface CatsKittySettings { }
 ```
 
-This guidance also ensures that the library can be transitioned to UMD without breaking declaration file users.
+이 가이드는 선언 파일 사용자가 중단하지 않고 라이브러리를 UMD로 전환할 수 있도록 합니다.
 
-## The Impact of ES6 on Module Plugins
+## ES6가 모듈 플러그인에 미치는 영향 (The Impact of ES6 on Module Plugins)
 
-Some plugins add or modify top-level exports on existing modules.
-While this is legal in CommonJS and other loaders, ES6 modules are considered immutable and this pattern will not be possible.
-Because TypeScript is loader-agnostic, there is no compile-time enforcement of this policy, but developers intending to transition to an ES6 module loader should be aware of this.
+어떤 플러그인은 기존 모듈에 최상위 export를 추가하거나 수정합니다.
+CommonJS와 다른 로더에서는 허용되지만, ES6 모듈은 불변하다고 간주되기에 이 패턴은 불가능합니다.
+왜냐하면 TypeScript는 로더에 구애받지 않기에, 이 정책이 컴파일-시간에 적용되지 않지만, ES6 모듈 로더로 전환하려는 개발자는 알고 있어야 합니다.
 
-## The Impact of ES6 on Module Call Signatures
+## 모듈 호출 시그니처에 ES6가 미치는 영향 (The Impact of ES6 on Module Call Signatures)
 
-Many popular libraries, such as Express, expose themselves as a callable function when imported.
-For example, the typical Express usage looks like this:
+Express와 같은 많은 유명한 라이브러리들은 import 될 때 호출 가능한 함수를 노출합니다.
+예를 들어, 일반적인 Express 사용법은 다음과 같습니다:
 
 ```ts
 import exp = require("express");
 var app = exp();
 ```
 
-In ES6 module loaders, the top-level object (here imported as `exp`) can only have properties;
-  the top-level module object is *never* callable.
-The most common solution here is to define a `default` export for a callable/constructable object;
-  some module loader shims will automatically detect this situation and replace the top-level object with the `default` export.
+ES6 모듈 로더에서, 최상위-레벨 객체(여기에서는 `exp`로 import)는 프로퍼티만 가질 수 있습니다;
+  최상위-레벨 모듈 객체는 *절대* 호출할 수 없습니다.
+가장 일반적인 해결책은 호출 가능/생성 가능 객체를 `default` export로 정의하는 것입니다;
+  어떤 모듈 로더 shims은 자동으로 이 상황을 감지하고 최상위-레벨 객체를 `default` export로 바꿉니다.
 
-## Library file layout
+## 라이브러리 파일 레이아웃 (Library file layout)
 
-The layout of your declaration files should mirror the layout of the library.
+선언 파일의 레이아웃은 라이브러리의 레이아웃을 반영해야 합니다.
 
-A library can consist of multiple modules, such as
+라이브러리는 다음과 같이 여러 모듈로 구성됩니다
 
 ```Text
 myLib
@@ -379,7 +379,7 @@ myLib
          +---- baz.js
 ```
 
-These could be imported as
+이는 다음과 같이 import 할 수 있습니다
 
 ```js
 var a = require("myLib");
@@ -388,7 +388,7 @@ var c = require("myLib/bar");
 var d = require("myLib/bar/baz");
 ```
 
-Your declaration files should thus be
+그러므로 선언 파일은 다음과 같아야 합니다
 
 ```Text
 @types/myLib
