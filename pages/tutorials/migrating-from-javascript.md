@@ -386,7 +386,7 @@ foo!.length; // okay - 'foo!' just has type 'string[]'
 
 앞으로, `strictNullChecks`를 사용할 때, 의존성이 `strictNullChecks`를 사용하도록 업데이트 되어야 할 수 있습니다.
 
-### No Implicit `any` for `this`
+### `this`에 대한 암시적 `any` 피하기 (No Implicit `any` for `this`)
 
 `this` 키워드를 클래스 밖에서 사용할 때, 기본적으로 `any` 타입을 가집니다.
 예를 들어, `Point` 클래스를 상상해 보세요, 그리고 메서드로 추가하고 싶은 함수를 상상해보세요:
