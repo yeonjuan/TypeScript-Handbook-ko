@@ -15,7 +15,7 @@ npm install --save @types/lodash
 
 # 사용하기 (Consuming)
 
-TypeScript 코드에 별 어려움 없이 lodash를 사용할 수 있을 것 입니다.
+TypeScript 코드에 별 어려움 없이 lodash를 사용할 수 있습니다.
 이는 모듈 및 전역 코드에 모두 적용됩니다.
 
 예를 들어, 타입 선언에 대해 `npm install`을 한 번만 수행하면, import 하고 사용할 수 있고
