@@ -4,6 +4,10 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+> ⚠️ **Deprecation Notice** ⚠️
+>
+> 본 레포에서의 번역 프로젝트는 종료되었습니다. 번역 파일은 전부 [typescript-kr/typescript-kr.github.io](https://github.com/typescript-kr/typescript-kr.github.io)로 이관되며, 나머지 번역 및 추후 번역 활동 또한 [typescript-kr/typescript-kr.github.io](https://github.com/typescript-kr/typescript-kr.github.io)에서 진행됩니다. 본 레포에 관련된 이슈는 [typescript-kr/typescript-kr.github.io](https://github.com/typescript-kr/typescript-kr.github.io)에 생성하면 됩니다.
+
 ## 타입스크립트 핸드북
 
 - [Basic Types](./pages/basic-types.md)
@@ -38,12 +42,12 @@
 - [Do's and Don'ts](./pages/declaration-files/dos-and-don-ts.md)
 - [Deep Dive](./pages/declaration-files/deep-dive.md)
 - [Templates](./pages/declaration-files/templates.md)
-- [Publishing (en)](./pages/declaration-files/publishing.md)
+- [Publishing](./pages/declaration-files/publishing.md)
 - [Consumption](./pages/declaration-files/consumption.md)
 
 ## 튜토리얼
 
-- [TypeScript in 5 minutes (en)](./pages/tutorials/typescript-in-5-minutes.md)
+- [TypeScript in 5 minutes](./pages/tutorials/typescript-in-5-minutes.md)
 - [ASP.NET Core (en)](./pages/tutorials/ASP.NET-core.md)
 - [Gulp (en)](./pages/tutorials/gulp.md)
 - [Migrating from JavaScript (en)](./pages/tutorials/migrating-from-javascript.md)
