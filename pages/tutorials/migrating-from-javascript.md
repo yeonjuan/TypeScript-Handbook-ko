@@ -31,7 +31,7 @@ projectRoot
 
 만약 src 디렉터리 바깥에 `tests` 폴더가 존재한다면, `src`와 `tests` 내부에 각각 `tsconfig.json`이 존재할 수 있습니다.
 
-# 구성 파일 작성하기 (Writing a Configuration File)
+# 설정 파일 작성하기 (Writing a Configuration File)
 
 TypeScript는 어떤 파일을 포함하고, 어떤 종류의 체크가 수행되어야 하는지와 같은 프로젝트 옵션을 관리하기 위해, `tsconfig.json`이라 불리는 파일을 사용합니다.
 프로젝트의 뼈대를 구성해 보겠습니다:
