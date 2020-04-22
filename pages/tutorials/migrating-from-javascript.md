@@ -29,7 +29,7 @@ projectRoot
 └── tsconfig.json
 ```
 
-만약 src 디렉터리 바깥에 `tests` 폴더가 존재한다면, `src`와 `tests` 내부에 각각 `tsconfig.json`이 존재할 수 있습니다.
+만약 `src` 디렉터리 바깥에 `tests` 폴더가 존재한다면, `src`와 `tests` 내부에 각각 `tsconfig.json`이 존재할 수 있습니다.
 
 # 설정 파일 작성하기 (Writing a Configuration File)
 
